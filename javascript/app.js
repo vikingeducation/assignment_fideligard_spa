@@ -14,8 +14,8 @@ tradeApp.config(function(
 
     resolve: {
       stockData : ['tradeYahooService', function(tradeYahooService){
-              return tradeYahooService.getStock();
-            }]
+              tradeYahooService.getStock();
+        }]
     },
 
     views:{
