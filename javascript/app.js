@@ -11,20 +11,24 @@ tradeApp.config(function(
 
   .state('parent',{
     url: '/',
+    controller: 'tradeCtrl',
     views:{
 
-      'stocks': {
-       
-      templateUrl: 'javascript/templates/stocks.html',
-      controller: 'tradeCtrl'
+        'stocks': {
+        templateUrl: 'javascript/templates/stocks.html'
+        
+
+        },
+
+       'portfolio': {
+        templateUrl: 'javascript/templates/portfolio.html',
+        
+        }
       },
-
-     'portfolio': {
-      
-      templateUrl: 'javascript/templates/portfolio.html',
-      controller: 'tradeCtrl'
-      }
-
+    resolve: {
+      stockData : ['tradeYahooService', function(tradeYahooService){
+              return tradeYahooService.getStock();
+            }]
     }
   
   });
