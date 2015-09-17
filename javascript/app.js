@@ -1,22 +1,25 @@
-var tradeApp = angular.module('tradeApp', []);
+var tradeApp = angular.module('tradeApp', ['ui.router']);
 
 
-tradeApp.config(function($stateProvider, $urlRouterProvider){
+tradeApp.config(function(
+                          $stateProvider,
+                          $urlRouterProvider){
 
-  $urlRouteProvider.otherwise("/index");
+  $urlRouterProvider.otherwise("/index");
 
-  $stateProvider.state('main-page',{
+  $stateProvider.state('index',{
     views:{
 
       'stocks': {
-      templateUrl: 'js/templates/stocks.html',
+      templateUrl: 'javascript/partials/stocks.html',
       controller: 'tradeCtrl'
       },
 
      'portfolio': {
-      templateUrl: 'js/templates/portfolio.html',
+      templateUrl: 'javascript/partials/portfolio.html',
       controller: 'tradeCtrl'
       }
+
     }
   });
 

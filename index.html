@@ -2,20 +2,33 @@
 <head>
   <title>Fideligard</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+
+    <!-- Router -->
+    <script src="javascript/services/uiRouter.js"></script>
 </head>
 <body ng-app='tradeApp'>
+  <div ng-controller='tradeCtrl'>
 
-<!-- View for date picker -->
-  
+
+    <h1>Stock Picker</h1>
+
+    <!-- View for date picker -->
+
     <div ui-view='stocks'></div>
-     <div ui-view='portfolio'></div>
-
-  
+<!--     <div ui-view='portfolio'></div> -->
 
 
-   
+  </div>
+    <!-- modules -->
+    <script src="javascript/app.js"></script>
 
-  <script src="javascript/controllers/tradeCtrl.js"></script>
-  <script src="javascript/app.js"></script>
+    <!-- directives -->
+
+    <!-- services -->
+    <script src="javascript/services/tradeYahoo.js"></script>
+
+    <!-- controllers -->
+    <script src="javascript/controllers/tradeCtrl.js"></script>
+
 </body>
 </html>
