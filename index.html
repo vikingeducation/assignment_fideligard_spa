@@ -11,18 +11,23 @@
     <script src="javascript/services/uiRouter.js"></script>
 </head>
 <body ng-app='tradeApp' >
-  <div ng-controller='tradeCtrl'>
+  
   
 
 
     <h1>Fideligard index</h1>
-    <date-picker>Date picker</date-picker>
+   <!--  <date-picker>Date picker</date-picker> -->
+
+     
     <!-- View for date picker -->
+    <!-- <div ui-view='report'>report not rendered</div> -->
+    <div ui-view='stocks'>stocks not rendered</div>
 
-    <div ui-view='stocks'>!!!</div>
-    <div ui-view='portfolio'>???</div>
+    <div ui-view='portfolio'>portfolio not rendered</div>
 
-  </div>
+    stock{{stock}}
+
+ 
 <!--     
     <a ui-sref="stocks">stocks</a>
     <a ui-sref="portfolio">portfolio</a> -->

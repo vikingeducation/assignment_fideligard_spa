@@ -1,10 +1,12 @@
 tradeApp.controller('tradeCtrl',  ['$scope',
-                                  'tradeYahooService','stockData',
+                                  'tradeYahooService',
                                   function( $scope,
-                                            tradeYahooService, stockData){
+                                            tradeYahooService){
 
 
-$scope.stockData = stockData;
+//$scope.stockData = stockData;
 $scope.tradeSymbol = tradeYahooService.tradeSymbol;
+
 $scope.stock = tradeYahooService.showStock();
+console.log("in tradeCtrl", $scope.stock);
 }]);

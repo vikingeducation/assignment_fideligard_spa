@@ -1,4 +1,4 @@
-app.factory("datePicker", function(){
+tradeApp.factory("datePicker", function(){
   return {
     restrict: "E",
     templateUrl: "javascript/directives/datePicker.html",
