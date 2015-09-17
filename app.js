@@ -16,4 +16,22 @@ app.config(function($stateProvider, $urlRouterProvider){
       }
     }
   })
+  .state("index.portfolio", {
+    url: '/portfolio',
+    views: {
+      'display@': {
+        templateUrl: "js/templates/portfolio.html",
+        controller: "portfolioCtrl"
+      }
+    }
+  })
+  .state("index.trade", {
+    url: '/trade',
+    views: {
+      'display@': {
+        templateUrl: "js/templates/trade.html",
+        controller: "tradeCtrl"
+      }
+    }
+  })
 })
