@@ -2,25 +2,28 @@ tradeApp.factory('tradeYahooService', ['$http', '$filter',function($http,$filter
 
   var obj={};
 
-  var _symbolStock = [];  // AAPL : [Prices/Dates]
-
-  var _stocksToGet = ['AAPL', 'FB', 'GOOG'];
+  // var _symbolStock = [];  // AAPL : [Prices/Dates]
 
   //=[{name: price: oneday : sevenday: month:}]
-  _stockData = [];
+  var _stockData = [];
+
+  var _symbolsOfStocksToGet = ['AAPL', 'FB', 'GOOG'];
 
   //"2014-12-31" data format
-  _date = new Date();
-  
-   
+
+  var _dateToday      = new Date().toISOString().slice(0,10);
+  var _dateHistorical = new Date(Date().
+                        setDate(today.getDate()-360)).
+                        toISOString().slice(0,10);
 
   obj.getStock = function(symbol){
-    return $http.get("http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=").then(function(response){
-      _symbolStock = response.data["query"]["results"]["quote"];
-      console.log("service log", _symbolStock);
+    for (var i =0; i < _symbolsOfStocksToGet.length; i++){
+      return $http.get("http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=").then(function(response){
+        _symbolStock = response.data["query"]["results"]["quote"];
+        console.log("service log", _symbolStock);
+      }
     });
   };
-
 
 
   obj.showStock = function(){
@@ -29,7 +32,7 @@ tradeApp.factory('tradeYahooService', ['$http', '$filter',function($http,$filter
 
   obj.getStockData = function(){
     // obj.stockData();
-    return _date.slice(0,10);
+    return new Date(dateString).splice(0,10);
     // return _stockData;
   };
 
