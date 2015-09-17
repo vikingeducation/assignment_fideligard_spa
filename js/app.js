@@ -9,7 +9,10 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
 
     .state('home', {
       url: '/home',
-      templateUrl: 'templates/home.html',
-      controller: "homeCtrl"
+      views: {
+        'ticker': {templateUrl: 'templates/home/ticker.html',
+                   controller: 'tickerCtrl'},
+        // 'portfolio': {templateUrl: 'templates/home/portfolio.html'}
+      }
     });
 });
