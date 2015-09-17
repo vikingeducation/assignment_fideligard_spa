@@ -1,9 +1,20 @@
 app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selectedDate', function($scope, $filter, historicalStock, selectedDate){
-  historicalStock.getStockData().then(function(result){
-    console.log(result);
-    console.log(result.data.query.results.quote);
-    $scope.stockData = result.data.query.results.quote;
-  });
+  $scope.stockData = [];
+  historicalStock.getStockData(getData);
+
+  function getData(result) {
+    $scope.stockData = $scope.stockData.concat(result.data.query.results.quote)
+  }
+
+  $scope.symbols = function() {
+    return $scope.stockData.reduce(function(result, current){
+      if (result.indexOf(current.Symbol) == -1) {
+        result.push(current.Symbol);
+      }
+      return result;
+    }, [])
+  }
+
   $scope.selectedDate = selectedDate.getDate;
 
   $scope.getLast = function(offset, entry){

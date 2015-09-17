@@ -1,3 +1,8 @@
+<select ng-model="symbolFilter">
+  <option ng-repeat="symbol in symbols()" value="{{symbol}}">
+    {{symbol}}
+  </option>
+</select>
 <table class="table table-striped">
   <thead>
     <th>Symbol</th>
@@ -8,7 +13,7 @@
     <th>Trade?</th>
   </thead>
   <tbody>
-    <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() ">
+    <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() | filter: symbolFilter ">
       <td>{{ dataRow.Symbol }}</td>
       <td>{{ dataRow.Close | currency }}</td>
       <td>{{ getYesterday(dataRow) | currency }}</td>

@@ -1,6 +1,5 @@
 app.filter("dateFilter", function(){
   return function(collection, date){
-    console.log(date);
     return collection.filter(function(el) {
       var chosenDate = new Date(el.Date)
           targetDate = new Date(date)
