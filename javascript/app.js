@@ -9,23 +9,28 @@ tradeApp.config(function(
 
   $stateProvider
 
-  .state('parent',{
+  .state('report',{
     url: '/',
+    
+    
+    resolve: {
+      stockData : ['tradeYahooService', function(tradeYahooService){
+              return tradeYahooService.getStock();
+            }]
+    },
     views:{
 
-      'stocks': {
-       
-      templateUrl: 'javascript/templates/stocks.html',
-      controller: 'tradeCtrl'
-      },
+        'stocks': {
+        templateUrl: 'javascript/templates/stocks.html',
+        controller: 'tradeCtrl'
+        },
 
-     'portfolio': {
-      
-      templateUrl: 'javascript/templates/portfolio.html',
-      controller: 'tradeCtrl'
+       'portfolio': {
+        templateUrl: 'javascript/templates/portfolio.html',
+        controller: 'tradeCtrl'
+        }
       }
 
-    }
   
   });
 
