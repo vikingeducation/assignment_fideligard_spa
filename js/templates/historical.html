@@ -18,7 +18,7 @@
       <th>Trade?</th>
     </thead>
     <tbody>
-      <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
+      <tr ng-repeat="dataRow in stockData.list | dateFilter:selectedDate() | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
         <td>{{ dataRow.Symbol }}</td>
         <td>{{ dataRow.Close | currency }}</td>
         <td>{{ getYesterday(dataRow) | currency }}</td>

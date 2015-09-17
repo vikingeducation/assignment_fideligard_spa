@@ -24,7 +24,7 @@ app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selected
 
 
   $scope.symbols = function() {
-    return $scope.stockData.reduce(function(result, current){
+    return $scope.stockData.list.reduce(function(result, current){
       if (result.indexOf(current.Symbol) == -1) {
         result.push(current.Symbol);
       }
@@ -44,7 +44,7 @@ app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selected
     targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
     targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
 
-    var filteredData = $scope.stockData.filter(function(el){ return el.Symbol == entry.Symbol })
+    var filteredData = $scope.stockData.list.filter(function(el){ return el.Symbol == entry.Symbol })
     var results = [];
     targetDays.forEach(function(day) {
       var result = $filter("dateFilter")(filteredData, day);
