@@ -1,6 +1,5 @@
 app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selectedDate', function($scope, $filter, historicalStock, selectedDate){
-  $scope.stockData = [];
-  historicalStock.getStockData(getData);
+  $scope.stockData = historicalStock.getStockData();
 
   $scope.sortCriteria = "";
   $scope.reverse = false;
@@ -22,9 +21,7 @@ app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selected
     }
   }
 
-  function getData(result) {
-    $scope.stockData = $scope.stockData.concat(result.data.query.results.quote)
-  }
+
 
   $scope.symbols = function() {
     return $scope.stockData.reduce(function(result, current){

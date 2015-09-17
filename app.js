@@ -26,7 +26,7 @@ app.config(function($stateProvider, $urlRouterProvider){
     }
   })
   .state("index.trade", {
-    url: '/trade',
+    url: '/trade/:symbol',
     views: {
       'display@': {
         templateUrl: "js/templates/trade.html",
