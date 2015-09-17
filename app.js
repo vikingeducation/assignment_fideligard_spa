@@ -12,7 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       },
       'historical': {
         templateUrl: 'js/templates/historical.html',
-        controller: 'MainCtrl'
+        controller: 'historyCtrl'
       }
     }
   })

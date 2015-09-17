@@ -2,7 +2,7 @@ app.factory('selectedDate', function(){
   var _currentDate;
 
   function getDate() {
-    return _currentDate
+    return _currentDate;
   };
 
   function setDate(offset) {

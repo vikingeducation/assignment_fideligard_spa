@@ -8,9 +8,10 @@
     <th>Trade?</th>
   </thead>
   <tbody>
-    <tr ng-repeat="dataRow in stockData | filter: { Date: convertedDate() } ">
+    <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() ">
       <td>{{dataRow.Symbol}}</td>
       <td>{{dataRow.Close}}</td>
+      <td>{{ getYesterday(dataRow) }}
     </tr>
   </tbody>
 </table>
