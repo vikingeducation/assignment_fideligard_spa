@@ -14,14 +14,15 @@ app.factory('transactionService', function(){
     return _transactions;
   }
 
-  function addTransaction(){
-
+  function addBuyTransaction(tradeData){
+    _transactions.push(tradeData);
+    console.log(_transactions);
   }
 
   return {
     getMoney: getMoney,
     getTransactions: getTransactions,
-    addTransaction: addTransaction,
+    addBuyTransaction: addBuyTransaction
   }
 
 });
