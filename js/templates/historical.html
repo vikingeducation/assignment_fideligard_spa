@@ -1,0 +1,16 @@
+<table class="table table-striped">
+  <thead>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>1d</th>
+    <th>30d</th>
+    <th>6month</th>
+    <th>Trade?</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="dataRow in stockData | filter: { Date: convertedDate() } ">
+      <td>{{dataRow.Symbol}}</td>
+      <td>{{dataRow.Close}}</td>
+    </tr>
+  </tbody>
+</table>

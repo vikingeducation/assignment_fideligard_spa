@@ -14,7 +14,8 @@
 </head>
 <body ng-app="app">
   <div class="container">
-    <div ui-view></div>
+    <div ui-view="index"></div>
+    <div ui-view="historical"></div>
   </div>
 
   <!-- main module -->
@@ -25,5 +26,8 @@
 
   <!-- directives -->
   <script src="js/directives/datePicker.js"></script>
+
+  <!-- services   -->
+  <script src="js/services/historicalStock.js"></script>
 </body>
 </html>

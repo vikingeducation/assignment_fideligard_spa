@@ -1,7 +1,10 @@
-app.controller("MainCtrl", ['$scope', function($scope){
-  $scope.convertedDate = function(){
-    var startDate = new Date('1/1/2014');
+app.controller("MainCtrl", ['$scope', 'historicalStock', function($scope, historicalStock){
+  $scope.stockData = historicalStock.getStockData();
 
-    return new Date(startDate.setDate(startDate.getDate() + $scope.currentDate))
+  $scope.convertedDate = function(){
+    var baseDate = new Date('01/01/2014');
+    var startDate = new Date(baseDate);
+    startDate.setDate(startDate.getDate()+Number($scope.currentDate));
+    return startDate;
   }
 }]);

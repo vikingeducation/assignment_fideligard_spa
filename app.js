@@ -5,7 +5,15 @@ app.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider.state('index', {
     url: '/index',
-    templateUrl: 'js/templates/index.html',
-    controller: 'MainCtrl',
+    views: {
+      'index': {
+        templateUrl: 'js/templates/index.html',
+        controller: 'MainCtrl'
+      },
+      'historical': {
+        templateUrl: 'js/templates/historical.html',
+        controller: 'MainCtrl'
+      }
+    }
   })
 })
