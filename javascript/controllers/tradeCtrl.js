@@ -8,5 +8,6 @@ tradeApp.controller('tradeCtrl',  ['$scope',
 $scope.tradeSymbol = tradeYahooService.tradeSymbol;
 
 $scope.stocks = tradeYahooService.showStock();
-console.log("in tradeCtrl", $scope.stock);
+$scope.real = tradeYahooService.getStockData();
+console.log("in tradeCtrl", $scope.real);
 }]);

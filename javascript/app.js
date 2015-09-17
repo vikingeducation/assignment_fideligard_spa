@@ -27,7 +27,7 @@ tradeApp.config(function(
 
        'portfolio': {
         templateUrl: 'javascript/templates/portfolio.html',
-        controller: 'tradeCtrl'
+        controller: 'portfolioCtrl'
         }
       }
 
