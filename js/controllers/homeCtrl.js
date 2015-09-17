@@ -12,7 +12,8 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
     $scope.selectedDate = d.setDate(d.getDate() - (-$scope.dateDiff));
     sendDate = new Date($scope.selectedDate)
     $scope.dateOutput = $scope.getDateStr(sendDate)
-    getData($scope.dateOutput)
+    $scope.stockData = getData($scope.dateOutput)
+    $scope.comparisonDays()
   };
   $scope.getDateStr = function(date){
     var dd = date.getDate();
@@ -32,13 +33,22 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
 
   $scope.comparisonDays = function(){
     var retArr = []
-    getData()
+    var date = new Date($scope.selectedDate);
+    console.log(date)
+    var day1 = new Date(date.setDate(date.getDate() - 1));
+    var day7 = new Date(date.setDate(date.getDate() - 7));
+    var day30 = new Date(date.setDate(date.getDate() - 30));
+
+    console.log(day1)
+    console.log(getData($scope.getDateStr(day1)));
+
+    return retArr
   }
 
   var results = []
   var ajaxSuccess = function(response){
     results.push(response.data.query.results.quote)
-    getData($scope.dateOutput);
+    $scope.stockData = getData($scope.dateOutput);
   }
   var ajaxFailure = function(){}
   var buildUrl = function(symbol){
@@ -57,7 +67,6 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
     for (var i = 0; i < symbols.length; i++){
       var sym = symbols[i];
       var url = buildUrl(sym);
-      console.log(url)
       $http.get(url).then(ajaxSuccess, ajaxFailure)
     }
 
@@ -70,7 +79,7 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
         return val.Date == dateStr
       }))
     }
-    $scope.stockData = data
+    return $scope.stockData = data
   }
 
   $scope.dateDiff = -1;
