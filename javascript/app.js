@@ -5,22 +5,29 @@ tradeApp.config(function(
                           $stateProvider,
                           $urlRouterProvider){
 
-  $urlRouterProvider.otherwise("/index");
+  $urlRouterProvider.otherwise("/");
 
-  $stateProvider.state('index',{
+  $stateProvider
+
+  .state('parent',{
+    url: '/',
     views:{
 
       'stocks': {
-      templateUrl: 'javascript/partials/stocks.html',
+       
+      templateUrl: 'javascript/templates/stocks.html',
       controller: 'tradeCtrl'
       },
 
      'portfolio': {
-      templateUrl: 'javascript/partials/portfolio.html',
+      
+      templateUrl: 'javascript/templates/portfolio.html',
       controller: 'tradeCtrl'
       }
 
     }
+  
   });
 
 });
+
