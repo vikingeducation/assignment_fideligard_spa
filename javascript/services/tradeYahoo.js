@@ -29,7 +29,7 @@ tradeApp.factory('tradeYahooService', ['$http', '$filter',function($http,$filter
 
   obj.getStockData = function(){
     // obj.stockData();
-    return _date.slice(0,10);
+    return new Date(year, month, day, hours, minutes, seconds, milliseconds);
     // return _stockData;
   };
 
