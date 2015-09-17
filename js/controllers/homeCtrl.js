@@ -12,7 +12,7 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
     $scope.selectedDate = d.setDate(d.getDate() - (-$scope.dateDiff));
     sendDate = new Date($scope.selectedDate)
     $scope.dateOutput = $scope.getDateStr(sendDate)
-    getData()
+    getData($scope.dateOutput)
   };
   $scope.getDateStr = function(date){
     var dd = date.getDate();
@@ -30,10 +30,15 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
 
   }
 
+  $scope.comparisonDays = function(){
+    var retArr = []
+    getData()
+  }
+
   var results = []
   var ajaxSuccess = function(response){
     results.push(response.data.query.results.quote)
-    getData();
+    getData($scope.dateOutput);
   }
   var ajaxFailure = function(){}
   var buildUrl = function(symbol){
@@ -58,11 +63,11 @@ fideligard.controller("homeCtrl",['$scope', '$http', function($scope, $http){
 
   })()
 
-  var getData = function(){
+  var getData = function(dateStr){
     var data = []
     for (var i = 0; i < results.length; i++){
       data.push($.grep(results[i], function(val){
-        return val.Date == $scope.dateOutput
+        return val.Date == dateStr
       }))
     }
     $scope.stockData = data

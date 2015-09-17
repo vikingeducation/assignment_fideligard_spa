@@ -5,18 +5,18 @@
       <thead>
         <th>Symbol</th>
         <th>Price</th>
-        <th>Open</th>
-        <th>Close</th>
-        <th>Diff</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
         <th>Trade</th>
       </thead>
       <tbody>
         <tr ng-repeat="stock in stockData">
         <td>{{stock[0].Symbol}}</td>
-        <td>Price</td>
-        <td>{{stock[0].Open | currency}}</td>
         <td>{{stock[0].Close | currency}}</td>
         <td>{{stock[0].Close - stock[0].Open | currency}}</td>
+        <td>{{stock[0].Close | currency}}</td>
+        <td></td>
         <td>Trade</td>
         </tr>
       </tbody>
