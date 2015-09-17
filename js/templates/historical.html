@@ -10,8 +10,10 @@
   <tbody>
     <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() ">
       <td>{{dataRow.Symbol}}</td>
-      <td>{{dataRow.Close}}</td>
-      <td>{{ getYesterday(dataRow) }}
+      <td>{{dataRow.Close | currency }}</td>
+      <td>{{ getYesterday(dataRow) | currency }}</td>
+      <td>{{ getLastMonth(dataRow) | currency }}</td>
+      <td>{{ getLast6Month(dataRow) | currency }}</td>
     </tr>
   </tbody>
 </table>
