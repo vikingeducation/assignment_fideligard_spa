@@ -2,9 +2,10 @@ tradeApp.directive('stockInfo', function(){
   return{
     templateUrl: 'javascript/directives/stockInfo.js',
     restrict: "E",
-    scope: {stockData: '=',
-            stock: '=',
-            tradeSymbol: '&'}
+    scope: true
+    // scope: {stockData: '=',
+    //         stock: '=',
+    //         tradeSymbol: '&'}
 
   };
 });
