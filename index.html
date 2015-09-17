@@ -14,9 +14,18 @@
 </head>
 <body ng-app="app">
   <div class="container">
-    <div ui-view="index"></div>
-    <div ui-view="historical"></div>
-    <div ui-view="display"></div>
+    <div class="row">
+      <div ui-view="index"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div ui-view="historical" class="row"></div>
+      </div>
+
+      <div class="col-md-7">
+        <div ui-view="display"></div>
+      </div>
+    </div>
   </div>
 
   <!-- main module -->
@@ -25,6 +34,8 @@
   <!-- controllers -->
   <script src="js/controllers/mainController.js"></script>
   <script src="js/controllers/historyController.js"></script>
+  <script src="js/controllers/tradeController.js"></script>
+  <script src="js/controllers/portfolioController.js"></script>
 
   <!-- directives -->
   <script src="js/directives/datePicker.js"></script>

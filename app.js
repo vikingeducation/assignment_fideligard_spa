@@ -1,7 +1,7 @@
 var app = angular.module("app", ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise('/index');
+  $urlRouterProvider.otherwise('/index/portfolio');
 
   $stateProvider.state('index', {
     url: '/index',

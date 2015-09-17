@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 pull-left">
+      <h1> Trade </h1>
+    <form id="trade-form" name="tradeForm" class="panel">
+      <div class="form-group">
+        Symbol: <input ng-value="tradeData.symbol"/>
+      </div>
+      <div class="form-group">
+        Buy/Sell: <input ng-value="tradeData.action"/>
+      </div>
+      <div class="form-group">
+        Quantity: <input ng-value="tradeData.quantity"/>
+      </div>
+      <div class="form-group">
+        Date: <input type="date" ng-value="tradeData.date"/>
+      </div>
+      <div class="form-group">
+        Price: <input ng-value="tradeData.price"/>
+      </div>
+      <div class="form-group">
+        Cost: <input ng-value="tradeData.cost"/>
+      </div>
+
+      Cash Available: 1 million dollars
+
+      Order Status:
+      Valid or Invalid
+
+      <button class="btn btn-primary">Place Order!</button>
+
+
+    </form>
+    </div>
+  </div>
+  <div class="row">
+    <a ui-sref="index.portfolio">Go to portfolio</a>
+  </div>
+</div>

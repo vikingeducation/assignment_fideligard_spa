@@ -1,27 +1,32 @@
-{{ sortCriteria }}
-<select ng-model="symbolFilter">
-  <option></option>
-  <option ng-repeat="symbol in symbols()" value="{{symbol}}">
-    {{symbol}}
-  </option>
-</select>
-<table class="table table-striped">
-  <thead>
-    <th ng-click="sortBy(1)">Symbol</th>
-    <th ng-click="sortBy(2)">Price</th>
-    <th ng-click="sortBy(3)">1d</th>
-    <th ng-click="sortBy(4)">30d</th>
-    <th ng-click="sortBy(5)">6month</th>
-    <th>Trade?</th>
-  </thead>
-  <tbody>
-    <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
-      <td>{{ dataRow.Symbol }}</td>
-      <td>{{ dataRow.Close }}</td>
-      <td>{{ getYesterday(dataRow) | currency }}</td>
-      <td>{{ getLastMonth(dataRow) | currency }}</td>
-      <td>{{ getLast6Month(dataRow) | currency }}</td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+<div class="panel col-md-12">
+  <div class="panel-heading">
+  <select ng-model="symbolFilter">
+    <option></option>
+    <option ng-repeat="symbol in symbols()" value="{{symbol}}">
+      {{symbol}}
+    </option>
+  </select>
+  </div>
+  <div class="panel-body">
+  <table class="table table-striped" style='word-wrap: break-word;'>
+    <thead>
+      <th ng-click="sortBy(1)">Symbol</th>
+      <th ng-click="sortBy(2)">Price</th>
+      <th ng-click="sortBy(3)">1d</th>
+      <th ng-click="sortBy(4)">30d</th>
+      <th ng-click="sortBy(5)">6month</th>
+      <th>Trade?</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="dataRow in stockData | dateFilter:selectedDate() | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
+        <td>{{ dataRow.Symbol }}</td>
+        <td>{{ dataRow.Close | currency }}</td>
+        <td>{{ getYesterday(dataRow) | currency }}</td>
+        <td>{{ getLastMonth(dataRow) | currency }}</td>
+        <td>{{ getLast6Month(dataRow) | currency }}</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
