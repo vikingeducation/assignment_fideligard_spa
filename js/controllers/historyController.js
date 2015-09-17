@@ -2,6 +2,26 @@ app.controller("historyCtrl", ['$scope', '$filter', 'historicalStock', 'selected
   $scope.stockData = [];
   historicalStock.getStockData(getData);
 
+  $scope.sortCriteria = "";
+  $scope.reverse = false;
+
+  $scope.sortBy = function(criteria){
+    var columns = {
+      1: "Symbol",
+      2: "Close",
+      3: $scope.getYesterday,
+      4: $scope.getLastMonth,
+      5: $scope.getLast6Month,
+    }
+    if (!columns[criteria]) return;
+
+    if (columns[criteria] == $scope.sortCriteria){
+      $scope.reverse = !$scope.reverse;
+    } else {
+      $scope.sortCriteria = columns[criteria];
+    }
+  }
+
   function getData(result) {
     $scope.stockData = $scope.stockData.concat(result.data.query.results.quote)
   }
