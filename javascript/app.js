@@ -11,13 +11,13 @@ tradeApp.config(function(
 
   .state('report',{
     url: '/',
-    
-    
+
     resolve: {
       stockData : ['tradeYahooService', function(tradeYahooService){
               return tradeYahooService.getStock();
             }]
     },
+
     views:{
 
         'stocks': {
@@ -31,7 +31,6 @@ tradeApp.config(function(
         }
       }
 
-  
   });
 
 });

@@ -4,7 +4,10 @@ tradeApp.factory('tradeYahooService', ['$http', function($http){
 
   var _symbolStock = [];  // AAPL : [Prices/Dates]
 
+  var _stocksToGet = ['AAPL', 'FB', 'GOOG'];
 
+  //=[{name: price: oneday : sevenday: month:}]
+  _stockData = [];
 
   //"2014-12-31" data format
   obj.getStock = function(){
@@ -17,8 +20,7 @@ tradeApp.factory('tradeYahooService', ['$http', function($http){
   obj.showStock = function(){
     return _symbolStock;
   };
-  //=[{name: price: oneday : sevenday: month:}]
-  _stockData = [];
+
 
   obj.stockData = function(){
     _stockData.push({

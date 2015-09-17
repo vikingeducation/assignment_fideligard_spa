@@ -1,11 +1,7 @@
 tradeApp.directive('stockInfo', function(){
   return{
-    templateUrl: 'javascript/directives/stockInfo.js',
-    restrict: "E",
+    templateUrl: 'javascript/directives/stockInfo.html',
+    restrict: "A",
     scope: true
-    // scope: {stockData: '=',
-    //         stock: '=',
-    //         tradeSymbol: '&'}
-
   };
 });

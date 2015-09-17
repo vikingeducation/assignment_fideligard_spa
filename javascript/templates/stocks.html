@@ -1,10 +1,5 @@
-
-
-
 <h2>Stocks</h2>
-here is stock
-<p >{{stock}}</p>
-<table>
+<table class='table table-striped'>
 <thead>
   <tr>
     <th>Symbol</th>
@@ -16,8 +11,6 @@ here is stock
   </tr>
 </thead>
 <tbody>
-  <stock-info ng-repeat="symbol in stockData" stockData='stockData'></stock-info>
-
+  <tr stock-info ng-repeat="stock in stocks"></tr>
 </tbody>
-
 </table>
