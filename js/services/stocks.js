@@ -4,9 +4,11 @@ fideligard.factory('stocks',['$http', function($http){
     return Object.keys(a[0]).map(
         function (c) { return a.map(function (r) { return r[c]; }); }
         );
-    }
+  }
 
-  var symbols = ['FB', 'TWTR']//, 'LNKD', 'GOOG']
+  // AjAX requests
+  // Organize data
+  retObj.symbols = ['FB', 'TWTR', 'LNKD', 'GOOG']
 
 
   oneYearAgo = function(){
@@ -32,14 +34,6 @@ fideligard.factory('stocks',['$http', function($http){
   }  //// results [[[day][2day]], [[day], [day2]]]
 
   var results = [];
-  retObj.ajaxSuccess = function(response){
-    console.log("success")
-    results.push(response.data.query.results.quote) // push array onto results each response is for a
-                                                    // differeny SYM
-    var stockData = comparisonDays()
-    retObj.trends = getTrends("FB", stockData)
-  }
-  var ajaxFailure = function(){console.log("fail")}
 
   var buildUrl = function(symbol){
     return "http://query.yahooapis.com/v1/public/yql?q= \
@@ -52,27 +46,33 @@ fideligard.factory('stocks',['$http', function($http){
         &env=store://datatables.org/alltableswithkeys \
         &callback="
   };
-  var ajaxRequest = function(){
+
+ retObj.ajaxRequest = function(){
     promises = []
-    for (var i = 0; i < symbols.length; i++){
-      var sym = symbols[i];
+    for (var i = 0; i < retObj.symbols.length; i++){
+      var sym = retObj.symbols[i];
       var url = buildUrl(sym);
       promises.push($http.get(url))
     }
     return promises
   }
 
-  var getData = function(dateStr){
+  retObj.updateResults = function(newResults){
+    results = newResults
+  }
+
+  retObj.getData = function(dateStr){
     var data = [];
     for (var i = 0; i < results.length; i++){
       data.push($.grep(results[i], function(val){
         return val.Date == dateStr;
       }));
     }
-
     array = data.reduce(function(a, b){
-     return a.concat(b);
+    return a.concat(b);
     });
+    retObj.getTrends(array)
+    console.log(array)
     return array
   };
 
@@ -86,43 +86,59 @@ fideligard.factory('stocks',['$http', function($http){
   //   comparisonDays()
   // };
 
+  var formatDays = function(){
+
+    array = [0, 1, 7, 30]
+    retArr = []
+
+    for (var i = 0; i < array.length; i++){
+      base = new Date(yesterday)
+      var num = array[i]
+      day = new Date(base.setDate(base.getDate() - num))
+      if (day.getDay() == 0){
+        day = new Date(day.setDate(day.getDate() - 2))
+      } else if (day.getDay() == 6){
+        day = new Date(day.setDate(day.getDate() - 1))
+      }
+      retArr.push(day);
+
+    }
+    return retArr
+
+  }
 
 
-  var comparisonDays = function(){
-    var date = new Date(yesterday);
+  retObj.comparisonDays = function(){
+    arr = formatDays()
 
-    var day0 = new Date(date.setDate(date.getDate() - 0));
-    var day1 = new Date(date.setDate(date.getDate() - 1));
-    var day7 = new Date(date.setDate(date.getDate() - 7));
-    var day30 = new Date(date.setDate(date.getDate() - 30));
-
-    arr = [day0, day1, day7, day30]
     retArr = []
 
     for (var i = 0; i < arr.length; i++) {
       var str = getDateStr(arr[i])
-      retArr.push(getData(str))
+      retArr.push(retObj.getData(str))
     }
 
-    return retArr /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
+    console.log(transpose(retArr))
+    return transpose(retArr) /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
   }
 
 
-  var getTrends = function(sym, stockData){
-    // console.log(stockData)
-    var data = $.grep(stockData, function(val){
-      return (val[0][0] && val[0][0].Symbol == sym) });
+  retObj.getTrends = function(sym, stockData){
+    // // console.log(stockData)
+    // var data = $.grep(stockData, function(val){
+    //   return (val[0][0] && val[0][0].Symbol == sym) });
 
-    i = 0;
-    console.log("geting trends");
-    console.log(data)
+    // i = 0;
+    // console.log("geting trends");
+    // console.log(data)
 
-    // console.log(data[0][i][0]);
+    // // console.log(data[0][i][0]);
+    retObj.trends = sym
 
   };
 
-  d = new Date();
-  yesterday = new Date(d.setDate(d.getDate() - 1));
+  var d = new Date();
+  var yesterday = new Date(d.setDate(d.getDate() - 1));
   dateOutput = getDateStr(yesterday);
 
 

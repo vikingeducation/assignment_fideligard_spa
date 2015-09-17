@@ -1,6 +1,13 @@
-  <h2>Stock Ticker</h2>
+  <div>
+
+      <div class="col-xs-6">
+        <h2>Stock Ticker</h2>
+      </div>
+    <div class="col-xs-6">
+     <h4>Filter: <input type='text' ng-model='symFilter'></h4>
+    </div>
+  </div>
   <!-- {{stockData[0][1][0]}} -->
-  {{trends}}
   <table class='table table-hover'>
     <thead>
       <th>Symbol</th>
@@ -11,12 +18,12 @@
       <th>Trade</th>
     </thead>
     <tbody>
-      <tr ng-repeat="stock in stockData">
-      <td>{{stock[0][0].Symbol}}</td>
-      <td>{{stock[0][0].Close | currency}}</td>
-      <td>{{stock[0][0].Close - stock[0][1].Close | currency}}</td>
-      <td>{{stock.Close | currency}}</td>
-      <td>X</td>
+      <tr ng-repeat="stock in trends | filter: {$: symFilter}">
+      <td>{{stock[0].Symbol}}</td>
+      <td>{{stock[0].Close | currency}}</td>
+      <td>{{stock[1].Close - stock[0].Close | currency}}</td>
+      <td>{{stock[2].Close - stock[0].Close| currency}}</td>
+      <td>{{stock[3].Close - stock[0].Close| currency}}</td>
       <td>Trade</td>
       </tr>
     </tbody>
