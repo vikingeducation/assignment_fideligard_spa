@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fideliguard</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+</head>
+<body ng-app="app">
+  <div class="container">
+    <div ui-view></div>
+  </div>
+
+  <!-- main module -->
+  <script src="app.js"></script>
+
+  <!-- controllers -->
+  <script src="js/controllers/mainController.js"></script>
+
+  <!-- directives -->
+  <script src="js/directives/datePicker.js"></script>
+</body>
+</html>
