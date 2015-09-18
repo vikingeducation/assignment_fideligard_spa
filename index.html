@@ -14,6 +14,7 @@
   <!-- APP -->
   <script src="js/app.js"></script>
   <script src="js/controllers/tickerCtrl.js"></script>
+  <script src="js/controllers/tradeCtrl.js"></script>
   <script src="js/services/stocks.js"></script>
 
 </script>
@@ -26,11 +27,10 @@
       </div>
       <div class="row">
         <div class="col-md-4 col-md-offset-1">
-
-          <div ui-view = "ticker"></div>
+          <div ui-view = "ticker" class="panel panel-default"></div>
         </div>
         <div class="col-md-6">
-          <!-- <div ui-view = "portfolio"></div> -->
+          <div ui-view class = "panel panel-default"></div>
         </div>
       </div>
 

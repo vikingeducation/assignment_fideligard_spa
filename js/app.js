@@ -14,5 +14,15 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
                    controller: 'tickerCtrl'},
         // 'portfolio': {templateUrl: 'templates/home/portfolio.html'}
       }
+    })
+
+    .state('trade',{
+      url: '/trade',
+      views: {
+        '': {templateUrl: 'templates/trade/trade.html',
+                  controller: 'tradeCtrl'},
+        'ticker': {templateUrl: 'templates/home/ticker.html',
+                   controller: 'tickerCtrl'},
+      }
     });
 });
