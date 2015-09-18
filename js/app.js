@@ -32,7 +32,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
 
 stocks.filter('tickerFilter', function () {
   return function (items, search) {
-    if (search === "") return items;
+    if (!search) return items;
 
     var result = {};
     for (key in items) {
