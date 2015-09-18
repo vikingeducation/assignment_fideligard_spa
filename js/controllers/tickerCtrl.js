@@ -3,7 +3,6 @@ fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', function($scope
   var results = [];
 
   var ajaxSuccess = function(response){
-    console.log("success");
     results.push(response.data.query.results.quote) // push array onto results each response is for a
                                                     // differeny SYM
     stocks.updateResults(results);

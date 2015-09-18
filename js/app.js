@@ -19,10 +19,15 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
     .state('simulator',{
       url: '/simulator',
       views: {
-        'ticker': {templateUrl: 'templates/simulator/ticker.html',
-                   controller: 'tickerCtrl'},
-        '': {templateUrl: 'templates/simulator/simulator.html',
-             controller: function(){console.log("here")}
+        'ticker': {
+          templateUrl: 'templates/simulator/ticker.html',
+          controller: 'tickerCtrl'},
+        'date-slider': {
+          templateUrl: 'templates/simulator/slider.html',
+          controller: 'dateCtrl'},
+        '': {
+          templateUrl: 'templates/simulator/simulator.html',
+          controller: 'simulatorCtrl'
             }
       }
 
@@ -32,5 +37,17 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
       url: '/trade',
       templateUrl: 'templates/simulator/trade/trade.html',
       controller: 'tradeCtrl'
+    })
+
+    .state('simulator.portfolio', {
+      url: '/portfolio',
+      templateUrl: 'templates/simulator/portfolio.html',
+      controller: 'portfolioCtrl',
+    })
+
+    .state('simulator.transactions', {
+      url: '/transactions',
+      templateUrl: 'templates/simulator/transactions.html',
+      controller: 'transactionsCtrl',
     });
 });

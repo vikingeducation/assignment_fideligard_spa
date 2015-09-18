@@ -70,8 +70,7 @@ fideligard.factory('stocks',['$http', function($http){
     return a.concat(b);
     });
     // retObj.getTrends(array)
-    console.log(array);
-    return array;
+    return array; //
   };
 
 
@@ -107,7 +106,6 @@ fideligard.factory('stocks',['$http', function($http){
       retArr.push(retObj.getData(str));
     }
 
-    console.log(transpose(retArr));
     return transpose(retArr); /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
   };
 

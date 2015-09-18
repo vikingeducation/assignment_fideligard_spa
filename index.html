@@ -15,6 +15,10 @@
   <script src="js/app.js"></script>
   <script src="js/controllers/tickerCtrl.js"></script>
   <script src="js/controllers/tradeCtrl.js"></script>
+  <script src="js/controllers/portfolioCtrl.js"></script>
+  <script src="js/controllers/simulatorCtrl.js"></script>
+  <script src="js/controllers/dateCtrl.js"></script>
+  <script src="js/controllers/transactionsCtrl.js"></script>
   <script src="js/services/stocks.js"></script>
 
 </script>
@@ -29,8 +33,14 @@
         <div class="col-md-4 col-md-offset-1">
           <div ui-view = "ticker" class="panel panel-default"></div>
         </div>
-        <div class="col-md-6">
-          <ui-view class = "panel panel-default"></ui-view>
+        <div class="col-md-5 col-md-offset-1">
+          <div class="row">
+            <div ui-view ="date-slider"></div>
+          </div>
+          <br>
+          <div class="row">
+            <ui-view></ui-view>
+          </div>
         </div>
       </div>
 
