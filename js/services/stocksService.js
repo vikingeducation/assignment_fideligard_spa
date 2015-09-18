@@ -1,11 +1,12 @@
 stocks.factory('stocksService', ['$http', function($http) {
 
   var obj = {};
-  obj.currentDate = "2014-07-18";
+  obj.dateObj = {};
+  obj.dateObj.currentDate = Date.parse("2014-07-18");
 
   var marketHistory = {};
 
-  var symbols = ['GOOG', 'AAPL', 'FB', 'CVC', 'NFLX', 'AMZN', 'PFE', 'MSFT', 'C', 'F', 'NOK'];
+  var symbols = ['GOOG', 'AAPL', 'FB', 'CVC', 'NFLX', 'AMZN', 'PFE', 'MSFT', 'C', 'F', 'NOK'].slice(0,2);
 
 
   //all market data when complete
@@ -34,23 +35,15 @@ stocks.factory('stocksService', ['$http', function($http) {
     var stock = marketHistory[symbol];
     for (var i = 0; i < stock.length; i++){
       var day = stock[i];
-      //don't want calculation for Dec. 2013 dates;
+      // // if don't want calculation for Dec. 2013 dates;
       // if ( day.Date <'2014-01-01') { continue; }
+      day.date = Date.parse(day.Date);
+      // debugger;
       day.oneDay = obj.priceChangeNDays(symbol, i, 1);
       day.oneWeek = obj.priceChangeNDays(symbol, i, 5);
       day.oneMonth = obj.priceChangeNDays(symbol, i, 22);
     }
     console.log (symbol + " done processing");
-  };
-
-
-  obj.setDate = function(selectedDate){
-    console.log(obj.currentDate)
-    return obj.currentDate = selectedDate;
-  };
-
-  obj.getDate = function(){
-    return obj.currentDate;
   };
 
   obj.priceChangeNDays = function(symbol, idx, days){
@@ -65,7 +58,7 @@ stocks.factory('stocksService', ['$http', function($http) {
 
   obj.getSymbols = function(){
     return symbols;
-  }
+  };
 
   return obj;
 
