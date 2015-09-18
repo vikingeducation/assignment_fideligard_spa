@@ -18,7 +18,8 @@ app.filter("beforeDateFilter", function(){
           targetDate = new Date(date)
       chosenDate.setHours(0,0,0,0);
       targetDate.setHours(0,0,0,0);
-      targetDate.setDate(targetDate.getDate() - 1);
+      // targetDate.setDate(targetDate.getDate() - 1);
+      // console.log(chosenDate, targetDate);
       return (chosenDate <= targetDate);
     });
   };

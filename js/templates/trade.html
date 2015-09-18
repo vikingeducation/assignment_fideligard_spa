@@ -1,43 +1,48 @@
-<div class="row">
-  <div class="row">
-    <div class="col-xs-6 pull-left">
-      <h1> Trade </h1>
-    <form id="trade-form" name="tradeForm" class="panel">
-      <div class="form-group">
-        Symbol: <input ng-model="tradeData.symbol"/>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2> Trade </h2>
       </div>
-      <div class="form-group">
-        Buy/Sell: <select ng-model="tradeData.action">
-                    <option ng-value="true">Buy</option>
-                    <option ng-value="false">Sell</option>
-                  </select>
+      <div class="col-sm-3 col-sm-offset-4">
+        <state-dropdown></state-dropdown>
       </div>
-      <div class="form-group">
-        Quantity: <input ng-model="tradeData.quantity"/>
-      </div>
-      <div class="form-group">
-        Date: <input ng-value="tradeData.date()" disabled min="1-1-2014" max="12-31-2014"/>
-      </div>
-      <div class="form-group">
-        Price: <input ng-value="calcPrice() | currency" disabled/>
-      </div>
-      <div class="form-group">
-        Cost: <input ng-value="calcCost() | currency" disabled/>
-      </div>
-
-      Cash Available: {{ currentMoney.total | currency }}
-
-      Order Status:
-      Valid or Invalid
-
-      <button class="btn btn-primary" ng-if="validBuy()" ng-click="createTranscation()" ui-sref="index.portfolio">Place Buy Order!</button>
-      <button class="btn btn-primary" ng-if="validSell()" ng-click="createTranscation()" ui-sref="index.portfolio">Place Sell Order!</button>
-
-
-    </form>
     </div>
   </div>
-
-  <state-dropdown></state-dropdown>
-
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <form id="trade-form" name="tradeForm" class="form-group">
+          <label> Symbol: </label>
+          <input ng-model="tradeData.symbol" class="form-control"/>
+          <label> Buy/Sell: </label>
+          <select ng-model="tradeData.action" class="form-control">
+            <option ng-value="true" value="" selected>Buy</option>
+            <option ng-value="false">Sell</option>
+          </select>
+          <label> Quantity: </label>
+          <input ng-model="tradeData.quantity" class="form-control"/>
+          <label> Date: </label>
+          <input ng-value="tradeData.date | date" disabled min="1-1-2014" max="12-31-2014" class="form-control"/>
+          <label> Price: </label>
+          <input ng-value="calcPrice() | currency" disabled class="form-control"/>
+          <label> Cost: </label>
+          <input ng-value="calcCost() | currency" disabled class="form-control"/>
+          <button class="btn btn-primary form-control" ng-if="validBuy()" ng-click="createTranscation()" ui-sref="index.portfolio">Buy</button>
+          <button class="btn btn-primary form-control" ng-if="validSell()" ng-click="createTranscation()" ui-sref="index.portfolio">Sell</button>
+        </form>
+      </div>
+      <div class="col-sm-5 col-sm-offset-1">
+        <label> Cash Available: </label>
+        <p>{{ currentMoney.total | currency }}</p>
+        <label> Order Status: </label>
+        <p>Valid / Invalid</p>
+      </div>
+    </div>
+    
+  </div>
 </div>
+
+
+
+

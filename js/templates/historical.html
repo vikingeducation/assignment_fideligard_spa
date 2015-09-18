@@ -1,24 +1,46 @@
-<div class="panel col-md-12">
-  <div class="panel-heading">
-  <select ng-model="symbolFilter">
-    <option></option>
-    <option ng-repeat="symbol in symbols()" value="{{symbol}}">
-      {{symbol}}
-    </option>
-  </select>
+<div class="panel panel-default">
+  <div class="panel-heading text-center">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2>Stocks</h2>
+      </div>
+      <div class="col-sm-4 col-sm-offset-3">
+        <select ng-model="symbolFilter">
+          <option selected value="">Select Ticker</option>
+          <option ng-repeat="symbol in symbols()" value="{{symbol}}">
+            {{symbol}}
+          </option>
+        </select>
+      </div>
+    </div>
   </div>
   <div class="panel-body">
   <table class="table table-striped" style='word-wrap: break-word;'>
     <thead>
-      <th ng-click="sortBy(1)">Symbol</th>
-      <th ng-click="sortBy(2)">Price</th>
-      <th ng-click="sortBy(3)">1d</th>
-      <th ng-click="sortBy(4)">30d</th>
-      <th ng-click="sortBy(5)">6month</th>
+      <th ng-click="sortBy(1)">
+        <b>Symbol</b>
+        <i class="fa fa-fw" ng-class="{'fa-sort-desc': reverseList[1], 'fa-sort-asc': !reverseList[1]}"></i>
+      </th>
+      <th ng-click="sortBy(2)">
+        <b>Price</b>
+        <i class="fa fa-fw" ng-class="{'fa-sort-desc': reverseList[2], 'fa-sort-asc': !reverseList[2]}"></i>
+      </th>
+      <th ng-click="sortBy(3)">
+        <b>1d</b>
+        <i class="fa fa-fw" ng-class="{'fa-sort-desc': reverseList[3], 'fa-sort-asc': !reverseList[3]}"></i>
+      </th>
+      <th ng-click="sortBy(4)">
+        <b>30d</b>
+        <i class="fa fa-fw" ng-class="{'fa-sort-desc': reverseList[4], 'fa-sort-asc': !reverseList[4]}"></i>
+      </th>
+      <th ng-click="sortBy(5)">
+        <b>6mon</b>
+        <i class="fa fa-fw" ng-class="{'fa-sort-desc': reverseList[5], 'fa-sort-asc': !reverseList[5]}"></i>
+      </th>
       <th>Trade?</th>
     </thead>
     <tbody>
-      <tr ng-repeat="dataRow in stockData.list | dateFilter:selectedDate() | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
+      <tr ng-repeat="dataRow in stockData.list | dateFilter:selectedDate.currentDate | filter: symbolFilter | tableFilter:sortCriteria:reverse ">
         <td>{{ dataRow.Symbol }}</td>
         <td>{{ dataRow.Close | currency }}</td>
         <td>{{ getYesterday(dataRow) | currency }}</td>

@@ -1,8 +1,59 @@
-<div class="row">
-  <div class="row">
-    <div class="col-xs-6 pull-left">
-      <h1> Portfolio </h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2> Portfolio </h2>
+      </div>
+      <div class="col-sm-3 col-sm-offset-4">
+        <state-dropdown></state-dropdown>
+      </div>
     </div>
   </div>
-  <state-dropdown></state-dropdown>
+  <div class="panel-body">
+    <table class="table table-hover">
+      <thead>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>30d</th>
+        <th>6mon</th>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <table class="table table-hover">
+      <thead>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>30d</th>
+        <th>6mon</th>
+        <th>Trade?</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(sym, data) in portfolio">
+          <td>{{sym}}</td>
+          <td>{{data.quantity}}</td>
+          <td>{{data.costBasis | currency}}</td>
+          <td>{{calcCurrentValue(sym) | currency}}</td>
+          <td>{{calcProfit(sym) | currency}}</td>
+          <td>{{calc1d(sym) | currency}}</td>
+          <td>{{calc30d(sym) | currency}}</td>
+          <td>{{calc6mon(sym) | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
+
+
+portfolio: {{portfolio}}
+
+curVal: {{calcCurrentValue(sym)}}
+
+
+pre: {{preDate}}

@@ -1,9 +1,9 @@
 app.factory('transactionService', ["$filter", function($filter){
-  var _money = { total: 100000.00 };
-  var _transactions = { record: [{
+  var money = { total: 100000.00 };
+  var transactions = { record: [{
                                   action: "true",
                                   cost: 531.820023,
-                                  date: new Date('Fri Apr 04 2014 00:00:00 GMT-0500 (CDT)'),
+                                  Date: new Date("04-04-2014"),
                                   price: 531.820023,
                                   quantity: 1,
                                   symbol: "AAPL"
@@ -11,7 +11,7 @@ app.factory('transactionService', ["$filter", function($filter){
                                 {
                                   action: "true",
                                   cost: 44.95,
-                                  date: new Date('Fri Aug 20 2014 00:00:00 GMT-0500 (CDT)'),
+                                  Date: new Date("08-20-2014"),
                                   price: 44.95,
                                   quantity: 1,
                                   symbol: "MSFT",
@@ -21,34 +21,48 @@ app.factory('transactionService', ["$filter", function($filter){
   // Symbol
   // Total amount bought
 
-  function getMoney(){
-    return _money;
-  }
+  // function getMoney(){
+  //   return _money;
+  // }
 
-  function getTransactions(){
-    return _transactions;
-  }
+  // function getTransactions(){
+  //   return _transactions;
+  // }
 
   function addTransaction(tradeData){
-    _transactions.record.push(tradeData);
+    transactions.record.push(tradeData);
+    // console.log(transactions);
   }
 
-  function countShares(symbol, date) {
-    return $filter("beforeDateFilter")(_transactions.record)
-    .reduce(function(total, ele){
-      if (ele.symbol == symbol && ele.action == "true") {
-        total += ele.quantity;
-      } else if (ele.symbol == symbol) {
-        total -= ele.quantity;
-      }
-      return total;
-    }, 0)
-  }
+  // function getPortfolio(date) {
+  //   var transactionsBefore = $filter("beforeDateFilter")(_transactions.record, date);
+  //   var portfolio = {};
+  //   transactionsBefore.forEach(function(ele) {
+  //     if (portfolio[ele.symbol]) {
+  //       if (ele.action == "true") {
+  //         portfolio[ele.symbol].quantity += ele.quantity;
+  //         portfolio[ele.symbol].costBasis += ele.quantity * ele.price;
+  //       } else {
+  //         portfolio[ele.symbol].quantity -= ele.quantity;
+  //         portfolio[ele.symbol].costBasis -= ele.quantity * ele.price;
+  //       }
+        
+  //     } else {
+  //       portfolio[ele.symbol] = {};
+  //       portfolio[ele.symbol].quantity = ele.quantity;
+  //       portfolio[ele.symbol].costBasis = ele.quantity * ele.price;
+  //     }
+  //   })
+  //   return portfolio;
+  // }
 
   return {
-    getMoney: getMoney,
-    getTransactions: getTransactions,
-    addTransaction: addTransaction
+    // getMoney: getMoney,
+    // getTransactions: getTransactions,
+    money: money,
+    transactions: transactions,
+    addTransaction: addTransaction,
+    // getPortfolio: getPortfolio
   }
 
 }]);

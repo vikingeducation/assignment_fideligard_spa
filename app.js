@@ -6,8 +6,8 @@ app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider.state('index', {
     url: '/index',
     views: {
-      'index': {
-        templateUrl: 'js/templates/index.html',
+      'date-picker': {
+        templateUrl: 'js/templates/datePicker.html',
         controller: 'MainCtrl'
       },
       'historical': {
@@ -34,7 +34,6 @@ app.config(function($stateProvider, $urlRouterProvider){
       }
     }
   })
-
   .state("index.transaction", {
     url: '/transaction',
     views: {
