@@ -34,4 +34,14 @@ app.config(function($stateProvider, $urlRouterProvider){
       }
     }
   })
+
+  .state("index.transaction", {
+    url: '/transaction',
+    views: {
+      'display@': {
+        templateUrl: "js/templates/transactions.html",
+        controller: "transactionCtrl"
+      }
+    }
+  })
 })
