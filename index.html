@@ -10,39 +10,35 @@
     <!-- Router -->
     <script src="javascript/services/uiRouter.js"></script>
 </head>
-<body ng-app='tradeApp' >
+  <body ng-app='tradeApp'>
 
-    <h1>Fideligard index</h1>
-
-    <div class="container">
-        <div class="row ">
-            <div class = "col-md-5 col-lg-5" ui-view='stocks'>stocks not rendered</div>
-        </div>
-    </div>
+    <h1 class='text-center'>Fideligard index</h1>
 
     <div class="container">
-        <div class="row">
-            <div class = "col-md-5 col-lg-5" ui-view='portfolio'>portfolio not rendered</div>
+      <div class="row ">
+        <div class = "col-md-5 col-lg-5" ui-view='stocks'>
+          stocks not rendered
         </div>
+
+        <div class = "col-md-5 col-lg-5" ui-view='portfolio'>
+          portfolio not rendered
+        </div>
+      </div>
     </div>
-<!--
-    <a ui-sref="stocks">stocks</a>
-    <a ui-sref="portfolio">portfolio</a> -->
 
+  <!-- modules -->
+  <script src="javascript/app.js"></script>
 
-    <!-- modules -->
-    <script src="javascript/app.js"></script>
+  <!-- directives -->
+  <script src="javascript/directives/stockInfo.js"></script>
+  <script src="javascript/directives/datePicker.js"></script>
 
-    <!-- directives -->
-    <script src="javascript/directives/stockInfo.js"></script>
-    <script src="javascript/directives/datePicker.js"></script>
+  <!-- services -->
+  <script src="javascript/services/tradeYahoo.js"></script>
 
-    <!-- services -->
-    <script src="javascript/services/tradeYahoo.js"></script>
+  <!-- controllers -->
+  <script src="javascript/controllers/tradeCtrl.js"></script>
+  <script src="javascript/controllers/portfolioCtrl.js"></script>
 
-    <!-- controllers -->
-    <script src="javascript/controllers/tradeCtrl.js"></script>
-    <script src="javascript/controllers/portfolioCtrl.js"></script>
-
-</body>
+  </body>
 </html>
