@@ -7,13 +7,13 @@ tradeApp.factory('tradeYahooService', ['$http', '$filter',function($http,$filter
   //=[{name: price: oneday : sevenday: month:}]
   var _stockData = [];
 
-  var _symbolsOfStocksToGet = ['AAPL', 'FB', 'GOOG'];
+  var _symbolsOfStocksToGet = ['AAPL', 'FB', 'GOOG', 'F', 'SBUX', 'BX'];
 
   //"2014-12-31" data format
   var today = new Date();
   var flag = 0;
-  var _dateToday      = new Date(new Date().setDate(today.getDate()-5)).toISOString().slice(0,10);
-  var _dateHistorical = new Date(new Date().setDate(today.getDate()-60)).toISOString().slice(0,10);
+  var _dateToday      = new Date(new Date().setDate(today.getDate()-60)).toISOString().slice(0,10);
+  var _dateHistorical = new Date(new Date().setDate(today.getDate()-120)).toISOString().slice(0,10);
 
   obj.getStock = function(){
     console.log(_dateToday);
@@ -21,25 +21,18 @@ tradeApp.factory('tradeYahooService', ['$http', '$filter',function($http,$filter
       var symbol = _symbolsOfStocksToGet[i];
 
       $http.get('http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22'+
-        'AAPL'+
+        symbol+
         '%22%20and%20startDate%20=%20%22'+
-        _dateToday+
-        '%22%20and%20endDate%20=%20%22'+
         _dateHistorical+
+        '%22%20and%20endDate%20=%20%22'+
+        _dateToday+
         '%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=')
       .then(_responseCallback);
     }
   };
 
   var _responseCallback = function(response){
-    console.log(response);
-
-    while(!response.data["query"]["results"]){
-      _dateToday      = new Date(new Date().setDate(today.getDate()-5-flag)).toISOString().slice(0,10);
-      _dateHistorical = new Date(new Date().setDate(today.getDate()-60-flag)).toISOString().slice(0,10);
-      flag++;
-      obj.getStock();
-    }
+ console.log(response);
 
     var stockForSymbol = response.data["query"]["results"]["quote"];
     pushData(stockForSymbol);

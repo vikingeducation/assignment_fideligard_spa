@@ -1,4 +1,6 @@
 <h2>Stocks</h2>
+
+
 <table class='table table-striped'>
 <thead>
   <tr>
@@ -11,7 +13,16 @@
   </tr>
 </thead>
 <tbody>
-  <p>returned {{stocks}}</p>
-  <!-- <tr stock-info ng-repeat="stock in stocks"></tr> -->
+
+
+  <tr  ng-repeat="stock in stocks">
+      <td>{{stock["name"]}}</td>
+      <td>{{stock.price | currency}}</td>
+      <td>{{stock.oneday | currency}}</td>
+      <td>{{stock.sevenday | currency}}</td>
+      <td>{{stock.month | currency}}</td>
+      <td><a ng-click="tradeSymbol(symbol.name)">trade</a></td>
+  </tr>
+
 </tbody>
 </table>
