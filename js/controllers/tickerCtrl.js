@@ -1,22 +1,32 @@
-fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', function($scope, $http, stocks){
+fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', 'date',
+                            function($scope, $http, stocks, date){
 
+  var currentDate = date.getDate();
   var results = [];
 
+
+
+  $scope.$watch(date.getDate, function(newDate, oldDate) {
+
+    $scope.trends = stocks.comparisonDays(newDate);
+  });
+
   var ajaxSuccess = function(response){
-    results.push(response.data.query.results.quote) // push array onto results each response is for a
+    results.push(response.data.query.results.quote); // push array onto results each response is for a
                                                     // differeny SYM
     stocks.updateResults(results);
-    $scope.trends = stocks.comparisonDays()
+    var newDate = date.getDate();
+    $scope.trends = stocks.comparisonDays(newDate);
   };
 
-  var ajaxFailure = function(){console.log("fail")};
+  var ajaxFailure = function(){console.log("fail");};
 
 // wait until ajax in service is complete.
 
-  var promises = stocks.ajaxRequest()
+  var promises = stocks.ajaxRequest();
 
   for (var i = 0; i < promises.length; i++) {
-    promises[i].then(ajaxSuccess, ajaxFailure)
+    promises[i].then(ajaxSuccess, ajaxFailure);
   }
 
 

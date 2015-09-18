@@ -18,7 +18,9 @@
                     <option value="sell">Sell</option>
                   </select>
         Quantity: <input type="text" class="form-control">
-        Date: <input type="date" class="form-control">
+        Date: <input type="date" class="form-control" ng-model='viewDate'
+         ng-change="updateDate">
+        {{viewDate}}
         <br>
         <p>Price: $7.00</p>
       </div>
