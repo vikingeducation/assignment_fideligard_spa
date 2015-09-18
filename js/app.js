@@ -12,25 +12,6 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
 
     .state("simulator", {
       url: '/simulator',
-      templateUrl: 'templates/simulator.html',
-      controller: function(){ console.log('anon sim ctrl')} //,
-      // views: {
-      //   'dateFilter': {
-      //     templateUrl: "templates/date_filter.html",
-      //     controller: 'stocksCtrl'
-      //   },
-
-      //   'stocks': {
-      //     templateUrl: "templates/stocks.html",
-      //     controller: 'stocksCtrl'
-      //   }
-      // }
-    })
-
-    .state("simulator.index", {
-      url: '/index',
-      // templateUrl: 'templates/'
-      // controller: function(){ console.log('anon sim ctrl')},
       views: {
         'dateFilter': {
           templateUrl: "templates/date_filter.html",
@@ -40,25 +21,22 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
         'stocks': {
           templateUrl: "templates/stocks.html",
           controller: 'stocksCtrl'
+        },
+
+        "":{
+          templateUrl: "templates/placeholder.html",
+          controller: 'stocksCtrl'
         }
       }
     })
 
-    .state("simulator.index.trade", {
+    .state("simulator.trade", {
       url: '/trade',
       templateUrl: 'templates/simulator/trade.html',
-      // controller: function(){ console.log('anon sim ctrl')} //,
-
-      controller: 'TradeCtrl' //,
-      // views: {
-      //   'main': {
-      //     templateUrl: "templates/simulator/trade.html",
-      //     controller: 'stocksCtrl'
-      //   }
-      // }
+      controller: 'TradeCtrl'
     })
 
-    .state("simulator.index.transaction", {
+    .state("simulator.transaction", {
       url: '/transaction',
       templateUrl: 'templates/simulator/transaction.html',
       controller: 'TransactionCtrl'
@@ -70,21 +48,21 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
       controller: 'PortfolioCtrl'
     });
 
-
-  // $urlRouterProvider.otherwise('/simulator');
+  $urlRouterProvider.otherwise('/simulator');
 
 });
+
 
 stocks.filter('tickerFilter', function () {
   return function (items, search) {
     if (!search) return items;
 
     var result = {};
-    for (key in items) {
+    for (var key in items) {
       if (key === search){
         result[key] = items[key];
       }
-    };
+    }
     return result;
   };
 });

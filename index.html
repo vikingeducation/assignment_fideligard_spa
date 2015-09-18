@@ -31,52 +31,70 @@
   </nav>
 
   <div class="container">
-    <div class="row" ui-view >
+    <div class="row">
 
-      <!-- everything here replaced with state change -->
+      <!-- === left panel === -->
 
-      <div class="col-sm-5 col-sm-offset-4">
-        <h4>Welcome to Fideliguard!</h4>
+      <!-- stock ui-view -->
+      <ui-view ='stocks'>
+      </ui-view><!-- end stock ui-view -->
 
-        <p>Please click on one of the links below:</p>
+      <!-- === end left panel === -->
 
-        <ul>
-          <li>
-            <a ui-sref="simulator">
-              Checkout our simulator
-            </a>
+
+      <!-- === right panel === -->
+      <div class="col-md-7">
+
+        <!-- === right top panel === -->
+
+        <div class="row" ui-view='dateFilter'>
+        </div><!-- end dateFilter ui-view -->
+
+        <!-- === end right top panel === -->
+
+
+        <!-- === right bottom panel === -->
+        <div class="row" ui-view>
+
+          <!-- everything here replaced with state change -->
+
+          <div class="col-sm-12">
+            <h4>Welcome to Fideliguard!</h4>
+
+            <p>Please click on one of the links below:</p>
+
             <ul>
               <li>
-                <a ui-sref="simulator.index">
-                  Simulator index
+                <a ui-sref="simulator">
+                  Checkout our simulator
                 </a>
+                <ul>
+                  <li>
+                    <a ui-sref="simulator.trade">
+                      Simulation trade
+                    </a>
+                  </li>
+                  <li>
+                    <a ui-sref="simulator.transaction">
+                      Simulation transaction
+                    </a>
+                  </li>
+                  <li>
+                    <a ui-sref="simulator.portfolio">
+                      Simulation portfolio
+                    </a>
+                  </li>
+                </ul>
               </li>
-              <li>
-                <a ui-sref="simulator.index.trade">
-                  Simulation trade
-                </a>
-              </li>
-              <li>
-                <a ui-sref="simulator.transaction">
-                  Simulation transaction
-                </a>
-              </li>
-              <li>
-                <a ui-sref="simulator.portfolio">
-                  Simulation portfolio
-                </a>
-              </li>
+              <li>more pages to come</li>
             </ul>
-          </li>
-          <li>more pages to come</li>
-        </ul>
+          </div>
 
-      </div>
-
-      <!-- everything inside this div replaced with div change -->
-
-    </div> <!-- ui-view end -->
-  </div>
+          <!-- everything inside this div replaced with div change -->
+        </div> <!-- ui-view end -->
+      </div><!-- === end right bottom panel === -->
+    </div><!--end div.row-->
+  </div><!--end div.container-->
 
 
   <!-- angular app -->
