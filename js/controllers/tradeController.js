@@ -12,16 +12,20 @@ app.controller("tradeCtrl", ['$scope', '$stateParams', 'selectedDate', 'historic
   $scope.tradeData.symbol = $stateParams.symbol;
   $scope.tradeData.date = selectedDate.getDate;
 
-  $scope.createBuyTranscation = function() {
+  $scope.createTranscation = function() {
     var tradeRecord = JSON.parse(JSON.stringify($scope.tradeData));
     tradeRecord.date = $scope.tradeData.date();
     tradeRecord.cost = Number($scope.calcCost());
     tradeRecord.price = Number($scope.calcPrice());
     tradeRecord.quantity = Number(tradeRecord.quantity);
-    transactionService.addBuyTransaction(tradeRecord);
+    transactionService.addTransaction(tradeRecord);
   }
 
   $scope.validBuy = function() {
     return $scope.tradeData.action == "true" && $scope.calcCost() <= $scope.currentMoney.total;
+  }
+
+  $scope.validSell = function() {
+    return true;
   }
 }]);

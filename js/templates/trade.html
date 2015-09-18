@@ -30,17 +30,14 @@
       Order Status:
       Valid or Invalid
 
-      <button class="btn btn-primary" ng-if="validBuy()" ng-click="createBuyTranscation()" ui-sref="index.portfolio">Place Buy Order!</button>
+      <button class="btn btn-primary" ng-if="validBuy()" ng-click="createTranscation()" ui-sref="index.portfolio">Place Buy Order!</button>
+      <button class="btn btn-primary" ng-if="validSell()" ng-click="createTranscation()" ui-sref="index.portfolio">Place Sell Order!</button>
 
 
     </form>
     </div>
   </div>
-  <div class="row">
-    <select>
-      <option> <a ui-sref="index.portfolio">Portfolio</a></option>
-      <option> <a ui-sref="index.trade">Trade</a></option>
-      <option> <a ui-sref="index.transaction">Transactions</a></option>
-    </select>
-  </div>
+
+  <state-dropdown></state-dropdown>
+
 </div>

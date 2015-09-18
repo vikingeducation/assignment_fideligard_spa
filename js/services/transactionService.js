@@ -1,4 +1,4 @@
-app.factory('transactionService', function(){
+app.factory('transactionService', ["$filter", function($filter){
   var _money = { total: 100000.00 };
   var _transactions = { record: [{
                                   action: "true",
@@ -29,15 +29,26 @@ app.factory('transactionService', function(){
     return _transactions;
   }
 
-  function addBuyTransaction(tradeData){
+  function addTransaction(tradeData){
     _transactions.record.push(tradeData);
-    console.log(_transactions);
+  }
+
+  function countShares(symbol, date) {
+    return $filter("beforeDateFilter")(_transactions.record)
+    .reduce(function(total, ele){
+      if (ele.symbol == symbol && ele.action == "true") {
+        total += ele.quantity;
+      } else if (ele.symbol == symbol) {
+        total -= ele.quantity;
+      }
+      return total;
+    }, 0)
   }
 
   return {
     getMoney: getMoney,
     getTransactions: getTransactions,
-    addBuyTransaction: addBuyTransaction
+    addTransaction: addTransaction
   }
 
-});
+}]);
