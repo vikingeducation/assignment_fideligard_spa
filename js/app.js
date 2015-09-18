@@ -28,7 +28,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
     .state("index.trade", {
       url: '/trade/:symbol',
       views: {
-        'main@': {
+        'main@index': {
           templateUrl: "js/templates/trade.html",
           controller: "stocksCtrl"
         }

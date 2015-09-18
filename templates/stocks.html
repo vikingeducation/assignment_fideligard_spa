@@ -17,14 +17,11 @@
       <thead>
         <th>
           <a href="" ng-click="sortSelection('Symbol')">Symbol</a>
-          <div class="col-sm-1">
-            <div class="row">
-          <span class="glyphicon glyphicon-menu-up" aria-hidden="true" ng-click=sortSelection('Symbol')></span></div><div class="row">
-          <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></div>
-          </div>
+          <span class="dropup" ng-click="sortSelection('Open')"><span class="caret"></span></span>
+          <span class="caret"></span>
         </th>
         <th>
-          <a href="">Price</a>
+          <a href="" ng-click="sortSelection('Open')">Price</a>
           <span class="dropup" ng-click="sortSelection('Open')"><span class="caret"></span></span>
           <span class="caret"></span>
         </th>
