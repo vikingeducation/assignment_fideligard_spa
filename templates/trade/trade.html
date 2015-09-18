@@ -11,7 +11,9 @@
   </div>
   <div class="row">
       <div class="col-xs-6">
-        Symbol: <input type="text" class="form-control">
+        Symbol: <select type="text" class="form-control">
+                  <option ng-repeat="symbol in symbols">{{symbol}}</option>
+                </select>
         Buy/Sell: <select class="form-control">
                     <option value="buy">Buy</option>
                     <option value="sell">Sell</option>

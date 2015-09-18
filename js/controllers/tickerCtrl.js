@@ -1,7 +1,5 @@
 fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', function($scope, $http, stocks){
 
-  //DQRQ
-
   var results = []
 
   var ajaxSuccess = function(response){
@@ -21,11 +19,6 @@ fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', function($scope
   for (var i = 0; i < promises.length; i++) {
     promises[i].then(ajaxSuccess, ajaxFailure)
   }
-
-
-  // trends sent to view to populate table
-
-
 
 
 }]);

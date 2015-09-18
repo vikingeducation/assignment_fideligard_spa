@@ -1,15 +1,13 @@
 fideligard.factory('stocks',['$http', function($http){
   var retObj = {}
+
   var transpose = function(a) {
     return Object.keys(a[0]).map(
         function (c) { return a.map(function (r) { return r[c]; }); }
         );
   }
 
-  // AjAX requests
-  // Organize data
-  retObj.symbols = ['FB', 'TWTR', 'LNKD', 'GOOG']
-
+  retObj.symbols = ['FB', 'TWTR', 'LNKD', 'GOOG', 'AAPL', 'SNE', 'ARX', 'TPE', 'KRX']
 
   oneYearAgo = function(){
     d = new Date()
@@ -71,11 +69,10 @@ fideligard.factory('stocks',['$http', function($http){
     array = data.reduce(function(a, b){
     return a.concat(b);
     });
-    retObj.getTrends(array)
+    // retObj.getTrends(array)
     console.log(array)
     return array
   };
-
 
   // selectDate = function(){
   //   d = new Date()
@@ -107,7 +104,6 @@ fideligard.factory('stocks',['$http', function($http){
 
   }
 
-
   retObj.comparisonDays = function(){
     arr = formatDays()
 
@@ -121,21 +117,6 @@ fideligard.factory('stocks',['$http', function($http){
     console.log(transpose(retArr))
     return transpose(retArr) /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
   }
-
-
-  retObj.getTrends = function(sym, stockData){
-    // // console.log(stockData)
-    // var data = $.grep(stockData, function(val){
-    //   return (val[0][0] && val[0][0].Symbol == sym) });
-
-    // i = 0;
-    // console.log("geting trends");
-    // console.log(data)
-
-    // // console.log(data[0][i][0]);
-    retObj.trends = sym
-
-  };
 
   var d = new Date();
   var yesterday = new Date(d.setDate(d.getDate() - 1));
