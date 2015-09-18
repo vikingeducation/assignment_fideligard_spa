@@ -31,7 +31,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
     })
 
     .state("simulator.trade", {
-      url: '/trade',
+      url: '/:ticker',
       templateUrl: 'templates/simulator/trade.html',
       controller: 'TradeCtrl'
     })

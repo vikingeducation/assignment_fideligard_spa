@@ -2,11 +2,12 @@ stocks.factory('stocksService', ['$http', function($http) {
 
   var obj = {};
   obj.dateObj = {};
-  obj.dateObj.currentDate = Date.parse("2014-07-18");
+  obj.dateObj.dateSelected = Date.parse("2014-07-18");
 
   var marketHistory = {};
   var history = {};
   history.list =[];
+  obj.marketHistory = marketHistory;
 
   var symbols = ['GOOG', 'AAPL', 'FB', 'CVC', 'NFLX', 'AMZN', 'PFE', 'MSFT', 'C', 'F', 'NOK'].slice(0,2);
 
@@ -45,7 +46,7 @@ stocks.factory('stocksService', ['$http', function($http) {
       var day = stock[i];
       // // if don't want calculation for Dec. 2013 dates;
       // if ( day.Date <'2014-01-01') { continue; }
-      day.date = Date.parse(day.Date);
+      day.dateNum = Date.parse(day.Date);
       // debugger;
       day.oneDay = obj.priceChangeNDays(symbol, i, 1);
       day.oneWeek = obj.priceChangeNDays(symbol, i, 5);
@@ -74,11 +75,12 @@ stocks.factory('stocksService', ['$http', function($http) {
   // can be optimized later
   var getIndexInData = function(symbol){
     //starts from end of the yr moving farther into past
+    // debugger;
     for (var i=0; i < marketHistory[symbol].length; i++){
-      if (marketHistory[symbol][i].Date == dateObj.currentDate){
+      if (marketHistory[symbol][i].date == obj.dateObj.dateSelected){
         return i;
       }
-      else if (marketHistory[symbol][i].Date < dateObj.currentDate){
+      else if (marketHistory[symbol][i].date < obj.dateObj.dateSelected){
         return i-1;
       }
     }
@@ -86,6 +88,7 @@ stocks.factory('stocksService', ['$http', function($http) {
   };
 
   obj.stockPrice = function(sym){
+    debugger
     // var stockHistory = marketHistory[sym];
     var idx = getIndexInData(sym);
     return marketHistory[sym][idx].Open;

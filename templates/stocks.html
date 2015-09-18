@@ -44,7 +44,7 @@
 
           <tr stock-row ng-repeat="stock in history.list |
           filter: dropDownSelection |
-          filter: { date: dateObj.dateSelected || 1419984000000} |
+          filter: { dateNum: dateObj.dateSelected || 1419984000000} |
           orderBy: sortSelect " stock="stock" >
           </tr>
 
