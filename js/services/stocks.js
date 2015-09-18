@@ -1,19 +1,19 @@
 fideligard.factory('stocks',['$http', function($http){
-  var retObj = {}
+  var retObj = {};
 
   var transpose = function(a) {
     return Object.keys(a[0]).map(
         function (c) { return a.map(function (r) { return r[c]; }); }
         );
-  }
+  };
 
   retObj.symbols = ['FB', 'TWTR', 'LNKD', 'GOOG', 'AAPL', 'SNE', 'ARX', 'TPE', 'KRX']
 
   oneYearAgo = function(){
-    d = new Date()
+    d = new Date();
     selectedDate = d.setDate(d.getDate() - (366));
-    return new Date(selectedDate)
-  }
+    return new Date(selectedDate);
+  };
 
   var getDateStr = function(date){
     var dd = date.getDate();
@@ -25,11 +25,11 @@ fideligard.factory('stocks',['$http', function($http){
     }
 
     if(mm<10) {
-        mm='0'+mm
+        mm='0'+mm;
     }
     return dateStr = yyyy+'-'+mm+'-'+dd;
         ///            AAPL            GOOG
-  }  //// results [[[day][2day]], [[day], [day2]]]
+  };  //// results [[[day][2day]], [[day], [day2]]]
 
   var results = [];
 
@@ -42,22 +42,22 @@ fideligard.factory('stocks',['$http', function($http){
         &format=json \
         &diagnostics=true \
         &env=store://datatables.org/alltableswithkeys \
-        &callback="
+        &callback=";
   };
 
  retObj.ajaxRequest = function(){
-    promises = []
+    promises = [];
     for (var i = 0; i < retObj.symbols.length; i++){
       var sym = retObj.symbols[i];
       var url = buildUrl(sym);
-      promises.push($http.get(url))
+      promises.push($http.get(url));
     }
-    return promises
-  }
+    return promises;
+  };
 
   retObj.updateResults = function(newResults){
-    results = newResults
-  }
+    results = newResults;
+  };
 
   retObj.getData = function(dateStr){
     var data = [];
@@ -70,29 +70,22 @@ fideligard.factory('stocks',['$http', function($http){
     return a.concat(b);
     });
     // retObj.getTrends(array)
-    console.log(array)
-    return array
+    console.log(array);
+    return array;
   };
 
-  // selectDate = function(){
-  //   d = new Date()
-  //   selectedDate = d.setDate(d.getDate() - (-dateDiff));
-  //   sendDate = new Date(selectedDate)
-  //   dateOutput = getDateStr(sendDate)
-  //   stockData = getData(dateOutput)
-  //   comparisonDays()
-  // };
+
 
   var formatDays = function(){
 
-    array = [0, 1, 7, 30]
-    retArr = []
+    array = [0, 1, 7, 30];
+    retArr = [];
 
     for (var i = 0; i < array.length; i++){
-      base = new Date(yesterday)
-      var num = array[i]
+      base = new Date(yesterday);
+      var num = array[i];
       day = new Date(base.setDate(base.getDate() - num))
-      if (day.getDay() == 0){
+      if (day.getDay() === 0){
         day = new Date(day.setDate(day.getDate() - 2))
       } else if (day.getDay() == 6){
         day = new Date(day.setDate(day.getDate() - 1))
@@ -100,23 +93,23 @@ fideligard.factory('stocks',['$http', function($http){
       retArr.push(day);
 
     }
-    return retArr
+    return retArr;
 
-  }
+  };
 
   retObj.comparisonDays = function(){
-    arr = formatDays()
+    arr = formatDays();
 
-    retArr = []
+    retArr = [];
 
     for (var i = 0; i < arr.length; i++) {
       var str = getDateStr(arr[i])
-      retArr.push(retObj.getData(str))
+      retArr.push(retObj.getData(str));
     }
 
-    console.log(transpose(retArr))
-    return transpose(retArr) /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
-  }
+    console.log(transpose(retArr));
+    return transpose(retArr); /// [[apple stocks on [0],[1],[2],{3}}], [fb stocks on 0,1,2,3]]
+  };
 
   var d = new Date();
   var yesterday = new Date(d.setDate(d.getDate() - 1));
@@ -125,4 +118,4 @@ fideligard.factory('stocks',['$http', function($http){
 
   return retObj;
 
-}])
+}]);

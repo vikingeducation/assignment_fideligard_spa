@@ -1,16 +1,16 @@
 fideligard.controller("tickerCtrl",['$scope', '$http', 'stocks', function($scope, $http, stocks){
 
-  var results = []
+  var results = [];
 
   var ajaxSuccess = function(response){
-    console.log("success")
+    console.log("success");
     results.push(response.data.query.results.quote) // push array onto results each response is for a
                                                     // differeny SYM
-    stocks.updateResults(results)
+    stocks.updateResults(results);
     $scope.trends = stocks.comparisonDays()
-  }
+  };
 
-  var ajaxFailure = function(){console.log("fail")}
+  var ajaxFailure = function(){console.log("fail")};
 
 // wait until ajax in service is complete.
 
