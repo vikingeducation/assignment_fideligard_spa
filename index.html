@@ -36,8 +36,9 @@
       <!-- === left panel === -->
 
       <!-- stock ui-view -->
-      <ui-view ='stocks'>
-      </ui-view><!-- end stock ui-view -->
+      <div ui-view ='stocks'>
+        <div class="col-md-4"></div>
+      </div><!-- end stock ui-view -->
 
       <!-- === end left panel === -->
 
@@ -54,7 +55,7 @@
 
 
         <!-- === right bottom panel === -->
-        <div class="row" ui-view>
+        <div class="row" ui-view >
 
           <!-- everything here replaced with state change -->
 
@@ -90,9 +91,11 @@
             </ul>
           </div>
 
-          <!-- everything inside this div replaced with div change -->
+          <!-- everything inside this replaced with state change -->
+
         </div> <!-- ui-view end -->
       </div><!-- === end right bottom panel === -->
+
     </div><!--end div.row-->
   </div><!--end div.container-->
 

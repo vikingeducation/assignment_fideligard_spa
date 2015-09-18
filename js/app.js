@@ -4,11 +4,11 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
 
-    // .state('index', {
-    //   url: '/',
-    //   controller: function(){ console.log('anon index ctrl')},
-    //   templateUrl: 'index.html'
-    // })
+    .state('index', {
+      url: '/',
+      controller: function(){ console.log('anon index ctrl')},
+      // templateUrl: 'index.html'
+    })
 
     .state("simulator", {
       url: '/simulator',
@@ -24,7 +24,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
         },
 
         "":{
-          templateUrl: "templates/placeholder.html",
+          templateUrl: "templates/simulator.html",
           controller: 'stocksCtrl'
         }
       }
@@ -48,7 +48,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
       controller: 'PortfolioCtrl'
     });
 
-  $urlRouterProvider.otherwise('/simulator');
+  $urlRouterProvider.otherwise('/');
 
 });
 
