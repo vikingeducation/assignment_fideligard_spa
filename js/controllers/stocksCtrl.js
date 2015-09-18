@@ -2,7 +2,7 @@ stocks.controller('stocksCtrl',
   [ '$scope' , 'stocksService', '$filter',
   function($scope, stocksService, $filter){
 
-    console.log('controller initiated');
+    console.log('stocks controller initiated');
 
     $scope.symbols = stocksService.getSymbols();
 

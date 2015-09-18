@@ -4,10 +4,10 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
 
-    .state('index', {
-      url: '/',
-      controller: function(){ console.log('anon index ctrl')},
-    })
+    // .state('index', {
+    //   url: '/',
+    //   controller: function(){ console.log('anon index ctrl')},
+    // })
 
     .state("simulator", {
       url: '/simulator',
@@ -26,24 +26,24 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
 
     .state("simulator.trade", {
       url: '/trade',
-      templateUrl: 'templates/store-layout.html',
+      templateUrl: 'templates/simulator/trade.html',
       controller: 'TradeCtrl'
     })
 
     .state("simulator.transaction", {
       url: '/transaction',
-      templateUrl: 'templates/store-layout.html',
+      templateUrl: 'templates/simulator/transaction.html',
       controller: 'TransactionCtrl'
     })
 
-    .state("simulator.Portfolio", {
+    .state("simulator.portfolio", {
       url: '/portfolio',
-      templateUrl: 'templates/store-layout.html',
+      templateUrl: 'templates/simulator/portfolio.html',
       controller: 'PortfolioCtrl'
     });
 
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/simulator');
 
 });
 
