@@ -21,7 +21,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
       views: {
         'ticker': {templateUrl: 'templates/simulator/ticker.html',
                    controller: 'tickerCtrl'},
-        '': {templateUrl: 'simulator.html',
+        '': {templateUrl: 'templates/simulator/simulator.html',
              controller: function(){console.log("here")}
             }
       }
