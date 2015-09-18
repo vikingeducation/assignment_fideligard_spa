@@ -3,7 +3,7 @@ var fideligard = angular.module('fideligard', ['ui.router']);
 
 fideligard.config(function($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.otherwise('/home');
+  $urlRouterProvider.otherwise('/simulator');
 
   $stateProvider
 
@@ -16,13 +16,21 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
     //   }
     // })
 
-    .state('home',{
-      url: '/home',
+    .state('simulator',{
+      url: '/simulator',
       views: {
-        '': {templateUrl: 'templates/trade/trade.html',
-                  controller: 'tradeCtrl'},
-        'ticker': {templateUrl: 'templates/home/ticker.html',
+        'ticker': {templateUrl: 'templates/simulator/ticker.html',
                    controller: 'tickerCtrl'},
+        '': {templateUrl: 'simulator.html',
+             controller: function(){console.log("here")}
+            }
       }
+
+    })
+
+    .state('simulator.trade', {
+      url: '/trade',
+      templateUrl: 'templates/simulator/trade/trade.html',
+      controller: 'tradeCtrl'
     });
 });
