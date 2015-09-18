@@ -1,10 +1,10 @@
 app.factory('historicalStock', ['$http', '$filter', function($http, $filter){
   var _symbols = ["AAPL", "GOOG", "MSFT", "FB", "YHOO", "NFLX"];
-  var stockData = {list: []};
+  var stockData = [];
 
   _symbols.forEach(function(sym) {
     _getSymData(sym, function(result){
-      stockData.list = stockData.list.concat(result.data.query.results.quote)
+      stockData.push.apply(stockData, result.data.query.results.quote)
     });
   })
 
@@ -13,7 +13,7 @@ app.factory('historicalStock', ['$http', '$filter', function($http, $filter){
   }
 
   function getPrice(date, symbol){
-    var target = $filter("dateFilter")(stockData.list, date).filter(function(el){ return el.Symbol == symbol })[0];
+    var target = $filter("dateFilter")(stockData, date).filter(function(el){ return el.Symbol == symbol })[0];
     return target ? target.Close : null;
   }
 

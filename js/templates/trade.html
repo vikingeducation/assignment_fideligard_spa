@@ -25,7 +25,8 @@
         Cost: <input ng-value="calcCost() | currency" disabled/>
       </div>
 
-      Cash Available: {{ currentMoney.total | currency }}
+      <p>Cash Available: {{ displayMoney() | currency }}</p>
+      <p>Final Cash Value at 12/31/2014 :{{ futureMoney() | currency }}</p>
 
       Order Status:
       Valid or Invalid

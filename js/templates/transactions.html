@@ -17,12 +17,12 @@
       <th>Price</th>
     </thead>
     <tbody>
-      <tr ng-repeat="transactions in transactions.record">
-        <td>{{ transactions.date | date }}</td>
-        <td>{{ transactions.symbol }}</td>
-        <td>{{ transactions.action == "true" ? "Buy" : "Sell" }}</td>
-        <td>{{ transactions.quantity }}</td>
-        <td>{{ transactions.price }}</td>
+      <tr ng-repeat="transaction in transactions">
+        <td>{{ transaction.date | date }}</td>
+        <td>{{ transaction.symbol }}</td>
+        <td>{{ transaction.action == "true" ? "Buy" : "Sell" }}</td>
+        <td>{{ transaction.quantity }}</td>
+        <td>{{ transaction.price }}</td>
       </tr>
     </tbody>
   </table>
