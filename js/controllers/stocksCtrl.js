@@ -12,8 +12,8 @@ stocks.controller('stocksCtrl',
     $scope.lastSort = {};
 
     $scope.sortSelection = function(input){
-      console.log('sorting')
-      debugger
+      console.log('sorting');
+      // debugger
       if (!input) return "";
       if (input != $scope.lastSort.type){
         $scope.lastSort = {type: input, order: '+'};
