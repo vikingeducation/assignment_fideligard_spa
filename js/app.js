@@ -17,11 +17,21 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
           controller: 'stocksCtrl'
         },
 
-        'portfolio': {
+        'main@': {
           templateUrl: "templates/portfolio.html",
           controller: 'stocksCtrl'
         }
 
+      }
+    })
+
+    .state("index.trade", {
+      url: '/trade/:symbol',
+      views: {
+        'main@': {
+          templateUrl: "js/templates/trade.html",
+          controller: "stocksCtrl"
+        }
       }
     });
 
