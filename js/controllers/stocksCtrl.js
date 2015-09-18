@@ -12,8 +12,8 @@ stocks.controller('stocksCtrl',
     $scope.lastSort = {};
 
     $scope.sortSelection = function(input){
-      console.log('sorting');
-      // debugger;
+      console.log('sorting')
+      debugger
       if (!input) return "";
       if (input != $scope.lastSort.type){
         $scope.lastSort = {type: input, order: '+'};
@@ -24,23 +24,10 @@ stocks.controller('stocksCtrl',
         return $scope.sortSelect = "-" + input;
       }
       else {
-        $scope.lastSort.order = '-';
+        $scope.lastSort.order = '+';
         return $scope.sortSelect = "+" + input;
       }
     };
 
-    $scope.getInfo = function(){
-      debugger
-      var list = [];
-      for (key in $scope.history) {
-        var arr = list[key];
-        var dateInfo = $filter('filter')(arr, {date: $scope.dateObj.currentdate});
-        list.push(dateInfo);
-        debugger
-      }
-      return list;
-    };
-    var list = $scope.getInfo()
 
-    $scope.list = list;
   }]);

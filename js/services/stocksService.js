@@ -5,6 +5,8 @@ stocks.factory('stocksService', ['$http', function($http) {
   obj.dateObj.currentDate = Date.parse("2014-07-18");
 
   var marketHistory = {};
+  var history = {};
+  history.list =[];
 
   var symbols = ['GOOG', 'AAPL', 'FB', 'CVC', 'NFLX', 'AMZN', 'PFE', 'MSFT', 'C', 'F', 'NOK'].slice(0,2);
 
@@ -43,6 +45,8 @@ stocks.factory('stocksService', ['$http', function($http) {
       day.oneWeek = obj.priceChangeNDays(symbol, i, 5);
       day.oneMonth = obj.priceChangeNDays(symbol, i, 22);
     }
+    history.list = history.list.concat(stock);
+    // debugger;
     console.log (symbol + " done processing");
   };
 
@@ -52,7 +56,7 @@ stocks.factory('stocksService', ['$http', function($http) {
   };
 
   obj.getAllStockData = function(){
-    return marketHistory;
+    return history;
     // { symbol: , price, 1d, 7d, 30d}
   };
 
