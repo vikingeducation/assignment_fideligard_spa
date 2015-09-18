@@ -47,6 +47,8 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
     .state("simulator.index.trade", {
       url: '/trade',
       templateUrl: 'templates/simulator/trade.html',
+      // controller: function(){ console.log('anon sim ctrl')} //,
+
       controller: 'TradeCtrl' //,
       // views: {
       //   'main': {

@@ -71,6 +71,26 @@ stocks.factory('stocksService', ['$http', function($http) {
     return symbols;
   };
 
+  // can be optimized later
+  var getIndexInData = function(symbol){
+    //starts from end of the yr moving farther into past
+    for (var i=0; i < marketHistory[symbol].length; i++){
+      if (marketHistory[symbol][i].Date == dateObj.currentDate){
+        return i;
+      }
+      else if (marketHistory[symbol][i].Date < dateObj.currentDate){
+        return i-1;
+      }
+    }
+    return 0; //if not found, edge case
+  };
+
+  obj.stockPrice = function(sym){
+    // var stockHistory = marketHistory[sym];
+    var idx = getIndexInData(sym);
+    return marketHistory[sym][idx].Open;
+  };
+
   return obj;
 
 }]);
