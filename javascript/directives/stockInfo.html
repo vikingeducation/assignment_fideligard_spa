@@ -1,12 +1,6 @@
-<td>here is stock{{stocks}}</td>
-  <td>{{stock["name"]}}</td>
-  <td>{{stock.price | currency}}</td>
-  <td>{{stock.oneday | currency}}</td>
-  <td>{{stock.sevenday | currency}}</td>
-  <td>{{stock.month | currency}}</td>
-  <td><a ng-click="tradeSymbol(symbol.name)">trade</a></td>
-
-
-
-
-
+<td>{{stock["name"]}}</td>
+<td>{{stock.price | currency}}</td>
+<td>{{stock.oneday | currency}}</td>
+<td>{{stock.sevenday | currency}}</td>
+<td>{{stock.month | currency}}</td>
+<td><a ng-click="tradeSymbol(symbol.name)">trade</a></td>

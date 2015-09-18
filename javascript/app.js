@@ -7,15 +7,12 @@ tradeApp.config(function(
 
   $urlRouterProvider.otherwise("/");
 
-  $stateProvider
-
-  .state('report',{
+  $stateProvider.state('report',{
     url: '/',
 
     resolve: {
-      stockData : ['tradeYahooService', function(tradeYahooService){
-              tradeYahooService.getStock();
-        }]
+      stockData : ['tradeYahooService',
+      function(tradeYahooService){ tradeYahooService.getStock();}]
     },
 
     views:{
@@ -31,6 +28,11 @@ tradeApp.config(function(
         }
       }
 
+  });
+
+  $stateProvider.state('portfolio.trade',{
+    url: '/trade',
+    templateUrl: 'javascript/templates/trade.html'
   });
 
 });

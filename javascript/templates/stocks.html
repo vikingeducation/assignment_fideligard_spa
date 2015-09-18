@@ -1,28 +1,21 @@
 <h2>Stocks</h2>
 
-
 <table class='table table-striped'>
-<thead>
-  <tr>
-    <th>Symbol</th>
-    <th>Price</th>
-    <th>1d</th>
-    <th>7d</th>
-    <th>30d</th>
-    <th>Trade?</th>
-  </tr>
-</thead>
-<tbody>
 
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Price</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th>Trade?</th>
+    </tr>
+  </thead>
 
-  <tr  ng-repeat="stock in stocks">
-      <td>{{stock["name"]}}</td>
-      <td>{{stock.price | currency}}</td>
-      <td>{{stock.oneday | currency}}</td>
-      <td>{{stock.sevenday | currency}}</td>
-      <td>{{stock.month | currency}}</td>
-      <td><a ng-click="tradeSymbol(symbol.name)">trade</a></td>
-  </tr>
+  <tbody>
+    <tr stock-info ng-repeat="stock in stocks">
+    </tr>
+  </tbody>
 
-</tbody>
 </table>
