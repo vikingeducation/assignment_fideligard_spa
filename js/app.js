@@ -7,17 +7,17 @@ fideligard.config(function($stateProvider, $urlRouterProvider){
 
   $stateProvider
 
-    .state('home', {
-      url: '/home',
-      views: {
-        'ticker': {templateUrl: 'templates/home/ticker.html',
-                   controller: 'tickerCtrl'},
-        // 'portfolio': {templateUrl: 'templates/home/portfolio.html'}
-      }
-    })
+    // .state('home', {
+    //   url: '/home',
+    //   views: {
+    //     'ticker': {templateUrl: 'templates/home/ticker.html',
+    //                controller: 'tickerCtrl'},
+    //     // 'portfolio': {templateUrl: 'templates/home/portfolio.html'}
+    //   }
+    // })
 
-    .state('trade',{
-      url: '/trade',
+    .state('home',{
+      url: '/home',
       views: {
         '': {templateUrl: 'templates/trade/trade.html',
                   controller: 'tradeCtrl'},
