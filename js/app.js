@@ -7,10 +7,30 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
     // .state('index', {
     //   url: '/',
     //   controller: function(){ console.log('anon index ctrl')},
+    //   templateUrl: 'index.html'
     // })
 
     .state("simulator", {
       url: '/simulator',
+      templateUrl: 'templates/simulator.html',
+      controller: function(){ console.log('anon sim ctrl')} //,
+      // views: {
+      //   'dateFilter': {
+      //     templateUrl: "templates/date_filter.html",
+      //     controller: 'stocksCtrl'
+      //   },
+
+      //   'stocks': {
+      //     templateUrl: "templates/stocks.html",
+      //     controller: 'stocksCtrl'
+      //   }
+      // }
+    })
+
+    .state("simulator.index", {
+      url: '/index',
+      // templateUrl: 'templates/'
+      // controller: function(){ console.log('anon sim ctrl')},
       views: {
         'dateFilter': {
           templateUrl: "templates/date_filter.html",
@@ -24,13 +44,19 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 
-    .state("simulator.trade", {
+    .state("simulator.index.trade", {
       url: '/trade',
       templateUrl: 'templates/simulator/trade.html',
-      controller: 'TradeCtrl'
+      controller: 'TradeCtrl' //,
+      // views: {
+      //   'main': {
+      //     templateUrl: "templates/simulator/trade.html",
+      //     controller: 'stocksCtrl'
+      //   }
+      // }
     })
 
-    .state("simulator.transaction", {
+    .state("simulator.index.transaction", {
       url: '/transaction',
       templateUrl: 'templates/simulator/transaction.html',
       controller: 'TransactionCtrl'
@@ -43,7 +69,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
     });
 
 
-  $urlRouterProvider.otherwise('/simulator');
+  // $urlRouterProvider.otherwise('/simulator');
 
 });
 
