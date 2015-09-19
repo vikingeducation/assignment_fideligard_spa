@@ -46,7 +46,7 @@
         <td>{{ getYesterday(dataRow) | currency }}</td>
         <td>{{ getLastMonth(dataRow) | currency }}</td>
         <td>{{ getLast6Month(dataRow) | currency }}</td>
-        <td ui-sref="index.trade({symbol: dataRow.Symbol })">trade</td>
+        <td><a ui-sref="index.trade({symbol: dataRow.Symbol })">Trade</a></td>
       </tr>
     </tbody>
   </table>

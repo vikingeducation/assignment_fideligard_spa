@@ -10,7 +10,7 @@
     </div>
   </div>
   <div class="panel-body">
-    <table class="table table-hover">
+    <table class="table table-bordered">
       <thead>
         <th>Cost Basis</th>
         <th>Current Value</th>
@@ -19,7 +19,16 @@
         <th>30d</th>
         <th>6mon</th>
       </thead>
-      <tbody></tbody>
+      <tbody>
+        <tr>
+          <td>{{calcCostBasisTotal() | currency}}</td>
+          <td>{{calcCurrentValueTotal() | currency}}</td>
+          <td>{{calcProfitTotal() | currency}}</td>
+          <td>{{calc1dTotal() | currency}}</td>
+          <td>{{calc30dTotal() | currency}}</td>
+          <td>{{calc6monTotal() | currency}}</td>
+        </tr>
+      </tbody>
     </table>
 
     <table class="table table-hover">
@@ -44,6 +53,7 @@
           <td>{{calc1d(sym) | currency}}</td>
           <td>{{calc30d(sym) | currency}}</td>
           <td>{{calc6mon(sym) | currency}}</td>
+          <td><a ui-sref="index.trade({symbol: sym })">Trade</a></td>
         </tr>
       </tbody>
     </table>
@@ -51,9 +61,5 @@
 </div>
 
 
-portfolio: {{portfolio}}
-
-curVal: {{calcCurrentValue(sym)}}
-
-
-pre: {{preDate}}
+portfolio: {{portfolio}}<br>
+overall: {{overall}}

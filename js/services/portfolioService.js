@@ -18,7 +18,11 @@ app.factory("portfolioService",
               pf[ele.symbol].costBasis += ele.quantity * ele.price;
             } else {                                       // If sell
               pf[ele.symbol].quantity -= ele.quantity;
-              pf[ele.symbol].costBasis -= ele.quantity * ele.price;
+              if (pf[ele.symbol].quantity !== 0) {
+                pf[ele.symbol].costBasis -= ele.quantity * ele.price;
+              } else {
+                delete pf[ele.symbol];
+              }
             }
           } else {                                        // If not already has this stock
             pf[ele.symbol] = {};                                

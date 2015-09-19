@@ -14,16 +14,23 @@
       <div class="col-sm-6">
         <form id="trade-form" name="tradeForm" class="form-group">
           <label> Symbol: </label>
-          <input ng-model="tradeData.symbol" class="form-control"/>
+          <input ng-model="tradeData.symbol" disabled class="form-control"/>
           <label> Buy/Sell: </label>
-          <select ng-model="tradeData.action" class="form-control">
+          <select ng-model="tradeData.action" ng-change="setOrderStatus()" class="form-control">
             <option ng-value="true" value="" selected>Buy</option>
             <option ng-value="false">Sell</option>
           </select>
           <label> Quantity: </label>
-          <input ng-model="tradeData.quantity" class="form-control"/>
+          <input type="number" required ng-model="tradeData.quantity" ng-change="setOrderStatus()" name="quantity" class="form-control"/>
+          <p ng-if="tradeForm.quantity.$dirty && buy() && !validBuy()">
+            You don't have enough fund!
+          </p>
+          <p ng-if="tradeForm.quantity.$dirty && sell() && !validSell()">
+            You don't have enough share!
+          </p>
+
           <label> Date: </label>
-          <input ng-value="tradeData.date | date" disabled min="1-1-2014" max="12-31-2014" class="form-control"/>
+          <input ng-value="tradeData.date.currentDate | date" disabled min="1-1-2014" max="12-31-2014" class="form-control"/>
           <label> Price: </label>
           <input ng-value="calcPrice() | currency" disabled class="form-control"/>
           <label> Cost: </label>
@@ -36,7 +43,7 @@
         <label> Cash Available: </label>
         <p>{{ currentMoney.total | currency }}</p>
         <label> Order Status: </label>
-        <p>Valid / Invalid</p>
+        <h3>{{orderStatus}}</h3>
       </div>
     </div>
     
