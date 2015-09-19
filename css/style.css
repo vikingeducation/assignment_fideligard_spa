@@ -1,0 +1,16 @@
+table {
+    table-layout: fixed;
+    width: 100%;   
+}
+
+th,td {
+  word-wrap: break-word;
+}
+
+.status-valid {
+  color: #33CC33;
+}
+
+.status-invalid {
+  color: #FF0000;
+}
