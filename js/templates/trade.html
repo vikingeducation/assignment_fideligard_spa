@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="row">
+    <div class="col-xs-6 pull-left">
+      <h1> Trade </h1>
+    <form id="trade-form" name="tradeForm" class="panel">
+      <div class="form-group">
+        Symbol: <input ng-model="tradeData.symbol" disabled/>
+      </div>
+      <div class="form-group">
+        Buy/Sell: <select ng-model="tradeData.action">
+                    <option ng-value="true">Buy</option>
+                    <option ng-value="false">Sell</option>
+                  </select>
+      </div>
+      <div class="form-group">
+        Quantity: <input ng-model="tradeData.quantity"/>
+      </div>
+      <div class="form-group">
+        Date: <input ng-value="tradeData.date()" disabled min="1-1-2014" max="12-31-2014"/>
+      </div>
+      <div class="form-group">
+        Price: <input ng-value="calcPrice() | currency" disabled/>
+      </div>
+      <div class="form-group">
+        Cost: <input ng-value="calcCost() | currency" disabled/>
+      </div>
+
+      <p>Cash Available: {{ displayMoney() | currency }}</p>
+      <p>Final Cash Value at 12/31/2014 :{{ futureMoney() | currency }}</p>
+
+      Order Status:
+      <button class="btn btn-primary" ng-if="validBuy()" ng-click="createTranscation()" ui-sref="index.transaction">Place Buy Order!</button>
+      <button class="btn btn-primary" ng-if="validSell()" ng-click="createTranscation()" ui-sref="index.transaction">Place Sell Order!</button>
+
+
+    </form>
+    </div>
+  </div>
+
+  <state-dropdown></state-dropdown>
+
+</div>

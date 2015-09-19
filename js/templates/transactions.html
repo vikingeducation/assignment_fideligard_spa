@@ -1,0 +1,28 @@
+<div class="panel col-md-12">
+  <div class="panel-header">
+    <h1>Transactions</h1>
+  </div>
+  <div class="panel-body">
+  <table class="table table-striped" style='word-wrap: break-word;'>
+    <thead>
+      <th ng-click="sortBy(1)">Date</th>
+      <th ng-click="sortBy(2)">Symbol</th>
+      <th ng-click="sortBy(3)">Type</th>
+      <th ng-click="sortBy(4)">Quantity</th>
+      <th ng-click="sortBy(5)">Price</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="transaction in transactions | tableFilter:sortCriteria:reverse">
+        <td>{{ transaction.date | date }}</td>
+        <td>{{ transaction.symbol }}</td>
+        <td>{{ transaction.action ? "Buy" : "Sell" }}</td>
+        <td>{{ transaction.quantity }}</td>
+        <td>{{ transaction.price }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+Sorting By: {{ sortCriteria? sortCriteria : "Nothing" }}, Descending {{ reverse }}
+<state-dropdown></state-dropdown>
+
