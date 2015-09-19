@@ -23,8 +23,48 @@ app.factory('historicalStock', ['$http', '$filter', function($http, $filter){
     .then(callback)
   }
 
+  function getLast(offset, date, symbol){
+    var currentClosing = getPrice(date, symbol);
+    var startingDate = new Date(date);
+    var targetDays = [];
+    targetDays.push(startingDate.setDate(startingDate.getDate() - offset - 1))
+    targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
+    targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
+    targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
+    targetDays.push(startingDate.setDate(startingDate.getDate() - 1))
+
+
+    var filteredData = stockData.filter(function(el){ return el.Symbol == symbol })
+    var results = [];
+    targetDays.forEach(function(day) {
+      var result = $filter("dateFilter")(filteredData, day);
+      if (result.length > 0 && results.length == 0) {
+        results = result;
+      }
+    });
+
+    if (!currentClosing) return "N/A"
+
+    return (results.length < 1) ? "N/A" : currentClosing - results[0].Close
+  }
+
+  function getYesterday(date, symbol){
+    return getLast(0, date,  symbol);
+  }
+
+  function getLastMonth(date, symbol){
+    return getLast(29, date, symbol);
+  }
+
+  function getLast6Month(date, symbol){
+    return getLast(179, date, symbol);
+  }
+
   return {
     getPrice: getPrice,
     getStockData: getStockData,
+    getYesterday: getYesterday,
+    getLastMonth: getLastMonth,
+    getLast6Month: getLast6Month,
   }
 }]);

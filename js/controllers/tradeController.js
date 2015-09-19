@@ -23,6 +23,7 @@ app.controller("tradeCtrl", ['$scope', '$stateParams', 'selectedDate', 'historic
 
   $scope.createTranscation = function() {
     var tradeRecord = JSON.parse(JSON.stringify($scope.tradeData));
+    tradeRecord.action = $scope.tradeData.action == "true" ? true : false
     tradeRecord.date = $scope.tradeData.date();
     tradeRecord.cost = Number($scope.calcCost());
     tradeRecord.price = Number($scope.calcPrice());

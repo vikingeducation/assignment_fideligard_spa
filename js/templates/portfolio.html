@@ -1,8 +1,58 @@
-<div class="row">
-  <div class="row">
-    <div class="col-xs-6 pull-left">
-      <h1> Portfolio </h1>
-    </div>
+<div class="panel col-md-12">
+  <div class="panel-header">
+    <h1>Portfolio</h1>
   </div>
-  <state-dropdown></state-dropdown>
+  <div class="panel-body  table-responsive">
+  <table class="table">
+      <tr>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit</th>
+        <th>1d</th>
+        <th>30d</th>
+        <th>6month</th>
+      </tr>
+      <tr>
+        <td>{{ money - totalCost() | currency }}</td>
+        <td>{{ money + stockValue() | currency  }}</td>
+        <td>{{ stockValue() + totalCost() | currency }}</td>
+        <td>{{ money + stockValue() - portfolioYesterday() | currency }}</td>
+        <td>{{ money + stockValue() - portfolioLastMonth() | currency }}</td>
+        <td>{{ money + stockValue() - portfolioLast6Month() | currency }}</td>
+      </tr>
+  </table>
+  <table class="table table-striped">
+    <thead>
+      <th ng-click="sortBy(1)">Symbol</th>
+      <th ng-click="sortBy(2)">Quantity</th>
+      <th ng-click="sortBy(3)">Cost Basis</th>
+      <th ng-click="sortBy(4)">Current Value</th>
+      <th ng-click="sortBy(5)">Profits</th>
+      <th ng-click="sortBy(6)">Current Price</th>
+      <th>Trade?</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td> Cash  </td>
+        <td> {{ money | currency }} </td>
+        <td> {{ money | currency }} </td>
+        <td> {{ money | currency }} </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr ng-repeat="row in portfolio" ng-if="row.quantity > 0">
+        <td>{{ row.symbol }}</td>
+        <td>{{ row.quantity }}</td>
+        <td>{{ row.cost | currency }}</td>
+        <td>{{ row.quantity * getPrice(currentDate(), row.symbol) | currency }}</td>
+        <td>{{ row.quantity * getPrice(currentDate(), row.symbol) + row.cost | currency }}</td>
+        <td>{{ getPrice(currentDate(), row.symbol) | currency }}</td>
+        <td ui-sref="index.trade({symbol: row.symbol })">trade</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+<state-dropdown></state-dropdown>
 </div>
+
