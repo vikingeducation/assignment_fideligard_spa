@@ -1,44 +1,79 @@
 <html>
 <head>
   <title>Fideligard</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <!-- Javascript and jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-    <!-- Router -->
-    <script src="javascript/services/uiRouter.js"></script>
+  <!-- Bootstrap CSS and Javascript -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="css/navbar.css">
+
+  <!-- Router -->
+  <script src="javascript/services/uiRouter.js"></script>
+
 </head>
   <body ng-app='tradeApp'>
 
-    <h1 class='text-center'>Fideligard index</h1>
+  <!-- Navbar -->
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="glyphicon glyphicon-menu-hamburger"></span>
+        </button>
+        <a class="navbar-brand" href="#">Fideligard Historical Portfolio Simulator</a>
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
 
-    <div class="container">
-      <div class="row ">
-        <div class = "col-md-5 col-lg-5" ui-view='stocks'>
-          stocks not rendered
-        </div>
+  <!-- Page content -->
+  <div class="container">
+    <div class="row ">
 
-        <div class = "col-md-5 col-lg-5" ui-view='portfolio'>
-          portfolio not rendered
+      <!-- Stocks (left panel) -->
+      <div class = "col-sm-5" ui-view='stocks'></div>
+
+      <!-- Simulator (right panel) -->
+      <div class = "col-sm-5 col-lg-offset-1">
+        <!-- Date Picker -->
+        <div class='row' ui-view='datePicker'></div>
+
+        <!-- Portfolio / Trade / Transactions -->
+        <div class='row'>
+          <ui-view></ui-view>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Footer -->
+  <nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid text-center">
+      <h5>
+        <span class="glyphicon glyphicon-copyright-mark"></span>
+        vcs
+      </h5>
+    </div>
+  </nav>
 
   <!-- modules -->
   <script src="javascript/app.js"></script>
 
   <!-- directives -->
   <script src="javascript/directives/stockInfo.js"></script>
-  <script src="javascript/directives/datePicker.js"></script>
 
   <!-- services -->
-  <script src="javascript/services/tradeYahoo.js"></script>
+  <script src="javascript/services/stockData.js"></script>
+  <script src="javascript/services/dateRange.js"></script>
 
   <!-- controllers -->
-  <script src="javascript/controllers/tradeCtrl.js"></script>
+  <script src="javascript/controllers/stocksCtrl.js"></script>
   <script src="javascript/controllers/portfolioCtrl.js"></script>
-
+  <script src="javascript/controllers/datePickerCtrl.js"></script>
   </body>
 </html>

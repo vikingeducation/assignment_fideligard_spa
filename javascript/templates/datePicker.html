@@ -1,0 +1,30 @@
+<!-- View for date picker -->
+
+<div class='alert alert-info'>
+
+  <div class='row'>
+    <div class='col-sm-5 col-sm-offset-1 text-left'>
+      1 Jan 2014
+    </div>
+    <div class='col-sm-5 text-right'>
+      31 Dec 2014
+    </div>
+  </div>
+
+  <div class='row'>
+
+    <div class='col-sm-10 col-sm-offset-1'>
+      <div class='row'>
+        <input type="range" min="1" max="248" ng-model="datePicker">
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-6'>
+           Range: {{dateRange()}} Trading Days
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

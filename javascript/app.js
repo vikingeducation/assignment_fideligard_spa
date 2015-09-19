@@ -1,39 +1,53 @@
 var tradeApp = angular.module('tradeApp', ['ui.router']);
 
 
-tradeApp.config(function(
-                          $stateProvider,
+tradeApp.config(function( $stateProvider,
                           $urlRouterProvider){
 
-  $urlRouterProvider.otherwise("/");
+  $urlRouterProvider.otherwise('/simulator');
 
-  $stateProvider.state('report',{
+  $stateProvider.state('index', {
     url: '/',
 
     resolve: {
-      stockData : ['tradeYahooService',
-      function(tradeYahooService){ tradeYahooService.getStock();}]
+      stockData: function(stockDataService){
+        stockDataService.getStocksFromYahoo();
+      }
     },
 
     views:{
-
-        'stocks': {
+      'stocks': {
         templateUrl: 'javascript/templates/stocks.html',
-        controller: 'tradeCtrl'
+        controller: 'stocksCtrl'
         },
 
-       'portfolio': {
-        templateUrl: 'javascript/templates/portfolio.html',
-        controller: 'portfolioCtrl'
-        }
+      'datePicker': {
+        templateUrl: 'javascript/templates/datePicker.html',
+        controller: 'datePickerCtrl'
+      },
+
+      '': {
+        templateUrl: 'javascript/templates/index.html'
       }
 
+    }
   });
 
-  $stateProvider.state('portfolio.trade',{
-    url: '/trade',
-    templateUrl: 'javascript/templates/trade.html'
+  $stateProvider.state('index.simulator',{
+    url: 'simulator',
+    templateUrl: 'javascript/templates/simulator.html',
   });
 
 });
+
+// Error Handling
+tradeApp.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+});
+
+
+
+
+
+
 

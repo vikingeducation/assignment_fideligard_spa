@@ -1,4 +1,24 @@
-<h2>Stocks</h2>
+<div class='row'>
+
+  <div class='col-sm-6'>
+    <h2>Stocks</h2>
+  </div>
+
+  <div class='col-sm-6 text-right'>
+
+    <div class='row'>
+      <label name='categoryFilter'>Ticker Filter</label>
+    </div>
+
+    <div class='row'>
+      <select ng-model='symbolFilter'>
+        <option>None</option>
+        <option ng-repeat='symbol in symbols'>{{symbol}}</option>
+      </select>
+    </div>
+
+  </div>
+</div>
 
 <table class='table table-striped'>
 
@@ -14,8 +34,9 @@
   </thead>
 
   <tbody>
-    <tr stock-info ng-repeat="stock in stocks">
+    <tr stock-info ng-repeat="stock in stocks | filter: { name: symbolReturn(symbolFilter) }">
     </tr>
   </tbody>
 
 </table>
+

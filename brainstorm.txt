@@ -1,0 +1,43 @@
+App architecture
+
+Views in a parent state
+1. Stocks stays there
+2. Date slider is always there
+
+Under another parent views
+Portfolio
+trade
+transactions
+
+State: something to navigate to
+View: static state (effectively is a partial)
+
+Markup
+index.html
+<ui-view = "stocks"></ui-view>
+<ui-view = "dateSlider"></ui-view>
+
+  simulator.html
+  <ui-view></ui-view>
+
+    Templates
+    portfolio.html
+        controller: portfolioCtrl
+    transactions.html
+        controller: transactionsCtrl
+    stocks.html
+        controller: stocksCtrl
+
+Routes
+> /home
+> /simulator
+   [view] date slider  ('template/dateSlider.html')
+   [view] stocks       ('template/stocksPanel.html')
+ >>[child state] Portfolio ('simulator.portfolio')
+      .state('simulator.portfolio', {
+        url: '/portfolio',
+        templateUrl: '/templates/portfolio.html',
+        controller: portfolioCtrl
+      })
+ >>[child state] Trade ('simulator.trade')
+ >>[child state] Transactions  ('simulator.transactions')

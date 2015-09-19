@@ -1,5 +1,5 @@
-tradeApp.controller('portfolioCtrl',  ['$scope', function( $scope){
+tradeApp.controller('portfolioCtrl',  ['$scope', function($scope){
 
-// console.log("portfolio ctrl run");
+console.log("portfolio ctrl run");
 
 }]);
