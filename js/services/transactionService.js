@@ -1,37 +1,37 @@
 app.factory('transactionService', ["$filter", function($filter){
   var transactions =  [
-                        // {
-                        //   action: true,
-                        //   cost: 5318.20023,
-                        //   date: new Date('Fri Apr 04 2014 00:00:00 GMT-0500 (CDT)'),
-                        //   price: 531.820023,
-                        //   quantity: 10,
-                        //   symbol: "AAPL"
-                        // },
-                        // {
-                        //   action: true,
-                        //   cost: 44.95,
-                        //   date: new Date('Fri Aug 20 2014 00:00:00 GMT-0500 (CDT)'),
-                        //   price: 44.95,
-                        //   quantity: 1,
-                        //   symbol: "MSFT",
-                        // },
-                        // {
-                        //   action: true,
-                        //   cost: 67835.727417,
-                        //   date: new Date('Jan 23 2014 00:00:00 GMT-0500 (CDT)'),
-                        //   price: 551.509979,
-                        //   quantity: 123,
-                        //   symbol: "AAPL",
-                        // },
-                        // {
-                        //   action: false,
-                        //   cost: 66964.887171,
-                        //   date: new Date('Feb 22 2014 00:00:00 GMT-0500 (CDT)'),
-                        //   price: 544.429977,
-                        //   quantity: 123,
-                        //   symbol: "AAPL",
-                        // }
+                        {
+                          action: true,
+                          cost: 5318.20023,
+                          date: new Date('Fri Apr 04 2014 00:00:00 GMT-0500 (CDT)'),
+                          price: 531.820023,
+                          quantity: 10,
+                          symbol: "AAPL"
+                        },
+                        {
+                          action: true,
+                          cost: 44.95,
+                          date: new Date('Fri Aug 20 2014 00:00:00 GMT-0500 (CDT)'),
+                          price: 44.95,
+                          quantity: 1,
+                          symbol: "MSFT",
+                        },
+                        {
+                          action: true,
+                          cost: 67835.727417,
+                          date: new Date('Jan 23 2014 00:00:00 GMT-0500 (CDT)'),
+                          price: 551.509979,
+                          quantity: 123,
+                          symbol: "AAPL",
+                        },
+                        {
+                          action: false,
+                          cost: 66964.887171,
+                          date: new Date('Feb 22 2014 00:00:00 GMT-0500 (CDT)'),
+                          price: 544.429977,
+                          quantity: 123,
+                          symbol: "AAPL",
+                        }
                       ]
 
   // Day bought
