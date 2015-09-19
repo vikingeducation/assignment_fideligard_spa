@@ -1,0 +1,98 @@
+<h3>Trade</h3><br>
+<div class='row'>
+  <div class='col-sm-6'>
+    <form name='tradeForm'>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Symbol</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <input type='text' ng-model='symbol'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Buy/Sell</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <select type='text' ng-model='action'>
+            <option>Buy</option>
+            <option>Sell</option>
+          </select>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Quantity</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <input type='text' ng-model='quantity'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Date</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <input type='text' ng-model='date'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Price</label>
+        </div>
+
+        <div class='col-sm-9'>
+          {{stock.price}}
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Cost</label>
+        </div>
+
+        <div class='col-sm-9'>
+          {{stock.cost}}
+        </div>
+      </div><br>
+
+      <button class="btn btn-primary btn-block"
+        ng-click='updatePortfolio(stock, quantity, action)'>
+          Place Order!
+      </button>
+
+    </form>
+  </div>
+
+
+  <div class='col-sm-6'>
+  <!-- From User Service -->
+    <div class='row'>
+      <label>Cash Available</label>
+    </div>
+
+    <div class='row'>
+      {{ user.cashAvailable | currency }}
+    </div>
+
+  <!-- From Processing model -->
+    <div class='row'>
+      <label>Order Status</label>
+    </div>
+
+    <div class='row'>
+      VALID
+    </div>
+
+  </div>
+</div>

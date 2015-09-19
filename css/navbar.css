@@ -5,5 +5,12 @@
 }
 
 body{
-  padding-bottom: 100px;
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
+select{
+  width: 95%;
+  background: #fff;
+  height: 25px;
 }

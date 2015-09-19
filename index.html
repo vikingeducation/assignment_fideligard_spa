@@ -19,7 +19,7 @@
   <body ng-app='tradeApp'>
 
   <!-- Navbar -->
-  <nav class="navbar navbar-default navbar-static-top">
+  <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse">
@@ -36,10 +36,10 @@
     <div class="row ">
 
       <!-- Stocks (left panel) -->
-      <div class = "col-sm-5" ui-view='stocks'></div>
+      <div class = "col-md-6" ui-view='stocks'></div>
 
       <!-- Simulator (right panel) -->
-      <div class = "col-sm-5 col-lg-offset-1">
+      <div class = "col-md-6">
         <!-- Date Picker -->
         <div class='row' ui-view='datePicker'></div>
 

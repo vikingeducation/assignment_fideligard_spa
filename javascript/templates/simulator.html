@@ -1,2 +1,14 @@
-<h2>Simulator</h2>
-<ui-view></ui-view>
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <a ui-sref='index.simulator.trade'>Trade</a>
+
+    <select class='col-md-2 pull-right'>
+      <option ui-sref='index.simulator.trade'>Trade</option>
+    <!--   <option ui-sref='portfolio.transactions'>Transactions</option> -->
+    </select>
+
+    <ui-view></ui-view>
+
+  </div>
+</div>

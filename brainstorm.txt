@@ -42,6 +42,8 @@ Routes
  >>[child state] Trade ('simulator.trade')
  >>[child state] Transactions  ('simulator.transactions')
 
- Bug List:
+ Bug List / Next steps:
  Epic 1
   - Sorting by Price not working correctly
+  - Create stockTableSortingService
+  - Ticker Filter F also returns FB and PFE

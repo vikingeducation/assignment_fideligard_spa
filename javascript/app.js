@@ -35,7 +35,13 @@ tradeApp.config(function( $stateProvider,
 
   $stateProvider.state('index.simulator',{
     url: 'simulator',
-    templateUrl: 'javascript/templates/simulator.html',
+    templateUrl: 'javascript/templates/simulator.html'
+  });
+
+  $stateProvider.state('index.simulator.trade',{
+    url: '/trade',
+    templateUrl: 'javascript/templates/trade.html',
+    controller: 'tradeCtrl'
   });
 
 });

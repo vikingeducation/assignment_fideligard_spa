@@ -1,42 +1,47 @@
-<div class='row'>
-
-  <div class='col-sm-6'>
-    <h2>Stocks</h2>
-  </div>
-
-  <div class='col-sm-6 text-right'>
+<div class="panel panel-default">
+  <div class="panel-body">
 
     <div class='row'>
-      <label name='categoryFilter'>Ticker Filter</label>
+
+      <div class='col-sm-6'>
+        <h2>Stocks</h2>
+      </div>
+
+      <div class='col-sm-3 col-sm-offset-3'>
+
+        <div class='row'>
+          <label name='categoryFilter'>Ticker Filter</label>
+        </div>
+
+        <div class='row'>
+          <select ng-model='symbolFilter'>
+            <option>None</option>
+            <option ng-repeat='symbol in symbols'>{{symbol}}</option>
+          </select>
+        </div>
+
+      </div>
     </div>
 
-    <div class='row'>
-      <select ng-model='symbolFilter'>
-        <option>None</option>
-        <option ng-repeat='symbol in symbols'>{{symbol}}</option>
-      </select>
-    </div>
+    <table class='table table-striped'>
+
+      <thead>
+          <th ng-click='cycleName()'>{{label('Symbol')}}</th>
+          <th ng-click='cyclePrice()'>{{label('Price')}}</th>
+          <th ng-click='cycleOneDay()'>{{label('1d')}}</th>
+          <th ng-click='cycleSevenDay()'>{{label('7d')}}</th>
+          <th ng-click='cycleMonth()'>{{label('30d')}}</th>
+          <th>Trade?</th>
+      </thead>
+
+      <tbody>
+        <tr stock-info ng-repeat="stock in stocks |
+            orderBy: sortCriteria() |
+            filter: { name: symbolReturn(symbolFilter) }">
+        </tr>
+      </tbody>
+
+    </table>
 
   </div>
 </div>
-
-<table class='table table-striped'>
-
-  <thead>
-      <th ng-click='cycleName()'>{{label('Symbol')}}</th>
-      <th ng-click='cyclePrice()'>{{label('Price')}}</th>
-      <th ng-click='cycleOneDay()'>{{label('1d')}}</th>
-      <th ng-click='cycleSevenDay()'>{{label('7d')}}</th>
-      <th ng-click='cycleMonth()'>{{label('30d')}}</th>
-      <th>Trade?</th>
-  </thead>
-
-  <tbody>
-    <tr stock-info ng-repeat="stock in stocks |
-        orderBy: sortCriteria() |
-        filter: { name: symbolReturn(symbolFilter) }">
-    </tr>
-  </tbody>
-
-</table>
-

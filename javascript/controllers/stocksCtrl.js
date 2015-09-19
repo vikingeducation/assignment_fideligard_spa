@@ -1,8 +1,7 @@
-tradeApp.controller('stocksCtrl',  [  '$scope',
-                                      'stockDataService',
-                                      function( $scope,
-                                                stockDataService
-                                              ){
+tradeApp.controller('stocksCtrl', ['$scope',
+                                    'stockDataService',
+                                    function($scope,
+                                            stockDataService){
 
 // allStocks = stockDataService.getAllStockData();
 // stock = stockDataService.getStocksTableData();
