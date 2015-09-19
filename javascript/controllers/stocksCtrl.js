@@ -24,7 +24,7 @@ tradeApp.controller('stocksCtrl',  [  '$scope',
   $scope.label = function(prop){
     var attr = {  'Symbol':'nameSort', 'Price':'priceSort', '1d':'onedaySort',
                   '7d':'sevendaySort', '30d':'monthSort'  };
-    return [prop, prop+' \u25BC', prop+' \u25B2'][$scope[attr[prop]] % 3];
+    return [prop, prop+' \u25B2', prop+' \u25BC'][$scope[attr[prop]] % 3];
   };
 
   $scope.sortCriteria = function(){
