@@ -4,14 +4,23 @@ fideligard.factory('date',['$http', function($http){
   var _dateSet = new Date(_today.setDate(_today.getDate() - 1))
   var _date = _dateSet
 
+  retObj.yesterday = function(){
+    var today = new Date();
+    return new Date(today.setDate(today.getDate() - 1))
+  }
 
   retObj.getDate = function(){
     return _date
   }
 
   retObj.setDate = function(dateDiff){
-    var newDate = new Date()
-    _date = new Date(newDate.setDate(newDate.getDate() - (-dateDiff)))
+
+    if (typeof(dateDiff) === "string"){
+      var newDate = new Date()
+      _date = new Date(newDate.setDate(newDate.getDate() - (-dateDiff)))
+    } else if (new Date(dateDiff) != "Invalid Date") {
+      _date = dateDiff
+    }
   };
 
   retObj.oneYearAgo = function(){
@@ -32,6 +41,7 @@ fideligard.factory('date',['$http', function($http){
     if(mm<10) {
         mm='0'+mm;
     }
+    var dateStr;
     return dateStr = yyyy+'-'+mm+'-'+dd;
 
   };

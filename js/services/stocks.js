@@ -2,7 +2,6 @@ fideligard.factory('stocks',['$http', 'date', function($http, date){
   var retObj = {};
 
   var transpose = function(a) {
-    if (!a) return
     return Object.keys(a[0]).map(
         function (c) { return a.map(function (r) { return r[c]; }); }
         );
@@ -13,6 +12,21 @@ fideligard.factory('stocks',['$http', 'date', function($http, date){
 
 
   var results = [];
+
+
+  retObj.getPrice = function(sym, day){
+    var dayObj = new Date(day);
+    var newDay = checkDayOfWeek(dayObj)
+    var day = date.getDateStr(newDay)
+    var data = retObj.getData(day);
+    var stock = $.grep(data, function(val){
+      if (val.Symbol == sym){
+        return true
+      }
+    });
+
+    return stock[0].Close
+  }
 
   var buildUrl = function(symbol){
     return "http://query.yahooapis.com/v1/public/yql?q= \
@@ -57,7 +71,14 @@ fideligard.factory('stocks',['$http', 'date', function($http, date){
     if (array) return array; //
   };
 
-
+  var checkDayOfWeek = function(day){
+    if (day.getDay() === 0){
+      day = new Date(day.setDate(day.getDate() - 2));
+    } else if (day.getDay() == 6){
+      day = new Date(day.setDate(day.getDate() - 1));
+    }
+    return day
+  }
 
   var formatDays = function(newDate){
 
@@ -67,11 +88,7 @@ fideligard.factory('stocks',['$http', 'date', function($http, date){
       var base = newDate;
       var num = array[i];
       var day = new Date(base.setDate(base.getDate() - num));
-      if (day.getDay() === 0){
-        day = new Date(day.setDate(day.getDate() - 2));
-      } else if (day.getDay() == 6){
-        day = new Date(day.setDate(day.getDate() - 1));
-      }
+      var day = checkDayOfWeek(day);
       retArr.push(day);
 
     }

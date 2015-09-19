@@ -10,25 +10,31 @@
   </div>
   <div class="row">
       <div class="col-xs-6">
-        Symbol: <select type="text" class="form-control">
+        Symbol: <select type="text" class="form-control" ng-model="symbol"
+                 ng-change="updatePrice()">
                   <option ng-repeat="symbol in symbols">{{symbol}}</option>
                 </select>
-        Buy/Sell: <select class="form-control">
-                    <option value="buy">Buy</option>
-                    <option value="sell">Sell</option>
+        Buy/Sell: <select class="form-control" ng-model="buyOrSell">
+                    <option value="Buy">Buy</option>
+                    <option value="Sell">Sell</option>
                   </select>
-        Quantity: <input type="text" class="form-control">
+        Quantity: <input type="text" class="form-control" ng-model="quantity">
         Date: <input type="date" class="form-control" ng-model='viewDate'
-         ng-change="updateDate">
-        {{viewDate}}
+         ng-change="updateDate()">
+         {{oneYearAgo}}
         <br>
-        <p>Price: $7.00</p>
+        <p>Price per Stock: {{price | currency}}</p>
+        <p>Total Cost: {{price * quantity | currency}}</p>
+        <button ng-if="buyOrSell=='Buy'"  class="btn btn-primary" ng-click="buy()">BUY</button>
+        <button ng-if="buyOrSell=='Sell'" class="btn btn-primary" ng-click="sell()">SELL</button>
       </div>
     <div class="col-xs-6">
       <p><strong>Cash Available:</strong></p>
-      <p>$9,000,000,000.00</p>
+      <p>{{cash | currency}}</p>
       <p><strong>Order Status:</strong></p>
-      <p>Valid</p>
+      <p ng-if="validateTransaction(buyOrSell)">Valid</p>
+      <p ng-if="!validateTransaction(buyOrSell)">Invalid</p>
+
     </div>
   </div>
 </div>
