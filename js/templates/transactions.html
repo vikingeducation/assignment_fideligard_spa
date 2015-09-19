@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2> Transactions </h2>
+      </div>
+      <div class="col-sm-2 col-sm-offset-1">
+        <select ng-model="symbolFilter">
+          <option value="">Select Ticker</option>
+          <option ng-repeat="symbol in symbols()" value="{{symbol}}">
+            {{symbol}}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <state-dropdown></state-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+  <table class="table table-striped" style='word-wrap: break-word;'>
+    <thead>
+      <th>Date</th>
+      <th>Symbol</th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="transactions in transactions.record">
+        <td>{{ transactions.Date | date }}</td>
+        <td>{{ transactions.symbol }}</td>
+        <td>{{ transactions.action == "true" ? "Buy" : "Sell" }}</td>
+        <td>{{ transactions.quantity }}</td>
+        <td>{{ transactions.price | currency}}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>

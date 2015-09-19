@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="row">
+      <div class="col-sm-4 col-sm-offset-1">
+        <h2> Portfolio </h2>
+      </div>
+      <div class="col-sm-3 col-sm-offset-4">
+        <state-dropdown></state-dropdown>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <table class="table table-bordered">
+      <thead>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>30d</th>
+        <th>6mon</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{calcCostBasisTotal() | currency}}</td>
+          <td>{{calcCurrentValueTotal() | currency}}</td>
+          <td>{{calcProfitTotal() | currency}}</td>
+          <td>{{calc1dTotal() | currency}}</td>
+          <td>{{calc30dTotal() | currency}}</td>
+          <td>{{calc6monTotal() | currency}}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="table table-hover">
+      <thead>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>30d</th>
+        <th>6mon</th>
+        <th>Trade?</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(sym, data) in portfolio">
+          <td>{{sym}}</td>
+          <td>{{data.quantity}}</td>
+          <td>{{data.costBasis | currency}}</td>
+          <td>{{calcCurrentValue(sym) | currency}}</td>
+          <td>{{calcProfit(sym) | currency}}</td>
+          <td>{{calc1d(sym) | currency}}</td>
+          <td>{{calc30d(sym) | currency}}</td>
+          <td>{{calc6mon(sym) | currency}}</td>
+          <td><a ui-sref="index.trade({symbol: sym })">Trade</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+portfolio: {{portfolio}}<br>
+overall: {{overall}}

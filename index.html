@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fideliguard</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+
+  <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.min.js"></script>
+
+  <script src="js/ui-bootstrap-0.13.4.min.js"></script>
+</head>
+<body ng-app="app">
+  <div class="container-fluid">
+    <div class="panel panel-info">
+      <div class="panel-heading text-center">
+        <h1>Stock Portfolio Simulator</h1>
+      </div>
+      <div class="panel-body">
+        <div ui-view="date-picker"></div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-5">
+            <div ui-view="historical" class="row"></div>
+          </div>
+
+          <div class="col-md-7">
+            <div ui-view="display"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- main module -->
+  <script src="app.js"></script>
+
+  <!-- controllers -->
+  <script src="js/controllers/mainController.js"></script>
+  <script src="js/controllers/historyController.js"></script>
+  <script src="js/controllers/tradeController.js"></script>
+  <script src="js/controllers/portfolioController.js"></script>
+  <script src="js/controllers/transactionController.js"></script>
+
+  <!-- directives -->
+  <script src="js/directives/datePicker.js"></script>
+  <script src="js/directives/stateDropdown.js"></script>
+
+  <!-- filters -->
+  <script src="js/filters/dateFilter.js"></script>
+  <script src="js/filters/tableFilter.js"></script>
+
+  <!-- services   -->
+  <script src="js/services/historicalStock.js"></script>
+  <script src="js/services/selectedDate.js"></script>
+  <script src="js/services/transactionService.js"></script>
+  <script src="js/services/portfolioService.js"></script>
+</body>
+</html>
