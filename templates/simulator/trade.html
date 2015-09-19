@@ -1,0 +1,83 @@
+<h3 class="pull left">Trade</h3>
+
+<select>
+  <option>Trade</option>
+  <option>Transaction</option>
+  <option>Portfolio</option>
+</select>
+<div class="row">
+
+  <div class="col-md-4">
+    <h4>Cash Available:</h4>
+    <h5>{{cashAmt}}</h5>
+    <br>
+    <h4>Order Status:</h4>
+    <h4>{{orderStatus()}}</h4>
+
+  </div>
+
+  <div class="col-md-8">
+    <form name="tradeForm">
+      <div class = "form-group">
+        <label>
+          Stock
+          <select ng-model="ticker" class = "form-control" required ng-change="getStockPrice()">
+            <option value='{{ticker}}' selected="selected">
+              {{ticker}}
+            </option>
+            <option ng-repeat="sym in symbols" value='{{sym}}'
+            ng-if="sym != ticker">
+              {{sym}}
+            </option>
+          </select>
+        </label>
+      </div>
+
+      <div class = "form-group">
+        <label>
+          Buy/Sell
+          <select ng-model="formData.tradeOption" class = "form-control" required>
+            <option value='' selected="selected">
+              SELECT
+            </option>
+            <option value='buy' selected="selected">
+              BUY
+            </option>
+            <option value='sell'>
+              SELL
+            </option>
+          </select>
+        </label>
+      </div>
+
+
+      <div class = "form-group">
+        <label>
+          Quantity
+          <input type="number" name="quantity" ng-model="formData.quantity" class="form-control" required min="1" max="100"/>
+        </label>
+      </div>
+
+      <div class = "form-group">
+        <label>Date
+          <input type="date" name ="date" value="{{dateObj.dateSelected | date: 'yyyy-MM-dd'}}" ng-model="dateObj.dateSelected" ng-change="updateInfo()" /><br>
+        </label>
+        {{dateObj.dateSelected | date: "yyyy-MM-dd"}}
+      </div>
+
+
+      <div class = "form-group">
+      <p>Price {{stockPrice | currency }}</p>
+      <p>Cost  {{stockPrice * formData.quantity | currency }} </p>
+      </div>
+
+
+      <a ui-sref="simulation.transaction" class = "btn btn-success"
+        ng-if="tradeForm.$valid" ng-click="processForm()">
+        Place Order
+      </a>
+
+      <br>
+    </form>
+  </div>
+</div>

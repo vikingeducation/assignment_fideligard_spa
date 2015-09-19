@@ -1,0 +1,50 @@
+index.html: 1 child state, 3 grandchildren
+  ui-view
+
+simulator.html
+  ui-view="stocks"
+  ui-view="dateFilter"
+  ui-view
+
+simulator: 3 views, 3 child states
+
+--------------
+
+  $stateProvider
+
+    .state("simulator", {
+      url: '/simulator',
+      templateUrl: 'templates/simulator.html',
+      controller: function(){ console.log('anon sim ctrl')} //,
+    })
+
+    .state("simulator.index", {
+      url: '/index',
+      views: {
+        'dateFilter': {
+          templateUrl: "templates/date_filter.html",
+          controller: 'stocksCtrl'
+        },
+        'stocks': {
+          templateUrl: "templates/stocks.html",
+          controller: 'stocksCtrl'
+        }
+      }
+    })
+
+    .state("simulator.index.trade", {
+      url: '/trade',
+      templateUrl: 'templates/simulator/trade.html',
+    })
+
+    .state("simulator.index.transaction", {
+      url: '/transaction',
+      templateUrl: 'templates/simulator/transaction.html',
+      controller: 'TransactionCtrl'
+    })
+
+    .state("simulator.portfolio", {
+      url: '/portfolio',
+      templateUrl: 'templates/simulator/portfolio.html',
+      controller: 'PortfolioCtrl'
+    });

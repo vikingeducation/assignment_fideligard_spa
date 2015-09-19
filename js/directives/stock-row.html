@@ -1,0 +1,8 @@
+<td>{{ stock.Symbol }}</td>
+<td>{{ stock.Open | currency }}</td>
+<!-- fill in with methods/data below -->
+<td>{{ stock.oneDay | currency }}</td>
+<td>{{ stock.oneWeek | currency  }}</td>
+<td>{{ stock.oneMonth | currency  }}</td>
+
+<td><a ui-sref="simulator.trade( { ticker: stock.Symbol })">Trade</a></td>
