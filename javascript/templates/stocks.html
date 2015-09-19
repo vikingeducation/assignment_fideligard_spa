@@ -23,18 +23,18 @@
 <table class='table table-striped'>
 
   <thead>
-    <tr>
-      <th>Symbol</th>
-      <th>Price</th>
-      <th>1d</th>
-      <th>7d</th>
-      <th>30d</th>
+      <th ng-click='cycleName()'>{{label('Symbol')}}</th>
+      <th ng-click='cyclePrice()'>{{label('Price')}}</th>
+      <th ng-click='cycleOneDay()'>{{label('1d')}}</th>
+      <th ng-click='cycleSevenDay()'>{{label('7d')}}</th>
+      <th ng-click='cycleMonth()'>{{label('30d')}}</th>
       <th>Trade?</th>
-    </tr>
   </thead>
 
   <tbody>
-    <tr stock-info ng-repeat="stock in stocks | filter: { name: symbolReturn(symbolFilter) }">
+    <tr stock-info ng-repeat="stock in stocks |
+        orderBy: sortCriteria() |
+        filter: { name: symbolReturn(symbolFilter) }">
     </tr>
   </tbody>
 
