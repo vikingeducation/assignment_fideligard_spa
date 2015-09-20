@@ -19,7 +19,7 @@
         </div>
 
         <div class='col-sm-9'>
-          <select type='text' ng-model='action'>
+          <select type='text' ng-model='transaction'>
             <option>Buy</option>
             <option>Sell</option>
           </select>
@@ -52,7 +52,7 @@
         </div>
 
         <div class='col-sm-9'>
-          {{stock.price}}
+          {{price | currency}}
         </div>
       </div><br>
 
@@ -62,7 +62,7 @@
         </div>
 
         <div class='col-sm-9'>
-          {{stock.cost}}
+          {{cost() | currency}}
         </div>
       </div><br>
 
@@ -82,8 +82,8 @@
     </div>
 
     <div class='row'>
-      {{ user.cashAvailable | currency }}
-    </div>
+      {{ balance() | currency }}
+    </div><br>
 
   <!-- From Processing model -->
     <div class='row'>
@@ -91,7 +91,7 @@
     </div>
 
     <div class='row'>
-      VALID
+      {{validity}}
     </div>
 
   </div>

@@ -3,4 +3,4 @@
 <td>{{stock.oneday | currency}}</td>
 <td>{{stock.sevenday | currency}}</td>
 <td>{{stock.month | currency}}</td>
-<td><a ui-sref='index.simulator.trade' ng-click="tradeSymbol(symbol.name)">trade</a></td>
+<td><a ui-sref='index.simulator.trade({symbol: stock.name, price: stock.price})'>trade</a></td>
