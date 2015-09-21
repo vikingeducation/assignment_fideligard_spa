@@ -24,3 +24,8 @@ input.ng-invalid{
     /* red */
     border: 1px solid red;
 }
+
+input.ng-pristine{
+    /* red */
+    border: 1px solid gray;
+}
