@@ -9,13 +9,21 @@ tradeApp.factory('userService', [function(){
 
   var buy = true;
 
-  obj.buyStock = function(symbol, quantity, date, price){
+  obj.buyOrSellStock = function(transactionType, symbol, quantity, date, price){
+    if (transactionType === 'Buy'){
+      _buyStock(symbol, quantity, date, price);
+    } else {
+      _sellStock(symbol, quantity, date, price);
+    }
+  };
+
+  var _buyStock = function(symbol, quantity, date, price){
     _transact(_name, symbol, quantity, date, price);
     _updatePortfolio(symbol, quantity);
     _balance -= quantity*price;
   };
 
-  obj.sellStock = function(symbol, quantity, date, price){
+  var _sellStock = function(symbol, quantity, date, price){
     _transact(_name, symbol, quantity, date, price);
     _updatePortfolio(symbol, -quantity);
     _balance += quantity*price;
