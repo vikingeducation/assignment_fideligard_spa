@@ -53,9 +53,10 @@ tradeApp.factory('stockDataService', ['$http',
   };
 
   var _dataForStocksTable = function(company, startDate){
-    startDate = parseInt(startDate) || 0;
+    var startDate = parseInt(startDate) || 0;
     _stocksTableData.push({
       name: company,
+      date: _allStockData[company][startDate]['Date'],
       price: _allStockData[company][startDate].Open,
       oneday: _onedayComparison(_allStockData[company], startDate),
       sevenday: _sevendayComparison(_allStockData[company], startDate),

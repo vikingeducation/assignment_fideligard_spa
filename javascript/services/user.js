@@ -23,10 +23,10 @@ tradeApp.factory('userService', [function(){
 
   // Portfolio
   var _updatePortfolio = function(symbol, quantity){
-    if ( _transactions.symbol ){
-      _transactions.symbol += quantity;
+    if ( _portfolio[symbol] ){
+      _portfolio[symbol] += parseInt(quantity);
     } else {
-      _transactions.symbol = quantity;
+      _portfolio[symbol] = parseInt(quantity);
     }
   };
 
@@ -57,14 +57,14 @@ tradeApp.factory('userService', [function(){
   };
 
   var _checkBalance = function(expenditure){
-    console.log('check balance');
+    console.log(expenditure > _balance ? false : true);
     return expenditure > _balance ? false : true;
   };
 
   var _checkQuantity = function(stock, quantity, transaction){
-    console.log(transaction, stock, quantity);
+    console.log(_portfolio, quantity);
     if (transaction == 'Sell'){
-      return _portfolio[stock] > quantity ? true : false;
+      return _portfolio[stock] >= parseInt(quantity) ? true : false;
     } else {
       return true;
     }

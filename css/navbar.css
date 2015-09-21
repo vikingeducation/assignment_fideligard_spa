@@ -14,3 +14,13 @@ select{
   background: #fff;
   height: 25px;
 }
+
+input.ng-valid{
+    /* green */
+    border: 1px solid green;
+}
+
+input.ng-invalid{
+    /* red */
+    border: 1px solid red;
+}

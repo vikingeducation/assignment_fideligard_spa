@@ -39,7 +39,7 @@ tradeApp.config(function( $stateProvider,
   });
 
   $stateProvider.state('index.simulator.trade',{
-    url: '/trade/:symbol?price',
+    url: '/trade/:symbol?price?date',
     templateUrl: 'javascript/templates/trade.html',
     controller: 'tradeCtrl'
   });
