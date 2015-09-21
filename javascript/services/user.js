@@ -7,8 +7,7 @@ tradeApp.factory('userService', [function(){
   var _portfolio = {}; // {symbol: quantity}
   var _transactions = []; // [{user: {symbol, quantity, date, price}} ]
 
-  var buy = true;
-
+  // Buy and sell stock
   obj.buyOrSellStock = function(transactionType, symbol, quantity, date, price){
     if (transactionType === 'Buy'){
       _buyStock(symbol, quantity, date, price);
@@ -65,12 +64,10 @@ tradeApp.factory('userService', [function(){
   };
 
   var _checkBalance = function(expenditure){
-    console.log(expenditure > _balance ? false : true);
     return expenditure > _balance ? false : true;
   };
 
   var _checkQuantity = function(stock, quantity, transaction){
-    console.log(_portfolio, quantity);
     if (transaction == 'Sell'){
       return _portfolio[stock] >= parseInt(quantity) ? true : false;
     } else {
