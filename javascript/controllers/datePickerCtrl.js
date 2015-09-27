@@ -10,7 +10,7 @@ $scope.$watch('datePicker', function(newVal){
   stockDataService.updateDataForStockTable(newVal);
 });
 
-$scope.dateRange = function(){ return 248 - $scope.datePicker; };
+$scope.dateRange  = function(){ return 248 - $scope.datePicker; };
 
 $scope.datePicked = function(){ return dateRangeService.pickedDate($scope.datePicker); };
 
