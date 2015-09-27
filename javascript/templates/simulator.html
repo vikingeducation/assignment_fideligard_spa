@@ -1,11 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-body">
 
-    <a ui-sref='index.simulator.trade'>Trade</a>
-
-    <select class='col-md-2 pull-right'>
-      <option ui-sref='index.simulator.trade'>Trade</option>
-    <!--   <option ui-sref='portfolio.transactions'>Transactions</option> -->
+    <select class='col-md-2 pull-right'
+            ng-model='panelSelectedPath'
+            ng-change='changePanel(panelSelectedPath)'
+            ng-options='option.path as option.panel for option in panelOptions'
+            id='simulator-select'>
     </select>
 
     <ui-view></ui-view>

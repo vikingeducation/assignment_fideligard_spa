@@ -1,11 +1,10 @@
-tradeApp.factory('userService', [function(){
+tradeApp.factory('userService', ['transactionService', function(transactionService){
 
   obj = {};
 
   var _name = 'Abe';
   var _balance = 100000;
   var _portfolio = {}; // {symbol: quantity}
-  var _transactions = []; // [{user: {symbol, quantity, date, price}} ]
 
   // Buy and sell stock
   obj.buyOrSellStock = function(transactionType, symbol, quantity, date, price){
@@ -17,13 +16,13 @@ tradeApp.factory('userService', [function(){
   };
 
   var _buyStock = function(symbol, quantity, date, price){
-    _transact(_name, symbol, quantity, date, price);
+    transactionService.transact(_name, symbol, quantity, date, price, 'Buy');
     _updatePortfolio(symbol, quantity);
     _balance -= quantity*price;
   };
 
   var _sellStock = function(symbol, quantity, date, price){
-    _transact(_name, symbol, quantity, date, price);
+    transactionService.transact(_name, symbol, quantity, date, price, 'Sell');
     _updatePortfolio(symbol, -quantity);
     _balance += quantity*price;
   };
@@ -37,16 +36,6 @@ tradeApp.factory('userService', [function(){
     }
   };
 
-  // Transaction
-  var _transact = function(name, symbol, quantity, date, price){
-    var transaction = {};
-    transaction.symbol = symbol;
-    transaction.quantity = quantity;
-    transaction.date = date;
-    transaction.price = price;
-    _transactions.push(transaction);
-  };
-
   // Balance
   obj.getBalance = function(){
     return _balance;
@@ -58,6 +47,7 @@ tradeApp.factory('userService', [function(){
 
   // Check transaction is valid
   obj.checkTransaction = function(expenditure, stock, quantity, transaction){
+    if (quantity <= 0){return false;}
     return  _checkBalance(expenditure) &&
             _checkQuantity(stock, quantity, transaction) ?
             true : false;

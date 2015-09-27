@@ -37,7 +37,7 @@
       <tbody>
         <tr stock-info ng-repeat="stock in stocks |
             orderBy: sortCriteria() |
-            filter: { name: symbolReturn(symbolFilter) }">
+            filter: { name: symbolReturn(symbolFilter) }" stock='stock'>
         </tr>
       </tbody>
 

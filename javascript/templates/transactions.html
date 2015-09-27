@@ -1,0 +1,19 @@
+<h3>Transactions</h3><br>
+
+<table class='table table-striped'>
+<thead>
+  <tr>
+    <th ng-click='cycleDate()'>{{label('Date')}}</th>
+    <th ng-click='cycleSymbol()'>{{label('Symbol')}}</th>
+    <th ng-click='cycleType()'>{{label('Type')}}</th>
+    <th ng-click='cycleQuantity()'>{{label('Quantity')}}</th>
+    <th ng-click='cyclePrice()'>{{label('Price')}}</th>
+  </tr>
+</thead>
+
+<tbody>
+  <tr transaction-info ng-repeat='transaction in transactions | orderBy: sortCriteria()' transaction='transaction'>
+  </tr>
+</tbody>
+
+</table>
