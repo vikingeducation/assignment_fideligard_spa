@@ -89,7 +89,7 @@ tradeApp.factory('stockDataService', ['$http',
     }
   };
 
-  obj.updateDataForStockTable = function(startDate, endDate){
+  obj.updateDataForStockTable = function(startDate){
     _stocksTableData.splice(0, _stocksTableData.length);
     for(var company in _allStockData){
       _dataForStocksTable(company, startDate);

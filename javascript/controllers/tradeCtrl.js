@@ -14,6 +14,7 @@ $scope.quantity = 0;
 $scope.date = $stateParams.date;
 $scope.validity = 'VALID';
 $scope.balance = userService.getBalance;
+var validTradingDay = false;
 
 $scope.cost = function(){
   return $scope.price * $scope.quantity;
@@ -43,24 +44,30 @@ var updateFormInfo = function(newValues, oldValues){
 };
 
 var checkDateAndUpdateFormValues = function(companyData, date){
+  var dateValid = false;
   for(var i = 0; i < companyData.length; i++){
     if(companyData[i]['Date'] === date){
       $scope.symbol = companyData[i].Symbol;
       $scope.price = companyData[i].Open;
       $scope.date = date;
+      validTradingDay = true;
+      dateValid = true;
     }
   }
+  if (!dateValid) {validTradingDay = false;}
 };
 
 $scope.updatePortfolio = function(){
-  if (userService.checkTransaction( $scope.cost(),
+  if (validTradingDay && userService.checkTransaction(
+                                    $scope.cost(),
                                     $scope.symbol,
                                     $scope.quantity,
                                     $scope.transaction )){
     $scope.validity = 'VALID';
     userService.buyOrSellStock($scope.transaction, $scope.symbol, $scope.quantity, $scope.date, $scope.price);
   } else {
-    $scope.validity = 'INVALID';
+    $scope.validity = 'INVALID' + userService.getCurrentTransactionStatus();
+    if (!validTradingDay) {$scope.validity += ': Trading Date';}
   }
 };
 

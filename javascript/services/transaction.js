@@ -4,8 +4,6 @@ tradeApp.factory('transactionService', [function(){
 
   var _transactions = []; // [{user: {symbol, quantity, date, price}} ]
 
-
-  // Transaction
   obj.transact = function(name, symbol, quantity, date, price, type){
     var transaction = {};
     transaction.type = type;
@@ -15,7 +13,6 @@ tradeApp.factory('transactionService', [function(){
     transaction.price = price;
     _transactions.push(transaction);
   };
-
 
   obj.getTransactions = function(){
     return _transactions;

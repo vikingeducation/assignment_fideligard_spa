@@ -1,10 +1,11 @@
-tradeApp.factory('userService', ['transactionService', function(transactionService){
+tradeApp.factory('userService', ['transactionService', 'portfolioService', function(transactionService, portfolioService){
 
   obj = {};
 
   var _name = 'Abe';
   var _balance = 100000;
   var _portfolio = {}; // {symbol: quantity}
+  var _currentTransactionStatus = '';
 
   // Buy and sell stock
   obj.buyOrSellStock = function(transactionType, symbol, quantity, date, price){
@@ -17,23 +18,14 @@ tradeApp.factory('userService', ['transactionService', function(transactionServi
 
   var _buyStock = function(symbol, quantity, date, price){
     transactionService.transact(_name, symbol, quantity, date, price, 'Buy');
-    _updatePortfolio(symbol, quantity);
     _balance -= quantity*price;
+    portfolioService.updatePortfolio(symbol, quantity, date, _balance);
   };
 
   var _sellStock = function(symbol, quantity, date, price){
     transactionService.transact(_name, symbol, quantity, date, price, 'Sell');
-    _updatePortfolio(symbol, -quantity);
     _balance += quantity*price;
-  };
-
-  // Portfolio
-  var _updatePortfolio = function(symbol, quantity){
-    if ( _portfolio[symbol] ){
-      _portfolio[symbol] += parseInt(quantity);
-    } else {
-      _portfolio[symbol] = parseInt(quantity);
-    }
+    portfolioService.updatePortfolio(symbol, -quantity, date, balance);
   };
 
   // Balance
@@ -54,16 +46,32 @@ tradeApp.factory('userService', ['transactionService', function(transactionServi
   };
 
   var _checkBalance = function(expenditure){
-    return expenditure > _balance ? false : true;
+    if (expenditure > _balance){
+      _currentTransactionStatus = ': Insufficient funds';
+      return false;
+    } else {
+      _currentTransactionStatus = '';
+      return true;
+    }
   };
 
   var _checkQuantity = function(stock, quantity, transaction){
     if (transaction == 'Sell'){
-      return _portfolio[stock] >= parseInt(quantity) ? true : false;
+      if (portfolioService.getPortfolio()[stock] >= parseInt(quantity)){
+        _currentTransactionStatus = '';
+        return true;
+      } else {
+        _currentTransactionStatus = ': Insufficient stock in portfolio';
+        return false;
+      }
     } else {
       return true;
     }
   };
+
+  obj.getCurrentTransactionStatus = function(){
+    return _currentTransactionStatus;
+  }
 
   return obj;
 
