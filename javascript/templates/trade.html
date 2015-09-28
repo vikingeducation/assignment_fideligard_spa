@@ -1,0 +1,98 @@
+<h3>Trade</h3><br>
+<div class='row'>
+  <div class='col-sm-6'>
+    <form name='tradeForm'>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Symbol</label>
+        </div>
+
+        <div class='col-sm-9'>
+         <!--  <p> {{symbolFound}} </p> -->
+          <input type='text' ng-model='symbol' ng-required='true' placeholder=' Ticker Symbol'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Buy/Sell</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <select type='text' ng-model='transaction'>
+            <option>Buy</option>
+            <option>Sell</option>
+          </select>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Quantity</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <input type='text' ng-model='quantity' ng-required='true'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Date</label>
+        </div>
+
+        <div class='col-sm-9'>
+          <input type='text' ng-model='date' ng-required='true' placeholder=' YYYY-MM-DD'>
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Price</label>
+        </div>
+
+        <div class='col-sm-9'>
+          {{price | currency}}
+        </div>
+      </div><br>
+
+      <div class='row'>
+        <div class='col-sm-3'>
+          <label>Cost</label>
+        </div>
+
+        <div class='col-sm-9'>
+          {{cost() | currency}}
+        </div>
+      </div><br>
+
+      <button class="btn btn-primary btn-block"
+        ng-click='updatePortfolio(stock, quantity, action)'>
+          Place Order!
+      </button>
+
+    </form>
+  </div>
+
+  <div class='col-sm-6'>
+  <!-- From User Service -->
+    <div class='row'>
+      <label>Cash Available</label>
+    </div>
+
+    <div class='row'>
+      {{ balance() | currency }}
+    </div><br>
+
+  <!-- From Processing model -->
+    <div class='row'>
+      <label>Order Status</label>
+    </div>
+
+    <div class='row' style='color: {{styleValidity()}}'>
+      {{validity}}
+    </div>
+
+  </div>
+</div>

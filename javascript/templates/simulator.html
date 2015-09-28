@@ -1,0 +1,14 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <select class='col-md-2 pull-right'
+            ng-model='panelSelectedPath'
+            ng-change='changePanel(panelSelectedPath)'
+            ng-options='option.path as option.panel for option in panelOptions'
+            id='simulator-select'>
+    </select>
+
+    <ui-view></ui-view>
+
+  </div>
+</div>
