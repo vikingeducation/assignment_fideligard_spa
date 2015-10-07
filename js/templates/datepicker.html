@@ -1,1 +1,28 @@
-<h1>Datepicker</h1>
+<div class='row'>
+  <div class='col-xs-12'>
+
+    <div class='row'>
+      <div class-'col-xs-12'>
+        <div class='datepicker-labels'>
+          <p class='pull-left date-label-min text-muted'>{{minDate | date:'M/d/yyyy' }}</p>
+          <p class='pull-right date-label-max text-muted'>{{maxDate | date:'M/d/yyyy' }}</p>
+
+          <input type='text' class='datepicker-label text-center form-control' ng-model="currentDateText">
+        </div>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class-'col-xs-12'>
+        <div class='datepicker'>
+          <input type='range' min='{{minDate}}' max='{{maxDate}}' step='{{step}}' id='datepicker' ng-model='currentDate' ng-change='updateLabel()'>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
