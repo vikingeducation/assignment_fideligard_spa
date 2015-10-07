@@ -24,14 +24,16 @@ fideligard.controller('DatePickerCtrl',
     }
 
     $scope.updateDateText = function() {
-      var input = document.dateTextForm.dateText.value;
-      // validate
+      var input = new Date(document.dateTextForm.dateText.value);
 
-      // update $scope.currentDate
-      console.log($scope.currentDate);
-      $scope.currentDate = Number(new Date(input));
-      // update position?
-      console.log($scope.currentDate);
+      if (input > $scope.minDate && input < $scope.maxDate) {
+        $scope.currentDate = Number(new Date(input));
+        $scope.updateLabel();
+      } else {
+        console.log('value out of range');
+        $scope.currentDateText = $filter('date')($scope.currentDate, "M/d/yyyy");
+      };
+
     }
 
   }]);
