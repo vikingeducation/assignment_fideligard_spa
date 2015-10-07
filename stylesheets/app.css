@@ -1,0 +1,2 @@
+/* enable cursors on ui.bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
