@@ -18,21 +18,23 @@
       </div>
     </div>
 
-
-    <table class='table table-bordered'>
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>1d</th>
-          <th>7d</th>
-          <th>30d</th>
-          <th>Trade?</th>
-        </tr>
-      </thead>
-      <tbody>
-      </tbody>
-    </table>
+    <div class='table-responsive'>
+      <table id='stock-table' class='table table-bordered table-striped'>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Price</th>
+            <th>1d</th>
+            <th>7d</th>
+            <th>30d</th>
+            <th>Trade?</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stock-row ng-repeat='stock in stocks' stock='stock'></tr>
+        </tbody>
+      </table>
+    </div>
 
   </div> <!-- panel-body -->
 

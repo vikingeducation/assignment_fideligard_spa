@@ -26,7 +26,7 @@ fideligard.config( function($stateProvider, $urlRouterProvider) {
       },
       'stocks': {
         templateUrl: 'js/templates/stocks.html',
-        controller: function($scope){ console.log("stocks") }
+        controller: 'StocksCtrl'
       },
       'main': {
         templateUrl: 'js/templates/main/main.html',
