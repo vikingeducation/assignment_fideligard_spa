@@ -3,7 +3,7 @@ var fideligard = angular.module('fideligard', ['ui.router', 'ui.bootstrap']);
 
 fideligard.config( function($stateProvider, $urlRouterProvider) {
 
-  //$urlRouterProvider.otherwise("/fi/trade");
+  $urlRouterProvider.otherwise("/fi/s/trade");
 
   $stateProvider
   .state('fideligard', {

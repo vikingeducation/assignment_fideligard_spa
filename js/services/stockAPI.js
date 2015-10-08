@@ -8,24 +8,47 @@ fideligard.factory('stockAPI', function() {
   stockAPI.dailyResults = stockAPI.JSON.query.results.quote;
 
 
+  stockAPI.datesInRange = function(lastDate, numberOfDays) {
+    var firstDate = lastDate - numberOfDays * 1000*60*60*24;
+    return this.dailyResults.filter(function(record) {
+      var recordDate = Date.parse(record.Date);
+      return (recordDate < lastDate && recordDate > firstDate);
+    });
+  }
 
-  stockAPI.price = function(day) {
-    return this.dailyResults[day].Close;
+
+  stockAPI.price = function(date) {
+    // pull 7 days just to make sure we get at least one business day
+    var records = stockAPI.datesInRange(date, 7);
+    return records[0].Close; // it reverses the order???
   };
 
-  stockAPI.priceChange = function(day, range) {
-    return this.dailyResults[day].Close - this.dailyResults[day + range].Close;
-  };
 
-  stockAPI.getStocks = function(day) {
-    return {
-      symbol: this.dailyResults[0].Symbol,
-      price: this.price(day),
-      priceChange1day: this.priceChange(day, 1),
-      priceChange7day: this.priceChange(day, 7),
-      priceChange30day: this.priceChange(day, 30)
+  stockAPI.priceChange = function(date, range) {
+    if (range === 1) {
+      // pull 7 days just to make sure we get at least one business day
+      var records = this.datesInRange(date, 7);
+      var last = records[records.length - 1];
+      var prior = records[records.length - 2] || records[records.length - 1];
+      console.log(records);
+      return last.Close - prior.Close;
+    } else {
+      var records = this.datesInRange(date, range);
+      return records[records.length - 1].Close - records[0].Close;
     };
   };
+
+
+  stockAPI.getStocks = function(date) {
+    return {
+      symbol: this.dailyResults[0].Symbol,
+      price: this.price(date),
+      priceChange1day: this.priceChange(date, 1),
+      priceChange7day: this.priceChange(date, 7),
+      priceChange30day: this.priceChange(date, 30)
+    };
+  };
+
 
   return stockAPI;
 
