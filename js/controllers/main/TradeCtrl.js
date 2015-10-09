@@ -1,9 +1,11 @@
 fideligard.controller('TradeCtrl',
-  ['$scope', '$stateParams', 'dateService', 'bank', 'portfolio', 'stockManager', 'transactions',
-  function($scope, $stateParams, dateService, bank, portfolio, stockManager, transactions) {
+  ['$scope', '$state', '$stateParams', 'dateService', 'bank', 'portfolio', 'stockManager', 'transactions',
+  function($scope, $state, $stateParams, dateService, bank, portfolio, stockManager, transactions) {
 
 
     $scope.init = function() {
+      $scope.selectedState = $state.current.name;
+
       $scope.bank = bank.availableCash;
       $scope.transaction = {
         symbol: $stateParams.symbol,
@@ -78,6 +80,11 @@ fideligard.controller('TradeCtrl',
       $scope.bank = bank.availableCash;
       $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
       $scope.calcMaxQuantity();
+    };
+
+
+    $scope.routeTo = function(state) {
+      $state.go(state);
     };
 
 
