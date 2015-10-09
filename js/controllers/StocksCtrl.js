@@ -10,7 +10,7 @@ fideligard.controller('StocksCtrl',
 
     $scope.setDate = function(newDate) {
       $scope.currentDate = newDate;
-      $scope.refreshStocks();
+      $scope.stocks = stockManager.getByDate($scope.currentDate);
     };
 
 

@@ -1,3 +1,8 @@
 /* enable cursors on ui.bootstrap */
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 .clickable { cursor: pointer; }
+
+
+main {
+  margin-top: 24px;
+}

@@ -41,7 +41,7 @@ fideligard.config( function($stateProvider, $urlRouterProvider) {
     views: {
       '': {
         templateUrl: 'js/templates/main/trade.html',
-        controller: function($scope){ console.log("trade") }
+        controller: 'TradeCtrl'
       }
     }
   })
