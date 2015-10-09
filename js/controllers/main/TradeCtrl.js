@@ -1,16 +1,15 @@
 fideligard.controller('TradeCtrl',
-  ['$scope', 'dateService', 'bank', 'portfolio', 'stockManager', 'transactions',
-  function($scope, dateService, bank, portfolio, stockManager, transactions) {
+  ['$scope', '$stateParams', 'dateService', 'bank', 'portfolio', 'stockManager', 'transactions',
+  function($scope, $stateParams, dateService, bank, portfolio, stockManager, transactions) {
 
 
     $scope.init = function() {
       $scope.bank = bank.availableCash;
-
       $scope.transaction = {
-        symbol: 'AAPL',
+        symbol: $stateParams.symbol,
         type: 'BUY',
         quantity: 1,
-        date: new Date(dateService.currentDate),
+        date: new Date( Number(dateService.currentDate) ),
         price: null
       };
 

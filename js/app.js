@@ -37,7 +37,7 @@ fideligard.config( function($stateProvider, $urlRouterProvider) {
 
 
   .state('fideligard.shared.trade', {
-    url: '/trade',
+    url: '/trade/:symbol',
     views: {
       '': {
         templateUrl: 'js/templates/main/trade.html',

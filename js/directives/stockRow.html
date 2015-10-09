@@ -3,4 +3,4 @@
 <td>{{ stock.priceChange1day | currency }}</td>
 <td>{{ stock.priceChange7day | currency }}</td>
 <td>{{ stock.priceChange30day | currency }}</td>
-<td>trade?</td>
+<td><a ui-sref = ".trade({ symbol:stock.symbol })">trade?</a></td>
