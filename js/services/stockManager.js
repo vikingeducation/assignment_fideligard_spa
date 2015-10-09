@@ -22,6 +22,7 @@ fideligard.factory('stockManager',
 
   stockManager.stockData = {};
   stockManager.needsRefresh = false;
+  stockManager.fullyLoaded = false;
 
 
   stockManager.refreshed = function() {
@@ -41,8 +42,19 @@ fideligard.factory('stockManager',
     var data = response.data.query.results.quote;
     var sym = data[0].Symbol;
     stockManager.stockData[sym] = data;
-    console.log('Loaded ' + Object.keys(stockManager.stockData).length + ' of ' + stockManager.stockList.length);
+    stockManager.loadingProgress();
+  };
+
+
+  stockManager.loadingProgress = function() {
+    var numberLoaded = Object.keys(stockManager.stockData).length;
+    var total = stockManager.stockList.length;
+    console.log('Loaded ' + numberLoaded + ' of ' + total);
     stockManager.needsRefresh = true;
+
+    if (numberLoaded === total) {
+      stockManager.fullyLoaded = true;
+    };
   };
 
 
@@ -60,15 +72,16 @@ fideligard.factory('stockManager',
       output.push( stockCalculator.generate(data[symbol], date) );
     };
     return output;
-    /*
-    return this.stockData.map( function(record) {
-      return stockCalculator.generate(record, date);
-    });*/
   };
 
 
   stockManager.getPrice = function(symbol, date) {
-    //console.log(this.stockData);
+    var validSymbol = stockManager.stockList.indexOf(symbol) !== -1;
+    if (stockManager.fullyLoaded && validSymbol) {
+      return stockCalculator.generate(stockManager.stockData[symbol], date).price;
+    } else {
+      return null;
+    };
   };
 
 

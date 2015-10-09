@@ -15,50 +15,50 @@
 
 
   <div class='col-xs-6'>
-    <form class='form-horizontal'>
+    <form name='transactForm' class='form-horizontal'>
 
       <div class='form-group'>
-        <label for='symbol' class='col-xs-5 control-label'>Symbol:</label>
-        <div class='col-xs-7'>
-          <input type='text' name='symbol' class='form-control' ng-model='symbol'>
+        <label for='symbol' class='col-xs-4 control-label'>Symbol:</label>
+        <div class='col-xs-8'>
+          <input type='text' name='symbol' class='form-control' ng-model='transaction.symbol' ng-change='refresh()' required>
         </div>
       </div>
 
       <div class='form-group'>
-        <label for='transact' class='col-xs-5 control-label'>Buy/Sell:</label>
-        <div class='col-xs-7'>
-          <select name='transact' class='form-control'>
-            <option>Buy</option>
-            <option>Sell</option>
+        <label for='transact' class='col-xs-4 control-label'>Buy/Sell:</label>
+        <div class='col-xs-8'>
+          <select name='transact' class='form-control' ng-model='transaction.transactOptions.selected' ng-options="option.name for option in transaction.transactOptions.available track by option.id" required>
+            <!-- <option value=1>Buy</option>
+            <option value=-1>Sell</option> -->
           </select>
         </div>
       </div>
 
       <div class='form-group'>
-        <label for='quantity' class='col-xs-5 control-label'>Quantity:</label>
-        <div class='col-xs-7'>
-          <input type='number' min='1' name='quantity' class='form-control' ng-model='quantity'>
+        <label for='quantity' class='col-xs-4 control-label'>Quantity:</label>
+        <div class='col-xs-8'>
+          <input type='number' min='1' name='quantity' class='form-control' ng-model='transaction.quantity' required>
         </div>
       </div>
 
       <div class='form-group'>
-        <label for='date' class='col-xs-5 control-label'>Date:</label>
-        <div class='col-xs-7'>
-          <input type='date' name='date' class='form-control' ng-model="date">
+        <label for='date' class='col-xs-4 control-label'>Date:</label>
+        <div class='col-xs-8'>
+          <input type='date' name='date' class='form-control' ng-model="transaction.date" ng-change='refresh()' required>
         </div>
       </div>
 
       <div class='form-group'>
-        <label class='col-xs-5 control-label'>Price:</label>
-        <div class='col-xs-7'>
-          <p class='form-control'>{{ price | currency }}</p>
+        <label class='col-xs-4 control-label'>Price:</label>
+        <div class='col-xs-8'>
+          <p class='form-control'>{{ transaction.price | currency }}</p>
         </div>
       </div>
 
       <div class='form-group'>
-        <label class='col-xs-5 control-label'>Total:</label>
-        <div class='col-xs-7'>
-          <p class='form-control'>{{ price * quantity | currency }}</p>
+        <label class='col-xs-4 control-label'>Total:</label>
+        <div class='col-xs-8'>
+          <p class='form-control'>{{ transaction.price * transaction.quantity | currency }}</p>
         </div>
       </div>
 
@@ -73,8 +73,12 @@
   <div class='col-xs-5 col-xs-offset-1'>
     <h4>Cash Available:</h4>
     <p>{{ bank | currency }}</p>
+
+    <h4>Current Shares:</h4>
+    <p>{{ currentShares | number }}</p>
+
     <h4>Order Status</h4>
-    <p>VALID</p>
+    <p>{{ status(transactForm.$valid) }}</p>
   </div>
 
 </div>
