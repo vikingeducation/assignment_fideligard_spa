@@ -21,6 +21,12 @@ fideligard.factory('stockManager',
 
 
   stockManager.stockData = [];
+  stockManager.needsRefresh = false;
+
+
+  stockManager.refreshed = function() {
+    this.needsRefresh = false;
+  }
 
 
   stockManager.init = function(datesMinMax) {
@@ -34,6 +40,7 @@ fideligard.factory('stockManager',
   stockManager.saveData = function(response) {
     stockManager.stockData.push(response.data.query.results.quote);
     console.log('Loaded ' + stockManager.stockData.length + ' of ' + stockManager.stockList.length);
+    stockManager.needsRefresh = true;
   };
 
 

@@ -8,7 +8,15 @@ fideligard.controller('StocksCtrl',
 
     $scope.setDate = function(newDate) {
       $scope.currentDate = newDate;
-      $scope.stocks = stockManager.getByDate($scope.currentDate);
+      $scope.refreshStocks();
+    };
+
+
+    $scope.refreshStocks = function(needsRefresh) {
+      if (needsRefresh) {
+        $scope.stocks = stockManager.getByDate($scope.currentDate);
+        stockManager.refreshed();
+      };
     };
 
 
@@ -16,7 +24,7 @@ fideligard.controller('StocksCtrl',
     $scope.date = dateService;
     $scope.$watch('date.currentDate', $scope.setDate );
 
-    //$scope.manager = stockManager;
-    //$scope.$watch('manager.stockData', $scope.setDate );
+    $scope.manager = stockManager;
+    $scope.$watch('manager.needsRefresh', $scope.refreshStocks );
 
   }]);
