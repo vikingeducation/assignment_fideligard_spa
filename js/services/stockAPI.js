@@ -10,11 +10,53 @@ fideligard.factory('stockAPI', function() {
 
   stockAPI.datesInRange = function(lastDate, numberOfDays) {
     var firstDate = lastDate - numberOfDays * 1000*60*60*24;
-    return this.dailyResults.filter(function(record) {
+    var filtered = this.dailyResults.filter(function(record) {
       var recordDate = Date.parse(record.Date);
       return (recordDate < lastDate && recordDate > firstDate);
     });
+    var sorted = filtered.sort( stockAPI.relativeDay );
+    return(sorted);
   }
+
+
+// always make data array of 31 days, starting with undefineds
+// then clean up, setting dates for undefineds and adding price from earlier day
+  stockAPI.buildArray = function(date, range) {
+    var filtered = this.datesInRange(date, range);
+    var cleansed = []
+    filtered.forEach( function(record) {
+      var day = stockAPI.relativeDay(record, date)
+      cleansed[day] = record;
+    });
+    return cleansed;
+  };
+
+  stockAPI.fillArray = function(array) {
+    var filled = [];
+    for(var i = 30; i >= 0; i--) {
+      if (array[i] === undefined) {
+        console.log('undef ' + i)
+        filled[i] = array[i+1];
+      } else {
+        console.log('def ' + i)
+        filled[i] = array[i];
+      };
+    };
+    console.log(filled);
+  };
+
+
+  stockAPI.relativeDay = function(stockRecord, baseDate) {
+    var year = Number(stockRecord.Date.slice(0,4));
+    //month is the only zero-indexed input
+    var month = Number(stockRecord.Date.slice(5,7)) - 1;
+    var day = Number(stockRecord.Date.slice(8,10));
+    var stockDate = new Date(year, month, day);
+
+    // rounding for now, consider using Date.js for cleaner handling later
+    // ...because Daylight Savings is a pain
+    return Math.round((baseDate - stockDate) / (1000*60*60*24));
+  };
 
 
   stockAPI.price = function(date) {
@@ -24,13 +66,13 @@ fideligard.factory('stockAPI', function() {
   };
 
 
+
   stockAPI.priceChange = function(date, range) {
     if (range === 1) {
       // pull 7 days just to make sure we get at least one business day
       var records = this.datesInRange(date, 7);
       var last = records[records.length - 1];
       var prior = records[records.length - 2] || records[records.length - 1];
-      console.log(records);
       return last.Close - prior.Close;
     } else {
       var records = this.datesInRange(date, range);
@@ -40,6 +82,9 @@ fideligard.factory('stockAPI', function() {
 
 
   stockAPI.getStocks = function(date) {
+    var array = stockAPI.buildArray(date, 40);
+    var filled = stockAPI.fillArray(array);
+    //console.log(array);
     return {
       symbol: this.dailyResults[0].Symbol,
       price: this.price(date),
