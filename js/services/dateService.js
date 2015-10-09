@@ -17,9 +17,6 @@ fideligard.factory('dateService', function() {
     return dateService.currentDate;
   };
 
-  /*dateService.dayNumber = function(date) {
-    return (dateService.maxDate - dateService.currentDate) / dateService.step;
-  };*/
 
 
   return dateService;

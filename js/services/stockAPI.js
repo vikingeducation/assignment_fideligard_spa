@@ -28,7 +28,7 @@ fideligard.factory('stockAPI', function() {
       var day = stockAPI.relativeDay(record, date)
       cleansed[day] = record;
     });
-    return cleansed;
+    return stockAPI.fillArray(cleansed);
   };
 
 
@@ -43,8 +43,6 @@ fideligard.factory('stockAPI', function() {
         filled[i] = array[i];
       };
     };
-    console.log(filled);
-    console.log(filled.length);
     return filled;
   };
 
@@ -62,40 +60,27 @@ fideligard.factory('stockAPI', function() {
   };
 
 
-  stockAPI.price = function(date) {
-    // pull 7 days just to make sure we get at least one business day
-    var records = stockAPI.datesInRange(date, 7);
-    return records[0].Close; // it reverses the order???
-  };
-
-
-
-  stockAPI.priceChange = function(date, range) {
-    if (range === 1) {
-      // pull 7 days just to make sure we get at least one business day
-      var records = this.datesInRange(date, 7);
-      var last = records[records.length - 1];
-      var prior = records[records.length - 2] || records[records.length - 1];
-      return last.Close - prior.Close;
-    } else {
-      var records = this.datesInRange(date, range);
-      return records[records.length - 1].Close - records[0].Close;
-    };
-  };
-
-
   stockAPI.getStocks = function(date) {
     var array = stockAPI.buildArray(date, 40);
-    var filled = stockAPI.fillArray(array);
-    //console.log(array);
+    //var filled = stockAPI.fillArray(array);
     return {
-      symbol: this.dailyResults[0].Symbol,
-      price: this.price(date),
-      priceChange1day: this.priceChange(date, 1),
-      priceChange7day: this.priceChange(date, 7),
-      priceChange30day: this.priceChange(date, 30)
+      symbol: array[0].Symbol,
+      price: array[0].Close,
+      priceChange1day: this.priceChange(array, 1),
+      priceChange7day: this.priceChange(array, 7),
+      priceChange30day: this.priceChange(array, 30)
     };
   };
+
+
+  stockAPI.priceChange = function(array, range) {
+    if (array.length > range) {
+      return array[0].Close - array[range].Close;
+    } else {
+      return null;
+    };
+  };
+
 
 
   return stockAPI;
