@@ -2,28 +2,50 @@ fideligard.controller('TradeCtrl',
   ['$scope', 'dateService', 'bank', 'portfolio', 'stockManager',
   function($scope, dateService, bank, portfolio, stockManager) {
 
-    $scope.bank = bank.availableCash;
+
+    $scope.init = function() {
+      $scope.bank = bank.availableCash;
+
+      $scope.transaction = {
+        symbol: 'AAPL',
+        type: 'BUY',
+        quantity: 1,
+        date: new Date(dateService.currentDate),
+        price: null
+      };
+
+      $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
+      $scope.calcMaxQuantity();
+
+      // Listener to auto-populate data as it is loaded
+      $scope.mgr = stockManager;
+      $scope.$watch('mgr.stockData', function(newData) {
+        $scope.transaction.price = stockManager.getPrice($scope.transaction.symbol, $scope.transaction.date);
+        $scope.maxQuantity = $scope.calcMaxQuantity();
+      }, true);
+    }
 
 
-    var selectOptions = {
-      available: [
-                { id: '1', name: 'Buy' },
-                { id: '-1', name: 'Sell' }
-      ],
-      selected: { id: '1', name: 'Buy' }
+    $scope.calcMaxQuantity = function() {
+      if ($scope.transaction.type === 'BUY') {
+        $scope.maxQuantity = $scope.calcMaxBuyQuantity();
+      } else {
+        $scope.maxQuantity = $scope.currentShares;
+      };
+
+      // set it on the DOM element b/c DOM loads before $scope
+      angular.element(document.querySelector('.number-input')).attr('max', $scope.maxQuantity);
     };
 
 
-    $scope.transaction = {
-      symbol: 'AAPL',
-      transactOptions: selectOptions,
-      quantity: 1,
-      date: new Date(dateService.currentDate),
-      price: null
-    };
+    $scope.calcMaxBuyQuantity = function() {
+      if ($scope.transaction.price) {
+        return Math.floor($scope.bank / $scope.transaction.price);
+      } else {
+        return 1
+      };
+    }
 
-
-    $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
 
 
     $scope.status = function(valid) {
@@ -37,12 +59,16 @@ fideligard.controller('TradeCtrl',
 
     $scope.refresh = function() {
       $scope.transaction.price = stockManager.getPrice($scope.transaction.symbol, $scope.transaction.date);
+      $scope.calcMaxQuantity();
     }
 
 
-    $scope.mgr = stockManager;
-    $scope.$watch('mgr.stockData', function(newData) {
-      $scope.transaction.price = stockManager.getPrice($scope.transaction.symbol, $scope.transaction.date);
-    }, true)
+    $scope.processOrder = function(valid) {
+      console.log('buy!');
+    }
+
+
+
+    $scope.init();
 
 }]);
