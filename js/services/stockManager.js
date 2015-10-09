@@ -1,6 +1,6 @@
 fideligard.factory('stockManager',
-  ['stockAPI',
-  function(stockAPI) {
+  ['stockAPI', 'stockCalculator',
+  function(stockAPI, stockCalculator) {
 
   var stockManager = {};
 
@@ -23,9 +23,9 @@ fideligard.factory('stockManager',
   stockManager.stockData = [];
 
 
-  stockManager.getStocks = function(startDate, endDate) {
+  stockManager.init = function(datesMinMax) {
     this.stockList.forEach( function(symbol) {
-      stockAPI.getStock(symbol, startDate, endDate).
+      stockAPI.getStock(symbol, datesMinMax[0], datesMinMax[1]).
         then( stockManager.saveData , stockManager.logError )
     });
   };
@@ -33,6 +33,7 @@ fideligard.factory('stockManager',
 
   stockManager.saveData = function(response) {
     stockManager.stockData.push(response.data.query.results.quote);
+    console.log('Loaded ' + stockManager.stockData.length + ' of ' + stockManager.stockList.length);
   };
 
 
@@ -41,6 +42,13 @@ fideligard.factory('stockManager',
     console.log(response);
     console.log('end api error!')
   };
+
+
+  stockManager.getByDate = function(date) {
+    return this.stockData.map( function(record) {
+      return stockCalculator.generate(record, date);
+    });
+  }
 
 
   return stockManager;
