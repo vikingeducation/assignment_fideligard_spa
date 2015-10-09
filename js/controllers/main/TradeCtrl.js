@@ -66,20 +66,21 @@ fideligard.controller('TradeCtrl',
 
 
     $scope.processOrder = function(valid) {
-      // log transaction in transactions
-      transactions.create($scope.transaction);
+      if (valid) {
+        // log transaction in transactions
+        transactions.create($scope.transaction);
 
-      // adjust bank
-      bank.payment($scope.transaction);
+        // adjust bank
+        bank.payment($scope.transaction);
 
-      // adjust portfolio
-      portfolio.add($scope.transaction)
+        // adjust portfolio
+        portfolio.add($scope.transaction)
 
-      // clear form? redirect?
-
-      $scope.bank = bank.availableCash;
-      $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
-      $scope.calcMaxQuantity();
+        console.log('order placed!');
+        $state.go('fideligard.shared.transactions');
+      } else {
+        console.log('trade not valid!');
+      };
     };
 
 
