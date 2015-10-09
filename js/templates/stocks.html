@@ -12,7 +12,7 @@
 
     <div class='row'>
       <div class='col-xs-4 pull-right'>
-        <input name='stock-filter' class='form-control'>
+        <input name='stock-filter' class='form-control' ng-model='symbolFilter'>
       </div>
       <div class='col-xs-4 pull-right text-right'>
         <label for='stock-filter'><h4>Filter:</h4></label>
@@ -32,7 +32,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr stock-row ng-repeat='stock in stocks' stock='stock'></tr>
+          <tr stock-row ng-repeat='stock in stocks | filter: { symbol: symbolFilter }' stock='stock'></tr>
         </tbody>
       </table>
     </div>
