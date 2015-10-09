@@ -1,6 +1,6 @@
 fideligard.controller('TradeCtrl',
-  ['$scope', 'dateService', 'bank', 'portfolio', 'stockManager',
-  function($scope, dateService, bank, portfolio, stockManager) {
+  ['$scope', 'dateService', 'bank', 'portfolio', 'stockManager', 'transactions',
+  function($scope, dateService, bank, portfolio, stockManager, transactions) {
 
 
     $scope.init = function() {
@@ -59,13 +59,27 @@ fideligard.controller('TradeCtrl',
 
     $scope.refresh = function() {
       $scope.transaction.price = stockManager.getPrice($scope.transaction.symbol, $scope.transaction.date);
+      $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
       $scope.calcMaxQuantity();
     }
 
 
     $scope.processOrder = function(valid) {
-      console.log('buy!');
-    }
+      // log transaction in transactions
+      transactions.create($scope.transaction);
+
+      // adjust bank
+      bank.payment($scope.transaction);
+
+      // adjust portfolio
+      portfolio.add($scope.transaction)
+
+      // clear form? redirect?
+
+      $scope.bank = bank.availableCash;
+      $scope.currentShares = portfolio.currentShares($scope.transaction.symbol);
+      $scope.calcMaxQuantity();
+    };
 
 
 
