@@ -37,7 +37,7 @@ fideligard.controller('DatePickerCtrl',
 
       if (input >= $scope.minDate && input <= $scope.maxDate) {
         $scope.currentDate = Number(new Date(input));
-        $scope.updateLabel();
+        $scope.updateDate();
       } else {
         console.log('value out of range');
         $scope.setCurrentDateText();

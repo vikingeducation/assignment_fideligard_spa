@@ -1,11 +1,11 @@
 fideligard.controller('StocksCtrl',
-  ['$scope', 'dateService', 'stockAPI',
-  function($scope, dateService, stockAPI) {
+  ['$scope', 'dateService', 'stockCalculator',
+  function($scope, dateService, stockCalculator) {
 
 
     ($scope.setDate = function(newDate) {
       $scope.currentDate = newDate;
-      $scope.stocks = [stockAPI.getStocks($scope.currentDate)];
+      $scope.stocks = [stockCalculator.getStocks($scope.currentDate)];
     })(dateService.currentDate);
 
 
