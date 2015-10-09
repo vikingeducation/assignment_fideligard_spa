@@ -14,8 +14,46 @@
 </div>
 
 
-<div class='row'>
 
+<div class='table-responsive'>
+  <table id='stock-table' class='table table-bordered table-striped'>
+    <thead>
+      <tr>
+
+        <th class='clickable' ng-click="toggleSort('date')">
+          Date
+          <i class="glyphicon" ng-class="getIcon('date')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('symbol')">
+          Symbol
+          <i class="glyphicon" ng-class="getIcon('symbol')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('type')">
+          Type
+          <i class="glyphicon" ng-class="getIcon('type')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('quantity')">
+          Quantity
+          <i class="glyphicon" ng-class="getIcon('quantity')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('price')">
+          Price
+          <i class="glyphicon" ng-class="getIcon('price')"></i>
+        </th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr transaction-row ng-repeat='transaction in transactions | orderBy:sort:sortDescending' transaction='transaction'></tr>
+      <!-- filter: { symbol: symbolFilter } -->
+    </tbody>
+
+  </table>
 
 
 </div>
