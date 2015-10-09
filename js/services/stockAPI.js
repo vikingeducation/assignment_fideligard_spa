@@ -4,13 +4,9 @@ fideligard.factory('stockAPI',
   var stockAPI = {};
 
   stockAPI.getStock = function(symbol, startDate, endDate) {
-    $http({
+    return $http({
       method: 'GET',
       url: this.urlFor(symbol, startDate, endDate)
-    }).then(function successCallback(response) {
-      console.log(response);
-    }, function errorCallback(response) {
-      console.log(response);
     });
   };
 
