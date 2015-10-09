@@ -31,18 +31,21 @@ fideligard.factory('stockAPI', function() {
     return cleansed;
   };
 
+
   stockAPI.fillArray = function(array) {
     var filled = [];
-    for(var i = 30; i >= 0; i--) {
+
+    // reverse fill prices on weekends/holidays
+    for(var i = array.length - 1; i >= 0; i--) {
       if (array[i] === undefined) {
-        console.log('undef ' + i)
-        filled[i] = array[i+1];
+        filled[i] = filled[i+1];
       } else {
-        console.log('def ' + i)
         filled[i] = array[i];
       };
     };
     console.log(filled);
+    console.log(filled.length);
+    return filled;
   };
 
 
