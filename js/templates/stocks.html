@@ -2,6 +2,7 @@
 
   <div class='panel-body'>
 
+
     <div class='row'>
       <div class='col-xs-12'>
         <h1>Stocks</h1>
@@ -19,21 +20,46 @@
       </div>
     </div>
 
+
     <div class='table-responsive'>
       <table id='stock-table' class='table table-bordered table-striped'>
         <thead>
           <tr>
-            <th>Symbol</th>
-            <th>Price</th>
-            <th>1d</th>
-            <th>7d</th>
-            <th>30d</th>
+
+            <th class='clickable' ng-click="toggleSort('symbol')">
+              Symbol
+              <i class="glyphicon" ng-class="getIcon('symbol')"></i>
+            </th>
+
+            <th class='clickable' ng-click="toggleSort('price')">
+              Price
+              <i class="glyphicon" ng-class="getIcon('price')"></i>
+            </th>
+
+            <th class='clickable' ng-click="toggleSort('priceChange1day')">
+              1d
+              <i class="glyphicon" ng-class="getIcon('priceChange1day')"></i>
+            </th>
+
+            <th class='clickable' ng-click="toggleSort('priceChange7day')">
+              7d
+              <i class="glyphicon" ng-class="getIcon('priceChange7day')"></i>
+            </th>
+
+            <th class='clickable' ng-click="toggleSort('priceChange30day')">
+              30d
+              <i class="glyphicon" ng-class="getIcon('priceChange30day')"></i>
+            </th>
+
             <th>Trade?</th>
+
           </tr>
         </thead>
+
         <tbody>
-          <tr stock-row ng-repeat='stock in stocks | filter: { symbol: symbolFilter }' stock='stock'></tr>
+          <tr stock-row ng-repeat='stock in stocks | orderBy:sort:sortDescending | filter: { symbol: symbolFilter }' stock='stock'></tr>
         </tbody>
+
       </table>
     </div>
 

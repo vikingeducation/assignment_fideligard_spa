@@ -78,7 +78,7 @@ fideligard.factory('stockCalculator', function() {
     var array = stockCalculator.buildArray(dataRecord, date, 40);
     return {
       symbol: array[0].Symbol,
-      price: array[0].Close,
+      price: Number(array[0].Close),
       priceChange1day: this.priceChange(array, 1),
       priceChange7day: this.priceChange(array, 7),
       priceChange30day: this.priceChange(array, 30)
