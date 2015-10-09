@@ -18,6 +18,7 @@
     <select class='form-control' ng-model='selectedState' ng-change='routeTo(selectedState)'>
       <option value = "fideligard.shared.trade">Trade</option>
       <option value = "fideligard.shared.transactions">Transactions</option>
+      <option value = "fideligard.shared.portfolio">Portfolio</option>
     </select>
   </div>
 
@@ -60,7 +61,6 @@
 
     <tbody>
       <tr transaction-row ng-repeat='transaction in transactions | orderBy:sort:sortDescending | filter: transactionFilter' transaction='transaction'></tr>
-      <!--  -->
     </tbody>
 
   </table>

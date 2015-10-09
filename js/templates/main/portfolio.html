@@ -1,1 +1,109 @@
-<h1>Portfolio</h1>
+<div class='row'>
+
+  <div class='col-xs-9'>
+    <h2>Portfolio</h2>
+  </div>
+
+
+  <div class='col-xs-3'>
+    <select class='form-control' ng-model='selectedState' ng-change='routeTo(selectedState)'>
+      <option value = "fideligard.shared.trade">Trade</option>
+      <option value = "fideligard.shared.transactions">Transactions</option>
+      <option value = "fideligard.shared.portfolio">Portfolio</option>
+    </select>
+  </div>
+
+</div>
+
+
+
+<div class='table-responsive'>
+  <table id='portfolio-summary' class='table table-bordered'>
+    <thead>
+      <tr>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Cost Basis</td>
+        <td>Current Value</td>
+        <td>Profit/Loss</td>
+        <td>1d</td>
+        <td>7d</td>
+        <td>30d</td>
+      </tr>
+    </tbody>
+  </table>
+</div> <!-- portfolio summary table -->
+
+
+
+<div class='table-responsive'>
+  <table id='portfolio-table' class='table table-bordered table-striped'>
+    <thead>
+      <tr>
+
+        <th class='clickable' ng-click="toggleSort('symbol')">
+          Symbol
+          <i class="glyphicon" ng-class="getIcon('symbol')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('quantity')">
+          Quantity
+          <i class="glyphicon" ng-class="getIcon('quantity')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('costBasis')">
+          Cost Basis
+          <i class="glyphicon" ng-class="getIcon('costBasis')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('currentValue')">
+          Current Value
+          <i class="glyphicon" ng-class="getIcon('currentValue')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('profit')">
+          Profit/Loss
+          <i class="glyphicon" ng-class="getIcon('profit')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('currentPrice')">
+          Current Price
+          <i class="glyphicon" ng-class="getIcon('currentPrice')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('priceChange1day')">
+          1d
+          <i class="glyphicon" ng-class="getIcon('priceChange1day')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('priceChange7day')">
+          7d
+          <i class="glyphicon" ng-class="getIcon('priceChange7day')"></i>
+        </th>
+
+        <th class='clickable' ng-click="toggleSort('priceChange30day')">
+          30d
+          <i class="glyphicon" ng-class="getIcon('priceChange30day')"></i>
+        </th>
+
+        <th>Trade?</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr portfolio-row ng-repeat='stock in portfolio | orderBy:sort:sortDescending' stock='stock'></tr>
+    </tbody>
+
+  </table>
+
+
+</div> <!-- portfolio detail table -->
