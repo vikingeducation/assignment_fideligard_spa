@@ -1,9 +1,9 @@
 <td>{{ stock.symbol }}</td>
 <td>{{ stock.quantity }}</td>
 <td>{{ stock.costBasis | currency }}</td>
-<td>{{ stock.quantity * stock.price | currency }}</td>
-<td>{{ stock.quantity * stock.price - stock.costBasis | currency }}</td>
-<td>{{ stock.price | currency }}</td>
+<td>{{ stock.currentValue() | currency }}</td>
+<td>{{ stock.profit() | currency }}</td>
+<td>{{ stock.currentPrice | currency }}</td>
 <td>{{ stock.priceChange1day | currency }}</td>
 <td>{{ stock.priceChange7day | currency }}</td>
 <td>{{ stock.priceChange30day | currency }}</td>

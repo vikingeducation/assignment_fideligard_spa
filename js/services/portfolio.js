@@ -60,6 +60,30 @@ fideligard.factory('portfolio',
   };
 
 
+  portfolio.present = function() {
+    output = []
+    for (var symbol in portfolio.assets) {
+      output.push( portfolio.generate(symbol, portfolio.assets[symbol]) );
+    };
+    return output
+  }
+
+
+  portfolio.generate = function(symbol, data) {
+    return {
+      symbol: symbol,
+      quantity: data.shares,
+      costBasis: data.cashInvested - data.cashProceeds,
+      currentValue: function() { return this.quantity * this.currentPrice },
+      profit: function() { return this.currentValue() - this.costBasis },
+      currentPrice: 5,
+      priceChange1day: 0,
+      priceChange7day: 0,
+      priceChange30day: 0
+    }
+  }
+
+
   // for moving backward in time
   /*portfolio.buildDown = function(futureDate, pastDate) {
     var oneDay = 1000*60*60*24;

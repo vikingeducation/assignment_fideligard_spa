@@ -12,7 +12,7 @@ fideligard.controller('PortfolioCtrl',
       // can't start this at 0 every time we open Portfolio route
       // probably need one big controller to init everything across routes
       //portfolio.buildUp(dateService.currentDate, 0);
-      $scope.portfolio = portfolio.assets;
+      $scope.portfolio = portfolio.present();
 
       // service needs to be on $scope in order to be $watched
       $scope.date = dateService;
@@ -33,7 +33,7 @@ fideligard.controller('PortfolioCtrl',
       //  portfolio.buildDown(prior, newDate);
       //};
       //console.log(new Date(newDate) + ", " + new Date(prior));
-      $scope.portfolio = portfolio.assets;
+      $scope.portfolio = portfolio.present();
       console.log($scope.portfolio);
     };
 
