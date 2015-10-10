@@ -1,13 +1,32 @@
 fideligard.controller('MainCtrl',
-  ['$scope', 'dateService', 'portfolio',
-  function($scope, dateService, portfolio) {
+  ['$scope', 'stockManager', 'dateService',
+  function($scope, stockManager, dateService) {
+
 
     $scope.init = function() {
-      //portfolio.buildUp(dateService.currentDate, 0);
       console.log('main init');
+
+      // ajax calls
+      // wrap this in a promise to trigger start?
+      stockManager.init(dateService.getMinMaxDateText(-40, 0));
+
+      // $scope.start();
     };
 
 
-    $scope.init();
+    $scope.start = function() {
+      console.log('start');
+      // stockManager.init()
+
+      // do I need these?
+      // DatePickerCtrl.init()
+      // StocksCtrl.init()
+      // TradeCtrl.init()
+      // TransactionsCtrl.init()
+      // PortfolioCtrl.init()
+    }
+
+
+    //$scope.init();
 
   }]);

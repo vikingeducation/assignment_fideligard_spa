@@ -1,5 +1,5 @@
 <td>{{ stock.symbol }}</td>
-<td>{{ stock.quantity }}</td>
+<td>{{ stock.quantity | number }}</td>
 <td>{{ stock.costBasis | currency }}</td>
 <td>{{ stock.currentValue() | currency }}</td>
 <td>{{ stock.profit() | currency }}</td>

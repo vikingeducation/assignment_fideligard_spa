@@ -66,7 +66,7 @@ fideligard.factory('portfolio',
       output.push( portfolio.generate(symbol, portfolio.assets[symbol]) );
     };
     return output
-  }
+  };
 
 
   portfolio.generate = function(symbol, data) {
@@ -76,12 +76,12 @@ fideligard.factory('portfolio',
       costBasis: data.cashInvested - data.cashProceeds,
       currentValue: function() { return this.quantity * this.currentPrice },
       profit: function() { return this.currentValue() - this.costBasis },
-      currentPrice: 5,
-      priceChange1day: 0,
-      priceChange7day: 0,
-      priceChange30day: 0
+      currentPrice: 1, // used for cash
+      priceChange1day: null,
+      priceChange7day: null,
+      priceChange30day: null
     }
-  }
+  };
 
 
   // for moving backward in time

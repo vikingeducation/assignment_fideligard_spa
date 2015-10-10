@@ -1,6 +1,6 @@
 fideligard.controller('PortfolioCtrl',
-  ['$scope', '$state', 'portfolio', 'dateService',
-  function($scope, $state, portfolio, dateService) {
+  ['$scope', '$state', 'portfolio', 'stockManager', 'stockCalculator', 'dateService',
+  function($scope, $state, portfolio, stockManager, stockCalculator, dateService) {
 
 
     $scope.init = function() {
@@ -9,33 +9,43 @@ fideligard.controller('PortfolioCtrl',
       $scope.sort = "date";
       $scope.sortDescending = false;
 
-      // can't start this at 0 every time we open Portfolio route
-      // probably need one big controller to init everything across routes
-      //portfolio.buildUp(dateService.currentDate, 0);
-      $scope.portfolio = portfolio.present();
+      $scope.getData();
 
       // service needs to be on $scope in order to be $watched
       $scope.date = dateService;
       $scope.$watch('date.currentDate', $scope.setDate );
+
+      $scope.manager = stockManager;
+      $scope.$watch('manager.fullyLoaded', $scope.getData );
     };
-
-
-    // need to figure out how to render in table
 
 
     $scope.setDate = function(newDate, oldDate) {
-      //var prior = dateService.priorDate;
       $scope.currentDate = newDate;
-      //if (newDate > prior) {
-      //portfolio.reset();
       portfolio.buildUp(newDate, 0);
-      //} else {
-      //  portfolio.buildDown(prior, newDate);
-      //};
-      //console.log(new Date(newDate) + ", " + new Date(prior));
-      $scope.portfolio = portfolio.present();
-      console.log($scope.portfolio);
+      $scope.getData();
     };
+
+
+    // currently not sorting on function fields properly???
+
+    // get portfolio data
+    $scope.getData = function() {
+      if (stockManager.fullyLoaded) {
+        $scope.portfolio = portfolio.present();
+        $scope.portfolio.forEach( function(stock) {
+          if (stock.symbol !== 'CASH') {
+            var priceInfo = stockCalculator.generate(stockManager.stockData[stock.symbol], $scope.currentDate);
+            stock.currentPrice = priceInfo.price;
+            stock.priceChange1day = priceInfo.priceChange1day;
+            stock.priceChange7day = priceInfo.priceChange7day;
+            stock.priceChange30day = priceInfo.priceChange30day;
+          };
+          // need to save this info in stock calc/mgr so it's easier to get?
+        })
+      };
+    }
+
 
 
     $scope.toggleSort = function(column) {
