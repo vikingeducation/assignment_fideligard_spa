@@ -1,6 +1,6 @@
 fideligard.controller('PortfolioCtrl',
-  ['$scope', '$state',
-  function($scope, $state) {
+  ['$scope', '$state', 'portfolio', 'dateService',
+  function($scope, $state, portfolio, dateService) {
 
 
     $scope.init = function() {
@@ -9,10 +9,25 @@ fideligard.controller('PortfolioCtrl',
       $scope.sort = "date";
       $scope.sortDescending = false;
 
-      $scope.portfolio = [];
+      portfolio.buildUp(dateService.currentDate, 0);
+      $scope.portfolio = portfolio.assets;
+      console.log($scope.portfolio);
+
+      // service needs to be on $scope in order to be $watched
+      $scope.date = dateService;
+      $scope.$watch('date.currentDate', $scope.setDate );
     };
 
 
+    // need to add a function to build up/down on date change
+    $scope.setDate = function(newDate, oldDate) {
+      $scope.currentDate = newDate;
+      if (newDate > oldDate) {
+        portfolio.buildUp(newDate, oldDate);
+      } else {
+        portfolio.buildDown(oldDate, newDate);
+      };
+    };
 
 
     $scope.toggleSort = function(column) {

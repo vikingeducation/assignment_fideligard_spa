@@ -6,7 +6,8 @@ fideligard.factory('portfolio',
 
   portfolio.all = {'AAPL': 8};
   portfolio.cash = 5000;
-  portfolio.stocks = {};
+  portfolio.assets = {'CASH': { quantity: 5000} };
+
 
   portfolio.currentShares = function(symbol) {
     return portfolio.all[symbol] || 0;
@@ -26,10 +27,8 @@ fideligard.factory('portfolio',
     portfolio.all[symbol] = newQuantity;
   };
 
-  // given 2 dates, pull all transactions that happened in between
-  // include cash
-  // add all buys
-  // subtract all sells
+
+  // for moving forward in time
   portfolio.buildUp = function(futureDate, pastDate) {
     //  if no startDate, get first date from dateService?
     var oneDay = 1000*60*60*24;
@@ -37,17 +36,42 @@ fideligard.factory('portfolio',
 
     transactionsInRange.forEach( function(transaction) {
       var cashFlow = transaction.price * transaction.quantity;
+
+      portfolio.assets[transaction.symbol] = portfolio.assets[transaction.symbol] || {shares: 0, costBasis: 0};
+
       if (transaction.type === 'BUY') {
-        portfolio.cash -= cashFlow;
-        // portfolio.stocks add to
-      }
-    })
+        portfolio.assets['CASH'].quantity -= cashFlow;
+        portfolio.assets[transaction.symbol].shares += transaction.quantity
+        portfolio.assets[transaction.symbol].costBasis += cashFlow;
+      } else {
+        portfolio.assets['CASH'].quantity += cashFlow;
+        portfolio.assets[transaction.symbol].shares -= transaction.quantity
+        portfolio.assets[transaction.symbol].costBasis -= cashFlow;
+      };
+    });
   };
 
 
+  // for moving backward in time
   portfolio.buildDown = function(futureDate, pastDate) {
     var oneDay = 1000*60*60*24;
     var transactionsInRange = transactions.between(pastDate, futureDate - oneDay);
+
+    transactionsInRange.forEach( function(transaction) {
+      var cashFlow = transaction.price * transaction.quantity;
+
+      portfolio.assets[transaction.symbol] = portfolio.assets[transaction.symbol] || {shares: 0, costBasis: 0};
+
+      if (transaction.type === 'SELL') {
+        portfolio.assets['CASH'].quantity -= cashFlow;
+        portfolio.assets[transaction.symbol].shares += transaction.quantity
+        portfolio.assets[transaction.symbol].costBasis += cashFlow;
+      } else {
+        portfolio.assets['CASH'].quantity += cashFlow;
+        portfolio.assets[transaction.symbol].shares -= transaction.quantity
+        portfolio.assets[transaction.symbol].costBasis -= cashFlow;
+      };
+    });
   }
 
 
