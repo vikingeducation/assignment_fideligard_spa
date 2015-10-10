@@ -1,0 +1,30 @@
+<div class='row'>
+  <div class='col-xs-12'>
+
+    <div class='row'>
+      <div class-'col-xs-12'>
+        <div class='datepicker-labels'>
+          <p class='pull-left date-label-min text-muted'>{{minDate | date:'M/d/yyyy' }}</p>
+          <p class='pull-right date-label-max text-muted'>{{maxDate | date:'M/d/yyyy' }}</p>
+
+          <form name='dateTextForm' ng-submit='unfocus()'>
+            <input type='text' name='dateText' class='datepicker-label text-center form-control' ng-model="currentDateText" ng-blur='updateDateText()'>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class='row'>
+      <div class-'col-xs-12'>
+        <div class='datepicker'>
+          <input type='range' min='{{minDate}}' max='{{maxDate}}' step='{{step}}' ng-model='currentDate' ng-change='updateDate()'>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+</div>
+
