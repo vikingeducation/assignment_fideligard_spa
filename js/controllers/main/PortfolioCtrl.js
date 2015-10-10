@@ -24,12 +24,16 @@ fideligard.controller('PortfolioCtrl',
 
 
     $scope.setDate = function(newDate, oldDate) {
+      //var prior = dateService.priorDate;
       $scope.currentDate = newDate;
-      if (newDate > oldDate) {
-        portfolio.buildUp(newDate, oldDate);
-      } else {
-        portfolio.buildDown(oldDate, newDate);
-      };
+      //if (newDate > prior) {
+      //portfolio.reset();
+      portfolio.buildUp(newDate, 0);
+      //} else {
+      //  portfolio.buildDown(prior, newDate);
+      //};
+      //console.log(new Date(newDate) + ", " + new Date(prior));
+      $scope.portfolio = portfolio.assets;
       console.log($scope.portfolio);
     };
 

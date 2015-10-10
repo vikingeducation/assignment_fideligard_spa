@@ -7,6 +7,7 @@ fideligard.factory('dateService', function() {
   dateService.maxDate = Number(new Date('12/31/2014'));
   dateService.step = 1000*60*60*24;
   dateService.currentDate = dateService.minDate;
+//  dateService.priorDate = 0;
 
 
   dateService.getMinMaxDates = function(adjustment1, adjustment2) {
@@ -43,6 +44,7 @@ fideligard.factory('dateService', function() {
 
 
   dateService.setCurrentDate = function(date) {
+    //dateService.priorDate = dateService.currentDate;
     dateService.currentDate = date;
   };
 

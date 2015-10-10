@@ -10,7 +10,6 @@ fideligard.controller('TransactionsCtrl',
       $scope.sortDescending = false;
 
       $scope.transactions = transactions.all;
-      console.log($scope.transactions);
     };
 
 
