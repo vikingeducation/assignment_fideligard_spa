@@ -1,0 +1,134 @@
+<div class="row">
+
+  <div class="col-xs-12">
+    <h2>Trade</h2>
+  </div>
+
+<!--   <div class="col-xs-6">
+    <select class="form-control">
+      <option value="">Trade</option>
+      <option value="">Portfolio</option>
+    </select>
+  </div> -->
+
+</div>
+
+<div class="row">
+
+  <div class="col-xs-6">
+    <form role = "form" class = "form-horizontal" name="tradeform" ng-submit = "processForm()">
+
+      <div class="form-group">
+        <label for = "symbol" class="col-sm-5 control-label">Symbol</label>
+        <div class="col-sm-7">
+          <input  ticker
+                  type="text"
+                  name = "symbol"
+                  required="string"
+                  ng-minlength="1"
+                  ng-maxlength="6"
+                  typeahead="ticker for ticker in symbols | filter: $viewValue | limitTo: 8"
+                  typeahead-no-results="noResults"
+                  placeholder = "AAPL"
+                  ng-model = "symbol"
+                  class = "form-control">
+
+          <div ng-show="noResults">
+            <i class="glyphicon glyphicon-remove"></i> No Results Found
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for = "transaction" class="col-sm-5 control-label">Buy / Sell</label>
+        <div class="col-sm-7">
+          <select name = "transaction" ng-model = "transaction" class = "form-control">
+            <option value="Buy" selected>Buy</option>
+            <option value="Sell">Sell</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for = "quantity" class="col-sm-5 control-label">Quantity</label>
+        <div class="col-sm-7">
+          <input  type="number"
+                  name = "quantity"
+                  placeholder = "100"
+                  ng-model = "quantity"
+                  class = "form-control"
+                  min="1"
+                  max="9999999" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for = "date" class="col-sm-5 control-label">Date</label>
+        <div class="col-sm-7">
+          <p class="input-group">
+            <input  type="text"
+                    class="form-control"
+                    datepicker-popup="shortDate"
+                    ng-model="dateSelected"
+                    is-open="status.opened"
+                    min-date="minDate"
+                    max-date="maxDate"
+                    date-disabled="disabled(date, mode)"
+                    required/>
+
+            <span class="input-group-btn">
+              <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="form-group">
+        <label class="col-sm-5 control-label">Price</label>
+        <div class="col-sm-7">
+          <h5 class="text-center text-muted text-vertical-center">{{ getPrice() | currency }}</h5>
+        </div>
+      </div>
+
+      <!-- Total -->
+      <div class="form-group">
+        <label class="col-sm-5 control-label">Total</label>
+        <div class="col-sm-7">
+          <h5 class="text-center text-success text-vertical-center">{{ getTotal() | currency }}</h5>
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <div class="form-group">
+        <div class="col-xs-10 col-xs-offset-1">
+          <input type="submit" class="btn btn-primary btn-lg btn-block" value="Place Order!" ng-disabled = "tradeform.$invalid || !affordable">
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <div class="col-xs-6">
+    <p><b>Cash Available:</b></p>
+    <p ng-class = "{ 'text-success': affordable, 'text-danger': !(affordable) }">{{ bank.cash | currency }}</p>
+    <div ng-hide = "afford()" class="text-danger">
+      <i class="glyphicon glyphicon-remove"></i> You cannot afford this!
+    </div>
+
+    <p><b>Cash after transaction:</b></p>
+    <p ng-class = "{ 'text-success': affordable, 'text-danger': !affordable }">{{ cashAfter() | currency }}</p>
+
+    <p><b>Order Status:</b></p>
+    <p class = "text-success" ng-if="tradeform.$valid && affordable">All fields valid!</p>
+    <p class = "text-warning" ng-if="tradeform.$invalid || !affordable">Not all fields are valid!</p>
+    <div ng-if="errors.messages.length > 0">
+      <p class = "text-danger" >The form failed to submit for the following reason(s): </p>
+      <ul>
+        <li class = "text-danger" ng-repeat = "msg in errors.messages">{{ msg }}</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+

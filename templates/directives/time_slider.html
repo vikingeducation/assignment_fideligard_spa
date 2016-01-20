@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-xs-12">
+
+      <input  type="range"
+              tooltip = "Date is '{{ dateSelected }}'"
+              step="86400000"
+              max="{{ min }}"
+              min="{{ max }}"
+              id="slider"
+              value = "{{ slider }}"
+              ng-model="slider"
+              ng-change="convertToDate()"/>
+
+  </div>
+</div>

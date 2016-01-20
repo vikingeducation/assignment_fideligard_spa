@@ -1,0 +1,67 @@
+<div class="row">
+  <div class="col-xs-6">
+    <h2>Stocks</h2>
+    <h6><b>Date:</b> {{ dateSelected.date }}</h6>
+  </div>
+
+  <div class="col-xs-6">
+    <label for="ticker">Filter:</label>
+    <input
+      type="text"
+      name = "ticker"
+      ng-model="tickerSelection"
+      typeahead="ticker for ticker in symbols | filter: $viewValue | limitTo: 8"
+      typeahead-no-results="noResults"
+      class="form-control">
+
+    <div ng-show="noResults">
+      <i class="glyphicon glyphicon-remove"></i> No Results Found
+    </div>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+
+    <table class = "table table-hover">
+      <thead>
+        <th>
+          <a ng-click = "selectSort('Symbol')">Symbol</a>
+          <span class="sortorder" ng-show="sortQuery === 'Symbol'" ng-class="{reverse:reverse}"></span>
+        </th>
+        <th>
+          <a ng-click = "selectSort('avg')">Price</a>
+          <span class="sortorder" ng-show="sortQuery === 'avg'" ng-class="{reverse:reverse}"></span>
+        </th>
+        <th>
+          <a ng-click = "selectSort('oneDay')">1d</a>
+          <span class="sortorder" ng-show="sortQuery === 'oneDay'" ng-class="{reverse:reverse}"></span>
+        </th>
+        <th>
+          <a ng-click = "selectSort('oneWeek')">7d</a>
+          <span class="sortorder" ng-show="sortQuery === 'oneWeek'" ng-class="{reverse:reverse}"></span>
+        </th>
+        <th>
+          <a ng-click = "selectSort('oneMonth')">30d</a>
+          <span class="sortorder" ng-show="sortQuery === 'oneMonth'" ng-class="{reverse:reverse}"></span>
+        </th>
+        <th>
+          Trade
+        </th>
+      </thead>
+
+      <tbody>
+
+        <tr
+          stock-row
+          ng-repeat="stock in history.contents | tickerFilter: tickerSelection | filter: { Date: dateSelected.date } | orderBy: sortQuery : reverse"
+          stock="stock" >
+        </tr>
+
+      </tbody>
+
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fideligard Stock Portfolio</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <!-- Angular ui-router -->
+  <script type="text/javascript" src="js/angular-ui-router.js"></script>
+  <!-- Angular ui-bootstrap -->
+  <script type="text/javascript" src='js/ui-bootstrap-tpls-0.13.4.min.js'></script>
+
+  <!-- app -->
+  <script src="js/app.js"></script>
+
+  <!-- services -->
+  <script src="js/services/portfolioService.js"></script>
+  <script src="js/services/stocksService.js"></script>
+  <script src="js/services/bankService.js"></script>
+
+  <!-- controllers -->
+  <script src="js/controllers/stocksCtrl.js"></script>
+  <script src="js/controllers/datePickerCtrl.js"></script>
+  <script src="js/controllers/tradeCtrl.js"></script>
+  <script src="js/controllers/portfolioCtrl.js"></script>
+  <script src="js/controllers/transactionsCtrl.js"></script>
+
+  <!-- directives  -->
+  <script src="js/directives/timeSlider.js"></script>
+  <script src="js/directives/stockRow.js"></script>
+  <script src="js/directives/portfolioRow.js"></script>
+  <script src="js/directives/transactionRow.js"></script>
+  <script src="js/directives/ticker.js"></script>
+
+  <!-- filters  -->
+  <script src="js/filters/tickerFilter.js"></script>
+  <script src="js/filters/transactionsFilter.js"></script>
+  <script src="js/filters/orderObjectBy.js"></script>
+
+</head>
+<body ng-app = "stocks">
+
+  <div ui-view = "navbar" ></div>
+
+  <div ui-view = "content" ></div>
+
+  <div ui-view = "footer" ></div>
+
+</body>
+</html>

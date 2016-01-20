@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-4">
+
+    <!-- Left calendar / Sets Slider start date -->
+    <p class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        show-weeks = "false"
+        datepicker-popup="{{format}}"
+        ng-model="dtStart"
+        is-open="status.opened"
+        show-button-bar = "false"
+        min-date="minDate"
+        max-date="maxDate"
+        datepicker-options="dateOptions"
+        date-disabled="disabled(date, mode)"
+        close-text="Close"
+        ng-change = "updateStart()" />
+
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+  </div>
+
+  <div class="col-xs-4 col-xs-offset-4">
+
+    <!-- Right calendar / Sets Slider end date -->
+    <p class="input-group">
+      <input
+        type="text"
+        class="form-control"
+        show-weeks = "false"
+        datepicker-popup="{{format}}"
+        is-open="status.opened"
+        show-button-bar = "false"
+        ng-model="dtEnd"
+        min-date="minDate"
+        max-date="maxDate"
+        datepicker-options="dateOptions"
+        date-disabled="disabled(date, mode)"
+        close-text="Close"
+        ng-change = "updateEnd()" />
+
+      <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+      </span>
+    </p>
+
+  </div>
+</div>
+
+<!-- Date Slider -->
+<time-slider
+  date-selected="dateSelected.date"
+  slider = "slider"
+  convert-to-date="convertToDate(slider)"
+  max = "sliderProps.start"
+  min = "sliderProps.end">
+</time-slider>
