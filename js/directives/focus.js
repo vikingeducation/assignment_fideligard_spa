@@ -8,7 +8,7 @@ simulator.directive('focus',
       scope.$watch('trigger', function(value) {
         if (value === "true") {
           $timeout(function() {
-           element[0].focus();
+           element.focus();
           });
         }
       });
