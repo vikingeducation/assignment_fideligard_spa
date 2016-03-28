@@ -15,6 +15,11 @@
       padding: 10px 15px;
     }
 
+    .date-input {
+      display: inline-block;
+      width: 155px;
+    }
+
   </style>
 </head>
 <body>
@@ -35,13 +40,13 @@
   <main class="container" ng-app="simulator">
     
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-sm-3">
 
         <div ui-view="stocks"></div>
 
       </div>
 
-      <div class="col-md-9">
+      <div class="col-sm-9">
         <div class="row">
           <div class="col-md-12">
 
@@ -73,6 +78,7 @@
 
 <!-- directives -->
 <script src="js/directives/dateSlider.js"></script>
+<script src="js/directives/focus.js"></script>
 
 <!-- services -->
 <script src="js/services/dateHelper.js"></script>

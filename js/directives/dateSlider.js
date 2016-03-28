@@ -14,10 +14,6 @@ simulator.directive('dateSlider', ['dateHelper', function(dateHelper){
       scope.$watch('rangeVal', function(newVal){
         scope.selectedDate = dateHelper.addDays(scope.startDate, scope.rangeVal);
       });
-
-      scope.movePicker = function(){
-        console.log('sip');
-      };
     }
   };
 }]);
