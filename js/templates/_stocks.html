@@ -1,1 +1,39 @@
-<p>stocks sidebar</p>
+<div class="row">
+  <div class="col-sm-4">
+    <h4>Stocks <small>{{ dates.selected | date : 'shortDate' }}</small></h4>
+  </div>
+<!-- 
+  <div class="col-sm-8 form-inline">
+    <div class="form-group">
+      <input name="stock-filter" class="form-control" type="text">
+    </div>
+  </div>
+   -->
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ historical.symbol }}</td>
+          <td>{{ historical.price | currency }}</td>
+          <td>{{ historical[1].diff | number:2 }}</td>
+          <td>{{ historical[7].diff | number:2 }}</td>
+          <td>{{ historical[30].diff | number:2 }}</td>
+          <td>-</td>
+        </tr>
+      </tbody>      
+    </table>
+  </div>
+</div>

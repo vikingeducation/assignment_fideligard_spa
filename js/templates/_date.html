@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-xs-1">
-    {{ startDate | date : 'shortDate'}}
+    {{ dates.start | date : 'shortDate'}}
   </div>
 
   <div class="col-xs-11 text-right">
-    {{ endDate | date : 'shortDate'}}
+    {{ dates.end | date : 'shortDate'}}
   </div>
 </div>
 
@@ -22,27 +22,27 @@
            class="form-control date-input" 
            type="date"
 
-           ng-model="selectedDate" 
+           ng-model="dates.selected" 
            ng-model-options="{updateOn : 'blur'}" 
            ng-show="showInput" 
            ng-blur="showInput = false" 
            focus="{{ showInput }}"
            blur-on-return
 
-           min="{{startDate | date:'yyyy-MM-dd'}}" 
-           max="{{endDate | date:'yyyy-MM-dd'}}" 
+           min="{{dates.start | date:'yyyy-MM-dd'}}" 
+           max="{{dates.end | date:'yyyy-MM-dd'}}" 
            required>
 
     <a href="javascript:void(0)"
 
        ng-click="showInput = true; disableTip = true" 
        ng-show="!showInput"
-        
+
        uib-tooltip="Click to enter a date." 
        tooltip-placement="right"
        tooltip-enable="!disableTip">
 
-      <strong>{{ selectedDate | date:'shortDate' }}</strong>
+      <strong>{{ dates.selected | date:'shortDate' }}</strong>
     </a>
   </div>
 </div>

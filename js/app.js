@@ -14,10 +14,16 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
           controller: 'DateCtrl'
         },
         'stocks': {
-          templateUrl: 'js/templates/_stocks.html'
+          templateUrl: 'js/templates/_stocks.html',
+          controller: 'StockPricesCtrl'
         },
         'main': {
           templateUrl: 'js/templates/_mainWrapper.html'
+        }
+      },
+      resolve: {
+        stocks: function( stockPrices ){
+          return stockPrices.init();
         }
       }
     })

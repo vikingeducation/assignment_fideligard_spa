@@ -1,18 +1,16 @@
-simulator.controller('DateCtrl', ['$scope', 'dateHelper', 
-  function($scope, dateHelper){
+simulator.controller('DateCtrl', ['$scope', 'dateHelper', 'workingDates', 
+  function($scope, dateHelper, workingDates){
 
-  $scope.startDate = new Date('1/1/2015');
-  $scope.endDate = new Date('12/31/2015');
-  $scope.selectedDate = new Date('1/1/2015');
+  $scope.dates = workingDates;
   $scope.showInput = true;
 
-  $scope.rangeMax = dateHelper.diffInDays($scope.startDate, $scope.endDate);
+  $scope.rangeMax = dateHelper.diffInDays($scope.dates.start, $scope.dates.end);
 
-  $scope.$watch('selectedDate', function(newVal){
-    $scope.rangeVal = dateHelper.diffInDays($scope.startDate, $scope.selectedDate);
+  $scope.$watch('dates.selected', function(newVal){
+    $scope.rangeVal = dateHelper.diffInDays($scope.dates.start, $scope.dates.selected);
   });
 
   $scope.$watch('rangeVal', function(newVal){
-    $scope.selectedDate = dateHelper.addDays($scope.startDate, $scope.rangeVal);
+    $scope.dates.selected = dateHelper.addDays($scope.dates.start, $scope.rangeVal);
   });
 }]);

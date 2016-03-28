@@ -14,4 +14,4 @@
  select * from   yahoo.finance.historicaldata
          where  symbol    = "AAPL"
          and    startDate = "2014-01-11"
-         and    endDate   = "2014-02-11"
+         and    endDate   = "2014-02-11"w

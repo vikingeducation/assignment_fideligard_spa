@@ -11,12 +11,12 @@ simulator.factory('dateHelper', function(){
 
   var addDays = function(date, days){
     var result = new Date(date);
-    result.setDate(result.getDate() + parseInt(days));
+    result.setDate(result.getDate() + Number(days));
     return result;
   };
 
   return {
     diffInDays: diffInDays,
-    addDays: addDays
+    addDays: addDays,
   };
 });
