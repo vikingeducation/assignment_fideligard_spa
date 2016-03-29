@@ -1,13 +1,13 @@
-financialApp.controller('StocksCtrl', ['$scope', function($scope){
+financialApp.controller('StocksCtrl', ['$scope', 'dateService', function($scope, dateService){
 
   console.log("hello");
 
-  $scope.startDate = new Date("1-2-2014");
-  $scope.endDate = new Date("7-31-2014");
+  $scope.startDate = dateService.getStartDate();
+  $scope.endDate = dateService.getEndDate();
   $scope.dateSelection = 0;
 
   $scope.convertDate = function(date){
-    return (new Date(date));
+    dateService.convertDate(date);
   }
 
   $scope.currentDate = function() {
@@ -16,14 +16,11 @@ financialApp.controller('StocksCtrl', ['$scope', function($scope){
     var newDate = new Date( start + selection );
     console.log(newDate);
     return newDate;
-  }
+  };
+
 
   $scope.dateRange = function() {
-    var range = Math.round( ( $scope.endDate.getTime() - $scope.startDate.getTime() ) / (1000*60*60*24) );
-
-    // console.log($scope.dateSelection, range);
-
-    return range;
+    dateService.dateRange();
   }
 
 }]);
