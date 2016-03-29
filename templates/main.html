@@ -20,9 +20,9 @@
 
         <form id="slider-holder">
           <span class="pull-left">{{ dateInfo.startDate | date:"MMM dd, yyyy"}}</span>
-          <span class="text-center">{{ dateInfo.currentDate() | date:"MMM dd, yyyy"}}</span>
+          <span class="text-center">{{ dateInfo.currentDate | date:"MMM dd, yyyy"}}</span>
           <span class="pull-right">{{ dateInfo.endDate | date:"MMM dd, yyyy"}}</span>
-          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-model='dateInfo.dateSelection'>
+          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-change='dateInfo.setCurrentDate()' ng-model='dateInfo.dateSelection'>
         </form>
 
       </div>

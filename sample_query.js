@@ -1,4 +1,4 @@
-{
+var rawData = {
   "query": {
     "count": 252,
     "created": "2016-03-29T13:10:07Z",
