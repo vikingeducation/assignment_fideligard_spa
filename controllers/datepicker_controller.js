@@ -9,7 +9,7 @@ fideligard.controller('DatePickerCtrl', ['$scope', function($scope) {
 
   $scope.msToString = function(ms) {
     var d = new Date();
-    d.setTime(ms)
+    d.setTime(ms);
     // $scope.date = ms;
     // return d; // '2014-03-04'
     $scope.dateString = d;
@@ -23,14 +23,14 @@ fideligard.controller('DatePickerCtrl', ['$scope', function($scope) {
     var d = new Date(string);
     $scope.date = d.getTime();
     // return d.getTime();
-  }
+  };
 
 
 
   $scope.inputDate = function() {
     var d = new Date();
-    return d.setTime($scope.date)
-  }
+    return d.setTime($scope.date);
+  };
 
 
 

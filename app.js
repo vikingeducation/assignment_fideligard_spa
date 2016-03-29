@@ -5,20 +5,29 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-  .state('dashboard', 
-    { url: '',
+  .state('container',
+    { url: '/',
       templateUrl: 'dashboard.html',
-      controller: 'DashboardCtrl'
-    })
-  .state('stocks',
-    { url: '/stocks',
-      templateUrl: 'templates/stocks.html',
-      controller: 'StocksCtrl'
-    })
+      controller: 'DashboardCtrl',
+  })
+  .state('container.content', {
+    url: '',
+    views: {
+      'datepicker': {
+        templateUrl: 'templates/datepicker.html',
+        controller: 'DatePickerCtrl'
+      },
+      'stocks': {
+        templateUrl: 'templates/stocks.html',
+        controller: 'StocksCtrl'
+      }
+    }
+  });
 
 
 
-})
+
+});
 
 
 
