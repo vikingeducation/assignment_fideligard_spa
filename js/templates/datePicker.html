@@ -4,7 +4,7 @@
       <span class="pull-left">{{startDateMs * 1000 | date: mediumDate: '+0000'}}</span>
       <span class="pull-right">{{endDateMs * 1000 | date: mediumDate: '+0000'}}</span>
     </div>
-    <input type="range" min='{{startDateMs}}' max='{{endDateMs}}' value='{{startDateMs}}' step="{{ (endDateMs - startDateMs) / 365 }}" ng-model="date.date">
-    <div style="margin-left: {{ (date.date - startDateMs)/((endDateMs - startDateMs) / 365) / 3.65 }}%">{{ date.date * 1000 | date: mediumDate: '+0000' }}</div>
+    <input type="range" min='{{startDateMs}}' max='{{endDateMs}}' value='{{startDateMs}}' step="{{ (endDateMs - startDateMs) / 365 }}" ng-model="date.dateMs">
+    <div style="margin-left: {{ (date.dateMs - startDateMs)/((endDateMs - startDateMs) / 365) / 3.65 }}%">{{ date.dateMs * 1000 | date: mediumDate: '+0000' }}</div>
   </div>
 </div>

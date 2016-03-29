@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-xs-11 section-border">
     <h1>Stocks</h1>
-    <div>{{ date.date * 1000 | date: mediumDate: '+0000' }}</div>
+    <div>{{ date.dateMs * 1000 | date: 'yyyy-MM-dd': '+0000' }}</div>
+    <div>{{ date.properDate() }}</div>
     <table class="table">
       <thead>
         <tr>
@@ -14,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="(symbol, data) in stockData">
+        <tr ng-repeat="(symbol, data) in stockData[]">
           <td>{{ symbol }}</td>
           <td>{{  }}</td>
           <td></td>
