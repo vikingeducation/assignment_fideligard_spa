@@ -1,8 +1,8 @@
-var stocks = angular.module( 'Stocks', ['ui-router']);
+var financialApp = angular.module( 'financialApp', ['ui.router']);
 
 
-store.config(function($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise("/stocks");
+financialApp.config(function($stateProvider, $urlRouterProvider){
+  $urlRouterProvider.otherwise("portfolio");
 
   $stateProvider
 
@@ -20,14 +20,14 @@ store.config(function($stateProvider, $urlRouterProvider){
       controller: 'StocksCtrl'
     })
 
-  .state('stocks.portfolio',
+  .state('stocks.trading',
     {
       url: "/trading",
       templateUrl: "templates/trading.html",
       controller: 'StocksCtrl'
     })
 
-  .state('stocks.portfolio',
+  .state('stocks.transactions',
     {
       url: "/transactions",
       templateUrl: "templates/transactions.html",

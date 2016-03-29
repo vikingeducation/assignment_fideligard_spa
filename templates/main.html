@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="stocks"> Fideligard Historical Portfolio Simulator</a>
+    </div>
+  </div>
+</nav>
+<div class="containter">
+  <div class="row">
+    <div class="col-xs-4">
+      <!-- stock index -->
+    </div>
+    <div class="col-xs-8">
+      <!-- date picker -->
+      <md-slider ng-model="selectedDate" min="0" max="100" step="1"></md-slider>
+      <div ui-view>
+      </div>
+    </div>
+  </div>
+</div>
