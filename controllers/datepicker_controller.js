@@ -8,6 +8,7 @@ fideligard.controller('DatePickerCtrl', ['$scope', 'DatePickerService', function
     d.setTime(ms);
     $scope.dateString = d;
     DatePickerService.dateString = $scope.dateString;
+    console.log("dateString in service: " + DatePickerService.dateString)
   };
 
 
@@ -19,6 +20,7 @@ fideligard.controller('DatePickerCtrl', ['$scope', 'DatePickerService', function
       var d = new Date(string);
       $scope.date = d.getTime();
       DatePickerService.date = $scope.date;
+      console.log("date in service: " + DatePickerService.date)
     }
   };
 

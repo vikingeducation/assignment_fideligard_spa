@@ -1,5 +1,20 @@
 <h3>Stocks</h3>
 
-<div ng-repeat="stocks in stocks">
-  <stock></stock>
-</div>
+<!-- <h3>Here be stocks: {{stocks}}</h3> -->
+
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="st in stocks" stock-row stock="st" stock-date="dateString">
+    </tr>
+  </tbody>
+</table>

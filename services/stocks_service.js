@@ -5,6 +5,9 @@ fideligard.factory('StocksService', function() {
   var obj = {};
 
 
+  var stockSymbols = ['LULU', 'DOW', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP']
+
+
 
   obj.singleStockOneYear = function() {
     var daily_data = raw_data["query"]["results"]["quote"]
@@ -12,8 +15,8 @@ fideligard.factory('StocksService', function() {
     for (var i = 0; i < daily_data.length; i++) {
       if (daily_data[i]["Date"]) {
         var date = daily_data[i]["Date"];
-        var data = daily_data[i]["Close"];
-        results[date] = Number(data);
+        var close = daily_data[i]["Close"];
+        results[date] = Number(close);
       }
     }
     return results;

@@ -1,7 +1,12 @@
-fideligard.directive('stock', function() {
+fideligard.directive('stockRow', function() {
   return {
     templateUrl: 'directives/templates/stockDirective.html',
-    restrict: 'E',
-    scope: {}
+    restrict: 'AE',
+    scope: // true
+    {
+      stock: "=",
+      stockDate: "=",
+      stockData: "="
+    }
   }
 });

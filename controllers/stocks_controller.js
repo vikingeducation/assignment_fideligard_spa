@@ -1,11 +1,16 @@
-fideligard.controller('StocksCtrl', ['$scope', 'StocksService', function($scope, StocksService) {
+fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerService', function($scope, StocksService, DatePickerService) {
 
 
-  $scope.singleStock = StocksService.singleStockOneYear();
+  $scope.stocks = [StocksService.singleStockOneYear()];
 
-  // $scope.singleStockSingleDay = singleStock[]
+  $scope.dateString = DatePickerService.dateString;
 
-  console.log($scope.singleStock)
+  $scope.$watch(function() {
+      return DatePickerService.dateString
+    }, 
+    function(newValue, oldValue) {
+      $scope.dateString = newValue;
+    })
 
 
 }]);
