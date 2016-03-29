@@ -1,6 +1,29 @@
 <div class="row">
   <div class="col-xs-11 section-border">
     <h1>Stocks</h1>
-
+    {{ hi }}
+    {{ stockData }}
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(symbol, data) in stockData">
+          <td>{{ symbol }}</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
