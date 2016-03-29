@@ -8,7 +8,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="form-group pull-right">
-          <input id="filter" type="text" name="filter" class="form-control" placeholder="Filter">
+          <input id="filter" type="text" name="filter" class="form-control" placeholder="Filter" ng-model="symbolFilter">
         </div>
         <h4>Stocks</h4>
       </div>
@@ -23,15 +23,7 @@
           <th>Trade</th>
         </thead>
         <!-- <stock-display stocks="stocks" diffs="stockDifference"></stock-display> -->
-        <tr ng-repeat="(stock, values) in stocks">
-          <td><strong>{{stock}}</strong></td>
-          <td>{{closeFor(values) | currency}}</td>
-          <!-- <stock-display difference="stockDifference(values, 1)"> -->
-          <td>{{stockDifference(values, 1) | currency}}</td>
-          <td>{{stockDifference(values, 7) | currency}}</td>
-          <td>{{stockDifference(values, 30) | currency}}</td>
-          <td><a>Trade</a></td>
-        </tr>
+        <tr stock-display stock='stock' values='values' current-date="currentDate" ng-repeat="(stock, values) in stocks | stockFilter: symbolFilter">
       </table>
     </div>
   </div>

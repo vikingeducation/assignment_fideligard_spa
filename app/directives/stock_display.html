@@ -1,4 +1,6 @@
-
-
-<!-- <td>some stuff here</td> -->
-<td>{{ difference }}</td>
+<td><strong>{{stock}}</strong></td>
+<td>{{closer | currency}}</td>
+<td ng-class="oneDay < 0 && 'loss' || oneDay > 0 && 'gain'">{{oneDay | currency}}</td>
+<td ng-class="sevenDays < 0 && 'loss' || sevenDays > 0 && 'gain'">{{sevenDays | currency}}</td>
+<td ng-class="thirtyDays < 0 && 'loss' || thirtyDays > 0 && 'gain'">{{thirtyDays | currency}}</td>
+<td><a>Trade</a></td>
