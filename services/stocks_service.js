@@ -10,19 +10,32 @@ fideligard.factory('StocksService', function() {
 
 
   obj.singleStockOneYear = function() {
-    var daily_data = raw_data["query"]["results"]["quote"]
+    var daily_data = raw_data["query"]["results"]["quote"];
+    // var msDay = 86400000;
     var results = {};
-    for (var i = 0; i < daily_data.length; i++) {
-      if (daily_data[i]["Date"]) {
-        var date = daily_data[i]["Date"];
-        var close = daily_data[i]["Close"];
-        results[date] = Number(close);
+    var counter = 0;
+    for (var i = 1388563200000; i < 1420012800000; i+= 86400000) {
+      results[i] = {'symbol': daily_data[0]["Symbol"]};
+      if (daily_data[counter] && daily_data[counter]["Date"]) {
+        var close = daily_data[counter]["Close"];
+        results[i]['price'] = Number(close);
+          if (counter >= 1){
+            results[i]['one_day'] = close - daily_data[counter - 1]["Close"];
+          }
+          if (counter >= 7){
+            results[i]['seven_day'] = close - daily_data[counter - 7]["Close"];
+          }
+          if (counter >=30){
+            results[i]['thirty_day'] = close - daily_data[counter - 30]["Close"];
+          }
       }
+      counter++;
     }
+    console.log(results);
     return results;
-  }
+  };
 
 
 
   return obj;
-})
+});
