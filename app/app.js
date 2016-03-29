@@ -26,7 +26,7 @@ stocks.config(function($stateProvider, $urlRouterProvider) {
  .state('stocks.portfolio', {
     url: '/portfolio',
     controller: 'PortfolioCtrl',
-    template: "<div>Portfolio</div>",
+    templateUrl: "/app/templates/portfolio.html",
  })
 
  .state( 'stocks.trade', {
