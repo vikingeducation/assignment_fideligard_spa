@@ -1,0 +1,29 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Fideligard Historical Portfolio Simulator</a>
+    </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class='padding-top'>
+  <div class="container">
+    <div class="row">
+      
+      <div class="datepicker col-xm-6 col-sm-offset-3" ng-controller="DatePickerCtrl">
+        <md-slider-container>
+            <span>Select a Date</span>
+            <md-slider flex min="1388563200000" max="1420012800000" ng-model="date" aria-label="blue" id="blue-slider" class="md-primary">
+            </md-slider>
+            <md-input-container>
+              <input flex type="date" ng-model="inputDate()" aria-label="blue" aria-controls="blue-slider" value="{{ inputDate() | date: 'yyyy-MM-dd'}}">
+            </md-input-container>
+          </md-slider-container>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -10,29 +10,14 @@
 </head>
 <body ng-cloak>
 
-  <div class="container">
-    <div class="row">
-      
-      <div class="datepicker col-xm-6 col-sm-offset-3" ng-controller="DatePickerCtrl">
-        <md-slider-container>
-            <span>Select a Date</span>
-            <md-slider flex min="0" max="365" ng-model="color.blue" aria-label="blue" id="blue-slider">
-            </md-slider>
-            <md-input-container>
-              <input flex type="number" ng-model="color.blue" aria-label="datepicker">
-            </md-input-container>
-          </md-slider-container>
-      </div>
 
 
-
-    </div>
-  </div>
+  <ui-view></ui-view>
 
 
   
   <!-- Angular Material requires Angular.js Libraries -->
-  /<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
@@ -50,6 +35,8 @@
   <!-- our application files  -->
   <script type="text/javascript" src="app.js"></script>
   <script type="text/javascript" src="controllers/datepicker_controller.js"></script>
+  <script type="text/javascript" src="controllers/dashboard_controller.js"></script>
+  <script type="text/javascript" src="controllers/stocks_controller.js"></script>
   
 </body>
 </html>
