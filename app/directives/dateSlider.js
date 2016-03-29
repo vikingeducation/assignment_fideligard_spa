@@ -1,5 +1,7 @@
 stocks.directive('dateSlider', [ '$timeout', function($timeout) {
 
+  console.log('slider directive');
+
   function date_by_subtracting_days(date, days) {
     return new Date(
         date.getFullYear(),

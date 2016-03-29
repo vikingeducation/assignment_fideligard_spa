@@ -22,9 +22,11 @@
           <th>30d</th>
           <th>Trade</th>
         </thead>
+        <!-- <stock-display stocks="stocks" diffs="stockDifference"></stock-display> -->
         <tr ng-repeat="(stock, values) in stocks">
           <td><strong>{{stock}}</strong></td>
           <td>{{closeFor(values) | currency}}</td>
+          <!-- <stock-display difference="stockDifference(values, 1)"> -->
           <td>{{stockDifference(values, 1) | currency}}</td>
           <td>{{stockDifference(values, 7) | currency}}</td>
           <td>{{stockDifference(values, 30) | currency}}</td>

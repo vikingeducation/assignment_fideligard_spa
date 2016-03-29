@@ -11,18 +11,37 @@ stocks.controller('StocksCtrl', ['$http', '$scope', '$stateParams', 'PortfolioSe
         date.getMilliseconds()
         );
   }
-  // PortfolioService.initializeHistoricalData();
-  //
-  //
+
+  $scope.currentSymbols =  PortfolioService.getSymbols();
+  console.log( $scope.currentSymbols );
+
   $scope.currentDate = new Date();
   $scope.stocks = {};
-  $scope.stocks.ORCL = {};
-
-  $http.get('/stock_data.json').then(function(response) {
-    response.data.dataset.data.forEach(function(daily) {
-      $scope.stocks.ORCL[daily[0]] = daily[4];
+  $scope.currentSymbols.forEach( function(sym){
+    $scope.stocks[sym] = {};
+    var symbolFileString = '/' + sym + '_data.json'
+    $http.get(symbolFileString).then(function(response) {
+      response.data.dataset.data.forEach(function(daily) {
+        $scope.stocks[sym][daily[0]] = daily[4];
+      });
     });
   });
+
+
+    $http.get('/GE_data.json').then(function(response) {
+        console.log('test here');
+        console.log(response);
+    });
+
+    $http.get('/AAPL_data.json').then(function(response) {
+        console.log('test here');
+        console.log(response);
+    });
+
+  //
+  // $scope.stocks.ORCL = {};
+  console.log($scope.stocks);
+
 
   $scope.stockDifference = function(values, daysAgo) {
     return $scope.closeFor(values,0) - $scope.closeFor(values,daysAgo);

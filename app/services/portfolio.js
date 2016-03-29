@@ -3,7 +3,8 @@ stocks.factory('PortfolioService', ['$http', function($http) {
   var PortfolioService = {};
   var stocks = [];
   var testLength = 3;
-  var testSymbols = ['MSFT', 'INTC', 'ORCL'];
+  var testSymbols = ['MSFT', 'INTC', 'AAPL', 'ORCL', 'MMM', 
+          'NFLX', 'NVDA', 'TSLA', 'BIDU', 'CSCO', 'EBAY', 'GOOG' ];
   var testPrice = [ 30.01, 18.22, 21.31];
   var testNames = ['Microsoft', 'Intel', 'Oracle'];
   var historicalData = {};
@@ -22,6 +23,10 @@ stocks.factory('PortfolioService', ['$http', function($http) {
   PortfolioService.getStocks = function() {
     return stocks;
   };
+
+  PortfolioService.getSymbols = function() {
+    return testSymbols;
+  };  
 
   PortfolioService.setupPortfolio = function() {
     if (stocks.length === 0) {
@@ -65,17 +70,17 @@ stocks.factory('PortfolioService', ['$http', function($http) {
    //  var queryString = urlString + optionsString;
    //  console.log(queryString);
 
-    var queryString = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json"
-    var queryObj = {
-      method: "GET",
-      url: queryString
-    };
+   //  var queryString = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json"
+   //  var queryObj = {
+   //    method: "GET",
+   //    url: queryString
+   //  };
 
-   $http(queryObj)
-    .then(function(response) {
-        console.log('got response');
-        console.log(response);
-    });
+   // $http(queryObj)
+   //  .then(function(response) {
+   //      console.log('got response');
+   //      console.log(response);
+   //  });
 
     console.log(historicalData);
   };
