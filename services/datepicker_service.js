@@ -20,16 +20,15 @@ fideligard.factory('DatePickerService', function() {
   // these are for the datepicker input box, which works in strings:
   picker.dateString = '2014-01-01';
 
-  picker.stringToMs = function(string, formIsValid) {
-    if (formIsValid) {
-      var d = new Date(string);
-      picker.date = d.getTime();
-    }
+  picker.stringToMs = function(string) {
+    var d = new Date(string);
+    picker.date = d.getTime();
+    console.log("picker.date was updated: " + picker.date)
   };
 
 
 
 
-  return picker
+  return picker;
 
 });
