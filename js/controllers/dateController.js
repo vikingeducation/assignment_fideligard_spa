@@ -6,11 +6,13 @@ fideligard.controller('dateCtrl',
      $scope.date = {
        dateMs: $scope.startDateMs,
        properDate: function() {
-         console.log("hello");
-         var dateObj = new Date(Date.UTC($scope.date.dateMs) * 1000);
-         var year = dateObj.getFullYear().toString();
-         var month = (dateObj.getMonth()+1).toString();
-         var day = dateObj.getDate().toString();
+         var dateObj = new Date($scope.date.dateMs * 1000);
+         var year = dateObj.getUTCFullYear().toString();
+         var month = (dateObj.getUTCMonth()+1);
+         var day = dateObj.getUTCDate();
+
+         if (month < 10) month = "0" + month.toString();
+         if (day < 10) day = "0" + day.toString();
          return year + "-" + month + "-" + day;
        }
     };

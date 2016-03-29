@@ -15,7 +15,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="(symbol, data) in stockData[]">
+        <tr ng-repeat="(symbol, data) in stockData[date.properDate()]">
           <td>{{ symbol }}</td>
           <td>{{  }}</td>
           <td></td>
