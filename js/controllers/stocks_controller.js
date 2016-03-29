@@ -11,18 +11,19 @@ financialApp.controller('StocksCtrl', ['$scope', function($scope){
   }
 
   $scope.currentDate = function() {
-    var newDate = new Date( $scope.startDate.getTime() );
-    newDate.setDate( newDate.getDate() + $scope.dateSelection );
+    var start = $scope.startDate.getTime();
+    var selection = $scope.dateSelection * (1000*60*60*24);
+    var newDate = new Date( start + selection );
+    console.log(newDate);
     return newDate;
   }
 
   $scope.dateRange = function() {
-    var newDate = Math.floor( ( $scope.endDate.getTime() - $scope.startDate.getTime() )/(1000*60*60*24));
+    var range = Math.round( ( $scope.endDate.getTime() - $scope.startDate.getTime() ) / (1000*60*60*24) );
 
-    console.log($scope.dateSelection)
-    console.log(newDate)
+    // console.log($scope.dateSelection, range);
 
-    return newDate;
+    return range;
   }
 
 }]);
