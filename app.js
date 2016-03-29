@@ -2,7 +2,7 @@ var fideligard = angular.module('fideligard', ['ui.router', 'ngMaterial']);
 
 fideligard.config(function($stateProvider, $urlRouterProvider) {
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('content');
 
   $stateProvider
   .state('container',
@@ -11,7 +11,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       controller: 'DashboardCtrl',
   })
   .state('container.content', {
-    url: '',
+    url: 'content',
     views: {
       'datepicker': {
         templateUrl: 'templates/datepicker.html',
