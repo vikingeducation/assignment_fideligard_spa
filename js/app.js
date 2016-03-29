@@ -12,7 +12,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
         },
         'datePicker': {
           templateUrl: 'js/templates/datePicker.html',
-          controller: function() {}
+          controller: 'dateCtrl'
         }
       }
     });
