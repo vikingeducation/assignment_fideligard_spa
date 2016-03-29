@@ -1,4 +1,3 @@
-
 stocks.factory('PortfolioService', ['$http', function($http) {
 
   var PortfolioService = {};
@@ -65,8 +64,6 @@ stocks.factory('PortfolioService', ['$http', function($http) {
    //  console.log(optionsString);
    //  var queryString = urlString + optionsString;
    //  console.log(queryString);
-
-    
 
     var queryString = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json"
     var queryObj = {

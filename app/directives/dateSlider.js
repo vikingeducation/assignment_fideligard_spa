@@ -14,13 +14,14 @@ stocks.directive('dateSlider', [ '$timeout', function($timeout) {
 
   var def = {
     restrict: 'E',
+    scope: {
+      currentDate: '='
+    },
     templateUrl: 'app/directives/dateSlider.html',
     link : function(scope, element, attrs) {
       // scope.currentDate = new Date();
       scope.sliderValue = 0;
       scope.$watch('sliderValue', function(newValue) {
-        console.log(newValue);
-        console.log(scope.currentDate);
         scope.currentDate = date_by_subtracting_days(new Date(), +newValue);
       });
     }

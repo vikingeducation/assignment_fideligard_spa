@@ -22,21 +22,21 @@
           <th>30d</th>
           <th>Trade</th>
         </thead>
-        <tr ng-repeat="stock in stocks">
-          <td><strong>{{stock.symbol}}</strong></td>
-          <td>{{stock.price}}</td>
-          <td>+$1.45</td>
-          <td>-$2.12</td>
-          <td>+$15.80</td>
+        <tr ng-repeat="(stock, values) in stocks">
+          <td><strong>{{stock}}</strong></td>
+          <td>{{closeFor(values) | currency}}</td>
+          <td>{{stockDifference(values, 1) | currency}}</td>
+          <td>{{stockDifference(values, 7) | currency}}</td>
+          <td>{{stockDifference(values, 30) | currency}}</td>
           <td><a>Trade</a></td>
         </tr>
       </table>
     </div>
   </div>
 
-
+  {{currentDate | date}}
   <div class="col-sm-6">
-    <date-slider>
+    <date-slider current-date="currentDate">
     <ui-view></ui-view>
   </div>
 
