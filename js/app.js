@@ -11,8 +11,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
           controller: 'stockCtrl'
         },
         'datePicker': {
-          templateUrl: 'js/templates/datePicker.html',
-          controller: 'dateCtrl'
+          templateUrl: 'js/templates/datePicker.html'
         }
       }
     });
