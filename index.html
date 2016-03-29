@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="store">
+<html ng-app='fideligard'>
   <head>
     <title>The Viking Store</title>
 
     <!-- jQuery -->
     <script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
     <!-- AngularJS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.3/angular.min.js"></script>
     <!-- ui-router -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.18/angular-ui-router.min.js"></script>
 
@@ -36,11 +36,19 @@
       </div>
     </nav>
 
-    <!-- <div ui-view="dashboard">
-      <div ui-view="stocks"></div>
-      <div ui-view="datePicker"></div>
-    </div> -->
-    
+    <div class="container">
+      <div class="row">
+
+        <div class='col-xs-4'>
+          <div ui-view="stocks"></div>
+        </div>
+
+        <div class="col-xs-8">
+          <div ui-view="datePicker"></div>
+        </div>
+      </div>
+    </div>
+
     <script src="js/app.js"></script>
 
   </body>

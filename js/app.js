@@ -5,16 +5,15 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('dashboard',{
       url: '',
-      templateUrl: 'js/templates/stocks.html'
-      // views: {
-      //   'stocks': {
-      //     templateUrl: 'js/templates/stocks.html',
-      //     controller: function() {}
-      //   },
-      //   'datePicker': {
-      //     templateUrl: 'js/templates/datePicker.html',
-      //     controller: function() {}
-      //   }
-      // }
+      views: {
+        'stocks': {
+          templateUrl: 'js/templates/stocks.html',
+          controller: function() {}
+        },
+        'datePicker': {
+          templateUrl: 'js/templates/datePicker.html',
+          controller: function() {}
+        }
+      }
     });
 });
