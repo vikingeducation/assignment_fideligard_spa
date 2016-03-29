@@ -19,28 +19,27 @@ Top level
   main area
 
 Routing
-  3 views in each state:
-  Trading state
-    Top
-      date picker
-    Left
-      stock data
-    Right
-      trading
-  Transaction state
-    Top
-      date picker
-    Left
-      stock data
-    Right
-      transactions
-  Portfolio state
-    Top
-      date picker
-    Left
-      stock data
-    Right
-      portfolio
+  Top level
+    navbar
+    ui-view
+      Trading state
+        Top
+          date picker
+        Left
+          stock data
+        Right
+          ui-view
+            trading
+            transactions
+            portfolio
+
+Services
+  StockService
+  DatePickerService
+  TradingService
+
+Directives
+  
 
 Top Panel View - 'DatePickerCtrl'
   Date Picker Widget
@@ -61,7 +60,7 @@ Left Panel View - 'DataCtrl'
     refactor for skinny controller
 
 Right Panel View - 'MainPanelCtrl'
-  Trade Widget
+  Trade Widget - controller?
     Add route for "trade"
     Clicking "Trade" in stocks widget opens it up
     Trade form w/ place order button
@@ -72,7 +71,7 @@ Right Panel View - 'MainPanelCtrl'
     Keep track of the transation when submitted
     Watch out for "time travel"
 
-  Transactions Widget
+  Transactions Widget - controller?
     Add route for transactions
     Allow switching trade/transactions w/ dropdown
     Table of transactions
@@ -80,7 +79,7 @@ Right Panel View - 'MainPanelCtrl'
     Sorting of transactions
     Seeding transactions
 
-  Portfolio Widget
+  Portfolio Widget - controller?
     Add route
     2 tables
     portfolio table - all the info
