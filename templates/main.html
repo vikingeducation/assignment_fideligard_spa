@@ -19,10 +19,10 @@
       <div class="panel panel-default">
 
         <form id="slider-holder">
-          <span class="pull-left">{{ startDate | date:"MMM dd, yyyy"}}</span>
-          <span class="text-center">{{ currentDate() | date:"MMM dd, yyyy"}}</span>
-          <span class="pull-right">{{ endDate | date:"MMM dd, yyyy"}}</span>
-          <input type="range" step="1" min="0" max="{{ dateRange() }}" id="date-slider" ng-model='dateSelection'>
+          <span class="pull-left">{{ dateInfo.startDate | date:"MMM dd, yyyy"}}</span>
+          <span class="text-center">{{ dateInfo.currentDate() | date:"MMM dd, yyyy"}}</span>
+          <span class="pull-right">{{ dateInfo.endDate | date:"MMM dd, yyyy"}}</span>
+          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-model='dateInfo.dateSelection'>
         </form>
 
       </div>
