@@ -1,0 +1,75 @@
+query for AAPL stock through Yahoo API:
+
+http://query.yahooapis.com/v1/public/yql?q=
+select * from   yahoo.finance.historicaldata
+         where  symbol    = "AAPL"
+         and    startDate = "2013-09-11"
+         and    endDate   = "2014-02-11"
+&format=json
+&diagnostics=true
+&env=store://datatables.org/alltableswithkeys
+&callback=
+
+
+
+things to keep in mind:
+- some stocks publish close prices on the weekends and holidays while others do not
+
+===========
+DATEPICKER
+
+- 
+
+===========
+SCRIPTS
+
+<!-- Angular -->
+<script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js" ></script>
+
+<!-- ui-router -->
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+<!-- jQuery -->
+<script   src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+
+
+<!-- minified angular-ui-bootstrap -->
+https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.5/ui-bootstrap-tpls.min.js
+
+<!-- bootstrap styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+
+===========
+CONTROLLERS
+
+StocksCtrl
+TradeCtrl
+PortfolioCtrl
+
+
+
+===========
+ROUTES
+
+'index' {
+  views: {
+    'stocks':...
+    'datePicker':...
+    '':...
+  }
+}
+
+stocks: index
+trade: create
+portfolio
+
+
+===========
+DIRECTIVES
+
+portfolioRow
+stockRow
+transactionRow
+
+

@@ -1,0 +1,55 @@
+<html lang="en" ng-app="fideligard">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Angular Material style sheet -->
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+
+<!-- bootstrap styles -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+</head>
+<body ng-cloak>
+
+  <div class="container">
+    <div class="row">
+      
+      <div class="datepicker col-xm-6 col-sm-offset-3" ng-controller="DatePickerCtrl">
+        <md-slider-container>
+            <span>Select a Date</span>
+            <md-slider flex min="0" max="365" ng-model="color.blue" aria-label="blue" id="blue-slider">
+            </md-slider>
+            <md-input-container>
+              <input flex type="number" ng-model="color.blue" aria-label="datepicker">
+            </md-input-container>
+          </md-slider-container>
+      </div>
+
+
+
+    </div>
+  </div>
+
+
+  
+  <!-- Angular Material requires Angular.js Libraries -->
+  /<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+
+
+  <!-- minified angular-ui-bootstrap -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.5/ui-bootstrap-tpls.min.js"></script>
+
+  <!-- ui-router -->
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
+
+  <!-- Angular Material Library -->
+  <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+  
+  <!-- our application files  -->
+  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="controllers/datepicker_controller.js"></script>
+  
+</body>
+</html>
