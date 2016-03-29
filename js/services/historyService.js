@@ -5,6 +5,7 @@ fideligard.factory('historyService',
       var _date = {};
 
       var parseData = (function() {
+
         var stockData = stockService.getStockData();
 
         for(var company in stockData) {
@@ -20,4 +21,11 @@ fideligard.factory('historyService',
 
       })();
 
+      var getHistoryData = function() {
+        return _date;
+      };
+
+      return {
+        getHistoryData: getHistoryData
+      };
 }]);

@@ -1,6 +1,7 @@
 fideligard.controller('stockCtrl',
-  ['$scope', 'stockService',
-   function($scope, stockService) {
-     $scope.stockData = stockService.getStockData();
+  ['$scope', 'historyService',
+   function($scope, historyService) {
+     $scope.stockData = historyService.getHistoryData();
+     console.log($scope.stockData);
    }
 ]);
