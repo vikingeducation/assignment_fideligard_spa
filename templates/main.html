@@ -5,16 +5,33 @@
     </div>
   </div>
 </nav>
-<div class="containter">
+
+<div class="container">
   <div class="row">
+
     <div class="col-xs-4">
-      <!-- stock index -->
-    </div>
-    <div class="col-xs-8">
-      <!-- date picker -->
-      <md-slider ng-model="selectedDate" min="0" max="100" step="1"></md-slider>
-      <div ui-view>
+      <div class="panel panel-default">
+        Stock Index
       </div>
     </div>
+
+    <div class="col-xs-8">
+      <div class="panel panel-default">
+
+        <form id="slider-holder">
+          <span class="pull-left">start</span>
+          <span class="text-center">current</span>
+          <span class="pull-right">end</span>
+          <input type="range" name="dates" min="0" max="10" id="date-slider">
+        </form>
+
+      </div>
+
+      <div class="panel panel-default">
+        <div ui-view></div>
+      </div>
+
+    </div>
+
   </div>
 </div>
