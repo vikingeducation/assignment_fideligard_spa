@@ -8,8 +8,8 @@ API
     http://query.yahooapis.com/v1/public/yql?q=
     select * from   yahoo.finance.historicaldata
              where  symbol    = "AAPL"
-             and    startDate = "2013-09-11"
-             and    endDate   = "2014-02-11"
+             and    startDate = "2014-01-01"
+             and    endDate   = "2014-12-31"
     &format=json
     &diagnostics=true
     &env=store://datatables.org/alltableswithkeys
