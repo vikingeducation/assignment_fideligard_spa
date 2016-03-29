@@ -4,16 +4,20 @@ fideligard.factory('historyService',
 
       var _date = {};
 
-      {
-        "2015-01-01": {
-                          GOOG: {},
+      var parseData = (function() {
+        var stockData = stockService.getStockData();
 
-                      },
+        for(var company in stockData) {
+          for(var i = 0; i < stockData[company].length; i++) {
+            var comp = stockData[company][i];
+            _date[comp.Date] = _date[comp.Date] || {};
+            _date[comp.Date][company] = {
+              volume: comp.Volume,
+              closing: comp.Close
+            };
+          }
+        }
 
-      }
+      })();
 
-      var getPrice(date) {
-        parse date
-        return _date[]
-      }
 }]);
