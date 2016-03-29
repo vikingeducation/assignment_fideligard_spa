@@ -8,7 +8,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'stocks': {
           templateUrl: 'js/templates/stocks.html',
-          controller: function() {}
+          controller: 'stockCtrl'
         },
         'datePicker': {
           templateUrl: 'js/templates/datePicker.html',
