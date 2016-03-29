@@ -12,6 +12,7 @@ fideligard.factory('stockService',
         .then(
           function(response){
             _rawData[symbol] = response;
+            _stocks[symbol] = _rawData[symbol].data.query.results.quote;
           },
           function(data) {
             console.log('error' + 'company name ' + symbol);
@@ -22,13 +23,8 @@ fideligard.factory('stockService',
       var getAll = (function() {
         for (var i = 0; i < _symbols.length; i++) {
           getCompany(_symbols[i]);
-          parseData(symbol);
         }
       })();
-
-      var parseData = function(symbol) {
-        _stocks[symbol] = _rawData[symbol].data.query.results.quote;
-      };
 
       var getStockData = function() {
         return _stocks;
