@@ -1,14 +1,13 @@
+stocks.factory('PortfolioService', function() {
 
-stocks.factory('portfolioService', function() {
-  
-  var obj = {};
+  var PortfolioService = {};
   var stocks = [];
   var testLength = 3;
   var testSymbols = ['MSFT', 'INTC', 'ORCL'];
   var testPrice = [ 30.01, 18.22, 21.31];
   var testNames = ['Microsoft', 'Intel', 'Oracle'];
 
-  obj.createStock = function(index) {
+  PortfolioService.createStock = function(index) {
     var stock = {};
     stock.symbol = testSymbols[index];
     stock.name = testNames[index];
@@ -19,18 +18,20 @@ stocks.factory('portfolioService', function() {
     stocks.push( stock );
   };
 
-  obj.getStocks = function() {
+  PortfolioService.getStocks = function() {
     return stocks;
   };
 
-  obj.setupPortfolio = function() {
+  PortfolioService.setupPortfolio = function() {
     if (stocks.length === 0) {
       for(var i = 0; i < testLength; i++) {
-        obj.createStock(i);
-      };
-    };
+        PortfolioService.createStock(i);
+      }
+    }
   };
 
-  return obj;
+  PortfolioService.setupPortfolio();
+
+  return PortfolioService;
 });
 

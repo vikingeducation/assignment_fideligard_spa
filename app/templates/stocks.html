@@ -1,42 +1,44 @@
-<h1>Stocks</h1>
+<h1>Fideligard Historical Portfolio Simulator</h1>
 
 <div class="row">
+
+  <!-- The Rightside Stock Panel -->
+
   <div class="col-sm-6">
-    <ul>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-      <li>tock</li>
-    </ul>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="form-group pull-right">
+          <input id="filter" type="text" name="filter" class="form-control" placeholder="Filter">
+        </div>
+        <h4>Stocks</h4>
+      </div>
+
+      <table class="table">
+        <thead>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade</th>
+        </thead>
+        <tr ng-repeat="stock in stocks">
+          <td><strong>{{stock.symbol}}</strong></td>
+          <td>{{stock.price}}</td>
+          <td>+$1.45</td>
+          <td>-$2.12</td>
+          <td>+$15.80</td>
+          <td><a>Trade</a></td>
+        </tr>
+      </table>
+    </div>
   </div>
+
+
   <div class="col-sm-6">
+    <date-slider>
     <ui-view></ui-view>
   </div>
+
 </div>
 
