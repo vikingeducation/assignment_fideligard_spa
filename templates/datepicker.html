@@ -5,8 +5,10 @@
         <md-slider flex min="1388563200000" max="1420012800000" ng-model="date" aria-label="blue" id="blue-slider" class="md-primary" ng-mouseup="msToString(date)">
         </md-slider>
         <md-input-container>
-          <input flex type="date" ng-model="dateString" aria-label="blue" aria-controls="blue-slider" value="{{ dateString | date: 'yyyy-MM-dd' }}">
-          <button ng-click="stringToMs(dateString)">Set Date</button>
+          <form name='stringInput'>
+            <input flex type="date" ng-model="dateString" aria-label="blue" aria-controls="blue-slider" value="{{ dateString | date: 'yyyy-MM-dd' }}" ng-pattern="/2014\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/">
+            <button ng-click="stringToMs(dateString, stringInput.$valid)">Set Date</button>
+          </form>
         </md-input-container>
       </md-slider-container>
   </div>
