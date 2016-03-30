@@ -38,8 +38,13 @@
           <input type="submit" value="Trade" class="btn btn-block btn-primary" style="margin: 10px 0;">
         </form>
       </div>
-      <div class="col-xs">
+      <div class="col-xs-6">
+        <h3><strong>Cash Available</strong></h3>
+        <p><strong>{{ bankroll | currency }}</strong></p>
 
+        <br>
+        <h3><strong>Order Status</strong></h3>
+        <div style="color: {{ statusColor }}; font-size: 20px">{{ orderStatus() }}</div>
       </div>
 
     </div>

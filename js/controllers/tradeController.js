@@ -1,10 +1,12 @@
 fideligard.controller('tradeCtrl',
   [
-    '$scope', '$stateParams', 'tradeService',
-      function($scope, $stateParams, tradeService) {
+    '$scope', '$stateParams', 'tradeService', 'userService',
+      function($scope, $stateParams, tradeService, userService) {
         $scope.company = $stateParams.company;
         $scope.date = $stateParams.date;
         $scope.data = $stateParams.data;
+        $scope.bankroll = userService.getBankroll();
+        $scope.statusColor = 'red';
 
         $scope.calculateCost = function(quantity) {
           return tradeService.calculateCost(quantity, $scope.data.close);
@@ -12,6 +14,16 @@ fideligard.controller('tradeCtrl',
 
         $scope.checkQuantity = function(quantity) {
           return tradeService.checkQuantity(quantity, $scope.data.volume);
+        };
+
+        $scope.orderStatus = function() {
+          if ($scope.tradeForm.$valid) {
+            $scope.statusColor = 'green';
+            return 'VALID';
+          } else {
+            $scope.statusColor = 'red';
+            return 'INVALID';
+          }
         };
       }
   ]);
