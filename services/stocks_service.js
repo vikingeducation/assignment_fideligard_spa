@@ -60,30 +60,54 @@ fideligard.factory('StocksService', ['$http', function($http) {
 
 
 
-  obj.constructStocks = function(data) {
-    var singleStock = this.singleStockOneYear(data);
-    stocks.push(singleStock);
+  // obj.constructStocks = function(data) {
+  //   var singleStock = this.singleStockOneYear(data);
+  //   stocks.push(singleStock);
+  //   return stocks;
+  // }
+
+
+  // returns an arary of promises
+  obj.getCalls = function() {
+    var promises = [];
+    var prefix = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
+    var postfix = "%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
+
+    for (var i = 0; i < stockSymbols.length; i++) {
+      promises.push($http.get(prefix + stockSymbols[i] + postfix))
+    }
+
+    return promises;
+  }
+
+
+  obj.constructStocks = function() {
+    var promises = this.getCalls();
+    console.log(promises)
+    console.log(promises.length)
+    var that = this;
+
+    for (var i = 0; i < promises.length; i++ ) {
+      promises[i].then(function(data){
+        console.log("API call was successful.")
+        stocks.push(that.singleStockOneYear(data));
+        // console.log($scope.stocks)
+      }, function() {
+        console.log("API call was unsuccessful.");
+      })
+    }
     return stocks;
   }
 
 
-  // returns a promise
-  obj.getCall = function(stockSymbol) {
-    var prefix = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
-    var postfix = "%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
-
-    return $http.get(prefix + stockSymbol + postfix);
-  }
-
-
   // returns promises
-  obj.getStocks = function() {
-    var promises = [];
-    for (var i = 0; i < stockSymbols.length; i++) {
-      promises.push(this.getCall(stockSymbols[i]));
-    }
-    return promises;
-  }
+  // obj.getStocks = function() {
+  //   var promises = [];
+  //   for (var i = 0; i < stockSymbols.length; i++) {
+  //     promises.push(this.getCall(stockSymbols[i]));
+  //   }
+  //   return promises;
+  // }
 
 
   return obj;
