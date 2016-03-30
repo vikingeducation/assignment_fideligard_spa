@@ -13,23 +13,31 @@ fideligard.factory('StocksService', function() {
     var daily_data = raw_data["query"]["results"]["quote"];
     // var msDay = 86400000;
     var results = {};
-    var counter = 0;
-    for (var i = 1388563200000; i < 1420012800000; i+= 86400000) {
+    var counter = 0;                 
+    for (var i = 1419984000000 ; i >= 1388534400000; i-= 86400000) {
+      // add a symbol for every single day
       results[i] = {'symbol': daily_data[0]["Symbol"]};
-      if (daily_data[counter] && daily_data[counter]["Date"]) {
-        var close = daily_data[counter]["Close"];
-        results[i]['price'] = Number(close);
-          if (counter >= 1){
-            results[i]['one_day'] = close - daily_data[counter - 1]["Close"];
-          }
-          if (counter >= 7){
-            results[i]['seven_day'] = close - daily_data[counter - 7]["Close"];
-          }
-          if (counter >=30){
-            results[i]['thirty_day'] = close - daily_data[counter - 30]["Close"];
-          }
+
+      // check if we've run out of days
+      if (daily_data[counter]) {
+
+        var msFromData = new Date(daily_data[counter]["Date"]).getTime();
+        if (Number(msFromData) == Number(i)) {
+          // create object
+          var close = daily_data[counter]["Close"];
+          results[i]['price'] = Number(close);
+          // if (counter >= 1){
+          //   results[i]['one_day'] = close - daily_data[counter - 1]["Close"];
+          // }
+          // if (counter >= 7){
+          //   results[i]['seven_day'] = close - daily_data[counter - 7]["Close"];
+          // }
+          // if (counter >=30){
+          //   results[i]['thirty_day'] = close - daily_data[counter - 30]["Close"];
+          // }
+        counter++;
+        }
       }
-      counter++;
     }
     console.log(results);
     return results;
