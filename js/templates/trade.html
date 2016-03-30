@@ -20,7 +20,7 @@
             </tr>
             <tr>
               <td><strong>Quantity </strong></td>
-              <td><input name="quantity" type="text" class="form-control" placeholder="Quantity" ng-model="quantity" required ng-pattern="/^\d*$/" ng-required="checkQuantity(quantity)"></td>
+              <td><input id="quantity" name="quantity" type="number" class="form-control" placeholder="Quantity" ng-model="quantity" ng-pattern="/^\d+$/" ng-max="data.volume" required></td>
             </tr>
             <tr>
               <td><strong>Date: </strong></td>

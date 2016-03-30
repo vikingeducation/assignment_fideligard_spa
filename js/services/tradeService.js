@@ -5,11 +5,13 @@ fideligard.factory('tradeService', function(){
   };
 
   var checkQuantity = function(quantity, volume) {
+    quantity = parseInt(quantity);
+    volume = parseInt(volume);
     if (quantity < 1 || quantity > volume) {
-      console.log("this is false");
+      console.log("should fail");
       return false;
     } else {
-      console.log("this is true");
+      console.log("should return");
       return true;
     }
 
