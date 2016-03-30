@@ -10,44 +10,49 @@ fideligard.factory('StocksService', function() {
 
 
   obj.singleStockOneYear = function() {
-    var backwards_data = raw_data["query"]["results"]["quote"];
-    console.log(backwards_data.length)
     // data comes in reverse chronological order
+    var backwards_data = raw_data["query"]["results"]["quote"];
     var daily_data = backwards_data.reverse();
-    console.log(daily_data.length)
 
-    // var msDay = 86400000;
     var results = {};
-    var counter = 0;        
-    // start: 1388534400000
-    // end: 1419984000000    
-    // end? 1404259200000    
+    var counter = 0;      
+    var dataObject = {};  
+    var previousDayData;
+ 
     for (var i = 1388534400000; i <= 1419984000000; i+= 86400000) {
-      // add a symbol for every single day
-      results[i] = {'symbol': daily_data[0]["Symbol"]};
-
       // check if we've run out of days
       if (daily_data[counter]) {
 
         var msFromData = new Date(daily_data[counter]["Date"]).getTime();
 
-        console.log("msFromDatams: "+ msFromData + "i: " +i)
-        console.log(Number(msFromData) == Number(i))
-
         if (Number(msFromData) == Number(i)) {
-          // create object
+          // create an object for every single day
+          dataObject['symbol'] = daily_data[0]["Symbol"]
+
           var close = daily_data[counter]["Close"];
-          results[i]['price'] = Number(close);
-          // if (counter >= 1){
-          //   results[i]['one_day'] = close - daily_data[counter - 1]["Close"];
-          // }
-          // if (counter >= 7){
-          //   results[i]['seven_day'] = close - daily_data[counter - 7]["Close"];
-          // }
-          // if (counter >=30){
-          //   results[i]['thirty_day'] = close - daily_data[counter - 30]["Close"];
-          // }
-        counter++;
+          dataObject['price'] = Number(close);
+
+          if (counter >= 1){
+            dataObject['one_day'] = close - daily_data[counter - 1]["Close"];
+          } else {
+            dataObject['one_day'] = "N/A";
+          }
+          if (counter >= 7){
+            dataObject['seven_day'] = close - daily_data[counter - 7]["Close"];
+          } else {
+            dataObject['seven_day'] = "N/A";
+          }
+          if (counter >=30){
+            dataObject['thirty_day'] = close - daily_data[counter - 30]["Close"];
+          } else {
+            dataObject['thirty_day'] = "N/A";
+          }
+          
+          results[i] = dataObject;
+          previousDayData = dataObject;
+          counter++;
+        } else {
+          results[i] = previousDayData;
         }
       }
     }
