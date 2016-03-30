@@ -6,5 +6,6 @@ fideligard.controller('transactionCtrl',
       userService,
       transactionService) {
 
+      $scope.transactions = transactionService.getTransactions();
     }
   ]);

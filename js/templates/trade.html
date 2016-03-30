@@ -5,7 +5,7 @@
     <div class="row">
 
       <div class="col-xs-6">
-        <form name="tradeForm" ng-submit="addTransaction(tradeForm.$valid)">
+        <form name="tradeForm">
           <table class="table">
             <tr>
               <td><strong>Symbol: </strong></td>
@@ -35,7 +35,7 @@
               <td>{{ calculateCost(quantity) | currency }}</td>
             </tr>
           </table>
-          <button class="btn btn-block btn-primary" style="margin: 10px 0;" ui-sref="dashboard.transactions">
+          <button type="submit" class="btn btn-block btn-primary" style="margin: 10px 0;" ng-click="addTransaction(tradeForm.$valid)" ui-sref="dashboard.transactions" ng-disabled="button.value">
             Trade
           </button>
         </form>
