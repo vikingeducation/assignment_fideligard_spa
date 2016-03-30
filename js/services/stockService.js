@@ -23,7 +23,7 @@ fideligard.factory('stockService',
               _date[comp.Date] = _date[comp.Date] || {};
               _date[comp.Date][company] = {
                 volume: comp.Volume,
-                closing: comp.Close
+                close: comp.Close
               };
             }
           }
