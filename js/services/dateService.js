@@ -13,7 +13,18 @@ financialApp.factory('dateService', [function(){
                       var selection = this.dateSelection * (1000*60*60*24);
                       var newDate = new Date( start + selection );
                       this.currentDate = newDate;
+                      console.log("newDate-" + newDate);
+                      console.log(this.dateSelection);
                     },
+                    getDateString: function(){
+                      var year = this.currentDate.getFullYear();
+                      var tempMonth = (this.currentDate.getMonth()+1);
+                      var month = (tempMonth <= 9 ? "0" : "") + tempMonth;
+                      var tempDay = this.currentDate.getDate()
+                      var day = (tempDay <= 9 ? "0" : "") + tempDay;
+                      console.log(year);
+                      return year + "-" + month + "-" + day;
+                    }
                   };
 
   var getDateInfo = function(date) {

@@ -1,10 +1,7 @@
 financialApp.factory('stockService', [function(){
 
-  var _stockData = {};
-
   var dataArray = rawData.query.results.quote;
-
-  console.log(dataArray);
+  var _stockData = {};
 
   for ( i = 0; i < dataArray.length; i++ ) {
     var date = dataArray[i].Date;
@@ -13,7 +10,7 @@ financialApp.factory('stockService', [function(){
     _stockData[date] = { date: new Date(date), symbol: symbol, price: price };
   }
 
-  console.log(_stockData);
+  //new object-scoped data from stock data
 
   var getStockData = function() {
     return _stockData;
