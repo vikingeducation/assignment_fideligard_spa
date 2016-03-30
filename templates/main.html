@@ -49,19 +49,19 @@
                 {{ stockData[ dateInfo.getDateString() ].symbol }}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price }}
+                {{ stockData[ dateInfo.getDateString() ].price | currency }}
               </td>
               <td>
-
+                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneDayAgo() ].price | currency }}
               </td>
               <td>
-
+                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneWeekAgo() ].price | currency }}
               </td>
               <td>
-
+                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneMonthAgo() ].price | currency }}
               </td>
               <td>
-                <a href="">trade</a>
+                <a ui-sref="stocks.trading">trade</a>
               </td>
             </tr>
           </tbody>
@@ -85,6 +85,21 @@
       </div>
 
       <div class="panel panel-default">
+
+        <div class="form-group">
+          <select class="form-control" ng-model="stockDataRoute" ng-change="go(stockDataRoute)">
+            <option value="portfolio">
+              Portfolio
+            </option>
+            <option value="trading">
+              Trading
+            </option>
+            <option value="transactions">
+              Transactions
+            </option>
+          </select>
+        </div>
+
         <div ui-view></div>
       </div>
 

@@ -1,10 +1,11 @@
-financialApp.controller('StocksCtrl', ['$scope', 'dateService', 'stockService', function($scope, dateService, stockService){
+financialApp.controller('StocksCtrl', ['$scope', '$location', 'dateService', 'stockService', function($scope, $location, dateService, stockService){
 
   $scope.dateInfo = dateService.getDateInfo();
   $scope.stockData = stockService.getStockData();
+  $scope.stockDataRoute = "portfolio";
 
-  $scope.currentDate = $scope.dateInfo.currentDate;
-  $scope.dateString = $scope.dateInfo.getDateString();
-  $scope.currentDateStock = $scope.stockData[$scope.dateString];
+  $scope.go = function(page) {
+    $location.path('/' + page);
+  };
 
 }]);
