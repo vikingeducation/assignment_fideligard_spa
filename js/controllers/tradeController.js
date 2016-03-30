@@ -1,8 +1,13 @@
 fideligard.controller('tradeCtrl',
   [
-    '$scope', '$stateParams',
-      function($scope, $stateParams) {
+    '$scope', '$stateParams', 'tradeService',
+      function($scope, $stateParams, tradeService) {
+        $scope.company = $stateParams.company;
+        $scope.date = $stateParams.date;
+        $scope.data = $stateParams.data;
 
-        console.log($stateParams.company);
+        $scope.calculateCost = function(quantity) {
+          return tradeService.calculateCost(quantity, $scope.data.close);
+        };
       }
   ]);

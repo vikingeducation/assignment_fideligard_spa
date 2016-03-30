@@ -9,24 +9,30 @@
           <table class="table">
             <tr>
               <td><strong>Symbol: </strong></td>
+              <td>{{ company }}</td>
             </tr>
             <tr>
               <td><strong>Buy/Sell </strong></td>
             </tr>
             <tr>
+              <td><strong>Available Quantity</strong></td>
+              <td>{{ data.volume | number }}</td>
+            </tr>
+            <tr>
               <td><strong>Quantity </strong></td>
-              <td><input type="text" class="form-control"></td>
+              <td><input type="text" class="form-control" placeholder="Quantity" ng-model="quantity"></td>
             </tr>
             <tr>
               <td><strong>Date: </strong></td>
-              <td>{{ tradeDate }}</td>
+              <td>{{ date | date }}</td>
             </tr>
             <tr>
               <td><strong>Price </strong></td>
-              <td></td>
+              <td>{{ data.close | currency }}</td>
             </tr>
             <tr>
               <td><strong>Cost </strong></td>
+              <td>{{ calculateCost(quantity) | currency }}</td>
             </tr>
           </table>
         </form>
