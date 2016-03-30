@@ -75,8 +75,6 @@ fideligard.factory('StocksService', ['$http', function($http) {
 
   obj.constructStocks = function() {
     var promises = this.getCalls();
-    console.log(promises)
-    console.log(promises.length)
     var that = this;
 
     for (var i = 0; i < promises.length; i++ ) {
