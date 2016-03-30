@@ -1,18 +1,6 @@
-<!-- actually prints: {{ stock }} {{ stockData }} -->
-<!--  {{stock}} -->
-
-<!-- {{ stock[1389052800000].price }} -->
-<!-- {{ stock }} -->
-
-
-{{ stockData }}
-
-
-
-<!-- {{stockData}} -->
-<!-- <td>{{ stock[stockDate].symbol}}</td>
-<td>{{ stock[stockDate].price | currency }}</td>
-<td>{{ stock[stockDate].one_day | currency  }}</td>
-<td>{{ stock[stockDate].seven_day | currency  }}</td>
-<td>{{ stock[stockDate].thirty_day | currency  }}</td> -->
+<td>{{ stockData.symbol}}</td>
+<td>{{ stockData.price | currency }}</td>
+<td>{{ stockData.one_day | currency  }}</td>
+<td>{{ stockData.seven_day | currency  }}</td>
+<td>{{ stockData.thirty_day | currency  }}</td>
 <!-- <td ui-sref='#'>Trade?</td>
