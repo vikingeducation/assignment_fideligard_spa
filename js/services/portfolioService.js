@@ -1,6 +1,6 @@
 fideligard.factory('portfolioService', ['stockService', function(stockService){
 
-  var stockData = stockService.getStockData();
+  var stockData = stockService.getHistoryData();
 
   var daysAgo = function(transaction, properDate, daysAgo) {
     var oldDate = new Date(properDate);
@@ -16,9 +16,8 @@ fideligard.factory('portfolioService', ['stockService', function(stockService){
     oldDate = year + "-" + month + "-" + day;
 
     var targetStock = stockData[oldDate];
-
     if (targetStock) {
-      return (transaction.price - targetStock[transaction.company].close) * transaction.quantity;
+      return (transaction.price - Number(targetStock[transaction.company].close)) * transaction.quantity;
     }
 
   };

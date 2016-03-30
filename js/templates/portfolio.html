@@ -41,10 +41,10 @@
           <td>{{ }}</td>
           <td>{{ }}</td>
           <td>{{ }}</td>
-          <td>{{  }}</td>
-          <td>{{ transaction.portDaysAgo(transacion, date.properDate(), 1) }}</td>
-          <td>{{ transaction.portDaysAgo(transacion, date.properDate(), 7) }}</td>
-          <td>{{ transaction.portDaysAgo(transacion, date.properDate(), 30) }}</td>
+          <td>{{ date.properDate() }}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 1) | currency}}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 7) | currency}}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 30) | currency }}</td>
         </tr>
       </tbody>
     </table>

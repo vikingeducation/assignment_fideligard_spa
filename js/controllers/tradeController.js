@@ -14,7 +14,6 @@ fideligard.controller('tradeCtrl',
         $scope.company = $stateParams.company;
         $scope.date = $stateParams.date;
         $scope.data = $stateParams.data;
-        $scope.bankroll = userService.getBankroll();
         $scope.user = {bankroll: userService.getBankroll()};
         $scope.statusColor = 'red';
         $scope.button = {value: false};
