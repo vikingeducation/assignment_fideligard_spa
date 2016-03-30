@@ -1,11 +1,11 @@
-fideligard.factory('StocksService', ['apiService', function(apiService) {
-
+fideligard.factory('StocksService', ['$http', function($http) {
 
 
   var obj = {};
+  var stocks = [];
 
 
-  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP']
+  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP'];
 
 
   obj.singleStockOneYear = function(raw_data) {
@@ -60,26 +60,48 @@ fideligard.factory('StocksService', ['apiService', function(apiService) {
 
 
 
-
-  obj.getStocks = function() {
-    var stocks = [];
-    for (var i = 0; i < stockSymbols.length; i++) {
-      apiService.getAll(stockSymbols[i]).then(
-        function(data) {
-          console.log(data["data"]["query"]["results"]["quote"])
-        }, function(){
-          console.log("API call failed")
-        });
-      // console.log(singleStockRawData)
-      // var singleStock = this.singleStockOneYear(singleStockRawData);
-      // stocks.push(singleStock)
-      // console.log("API call for: "+ stockSymbols[i])
-    }
+  obj.constructStocks = function(data) {
+    var singleStock = this.singleStockOneYear(data);
+    stocks.push(singleStock);
     return stocks;
   }
 
 
+  // returns a promise
+  obj.getCall = function(stockSymbol) {
+    var prefix = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
+    var postfix = "%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
 
+    return $http.get(prefix + stockSymbol + postfix);
+  }
+
+
+  obj.getStocks = function() {
+    var promises = [];
+    for (var i = 0; i < stockSymbols.length; i++) {
+      // console.log(this.getCall(stockSymbols[i]))
+      promises.push(this.getCall(stockSymbols[i]));
+    }
+    console.log(promises)
+    return promises;
+  }
+
+  // returns a promise
+  // obj.getStocks = function() {
+  //   for (var i = 0; i < stockSymbols.length; i++) {
+  //     // console.log(this.getCall(stockSymbols[i]))
+  //     obj.getCall(stockSymbols[i]).then(function(data) {
+  //       var that = this;
+  //       console.log("made an API call in stocks service")
+  //       obj.constructStocks(data)
+  //       console.log("stocks array in promise: ")
+  //       console.log(stocks)
+  //     },
+  //     function() {
+  //       console.log("API call was unsuccessful.")
+  //     })
+  //   }
+  // }
 
 
 
