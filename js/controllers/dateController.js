@@ -16,5 +16,10 @@ fideligard.controller('dateCtrl',
          return year + "-" + month + "-" + day;
        }
     };
+
+    $scope.tradeDate = 0;
+    $scope.setTradeDate = function(date) {
+      $scope.tradeDate = date;
+    };
    }
 ]);

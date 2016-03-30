@@ -1,7 +1,8 @@
 fideligard.controller('tradeCtrl',
   [
-    '$scope',
-      function($scope) {
+    '$scope', '$stateParams',
+      function($scope, $stateParams) {
 
+        console.log($stateParams.company);
       }
   ]);

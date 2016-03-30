@@ -28,6 +28,6 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
     .state('dashboard.trade', {
       url: '/trade',
       templateUrl: 'js/templates/trade.html',
-      controller: 'tradeCtrl'
+      controller: 'stockCtrl'
     });
 });
