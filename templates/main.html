@@ -6,17 +6,74 @@
   </div>
 </nav>
 
-<div class="container">
+<div class="container-fluid">
   <div class="row">
 
-    <div class="col-xs-4">
+    <div class="col-xs-5">
       <div class="panel panel-default">
-        Stock Index
+
+        <h3>Stocks</h3>
+
+        <div class="form-group">
+          <label for="filter">Filter</label>
+          <input type="text" class="form-control" ng-model="filter"></input>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                Symbol
+              </th>
+              <th>
+                Price
+              </th>
+              <th>
+                1d
+              </th>
+              <th>
+                7d
+              </th>
+              <th>
+                30d
+              </th>
+              <th>
+                Trade?
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td>
+                {{ stockData[ dateInfo.getDateString() ].symbol }}
+              </td>
+              <td>
+                {{ stockData[ dateInfo.getDateString() ].price }}
+              </td>
+              <td>
+
+              </td>
+              <td>
+
+              </td>
+              <td>
+
+              </td>
+              <td>
+                <a href="">trade</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
       </div>
     </div>
 
-    <div class="col-xs-8">
+    <div class="col-xs-7">
       <div class="panel panel-default">
+
+        <h3>Date</h3>
 
         <form id="slider-holder">
           <span class="pull-left">{{ dateInfo.startDate | date:"MMM dd, yyyy"}}</span>

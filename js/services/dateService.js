@@ -1,9 +1,9 @@
 financialApp.factory('dateService', [function(){
 
-  var _dateInfo = { startDate: new Date("1-2-2014"),
+  var _dateInfo = { startDate: new Date("1-1-2014"),
                     endDate: new Date("7-31-2014"),
                     dateSelection: 0,
-                    currentDate: new Date("1-2-2014"),
+                    currentDate: new Date("1-1-2014"),
                     dateRange: function() {
                       var range = Math.round( ( this.endDate.getTime() - this.startDate.getTime() ) / (1000*60*60*24) );
                         return range;
@@ -13,8 +13,6 @@ financialApp.factory('dateService', [function(){
                       var selection = this.dateSelection * (1000*60*60*24);
                       var newDate = new Date( start + selection );
                       this.currentDate = newDate;
-                      console.log("newDate-" + newDate);
-                      console.log(this.dateSelection);
                     },
                     getDateString: function(){
                       var year = this.currentDate.getFullYear();
@@ -22,7 +20,6 @@ financialApp.factory('dateService', [function(){
                       var month = (tempMonth <= 9 ? "0" : "") + tempMonth;
                       var tempDay = this.currentDate.getDate()
                       var day = (tempDay <= 9 ? "0" : "") + tempDay;
-                      console.log(year);
                       return year + "-" + month + "-" + day;
                     }
                   };
