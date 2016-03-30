@@ -18,9 +18,9 @@
         <tr ng-repeat="(company, data) in stockData[date.properDate()]">
           <td>{{ company }}</td>
           <td>{{ data.close | currency}}</td>
-          <td>{{ oneDayAgo(company, data, date.properDate(), stockData) | currency }}</td>
-          <td></td>
-          <td></td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 1) | currency }}</td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 7) | currency }}</td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 30) | currency }}</td>
           <td></td>
         </tr>
       </tbody>

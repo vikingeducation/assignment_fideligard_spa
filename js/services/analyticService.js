@@ -1,9 +1,9 @@
 fideligard.factory('analyticService', function(){
 
-  var oneDayAgo = function(company, data, properDate, stockData) {
+  var daysAgo = function(company, data, properDate, stockData, daysAgo) {
     var currentStock = data.close;
     var yesterday = new Date(properDate);
-    yesterday.setDate(yesterday.getDate() - 1);
+    yesterday.setDate(yesterday.getDate() - daysAgo);
 
 
     var year = yesterday.getUTCFullYear().toString();
@@ -27,7 +27,7 @@ fideligard.factory('analyticService', function(){
   };
 
   return {
-    oneDayAgo: oneDayAgo
+    daysAgo: daysAgo
   };
 
 });
