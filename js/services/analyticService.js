@@ -2,9 +2,8 @@ fideligard.factory('analyticService', function(){
 
   var oneDayAgo = function(company, data, properDate, stockData) {
     var currentStock = data.close;
-
     var yesterday = new Date(properDate);
-    yesterday.setDate(yesterday.getUTCDate() - 1);
+    yesterday.setDate(yesterday.getDate() - 1);
 
 
     var year = yesterday.getUTCFullYear().toString();
@@ -18,6 +17,8 @@ fideligard.factory('analyticService', function(){
     var targetStock = stockData[yesterday];
 
     if (currentStock && targetStock) {
+      console.log(properDate, yesterday);
+      console.log(currentStock - targetStock[company].close);
       return (currentStock - targetStock[company].close);
     } else {
       console.log('fail');
