@@ -5,7 +5,7 @@ fideligard.factory('StocksService', ['$http', function($http) {
   var stocks = [];
 
 
-  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'NKE', 'HMC', 'KO', 'PEP'];
+  obj.stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'NKE', 'HMC', 'KO', 'PEP'];
 
 
   obj.singleStockOneYear = function(raw_data) {
@@ -65,8 +65,8 @@ fideligard.factory('StocksService', ['$http', function($http) {
     var prefix = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
     var postfix = "%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
 
-    for (var i = 0; i < stockSymbols.length; i++) {
-      promises.push($http.get(prefix + stockSymbols[i] + postfix))
+    for (var i = 0; i < obj.stockSymbols.length; i++) {
+      promises.push($http.get(prefix + obj.stockSymbols[i] + postfix))
     }
 
     return promises;

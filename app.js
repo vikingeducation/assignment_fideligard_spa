@@ -23,11 +23,6 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
-  // .state('fideligard.dashboard.container', {
-  //   url: 'container',
-  //   templateUrl: 'templates/container.html',
-  //   controller: 'ContainerCtrl'
-  // })
   .state('fideligard.dashboard.trade', {
     url: '/trade?symbol?price?date',
     views: {
@@ -41,7 +36,8 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
     url: '/transactions',
     views: {
       '@fideligard': {
-        template: "<div>Hello!</div>"
+        template: "<div>Hello!</div>",
+        controller: "TransactionsCtrl"
       }
     }
 
