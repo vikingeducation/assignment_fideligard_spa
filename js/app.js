@@ -6,6 +6,9 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
     .state('dashboard',{
       url: '',
       views: {
+        '': {
+          templateUrl: 'js/templates/landing.html'
+        },
         'stocks': {
           templateUrl: 'js/templates/stocks.html',
           controller: 'stockCtrl'
@@ -15,4 +18,9 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
         }
       }
     });
+    // .state('dashboard.trade', {
+    //   url: '',
+    //   template: '<h1>Trade</h1>',
+    //   controller: 'tradeCtrl'
+    // });
 });

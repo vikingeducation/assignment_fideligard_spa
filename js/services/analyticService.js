@@ -17,11 +17,8 @@ fideligard.factory('analyticService', function(){
     var targetStock = stockData[yesterday];
 
     if (currentStock && targetStock) {
-      console.log(properDate, yesterday);
-      console.log(currentStock - targetStock[company].close);
       return (currentStock - targetStock[company].close);
     } else {
-      console.log('fail');
       return '';
     }
   };

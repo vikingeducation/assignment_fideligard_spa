@@ -21,7 +21,7 @@
           <td>{{ daysAgo(company, data, date.properDate(), stockData, 1) | currency }}</td>
           <td>{{ daysAgo(company, data, date.properDate(), stockData, 7) | currency }}</td>
           <td>{{ daysAgo(company, data, date.properDate(), stockData, 30) | currency }}</td>
-          <td></td>
+          <td><a ui-sref="dashboard.trade">trade</a></td>
         </tr>
       </tbody>
     </table>
