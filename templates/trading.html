@@ -1,9 +1,8 @@
 <h3>Trading</h3>
 
 <div class="row">
-  <div class="col-xs-6">
-
-    <form name="trading" ng-submit="trade(trading.$valid)" novalidate>
+  <form name="trading" ng-submit="trade(trading.$valid)" novalidate>
+    <div class="col-xs-6">
 
       <div class="form-group">
         <label for="symbol">Symbol</label>
@@ -20,7 +19,7 @@
 
       <div class="form-group">
         <label for="quantity">Quantity</label>
-        <input class="form-control" type="number" name="formData.quantity" ng-model="quantity" ng-min="1" ng-max="(portfolio.cash / stockData[ dateInfo.getDateString() ][symbol].price)" required>
+        <input class="form-control" type="number" name="quantity" ng-model="formData.quantity" ng-min="1" ng-max="tradeMax()" required>
       </div>
 
       <!-- <div class="form-group">
@@ -30,31 +29,31 @@
 
       <div class="form-group">
         <label for="price">Price</label>
-        <p>{{ stockData[ dateInfo.getDateString() ][formData.symbol].price | currency }}</p>
+        <p>{{ price() | currency }}</p>
       </div>
 
       <div class="form-group">
         <label for="cost">Cost</label>
-        <p>{{ stockData[ dateInfo.getDateString() ][formData.symbol].price * quantity | currency }}</p>
+        <p>{{ cost() | currency }}</p>
       </div>
 
       <div class="form-group">
         <input type="submit" name="trade" class="btn btn-primary btn-block" value="Trade"></input>
       </div>
 
-    </form>
+    </div>
 
-  </div>
+    <div class="col-xs-6">
+      <h3>Cash Available</h3>
+      <p>
+        {{ portfolio.cash | currency }}
+      </p>
 
-  <div class="col-xs-6">
-    <h3>Cash Available</h3>
-    <p>
-      {{ portfolio.cash | currency }}
-    </p>
+      <h3>Trade Status</h3>
+      <p>
+        {{ trading.$valid ? "VALID" : "INVALID" }}
+      </p>
+    </div>
 
-    <h3>Trade Status</h3>
-    <p>
-      VALID/INVALID
-    </p>
-  </div>
+  </form>
 </div>

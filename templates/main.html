@@ -52,13 +52,13 @@
                 {{ stock.price | currency }}
               </td>
               <td>
-                {{ stock.price - stockData[ dateInfo.oneDayAgo() ][ symbol ].price | currency }}
+                {{ stock.price - priceOneDayAgo(symbol) | currency }}
               </td>
               <td>
-                {{ stock.price - stockData[ dateInfo.oneWeekAgo() ][ symbol ].price | currency }}
+                {{ stock.price - priceOneWeekAgo(symbol) | currency }}
               </td>
               <td>
-                {{ stock.price - stockData[ dateInfo.oneMonthAgo() ][ symbol ].price | currency }}
+                {{ stock.price - priceOneMonthAgo(symbol) | currency }}
               </td>
               <td>
                 <a ui-sref="stocks.trading({ symbol: symbol })">

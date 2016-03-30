@@ -16,4 +16,16 @@ financialApp.controller('StocksCtrl', ['$scope', '$location', 'dateService', 'st
     console.log( portfolioService.getTransactions() );
   }
 
+  $scope.priceOneDayAgo = function(symbol) {
+    return $scope.stockData[ $scope.dateInfo.oneDayAgo() ][ symbol ].price;
+  }
+
+  $scope.priceOneWeekAgo = function(symbol) {
+    return $scope.stockData[ $scope.dateInfo.oneWeekAgo() ][ symbol ].price;
+  }
+
+  $scope.priceOneMonthAgo = function(symbol) {
+    return $scope.stockData[ $scope.dateInfo.oneMonthAgo() ][ symbol ].price;
+  }
+
 }]);

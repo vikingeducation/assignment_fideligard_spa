@@ -2,8 +2,6 @@ financialApp.factory('stockService', [ 'dateService', function( dateService ){
 
   var _stockData = {};
 
-
-
   var allStocks = rawData;
 
   for ( var i = 0; i < allStocks.length; i++ ) {
@@ -32,8 +30,6 @@ financialApp.factory('stockService', [ 'dateService', function( dateService ){
       _stockData[dateString][stockItem.Symbol] = { price: stockItem.Close };
     }
   }
-
-  //new object-scoped data from stock data
 
   var getStockData = function() {
     return _stockData;
