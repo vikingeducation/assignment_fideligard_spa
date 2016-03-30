@@ -27,22 +27,22 @@
   <tbody>
     <tr>
       <td>
-
+        {{ portfolio.costBasis | currency }}
       </td>
       <td>
-
+        {{ portfolio.currentValue | currency }}
       </td>
       <td>
-
+        {{ portfolio.profitLoss | currency }}
       </td>
       <td>
-
+        {{ portfolio.oneDayAgo | currency }}
       </td>
       <td>
-
+        {{ portfolio.oneWeekAgo | currency }}
       </td>
       <td>
-
+        {{ portfolio.oneMonthAgo | currency }}
       </td>
     </tr>
   </tbody>
@@ -85,36 +85,38 @@
   </thead>
 
   <tbody>
-    <tr>
+    <tr ng-repeat="(symbol, stock) in portfolio.stocks">
       <td>
-
+        {{ symbol }}
       </td>
       <td>
-
+        {{ stock.quantity }}
       </td>
       <td>
-
+        {{ stock.costBasis | currency }}
       </td>
       <td>
-
+        {{ stock.quantity * stockData[ dateInfo.getDateString() ][symbol].price | currency }}
       </td>
       <td>
-
+        {{ stock.profitLoss | currency }}
       </td>
       <td>
-
+        {{ stockData[ dateInfo.getDateString() ][symbol].price | currency }}
       </td>
       <td>
-
+        {{ stock.oneDayAgo | currency }}
       </td>
       <td>
-
+        {{ stock.oneWeekAgo | currency }}
       </td>
       <td>
-
+        {{ stock.oneMonthAgo | currency }}
       </td>
       <td>
-        <a href="">trade</a>
+        <a ui-sref="stocks.trading({ symbol: symbol })">
+          trade
+        </a>
       </td>
     </tr>
   </tbody>

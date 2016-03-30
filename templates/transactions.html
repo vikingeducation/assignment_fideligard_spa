@@ -26,22 +26,22 @@
     </tr>
   </thead>
 
-  <tbody>
-    <tr>
+  <tbody ng-repeat="(date, dates) in transactions">
+    <tr ng-repeat="(symbol, trans) in dates">
       <td>
-
+        {{ date | date : "MMM d, yyyy" }}
       </td>
       <td>
-
+        {{ symbol }}
       </td>
       <td>
-
+        {{ trans.buysell }}
       </td>
       <td>
-
+        {{ trans.quantity }}
       </td>
       <td>
-
+        {{ stockData[date][symbol].price | currency }}
       </td>
     </tr>
   </tbody>

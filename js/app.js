@@ -14,19 +14,22 @@ financialApp.config( function($stateProvider, $urlRouterProvider){
   .state('stocks.portfolio', {
       url: "/portfolio",
       templateUrl: "templates/portfolio.html",
-      controller: 'StocksCtrl'
+      controller: 'PortfolioCtrl'
     })
 
   .state('stocks.trading', {
       url: "/trading",
       templateUrl: "templates/trading.html",
-      controller: 'StocksCtrl'
+      controller: 'TradingCtrl',
+      params: {
+        symbol: undefined,
+      }
     })
 
   .state('stocks.transactions', {
       url: "/transactions",
       templateUrl: "templates/transactions.html",
-      controller: 'StocksCtrl'
+      controller: 'TransactionsCtrl'
     })
 });
 

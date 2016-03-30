@@ -1,33 +1,33 @@
 financialApp.factory('dateService', [function(){
 
-  var _dateInfo = { startDate: new Date("2-1-2014"),
-                    endDate: new Date("8-30-2014"),
-                    dateSelection: 0,
-                    currentDate: new Date("2-1-2014"),
-                    dateRange: function() {
-                      var range = Math.round( ( this.endDate.getTime() - this.startDate.getTime() ) / (1000*60*60*24) );
-                        return range;
-                    },
-                    setCurrentDate: function() {
-                      this.currentDate = offsetDate(  this.startDate,
-                                                      this.dateSelection );
-                    },
-                    getDateString: function(){
-                      return dateToString( this.currentDate );
-                    },
-                    oneDayAgo: function(){
-                      var otherDate = offsetDate( this.currentDate, -1 );
-                      return dateToString( otherDate );
-                    },
-                    oneWeekAgo: function(){
-                      var otherDate = offsetDate( this.currentDate, -7 );
-                      return dateToString( otherDate );
-                    },
-                    oneMonthAgo: function(){
-                      var otherDate = offsetDate( this.currentDate, -30 );
-                      return dateToString( otherDate );
-                    }
-                  };
+  var _dateInfo = {
+    startDate: new Date("2-1-2014"),
+    endDate: new Date("8-30-2014"),
+    dateSelection: 0,
+    currentDate: new Date("2-1-2014"),
+    dateRange: function() {
+      return findDateRange( this.startDate, this.endDate );
+    },
+    setCurrentDate: function() {
+      this.currentDate = offsetDate(  this.startDate,
+                                      this.dateSelection );
+    },
+    getDateString: function(){
+      return dateToString( this.currentDate );
+    },
+    oneDayAgo: function(){
+      var otherDate = offsetDate( this.currentDate, -1 );
+      return dateToString( otherDate );
+    },
+    oneWeekAgo: function(){
+      var otherDate = offsetDate( this.currentDate, -7 );
+      return dateToString( otherDate );
+    },
+    oneMonthAgo: function(){
+      var otherDate = offsetDate( this.currentDate, -30 );
+      return dateToString( otherDate );
+    },
+  };
 
   var getDateInfo = function(date) {
     return _dateInfo;
@@ -49,10 +49,16 @@ financialApp.factory('dateService', [function(){
     return newDate;
   };
 
+  var findDateRange = function(start, end) {
+    var range = Math.round( ( end.getTime() - start.getTime() ) / (1000*60*60*24) );
+      return range;
+  }
+
   return{
     getDateInfo: getDateInfo,
     dateToString: dateToString,
     offsetDate: offsetDate,
+    findDateRange: findDateRange,
   };
 
 }]);

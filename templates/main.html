@@ -44,24 +44,26 @@
           </thead>
 
           <tbody>
-            <tr>
+            <tr ng-repeat="(symbol, stock) in stockData[ dateInfo.getDateString() ]">
               <td>
-                {{ stockData[ dateInfo.getDateString() ].symbol }}
+                {{ symbol }}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price | currency }}
+                {{ stock.price | currency }}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneDayAgo() ].price | currency }}
+                {{ stock.price - stockData[ dateInfo.oneDayAgo() ][ symbol ].price | currency }}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneWeekAgo() ].price | currency }}
+                {{ stock.price - stockData[ dateInfo.oneWeekAgo() ][ symbol ].price | currency }}
               </td>
               <td>
-                {{ stockData[ dateInfo.getDateString() ].price - stockData[ dateInfo.oneMonthAgo() ].price | currency }}
+                {{ stock.price - stockData[ dateInfo.oneMonthAgo() ][ symbol ].price | currency }}
               </td>
               <td>
-                <a ui-sref="stocks.trading">trade</a>
+                <a ui-sref="stocks.trading({ symbol: symbol })">
+                  trade
+                </a>
               </td>
             </tr>
           </tbody>
@@ -79,7 +81,7 @@
           <span class="pull-left">{{ dateInfo.startDate | date:"MMM dd, yyyy"}}</span>
           <span class="text-center">{{ dateInfo.currentDate | date:"MMM dd, yyyy"}}</span>
           <span class="pull-right">{{ dateInfo.endDate | date:"MMM dd, yyyy"}}</span>
-          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-change='dateInfo.setCurrentDate()' ng-model='dateInfo.dateSelection'>
+          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-change='update()' ng-model='dateInfo.dateSelection'>
         </form>
 
       </div>

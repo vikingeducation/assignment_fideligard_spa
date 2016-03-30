@@ -13,8 +13,18 @@ https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
 http://query.yahooapis.com/v1/public/yql?q=
 select * from   yahoo.finance.historicaldata
          where  symbol    = "AAPL"
-         and    startDate = "2011-09-11"
-         and    endDate   = "2014-02-11"
+         and    startDate = "2014-01-01"
+         and    endDate   = "2014-12-31"
+&format=json
+&diagnostics=true
+&env=store://datatables.org/alltableswithkeys
+&callback=
+
+http://query.yahooapis.com/v1/public/yql?q=
+select * from   yahoo.finance.historicaldata
+         where  symbol    = "ALL"
+         and    startDate = "2014-01-01"
+         and    endDate   = "2014-12-31"
 &format=json
 &diagnostics=true
 &env=store://datatables.org/alltableswithkeys
@@ -45,7 +55,7 @@ Services
   TradingService
 
 Directives
-  
+
 
 Top Panel View - 'DatePickerCtrl'
   Date Picker Widget
@@ -74,7 +84,7 @@ Right Panel View - 'MainPanelCtrl'
     Display validity of order
     Validations - only allow if valid
     Auto-pop dates and stock symbol
-    Keep track of the transation when submitted
+    Keep track of the transaction when submitted
     Watch out for "time travel"
 
   Transactions Widget - controller?
@@ -127,5 +137,3 @@ Right Panel View - 'MainPanelCtrl'
     // portfolio/trade
     //portfolio/transactions
     //portfolio/show
-
-  
