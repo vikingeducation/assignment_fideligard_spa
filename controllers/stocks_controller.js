@@ -10,6 +10,7 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
     },
     function(newValue) {
       $scope.date = newValue;
+      console.log("stocks controller date was changed to:"+ $scope.date)
     });
 
 

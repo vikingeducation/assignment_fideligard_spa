@@ -37,26 +37,25 @@ fideligard.factory('StocksService', function() {
           } else {
             dataObject['one_day'] = "N/A";
           }
-          if (counter >= 7){
+          if (counter >= 7) {
             dataObject['seven_day'] = close - daily_data[counter - 7]["Close"];
           } else {
             dataObject['seven_day'] = "N/A";
           }
-          if (counter >=30){
+          if (counter >=30) {
             dataObject['thirty_day'] = close - daily_data[counter - 30]["Close"];
           } else {
             dataObject['thirty_day'] = "N/A";
           }
-          
           results[i] = dataObject;
           previousDayData = dataObject;
+          dataObject = {};
           counter++;
         } else {
           results[i] = previousDayData;
         }
       }
     }
-    console.log(results);
     return results;
   };
 
