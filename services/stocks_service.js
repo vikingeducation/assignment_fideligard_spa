@@ -5,16 +5,24 @@ fideligard.factory('StocksService', function() {
   var obj = {};
 
 
-  var stockSymbols = ['LULU', 'DOW', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP']
+  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP']
 
 
 
   obj.singleStockOneYear = function() {
-    var daily_data = raw_data["query"]["results"]["quote"];
+    var backwards_data = raw_data["query"]["results"]["quote"];
+    console.log(backwards_data.length)
+    // data comes in reverse chronological order
+    var daily_data = backwards_data.reverse();
+    console.log(daily_data.length)
+
     // var msDay = 86400000;
     var results = {};
-    var counter = 0;                 
-    for (var i = 1419984000000 ; i >= 1388534400000; i-= 86400000) {
+    var counter = 0;        
+    // start: 1388534400000
+    // end: 1419984000000    
+    // end? 1404259200000    
+    for (var i = 1388534400000; i <= 1419984000000; i+= 86400000) {
       // add a symbol for every single day
       results[i] = {'symbol': daily_data[0]["Symbol"]};
 
@@ -22,6 +30,10 @@ fideligard.factory('StocksService', function() {
       if (daily_data[counter]) {
 
         var msFromData = new Date(daily_data[counter]["Date"]).getTime();
+
+        console.log("msFromDatams: "+ msFromData + "i: " +i)
+        console.log(Number(msFromData) == Number(i))
+
         if (Number(msFromData) == Number(i)) {
           // create object
           var close = daily_data[counter]["Close"];

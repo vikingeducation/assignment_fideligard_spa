@@ -1,3 +1,8 @@
+TODO:
+
+missing days should not be blank, they should be the previous day's value
+
+
 ===================
 API
 
@@ -8,8 +13,8 @@ API
     http://query.yahooapis.com/v1/public/yql?q=
     select * from   yahoo.finance.historicaldata
              where  symbol    = "AAPL"
-             and    startDate = "2014-01-01"
-             and    endDate   = "2014-12-31"
+             and    startDate = "2014-12-21"
+             and    endDate   = "2014-01-01"
     &format=json
     &diagnostics=true
     &env=store://datatables.org/alltableswithkeys
