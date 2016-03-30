@@ -7,7 +7,27 @@ fideligard.controller('TradeCtrl', ['$scope', '$stateParams', 'DatePickerService
   $scope.cashAvailable = 1000000;
 
 
-  $scope.validOrder;
+  $scope.orderIsValid;
+
+
+  $scope.validOrder = function() {
+    // can't sell what you don't own
+
+    // can't buy more than you have cash available for
+    if ($scope.getTotalCost() > $scope.cashAvailable) {
+      $scope.orderIsValid = false;
+      // console.log($scope.orderIsValid)
+      $scope.errorMessage = "You don't have enough money for that trade.";
+      return "INVALID";
+    } else {
+      $scope.orderIsValid = true;
+      $scope.errorMessage = undefined;
+      // console.log($scope.orderIsValid)
+      return "VALID";
+    }
+    
+  };
+
 
   $scope.availableStocks = StocksService.stockSymbols;
 
@@ -26,8 +46,9 @@ fideligard.controller('TradeCtrl', ['$scope', '$stateParams', 'DatePickerService
 
 
   $scope.createTransaction = function(formIsValid) {
-    if (formIsValid) {
+    if (formIsValid && $scope.orderIsValid) {
       console.log("Create transaction!");
+
     } else {
       console.log("no good")
     }

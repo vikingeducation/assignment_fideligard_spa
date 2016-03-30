@@ -37,7 +37,10 @@
       {{ getTotalCost() | currency }}<br/>
     </div>
 
-      <input type="submit" value="Place Order!" class="btn btn-info" ng-click="createTransaction(newTrade.$valid)">
+    <input type="submit" value="Place Order!" class="btn btn-info" ng-click="createTransaction(newTrade.$valid)">
+
+
+    <div>{{errorMessage}}</div>
 
     </form>
   </div>
@@ -52,7 +55,7 @@
     {{ cashAvailable | currency }}<br/><br/><br/><br/>
 
     <label>Order Status: </label><br/>
-    {{ validOrder }}
+    {{ validOrder() }}
     
   </div>
 
