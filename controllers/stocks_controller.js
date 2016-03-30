@@ -1,7 +1,7 @@
 fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerService', function($scope, StocksService, DatePickerService) {
 
 
-  $scope.stocks = [StocksService.singleStockOneYear()];
+  $scope.stocks = StocksService.getStocks();
 
   $scope.date = DatePickerService.date;
 

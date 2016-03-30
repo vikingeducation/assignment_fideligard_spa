@@ -9,6 +9,8 @@ API
 - use 'resolve' object to load as much data as we can, or spread out over a couple calls
 
 
+http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=
+
 - query for AAPL stock through Yahoo API:
     http://query.yahooapis.com/v1/public/yql?q=
     select * from   yahoo.finance.historicaldata
