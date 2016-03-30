@@ -6,12 +6,12 @@
     
       <div class="form-group">
       <label>Symbol: </label>
-      <input type="text" name="symbol" ng-model="formData.symbol" class="form-control"><br/>
+      <input type="text" name="symbol" ng-model="symbol" class="form-control"><br/>
     </div>
 
     <div class="form-group">
       <label>Buy/Sell: </label>
-      <select ng-model="formData.transactionType" class="form-control">
+      <select ng-model="transactionType" class="form-control">
         <option value="buy">BUY</option>
         <option value="sell">SELL</option>
       </select><br/>
@@ -19,22 +19,22 @@
 
     <div class="form-group">
       <label>Quantity: </label>
-      <input type="number" name="quantity" ng-model="formData.quantity" class="form-control"><br/>
+      <input type="number" name="quantity" ng-model="quantity" class="form-control"><br/>
     </div>
 
     <div class="form-group">
       <label>Date: </label>
-      <span type="date" name="date" ng-model="formData.date">2014-03-01</span><br/>
+      <span type="date" name="date" ng-model="date">{{ date | date: 'yyyy-MM-dd' }} </span><br/>
     </div>
 
     <div class="form-group">
       <label>Price: </label>
-      {{ price }}<br/>
+      {{ price | currency }}<br/>
     </div>
 
     <div class="form-group">
       <label>Cost: </label>
-      {{ totalCost }}<br/>
+      {{ getTotalCost() | currency }}<br/>
     </div>
 
       <input type="submit" value="Place Order!" class="btn btn-info">
@@ -49,7 +49,7 @@
   <div class="col-xs-4 col-xs-offset-2">
 
     <label>Cash Available: </label><br/>
-    {{ cashAvailable }}<br/><br/><br/><br/>
+    {{ cashAvailable | currency }}<br/><br/><br/><br/>
 
     <label>Order Status: </label><br/>
     {{ validOrder }}
