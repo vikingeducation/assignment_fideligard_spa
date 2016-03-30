@@ -1,7 +1,15 @@
 fideligard.controller('tradeCtrl',
-  [
-    '$scope', '$stateParams', 'tradeService', 'userService',
-      function($scope, $stateParams, tradeService, userService) {
+  ['$scope',
+  '$stateParams',
+  'tradeService',
+  'userService',
+  'transactionService',
+    function($scope,
+      $stateParams,
+      tradeService,
+      userService,
+      transactionService) {
+
         $scope.company = $stateParams.company;
         $scope.date = $stateParams.date;
         $scope.data = $stateParams.data;
@@ -25,5 +33,5 @@ fideligard.controller('tradeCtrl',
             return 'INVALID';
           }
         };
-      }
+    }
   ]);
