@@ -16,7 +16,6 @@
     </tr>
   </thead>
   <tbody>
-  {{ sortType}} {{ sortReverse }}
     <tr stock-data="st[date]" ng-repeat="st in stocks | orderBy:sortType:sortReverse | filter: filterByName" stock-row stock="st" stock-date="date">
     </tr>
   </tbody>
