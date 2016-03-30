@@ -39,5 +39,10 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       url: '/transactions',
       templateUrl: 'js/templates/transactions.html',
       controller: 'transactionCtrl'
+    })
+    .state('dashboard.portfolio', {
+      url: '/portfolio',
+      templateUrl: 'js/templates/portfolio.html',
+      controller: 'portfolioCtrl'
     });
 });
