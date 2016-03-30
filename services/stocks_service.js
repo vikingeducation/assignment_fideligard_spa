@@ -59,14 +59,6 @@ fideligard.factory('StocksService', ['$http', function($http) {
   };
 
 
-
-  // obj.constructStocks = function(data) {
-  //   var singleStock = this.singleStockOneYear(data);
-  //   stocks.push(singleStock);
-  //   return stocks;
-  // }
-
-
   // returns an arary of promises
   obj.getCalls = function() {
     var promises = [];
@@ -98,16 +90,6 @@ fideligard.factory('StocksService', ['$http', function($http) {
     }
     return stocks;
   }
-
-
-  // returns promises
-  // obj.getStocks = function() {
-  //   var promises = [];
-  //   for (var i = 0; i < stockSymbols.length; i++) {
-  //     promises.push(this.getCall(stockSymbols[i]));
-  //   }
-  //   return promises;
-  // }
 
 
   return obj;

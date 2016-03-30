@@ -16,8 +16,11 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
     });
 
 
-
   $scope.filterByName = "";
+  $scope.sortType = ""
+  $scope.sortReverse = false;
+
+  console.log($scope.sortType)
 
 
 }]);

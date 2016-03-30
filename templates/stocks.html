@@ -2,21 +2,22 @@
 
 <label>Filter by name:</label>
 <input ng-model="filterByName"></input> 
-<!-- <div>{{stocks[0][date]["symbol"]}}</div> -->
 
 <table class='table table-striped'>
   <thead>
   <tr>
-    <th>Symbol</th>
-    <th>Price</th>
-    <th>1d</th>
-    <th>7d</th>
-    <th>30d</th>
+    <th ng-click="sortType = 'symbol'; sortReverse = !sortReverse">Symbol
+    </th>
+    <th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+    <th ng-click="sortType = 'one_day'; sortReverse = !sortReverse">1d</th>
+    <th ng-click="sortType = 'seven_day'; sortReverse = !sortReverse">7d</th>
+    <th ng-click="sortType = 'thirty_day'; sortReverse = !sortReverse">30d</th>
     <th>Trade?</th>
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="st in stocks | filter: filterByName" stock-row stock="st" stock-date="date" stock-data="st[date]">
+  {{ sortType}} {{ sortReverse }}
+    <tr stock-data="st[date]" ng-repeat="st in stocks | orderBy:sortType:sortReverse | filter: filterByName" stock-row stock="st" stock-date="date">
     </tr>
   </tbody>
 </table>
