@@ -34,5 +34,10 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
         date: null,
         data: null
       }
+    })
+    .state('dashboard.transactions', {
+      url: '/transactions',
+      templateUrl: 'js/templates/transactions.html',
+      controller: 'transactionCtrl'
     });
 });
