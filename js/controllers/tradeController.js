@@ -9,5 +9,9 @@ fideligard.controller('tradeCtrl',
         $scope.calculateCost = function(quantity) {
           return tradeService.calculateCost(quantity, $scope.data.close);
         };
+
+        $scope.checkQuantity = function(quantity) {
+          return tradeService.checkQuantity(quantity, $scope.data.volume);
+        };
       }
   ]);
