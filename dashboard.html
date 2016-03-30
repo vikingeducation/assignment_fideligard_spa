@@ -20,9 +20,13 @@
 
         <!-- portfolio / trade / transactions -->
         <div class="panel panel-default">
-          <div class="panel-heading">
-             Portfolio or Trade or Transactions
-            <select class="pull-right"></select>
+          <div class="panel-heading form-inline">
+          <div class="form-group">
+            <select class="pull-right form-control">
+              <option href='#/dashboard/transactions' value="">Transactions</option>
+              <option ui-sref='' value="">Portfolio</option>
+            </select>
+            </div>
           </div>
 
           <div class="panel-body">

@@ -48,7 +48,16 @@ fideligard.controller('TradeCtrl', ['$scope', '$stateParams', 'DatePickerService
   $scope.createTransaction = function(formIsValid) {
     if (formIsValid && $scope.orderIsValid) {
       console.log("Create transaction!");
-
+      var newTransaction = {
+        date: $scope.date,
+        symbol: $scope.symbol,
+        transactionType: $scope.transactionType,
+        quantity: $scope.quantity,
+        price: $scope.price
+      };
+      console.log(newTransaction);
+      TransactionsService.transactions.push(newTransaction);
+      console.log(TransactionsService.transactions)
     } else {
       console.log("no good")
     }

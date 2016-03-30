@@ -36,7 +36,7 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
     url: '/transactions',
     views: {
       '@fideligard': {
-        template: "<div>Hello!</div>",
+        templateUrl: "templates/transactions.html",
         controller: "TransactionsCtrl"
       }
     }

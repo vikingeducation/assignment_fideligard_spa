@@ -1,0 +1,27 @@
+<h3>Transactions</h3>
+
+<div class="pull-right">
+  <label>Filter:</label>
+  <input ng-model="filterByName"></input> 
+</div>
+
+{{transactions}}
+
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th ng-click="sortType = 'date'; sortReverse = !sortReverse">Date
+    </th>
+    <th ng-click="sortType = 'symbol'; sortReverse = !sortReverse">Symbol</th>
+    <th ng-click="sortType = 'type'; sortReverse = !sortReverse">Type</th>
+    <th ng-click="sortType = 'quantity'; sortReverse = !sortReverse">Quantity</th>
+    <th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tr in transactions">
+      <td>{{tr}}</td>
+      <td>{{ tr.date | date: 'yyyy-mm-dd' }}</td>
+    </tr>
+  </tbody>
+</table>
