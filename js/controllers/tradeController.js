@@ -15,6 +15,7 @@ fideligard.controller('tradeCtrl',
         $scope.date = $stateParams.date;
         $scope.data = $stateParams.data;
         $scope.bankroll = userService.getBankroll();
+        $scope.user = {bankroll: userService.getBankroll()};
         $scope.statusColor = 'red';
         $scope.button = {value: false};
 
@@ -40,7 +41,6 @@ fideligard.controller('tradeCtrl',
 
         $scope.addTransaction = function(isFormValid) {
           if (isFormValid) {
-            console.log("adding transaction");
             transactionService.addTransaction($scope.date, $scope.company, "BUY", $scope.quantity, $scope.calculateCost($scope.quantity));
           }
         };
