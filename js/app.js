@@ -22,7 +22,8 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
         }
       },
       resolve: {
-        stocks: function( stockPrices ){
+        init: function( stockPrices, workingDates ){
+          workingDates;
           return stockPrices.init();
         }
       }

@@ -17,21 +17,21 @@
 <div class="row">
   <div class="col-xs-12">
     <strong>Selected Date:</strong>
+      <form name="form">
+        <input name="date" 
+               class="form-control date-input" 
+               type="date"
 
-    <input name="date-input" 
-           class="form-control date-input" 
-           type="date"
+               ng-model="inputDate" 
+               ng-show="showInput"
+               focus="{{ showInput }}"
+               ng-blur="tryUpdate()"
+               blur-on-return
 
-           ng-model="dates.selected" 
-           ng-model-options="{updateOn : 'blur'}" 
-           ng-show="showInput" 
-           ng-blur="showInput = false" 
-           focus="{{ showInput }}"
-           blur-on-return
-
-           min="{{dates.start | date:'yyyy-MM-dd'}}" 
-           max="{{dates.end | date:'yyyy-MM-dd'}}" 
-           required>
+               min="{{dates.start | date:'yyyy-MM-dd'}}" 
+               max="{{dates.end | date:'yyyy-MM-dd'}}" 
+               required>
+      </form>
 
     <a href="javascript:void(0)"
 
@@ -42,7 +42,7 @@
        tooltip-placement="right"
        tooltip-enable="!disableTip">
 
-      <strong>{{ dates.selected | date:'shortDate' }}</strong>
+      <strong>{{ inputDate | date:'shortDate' }}</strong>
     </a>
   </div>
 </div>
