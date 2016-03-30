@@ -16,4 +16,8 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
     });
 
 
+
+  $scope.filterByName = "";
+
+
 }]);

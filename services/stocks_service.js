@@ -5,7 +5,7 @@ fideligard.factory('StocksService', ['$http', function($http) {
   var stocks = [];
 
 
-  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'VKTX', 'HMC', 'KO', 'PEP'];
+  var stockSymbols = ['LULU', 'TWTR', 'GM', 'WMT', 'F', 'NFLIX', 'AAPL', 'SNDK', 'NKE', 'HMC', 'KO', 'PEP'];
 
 
   obj.singleStockOneYear = function(raw_data) {

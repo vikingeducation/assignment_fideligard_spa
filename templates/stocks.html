@@ -1,5 +1,9 @@
 <h3>Stocks</h3>
 
+<label>Filter by name:</label>
+<input ng-model="filterByName"></input> 
+<!-- <div>{{stocks[0][date]["symbol"]}}</div> -->
+
 <table class='table table-striped'>
   <thead>
   <tr>
@@ -12,9 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="st in stocks" stock-row stock="st" stock-date="date" stock-data="st[date]">
+    <tr ng-repeat="st in stocks | filter: filterByName" stock-row stock="st" stock-date="date" stock-data="st[date]">
     </tr>
   </tbody>
 </table>
-
-<!-- <div ng-repeat="st in stocks" stock-row stock="st" stock-date="date" stock-data="st[date]"></div> -->
