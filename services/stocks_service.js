@@ -76,35 +76,14 @@ fideligard.factory('StocksService', ['$http', function($http) {
   }
 
 
+  // returns promises
   obj.getStocks = function() {
     var promises = [];
     for (var i = 0; i < stockSymbols.length; i++) {
-      // console.log(this.getCall(stockSymbols[i]))
       promises.push(this.getCall(stockSymbols[i]));
     }
-    console.log(promises)
     return promises;
   }
-
-  // returns a promise
-  // obj.getStocks = function() {
-  //   for (var i = 0; i < stockSymbols.length; i++) {
-  //     // console.log(this.getCall(stockSymbols[i]))
-  //     obj.getCall(stockSymbols[i]).then(function(data) {
-  //       var that = this;
-  //       console.log("made an API call in stocks service")
-  //       obj.constructStocks(data)
-  //       console.log("stocks array in promise: ")
-  //       console.log(stocks)
-  //     },
-  //     function() {
-  //       console.log("API call was unsuccessful.")
-  //     })
-  //   }
-  // }
-
-
-
 
 
   return obj;

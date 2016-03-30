@@ -3,46 +3,37 @@ fideligard.controller('StocksCtrl', ['$scope', 'StocksService', 'DatePickerServi
 
   $scope.stocks = [];
 
-
-  var moreStocks = function() {
+  // TODO: move into StocksService so it can be reused
+  var constructStocks = function() {
     var promises = StocksService.getStocks();
     for (var i = 0; i < promises.length; i++ ) {
-      // console.log(promises[i])
       promises[i].then(function(data){
         console.log("API call was successful.")
         $scope.stocks = StocksService.constructStocks(data)
-        console.log($scope.stocks)
+        // console.log($scope.stocks)
+      }, function() {
+        console.log("API call was unsuccessful.")
       })
     }
+  }
+
+  $scope.getDate = function(stock, date) {
+    return stock[date];
+  }
 
 
-
-  // StocksService.getStocks().then(function(data) {
-  //       console.log("made an API call in stocks service")
-  //       StocksService.constructStocks(data)
-  //       console.log("stocks array in promise: ")
-  //       console.log(stocks)
-  //       $scope.stocks = StocksService.stocks;
-  //     },
-  //     function() {
-  //       console.log("API call was unsuccessful.")
-  //     })
-}
+  $scope.stocks = constructStocks();
 
 
+  $scope.date = String(DatePickerService.date);
 
-  $scope.stocks = moreStocks();
-
-  // $scope.stocks = StocksService.getStocks();
-
-  $scope.date = DatePickerService.date;
 
   $scope.$watch(function() {
       return DatePickerService.date;
     },
     function(newValue) {
-      $scope.date = newValue;
-      console.log("stocks controller date was changed to:"+ $scope.date)
+      $scope.date = newValue - 28800000;
+      console.log("stocks controller date was changed to: "+ $scope.date)
     });
 
 
