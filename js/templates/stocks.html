@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-xs-11 section-border">
+    <h1>Stocks</h1>
+    <div>{{ date.dateMs * 1000 | date: 'yyyy-MM-dd': '+0000' }}</div>
+    <div>{{ date.properDate() }}</div>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="(company, data) in stockData[date.properDate()]">
+          <td>{{ company }}</td>
+          <td>{{ data.close | currency}}</td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 1) | currency }}</td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 7) | currency }}</td>
+          <td>{{ daysAgo(company, data, date.properDate(), stockData, 30) | currency }}</td>
+          <td><a ui-sref="dashboard.trade({
+            company: company,
+            date: date.properDate(),
+            data: {{data}}
+          })">trade</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

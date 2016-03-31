@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col-xs-12 section-border">
+    <h1>Trade</h1>
+
+    <div class="row">
+
+      <div class="col-xs-6">
+        <form name="tradeForm">
+          <table class="table">
+            <tr>
+              <td><strong>Symbol: </strong></td>
+              <td>{{ company }}</td>
+            </tr>
+            <tr>
+              <td><strong>Buy/Sell </strong></td>
+            </tr>
+            <tr>
+              <td><strong>Available Quantity</strong></td>
+              <td>{{ data.volume | number }}</td>
+            </tr>
+            <tr>
+              <td><strong>Quantity </strong></td>
+              <td><input id="quantity" name="quantity" type="number" class="form-control" placeholder="Quantity" ng-model="quantity" ng-pattern="/^\d+$/" ng-max="data.volume" required></td>
+            </tr>
+            <tr>
+              <td><strong>Date: </strong></td>
+              <td>{{ date | date }}</td>
+            </tr>
+            <tr>
+              <td><strong>Price </strong></td>
+              <td>{{ data.close | currency }}</td>
+            </tr>
+            <tr>
+              <td><strong>Cost </strong></td>
+              <td>{{ calculateCost(quantity) | currency }}</td>
+            </tr>
+          </table>
+          <button type="submit" class="btn btn-block btn-primary" style="margin: 10px 0;" ng-click="addTransaction(tradeForm.$valid)" ui-sref="dashboard.transactions" ng-disabled="button.value">
+            Trade
+          </button>
+        </form>
+      </div>
+      <div class="col-xs-6">
+        <h3><strong>Cash Available</strong></h3>
+        <p><strong>{{ user.bankroll | currency }}</strong></p>
+
+        <br>
+        <h3><strong>Order Status</strong></h3>
+        <div style="color: {{ statusColor }}; font-size: 20px">{{ orderStatus() }}</div>
+      </div>
+
+    </div>
+  </div>
+</div>

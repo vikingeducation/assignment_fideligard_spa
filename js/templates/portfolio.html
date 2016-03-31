@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-xs-12 section-border">
+    <h1>Portfolio</h1>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Cost Basis</th>
+          <th>Current Value</th>
+          <th>Profit/Loss</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+
+    <br><br>
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Symbol</th>
+          <th>Quantity</th>
+          <th>Cost Basis</th>
+          <th>Current Value</th>
+          <th>Profit/Loss</th>
+          <th>Current Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="transaction in transactions">
+          <td>{{ transaction.company }}</td>
+          <td>{{ transaction.quantity }}</td>
+          <td>{{ }}</td>
+          <td>{{ }}</td>
+          <td>{{ }}</td>
+          <td>{{ date.properDate() }}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 1) | currency}}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 7) | currency}}</td>
+          <td>{{ portDaysAgo(transaction, date.properDate(), 30) | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
