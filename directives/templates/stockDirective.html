@@ -1,0 +1,6 @@
+<td>{{ stockData.symbol}}</td>
+<td>{{ stockData.price | currency }}</td>
+<td>{{ stockData.one_day | currency  }}</td>
+<td>{{ stockData.seven_day | currency  }}</td>
+<td>{{ stockData.thirty_day | currency  }}</td>
+<td><a class='btn btn-default' ui-sref='fideligard.dashboard.trade({symbol: stockData.symbol, price: stockData.price, date: stockDate})'>Trade</a> </td>

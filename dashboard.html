@@ -1,0 +1,43 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" class="text-center">Fideligard Historical Portfolio Simulator</a>
+    </div>
+    </div>
+  </div>
+</nav>
+
+<div class='padding-top'>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xs-5">
+        <div ui-view="stocks"></div>
+      </div>
+
+      <div class="col-xs-7">
+        <div ui-view='datepicker'></div>
+
+        <!-- portfolio / trade / transactions -->
+        <div class="panel panel-default">
+          <div class="panel-heading form-inline">
+          <div class="form-group">
+            <select class="pull-right form-control">
+              <option href='#/dashboard/transactions' value="">Transactions</option>
+              <option ui-sref='' value="">Portfolio</option>
+            </select>
+            </div>
+          </div>
+
+          <div class="panel-body">
+            <ui-view></ui-view>
+          </div>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<h3>Stocks</h3>
+
+<label>Filter:</label>
+<input ng-model="filterByName"></input> 
+
+<table class='table table-striped'>
+  <thead>
+  <tr>
+    <th ng-click="sortType = 'symbol'; sortReverse = !sortReverse">Symbol
+    </th>
+    <th ng-click="sortType = 'price'; sortReverse = !sortReverse">Price</th>
+    <th ng-click="sortType = 'one_day'; sortReverse = !sortReverse">1d</th>
+    <th ng-click="sortType = 'seven_day'; sortReverse = !sortReverse">7d</th>
+    <th ng-click="sortType = 'thirty_day'; sortReverse = !sortReverse">30d</th>
+    <th>Trade?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr stock-data="st[date]" ng-repeat="st in stocks | orderBy:sortType:sortReverse | filter: filterByName" stock-row stock="st" stock-date="date">
+    </tr>
+  </tbody>
+</table>
