@@ -1,12 +1,13 @@
-simulator.controller('StockPricesCtrl', ['$scope', 'workingDates', 'stockPrices', 
-  function($scope, workingDates, stockPrices){
+simulator.controller('StockPricesCtrl', ['$scope', 'sharedData', 'stockPrices', 
+  function($scope, sharedData, stockPrices){
   
-  $scope.dates = workingDates;
-  $scope.symbols = ["AAPL"];
+  $scope.dates = sharedData.dates;
+  $scope.symbols = sharedData.symbols;
 
   $scope.$watch('dates.selected', function(newVal){
+    $scope.historical = [];
     $scope.symbols.forEach(function(sym){
-      $scope.historical = stockPrices.historical(sym, $scope.dates.selected);
+      $scope.historical.push(stockPrices.historical(sym, $scope.dates.selected));
     });
   });
 

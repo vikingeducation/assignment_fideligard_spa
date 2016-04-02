@@ -1,7 +1,7 @@
-simulator.controller('DateCtrl', ['$scope', 'dateHelper', 'workingDates', 
-  function($scope, dateHelper, workingDates){
+simulator.controller('DateCtrl', ['$scope', 'dateHelper', 'sharedData', 
+  function($scope, dateHelper, sharedData){
 
-  $scope.dates = workingDates;
+  $scope.dates = sharedData.dates;
   $scope.showInput = true;
 
   $scope.rangeMax = dateHelper.diffInDays($scope.dates.start, $scope.dates.end);

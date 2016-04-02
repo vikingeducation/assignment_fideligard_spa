@@ -25,12 +25,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{ historical.symbol }}</td>
-          <td>{{ historical.price | currency }}</td>
-          <td>{{ historical[1].diff | number:2 }}</td>
-          <td>{{ historical[7].diff | number:2 }}</td>
-          <td>{{ historical[30].diff | number:2 }}</td>
+        <tr ng-repeat="sym in historical">
+          <td>{{ sym.symbol }}</td>
+          <td>{{ sym.price | currency }}</td>
+          <td>{{ sym[1].diff | number:2 }}</td>
+          <td>{{ sym[7].diff | number:2 }}</td>
+          <td>{{ sym[30].diff | number:2 }}</td>
           <td>-</td>
         </tr>
       </tbody>      

@@ -12,6 +12,6 @@
 }
 
  select * from   yahoo.finance.historicaldata
-         where  symbol    = "AAPL"
+         where  symbol    in ("YHOO","AAPL","GOOG","MSFT","ORCL","NXPI","WDAY","SPLK","CRM","AMZN","INTC","TWTR","FB")
          and    startDate = "2014-01-11"
-         and    endDate   = "2014-02-11"w
+         and    endDate   = "2014-02-11"
