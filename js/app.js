@@ -23,7 +23,6 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
       },
       resolve: {
         init: function( stockPrices, sharedData ){
-          sharedData;
           return stockPrices.init();
         }
       }

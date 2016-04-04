@@ -1,14 +1,14 @@
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-7">
     <h4>Stocks <small>{{ dates.selected | date : 'shortDate' }}</small></h4>
   </div>
-<!-- 
-  <div class="col-sm-8 form-inline">
+
+  <div class="col-sm-5 form-inline">
     <div class="form-group">
-      <input name="stock-filter" class="form-control" type="text">
+      <input name="stock-filter" class="form-control input-sm" type="text" placeholder="Filter Symbols" ng-model="displaySymbol">
     </div>
   </div>
-   -->
+  
 </div>
 
 <div class="row">
@@ -16,21 +16,31 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>1d</th>
-          <th>7d</th>
-          <th>30d</th>
+          <th>
+            <a href="javascript:void()" ng-click="orderBy = 'symbol'; orderByReverse = !orderByReverse">Symbol</a>
+          </th>
+          <th>
+            <a href="javascript:void()" ng-click="orderBy = 'price'; orderByReverse = !orderByReverse">Price</a>
+          </th>
+          <th>
+            <a href="javascript:void()" ng-click="orderBy = '[1].diff'; orderByReverse = !orderByReverse">1d</a>
+          </th>
+          <th>
+            <a href="javascript:void()" ng-click="orderBy = '[7].diff'; orderByReverse = !orderByReverse">7d</a>
+          </th>
+          <th>
+            <a href="javascript:void()" ng-click="orderBy = '[30].diff'; orderByReverse = !orderByReverse">30d</a>
+          </th>
           <th>Trade?</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="sym in historical">
-          <td>{{ sym.symbol }}</td>
-          <td>{{ sym.price | currency }}</td>
-          <td>{{ sym[1].diff | number:2 }}</td>
-          <td>{{ sym[7].diff | number:2 }}</td>
-          <td>{{ sym[30].diff | number:2 }}</td>
+        <tr ng-repeat="quote in quotes | filter:{symbol:displaySymbol} | orderBy : orderBy : orderByReverse">
+          <td>{{ quote.symbol }}</td>
+          <td>{{ quote.price | currency }}</td>
+          <td>{{ quote[1].diff | currency }}</td>
+          <td>{{ quote[7].diff | currency }}</td>
+          <td>{{ quote[30].diff | currency }}</td>
           <td>-</td>
         </tr>
       </tbody>      

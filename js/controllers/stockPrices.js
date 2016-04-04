@@ -5,9 +5,9 @@ simulator.controller('StockPricesCtrl', ['$scope', 'sharedData', 'stockPrices',
   $scope.symbols = sharedData.symbols;
 
   $scope.$watch('dates.selected', function(newVal){
-    $scope.historical = [];
+    $scope.quotes = [];
     $scope.symbols.forEach(function(sym){
-      $scope.historical.push(stockPrices.historical(sym, $scope.dates.selected));
+      $scope.quotes.push(stockPrices.historical(sym, $scope.dates.selected));
     });
   });
 

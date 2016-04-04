@@ -6,8 +6,8 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'sharedData', 'yahooA
   var init = function(){
     // format our raw data into something that's easy to to view by date
     // and stock symbol, so we don't have to iterate the entire collection
-    return yahooApi.getQuotes().success(function(data){    
-      var raw = data.query.results.quote;
+    return yahooApi.getQuotes().then(function(response){    
+      var raw = response.data.query.results.quote;
 
       raw.forEach(function(stockData){
         var date = stockData.Date;
