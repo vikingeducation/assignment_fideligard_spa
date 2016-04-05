@@ -1,8 +1,8 @@
-simulator.directive('focus',
+simulator.directive('focusWhen',
   function($timeout) {
     return {
     scope : {
-      trigger : '@focus'
+      trigger : '@focusWhen'
     },
     link : function(scope, element, attr) {
       scope.$watch('trigger', function(value) {

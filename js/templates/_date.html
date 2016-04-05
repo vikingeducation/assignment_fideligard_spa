@@ -24,8 +24,8 @@
 
                ng-model="inputDate" 
                ng-show="showInput"
-               focus="{{ showInput }}"
                ng-blur="tryUpdate()"
+               focus-when="{{ showInput }}"
                blur-on-return
 
                min="{{dates.start | date:'yyyy-MM-dd'}}" 

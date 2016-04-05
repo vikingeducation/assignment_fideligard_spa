@@ -1,48 +1,54 @@
-simulator.factory('stockPrices', ['$filter', 'dateHelper', 'sharedData', 'yahooApi', 
-  function($filter, dateHelper, sharedData, yahooApi){
+simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'yahooApi', 
+  function($filter, dateHelper, portfolioDates, yahooApi){
 
   var _parsed = {};
+  var _symbols = ["TWTR","YHOO","AAPL","GOOG","MSFT",
+                  "ORCL","NXPI","AMZN","INTC"];
 
   var init = function(){
     // format our raw data into something that's easy to to view by date
     // and stock symbol, so we don't have to iterate the entire collection
-    return yahooApi.getQuotes().then(function(response){    
-      var raw = response.data.query.results.quote;
+    return yahooApi.getQuotes(_symbols, portfolioDates.buffer, portfolioDates.end)
+      .then(function(response){    
+        var raw = response.data.query.results.quote;
 
-      raw.forEach(function(stockData){
-        var date = stockData.Date;
-        var symbol = stockData.Symbol;
+        raw.forEach(function(stockData){
+          var date = stockData.Date;
+          var symbol = stockData.Symbol;
 
-        if (!_parsed[date]){
-          _parsed[date] = {};
-        }
+          if (!_parsed[date]){
+            _parsed[date] = {};
+          }
 
-        _parsed[date][symbol] = stockData;
-      });
+          _parsed[date][symbol] = stockData;
+        });
 
-      _fill();
+        _fill();
     });
   };
 
-  var historical = function(symbol, selectedDate){
+  var historical = function(selectedDate){
     // start historical data collection by making sure the day we're working
     // with has pricing data, otherwise return an empty object
-    var quoteForDate = _price(symbol, selectedDate);
-    var result = {};
+    var results = [];
 
-    if ( quoteForDate ) {
-      var selectedDatePrice = Number(quoteForDate.Close);
-      result = _priceCompare(symbol, selectedDate, selectedDatePrice);
-      result.price = selectedDatePrice;
-      result.symbol = symbol;
-    }
+    _symbols.forEach(function(sym){
+      var quoteForDate = _price(sym, selectedDate);
 
-    return result;
+      if ( quoteForDate ) {
+        var selectedDatePrice = Number(quoteForDate.Close);
+        result = _priceCompare(sym, selectedDate, selectedDatePrice);
+        result.price = selectedDatePrice;
+        result.symbol = sym;
+        results.push(result);
+      }
+    });
+    return results;
   };
 
   var _fill = function(){
     var range = dateHelper.datesInRange(
-      sharedData.dates.buffer, sharedData.dates.end
+      portfolioDates.buffer, portfolioDates.end
     );
 
     // fill in any missing dates in the parsed data
@@ -53,9 +59,9 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'sharedData', 'yahooA
       }
     });
 
-    sharedData.symbols.forEach(function(sym){
+    _symbols.forEach(function(sym){
       // iterate backwards through the range of dates, checking _parsed
-      // if a missing date is found, skip back one day until we find the 
+      // if a missing price is found, skip back one day until we find the 
       // next available day and fill in pricing for missing day using that
       // data.  
 
@@ -84,9 +90,9 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'sharedData', 'yahooA
     // setup a object to return with keys for each of the days we'll
     // check pricing on
     var result = {
-      '1':{  'dateOf': dateHelper.addDays(compareDate, -1) }, 
-      '7':{  'dateOf': dateHelper.addDays(compareDate, -7) }, 
-      '30':{ 'dateOf': dateHelper.addDays(compareDate, -30) }
+      'day1':{  'dateOf': dateHelper.addDays(compareDate, -1) }, 
+      'day7':{  'dateOf': dateHelper.addDays(compareDate, -7) }, 
+      'day30':{ 'dateOf': dateHelper.addDays(compareDate, -30) }
     };
 
     var keys = Object.keys(result);
