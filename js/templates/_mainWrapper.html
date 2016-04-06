@@ -1,1 +1,14 @@
+<div class="row">
+  <div class="col-xs-6">{{currentPage}}</div>
+  <div class="col-xs-6 text-right">
+    <select name="mainnav" id="mainnav" class="form-control" ng-model="currentPage" ng-change="go()">
+      <option value="Portfolio">Portfolio</option>
+      <option value="Trade">Trade</option>
+      <option value="Transactions">Transactions</option>
+    </select>
+  </div>
+</div>
+
+{{options}}
+
 <ui-view></ui-view>

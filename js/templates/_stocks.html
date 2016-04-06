@@ -16,7 +16,7 @@
     <table class="table table-striped table-condensed table-vcenter">
       <thead>
         <tr>
-          <th sort-header ng-repeat="header in headers" header="header" sort="sort"></th>
+          <th sort-header ng-repeat="header in headers" label="{{header.label}}" set-order-by="{{header.setOrderBy}}" sort="sort"></th>
           <th>Trade?</th>
         </tr>
       </thead>

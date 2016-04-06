@@ -3,17 +3,18 @@ simulator.directive('sortHeader', function(){
     templateUrl: 'js/directives/sortHeader.html',
     restrict: 'AE',
     scope: {
-      header: '=',
+      label: "@",
+      setOrderBy: '@',
       sort: "="
     },
     link: function(scope){
       // first time the header is clicked, change sort to that 
       // column, and order a-z.  if clicked again, reverse sort
       scope.updateSort = function(){
-        if (scope.sort.orderBy === scope.header.orderBy) {
+        if (scope.sort.orderBy === scope.setOrderBy) {
           scope.sort.orderByReverse = !scope.sort.orderByReverse;
         } else {        
-          scope.sort.orderBy = scope.header.orderBy; 
+          scope.sort.orderBy = scope.setOrderBy; 
           scope.sort.orderByReverse = false;
         }
       };

@@ -18,19 +18,33 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
           controller: 'StockPricesCtrl'
         },
         'main': {
-          templateUrl: 'js/templates/_mainWrapper.html'
+          templateUrl: 'js/templates/_mainWrapper.html',
+          controller: 'MainCtrl'
         }
       },
       resolve: {
-        init: function( stockPrices, portfolioDates ){
+        init: function( stockPrices ){
           return stockPrices.init();
         }
       }
     })
 
-    .state('main.portfolio', {
+    .state('Portfolio', {
+      parent: 'main',
       url: '/portfolio',
       templateUrl: 'js/templates/main/_portfolio.html'
+    })
+
+    .state('Trade', {
+      parent: 'main',
+      url: '/trade',
+      templateUrl: 'js/templates/main/_trade.html'
+    })
+
+    .state('Transactions', {
+      parent: 'main',
+      url: '/transactions',
+      templateUrl: 'js/templates/main/_transactions.html'
     });
 
 });
