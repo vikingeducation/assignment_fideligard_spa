@@ -1,4 +1,8 @@
-<th role="button" ng-click="sort.orderBy = header.orderBy; sort.orderByReverse = !sort.orderByReverse">
+<th role="button" ng-click="updateSort()">
   {{ header.label }}
-  <span class="glyphicon glyphicon-sort-by-attributes" aria-hidden="true"></span>
+  <span ng-show="sort.orderBy != header.orderBy" class="glyphicon glyphicon-sort-by-attributes gi-half text-muted" aria-hidden="true" aria-label="Sort Off"></span>
+
+  <span ng-show="sort.orderBy === header.orderBy && sort.orderByReverse === false" class="glyphicon glyphicon-sort-by-attributes gi-half text-primary" aria-hidden="true" aria-label="Sort A-Z, 0-1"></span>
+
+  <span ng-show="sort.orderBy === header.orderBy && sort.orderByReverse === true"class="glyphicon glyphicon-sort-by-attributes-alt gi-half text-primary" aria-hidden="true" aria-label="Sort Z-A, 1-0"></span>
 </th>

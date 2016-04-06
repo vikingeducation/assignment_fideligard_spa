@@ -1,18 +1,30 @@
  @import "vendor/bootstrap/bootstrap";
 
+.ng-invalid {
+  @extend .has-error;
+}
+
 .navbar-brand {
   padding: 10px 15px;
 }
 
-form {
-  display: inline-block;
+.date-picker {
+  form {
+    display: inline-block;
+  }
+
+  .date-input {
+    display: inline-block;
+    width: 155px;
+  }
 }
 
-.date-input {
-  display: inline-block;
-  width: 155px;
-}
+.stocks-panel {
+  .gi-half {
+    font-size: 0.8em;
+  }
 
-.ng-invalid {
-  @extend .has-error;
+  .table-vcenter td {
+     vertical-align: middle!important;
+  }
 }
