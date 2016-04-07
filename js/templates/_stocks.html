@@ -22,13 +22,14 @@
       </thead>
       <tbody>
         <tr ng-repeat="quote in quotes | filter:{symbol:displaySymbol} | orderBy : sort.orderBy : sort.orderByReverse">
+        
           <td>{{ quote.symbol }}</td>
           <td>{{ quote.price | currency }}</td>
           <td>{{ quote.day1.diff > 0 ? "+" : "" }}{{ quote.day1.diff | number:2 }}</td>
           <td>{{ quote.day7.diff > 0 ? "+" : "" }}{{ quote.day7.diff | number:2 }}</td>
           <td>{{ quote.day30.diff > 0 ? "+" : "" }}{{ quote.day30.diff | number:2 }}</td>
           <td>
-            <button role="button" class="btn btn-default btn-xs">Trade</button>
+            <button role="button" class="btn btn-default btn-xs" ui-sref="Trade({symbol: quote.symbol, date: dates.selected})">Trade</button>
           </td>
         </tr>
       </tbody>      

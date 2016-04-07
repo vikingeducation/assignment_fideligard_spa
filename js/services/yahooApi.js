@@ -26,7 +26,7 @@ simulator.factory('yahooApi', ['$http', '$filter',
   };
 
   return {
-    getQuotes: getQuotes
+    getQuotes: offline
   };
 
 }]);
