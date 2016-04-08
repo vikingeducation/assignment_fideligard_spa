@@ -5,14 +5,18 @@
       <div class="form-group">
         <label for="symbol" class="col-sm-4 control-label">Symbol</label>
         <div class="col-sm-5">
-          <input name="symbol" type="text" class="form-control">
+          <input name="symbol" type="search" class="form-control" list="symbols" placeholder="Search Symbols" ng-model="tradeSymbol" autocomplete="off" required>
+
+          <datalist id="symbols">
+            <option ng-repeat="symbol in symbols">{{symbol}}</option>
+          </datalist>
         </div>
       </div>
 
       <div class="form-group">
         <label for="buy-sell" class="col-sm-4 control-label">Buy/Sell</label>
         <div class="col-sm-5">
-          <input name="buy-sell" type="text" class="form-control">
+          <select name="buy-sell" class="form-control" ng-model="tradeBuySell" ng-options="opt for opt in buySellArr" required></select>
         </div>
       </div>
 
@@ -26,7 +30,7 @@
       <div class="form-group">
         <label for="date" class="col-sm-4 control-label">Date</label>
         <div class="col-sm-5">
-          <input name="date" type="date" class="form-control">
+          <input name="date" type="date" class="form-control" ng-model="tradeDate" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}" required>
         </div>
       </div>
 
