@@ -4,4 +4,8 @@ financialApp.controller('PortfolioCtrl', ['$scope', '$location', 'dateService', 
   $scope.dateInfo = dateService.getDateInfo();
   $scope.portfolio = portfolioService.getPortfolio();
 
+  $scope.price = function(symbol) {
+    return $scope.stockData[ $scope.dateInfo.getDateString() ][symbol].price
+  }
+
 }]);

@@ -96,7 +96,7 @@
         {{ stock.costBasis | currency }}
       </td>
       <td>
-        {{ stock.quantity * stockData[ dateInfo.getDateString() ][symbol].price | currency }}
+        {{ stock.quantity * price(symbol) | currency }}
       </td>
       <td>
         {{ stock.profitLoss | currency }}
