@@ -33,7 +33,7 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
     var results = [];
 
     _symbols.forEach(function(sym){
-      var quoteForDate = price(sym, selectedDate);
+      var quoteForDate = quote(sym, selectedDate);
 
       if ( quoteForDate ) {
         var selectedDatePrice = Number(quoteForDate.Close);
@@ -46,11 +46,16 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
     return results;
   };
 
-  var price = function(symbol, date){
+  var quote = function(symbol, date){
     // key into the parsed date for a certain date and stock symbol
     // will return null or undefined if date or stock symbol aren't found 
     var dateKey = $filter('date')(date, "yyyy-MM-dd");
     return _parsed[dateKey] ? _parsed[dateKey][symbol] : null;
+  };
+
+  var closingPrice = function(symbol, date){
+    var q = quote(symbol, date);
+    return q ? q.Close : null;
   };
 
   var getSymbols = function(){
@@ -77,14 +82,14 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
       // data.  
 
       for(var i = range.length - 1; i>=0; i--){
-        if ( !price(sym, range[i]) ){
+        if ( !quote(sym, range[i]) ){
           var checkDay = 1;
-          while( checkDay <= 7 && !price(sym, range[i-checkDay]) ){
+          while( checkDay <= 7 && !quote(sym, range[i-checkDay]) ){
             checkDay++;
           }
-          var fdate = $filter('date')(range[i], "yyyy-MM-dd");
-          var fprice = price(sym, range[i-checkDay]);
-          _parsed[fdate][sym] = fprice;
+          var fillDate = $filter('date')(range[i], "yyyy-MM-dd");
+          var fillQuote = quote(sym, range[i-checkDay]);
+          _parsed[fillDate][sym] = fillQuote;
         }
       }
     });
@@ -101,8 +106,8 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
 
     var keys = Object.keys(result);
     keys.forEach(function(day, idx){
-      var quote = price(symbol, result[day].dateOf);
-      result[day].diff = quote ? comparePrice - Number(quote.Close) : null;
+      var daysQuote = quote(symbol, result[day].dateOf);
+      result[day].diff = daysQuote ? comparePrice - Number(daysQuote.Close) : null;
     });
 
     return result;
@@ -112,7 +117,8 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
   return {
     init: init,
     historical: historical,
-    price: price,
+    quote: quote,
+    closingPrice: closingPrice,
     getSymbols: getSymbols,
   };
 

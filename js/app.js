@@ -1,4 +1,4 @@
-var simulator = angular.module( 'simulator', ['ui.router', 'ui.bootstrap'] );
+var simulator = angular.module( 'simulator', ['ui.router', 'ui.validate', 'ui.bootstrap'] );
 
 simulator.config( function($stateProvider, $urlRouterProvider ){
 

@@ -6,11 +6,11 @@ simulator.controller('DateCtrl', ['$scope', 'dateHelper', 'portfolioDates',
 
   $scope.rangeMax = dateHelper.diffInDays($scope.dates.start, $scope.dates.end);
   $scope.rangeVal = dateHelper.diffInDays($scope.dates.start, $scope.dates.selected);
-  $scope.inputDate = $scope.dates.selected;
+  $scope.formData = { date: $scope.dates.selected };
 
   $scope.$watch('rangeVal', function(newVal){
     $scope.dates.selected = dateHelper.addDays($scope.dates.start, $scope.rangeVal);
-    $scope.inputDate = $scope.dates.selected;
+    $scope.formData.date = $scope.dates.selected;
   });
 
   // Model for input[date] is different from main dates.selected.
@@ -21,8 +21,8 @@ simulator.controller('DateCtrl', ['$scope', 'dateHelper', 'portfolioDates',
   // the inputDate is valid rather than using two-way binding. 
 
   $scope.tryUpdate = function(){
-    if ($scope.form.$valid){
-      $scope.dates.selected = $scope.inputDate;
+    if ($scope.pickerForm.$valid){
+      $scope.dates.selected = $scope.formData.date;
       $scope.rangeVal = dateHelper.diffInDays($scope.dates.start, $scope.dates.selected);
       $scope.showInput = false;
     } 
