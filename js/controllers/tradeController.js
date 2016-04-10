@@ -1,24 +1,29 @@
-simulator.controller('TradeCtrl', ['$scope', '$stateParams', 'portfolioDates', 'stockPrices', 'portfolioLedger',
-  function($scope, $stateParams, portfolioDates, stockPrices, portfolioLedger){
-
-  $scope.paramz = $stateParams;
+simulator.controller('TradeCtrl', ['$scope', '$stateParams', '$state', 'portfolioDates', 'stockPrices', 'portfolioLedger',
+  function($scope, $stateParams, $state, portfolioDates, stockPrices, portfolioLedger){
 
   $scope.ledger = portfolioLedger;
-
-  $scope.cashOnHand = $scope.ledger.cashOnHand($stateParams.date);
-
   $scope.symbols = stockPrices.getSymbols();
-
-  $scope.formData = {
-    symbol: $stateParams.symbol,
-    date: $stateParams.date,
-  };
-
   $scope.buySellArr = ['Buy', 'Sell'];
-
   $scope.minDate = portfolioDates.start;
   $scope.maxDate = portfolioDates.end;
   $scope.tradeDate = $stateParams.date;
+  
+  $scope.formData = {
+    symbol: $stateParams.symbol,
+    buySell: undefined,
+    quantity: undefined,
+    date: $stateParams.date,
+  };
+
+  $scope.$watch('formData.quantity', function(newVal){
+    if (newVal) {
+      $scope.displayTotal = $scope.formData.price * Number(newVal);
+    } 
+  });
+
+  $scope.$watch('formData.date', function(newVal){
+    $scope.cashOnHand = $scope.ledger.cashOnHand(newVal);
+  });
 
   $scope.$watchGroup(['formData.symbol', 'formData.date'], function(newVals){
     if (newVals[0] && newVals[1]) {
@@ -26,42 +31,16 @@ simulator.controller('TradeCtrl', ['$scope', '$stateParams', 'portfolioDates', '
     }
   });
 
-  // validations
-
-  $scope.currentBalance = function(newQuantity){
-    if ($scope.formData.buySell == 'Buy') {
-      return $scope.ledger.cashOnHand($scope.formData.date) >= 
-             $scope.formData.price * Number(newQuantity);
-    } else {
-      return true;
-    }
-  };
-
-  $scope.futureBalance = function(newQuantity){
-    if ($scope.formData.buySell == 'Buy' && $scope.currentBalance(newQuantity)) {
-      return $scope.ledger.cashOnHand() >= 
-             $scope.formData.price * Number(newQuantity);
-    } else {
-      return true;
-    }
-  };
-
-  $scope.currentQuantity = function(newQuantity){
-    if ($scope.formData.buySell == 'Sell') {
-      return $scope.ledger.quantityOnHand($scope.formData.symbol, $scope.formData.date) >= 
-             Number(newQuantity);
-    } else {
-      return true;
-    }
-  };
-
-  $scope.futureQuantity = function(newQuantity){
-    if ($scope.formData.buySell == 'Sell' && $scope.currentQuantity(newQuantity)) {
-      return $scope.ledger.quantityOnHand($scope.formData.symbol) >= 
-             Number(newQuantity);
-    } else {
-      return true;
-    }
+  $scope.placeOrder = function(){
+    $scope.ledger.addTransaction({
+      date: new Date($scope.formData.date),
+      symbol: $scope.formData.symbol,
+      type: $scope.formData.buySell,
+      quantity: Number($scope.formData.quantity),
+      price: Number($scope.formData.quantity * $scope.formData.price)
+    }).then(function(){
+      $state.go('Transactions');
+    });
   };
 
 }]);

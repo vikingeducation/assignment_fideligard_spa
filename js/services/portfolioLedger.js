@@ -21,6 +21,15 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
   var _startingBalance = 200000;
   var _transactions = SEED_TRANSACTIONS;
 
+  var addTransaction = function(transaction){
+    return new Promise(
+      function(resolve){
+        resolve(_transactions.push(transaction));
+        console.log(_transactions);
+      }
+    );
+  };
+
   var cashOnHand = function(date){
     var cash = _startingBalance;
     var transactions;
@@ -73,6 +82,7 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
 
 
   return {
+    addTransaction: addTransaction,
     cashOnHand: cashOnHand,
     quantityOnHand: quantityOnHand,
   };

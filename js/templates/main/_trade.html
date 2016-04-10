@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-6">
-    <form name="tradeForm" action="#" class="form-horizontal" novalidate>
+    <form name="tradeForm" ng-submit="placeOrder()" class="form-horizontal" trade-validations novalidate>
 
       <!-- Originally just extended .has-error to .ng-valid
       however this marks the entire form in red, even on load.
@@ -23,13 +23,7 @@
       <div class="form-group" ng-class="{ 'has-error': tradeForm.quantity.$dirty && tradeForm.quantity.$invalid }">
         <label for="quantity" class="col-sm-4 control-label">Quantity</label>
         <div class="col-sm-5">
-          <input name="quantity" type="number" class="form-control" ng-model="formData.quantity" ng-min="1" required
-          ui-validate="{ 
-            currentBalance: 'currentBalance($value)',
-            futureBalance: 'futureBalance($value)',
-            currentQuantity: 'currentQuantity($value)',
-            futureQuantity: 'futureQuantity($value)' 
-          }">
+          <input name="quantity" type="number" class="form-control" ng-model="formData.quantity" ng-min="1" required>
         </div>
       </div>
 
@@ -40,23 +34,23 @@
         </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" ng-show="formData.price">
         <label class="col-sm-4 control-label">Price</label>
         <div class="col-sm-5">
           <p class="form-control-static">{{ formData.price | currency }}</p>
         </div>
       </div>
 
-      <div class="form-group">
-        <label class="col-sm-4 control-label">Cost</label>
+      <div class="form-group" ng-show="displayTotal">
+        <label class="col-sm-4 control-label">Order Total</label>
         <div class="col-sm-5">
-          <p class="form-control-static">{{ formData.price * formData.quantity | currency }}</p>
+          <p class="form-control-static">{{ displayTotal | currency }}</p>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-offset-4 col-sm-5">
-          <button type="submit" class="btn btn-primary">Place Order!</button>
+          <button type="submit" ng-disabled="tradeForm.$invalid" class="btn btn-primary">Place Order!</button>
         </div>
       </div>            
 
@@ -65,16 +59,34 @@
 
   <div class="col-md-6">
     
-    <strong>Cash Available</strong>
+    <strong>Cash Available</strong> ({{ formData.date | date : 'shortDate' }})
     <p>{{ cashOnHand | currency }}</p>
 
     <strong>Order Status</strong>
-    <p>Valid</p>
+    <p ng-show="tradeForm.$valid" class="text-success">
+      <strong>Valid</strong>
+    </p>
+    <p ng-show="tradeForm.$invalid" class="text-danger">
+      <strong>Invalid</strong>
+    </p>
 
-    <p>{{paramz}}</p>
-    <p>{{tradeForm.quantity.$error}}</p>
-    <p>{{ledger.quantityOnHand(formData.date, formData.symbol) >= 
-             Number(formData.quantity)}}</p>
+    <ul>
+      <li class="text-danger" ng-show="tradeForm.date.$error.min || tradeForm.date.$error.max">
+        Date is out of simluation range
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.currentBalance">
+        Insufficent funds for buy order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.futureBalance">
+        Leaves Insufficient funds for existing order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.currentQuantity">
+        Insufficient quantity for sell order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.futureQuantity">
+        Leaves Insufficient quantity for existing order
+      </li>
+    </ul>
 
   </div>
 </div>
