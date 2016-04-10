@@ -37,9 +37,9 @@ simulator.controller('TradeCtrl', ['$scope', '$stateParams', '$state', 'portfoli
       symbol: $scope.formData.symbol,
       type: $scope.formData.buySell,
       quantity: Number($scope.formData.quantity),
-      price: Number($scope.formData.quantity * $scope.formData.price)
-    }).then(function(){
-      $state.go('Transactions');
+      price: Number($scope.formData.price)
+    }).then(function(response){
+      $state.go('Transactions', {newIdx: response - 1});
     });
   };
 

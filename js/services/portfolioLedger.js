@@ -13,6 +13,13 @@ var SEED_TRANSACTIONS = [
     quantity: 5,
     price: 524.69
   },
+  {
+    date: new Date('5-1-2014'),
+    symbol: "GOOG",
+    type: "Buy",
+    quantity: 100,
+    price: 531.35
+  }
 ];
 
 simulator.factory('portfolioLedger', ['dateHelper', '$filter', 
@@ -25,9 +32,12 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
     return new Promise(
       function(resolve){
         resolve(_transactions.push(transaction));
-        console.log(_transactions);
       }
     );
+  };
+
+  var getTransactions = function(){
+    return _transactions;
   };
 
   var cashOnHand = function(date){
@@ -83,6 +93,7 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
 
   return {
     addTransaction: addTransaction,
+    getTransactions: getTransactions,
     cashOnHand: cashOnHand,
     quantityOnHand: quantityOnHand,
   };

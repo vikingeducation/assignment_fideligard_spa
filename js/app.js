@@ -45,7 +45,9 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
     .state('Transactions', {
       parent: 'main',
       url: '/transactions',
-      templateUrl: 'js/templates/main/_transactions.html'
+      templateUrl: 'js/templates/main/_transactions.html',
+      controller: 'TransactionsCtrl',
+      params: {newIdx: undefined}
     });
 
 });
