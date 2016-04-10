@@ -13,6 +13,10 @@ simulator.directive('tradeValidations', ['portfolioLedger',
         if (!fd.quantity || !fd.symbol || !fd.buySell || !fd.date ) return;
 
         if (fd.buySell == 'Buy') {
+          // clear any 'Sell' validations
+          scope.tradeForm.quantity.$setValidity('currentQuantity', true);
+          scope.tradeForm.quantity.$setValidity('futureQuantity', true);
+
           var cbIsValid = portfolioLedger.cashOnHand(fd.date) >= 
                           fd.price * Number(fd.quantity);
           scope.tradeForm.quantity.$setValidity('currentBalance', cbIsValid);
@@ -25,6 +29,10 @@ simulator.directive('tradeValidations', ['portfolioLedger',
         } 
 
         if (fd.buySell == 'Sell') {
+          // clear any 'Buy' validations
+          scope.tradeForm.quantity.$setValidity('currentBalance', true);
+          scope.tradeForm.quantity.$setValidity('futureBalance', true);
+
           var cqIsValid = portfolioLedger.quantityOnHand(fd.symbol, fd.date) >= 
                           Number(fd.quantity);
           scope.tradeForm.quantity.$setValidity('currentQuantity', cqIsValid);

@@ -19,7 +19,6 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
         },
         'main': {
           templateUrl: 'js/templates/_mainWrapper.html',
-          controller: 'MainCtrl'
         }
       },
       resolve: {
@@ -40,7 +39,7 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
       url: '/trade',
       templateUrl: 'js/templates/main/_trade.html',
       controller: 'TradeCtrl',
-      params: {symbol: undefined, date: undefined, price: undefined}
+      params: {symbol: undefined, date: undefined}
     })
 
     .state('Transactions', {
