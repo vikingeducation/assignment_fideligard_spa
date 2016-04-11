@@ -43,12 +43,13 @@ simulator.factory('portfolioLedger', ['dateHelper', 'stockPrices', '$filter',
   var buildForDate = function(date){
     var bDate = new Date(date);
     var fTransactions = _upToDate(bDate, _transactions);
-    var portfolio = {};
+    var stocks = {};
+    var portfolio = [];
 
     fTransactions.forEach(function(trs){
       // create obj for symbol if it doesn't exist
-      if (!portfolio[trs.symbol]) {
-        portfolio[trs.symbol] = {
+      if (!stocks[trs.symbol]) {
+        stocks[trs.symbol] = {
           totalSpent: 0,
           totalEarned: 0,
           quantity: 0
@@ -56,24 +57,27 @@ simulator.factory('portfolioLedger', ['dateHelper', 'stockPrices', '$filter',
       }
 
       if (trs.type == 'Buy') {
-        portfolio[trs.symbol].totalSpent += trs.price * trs.quantity;
-        portfolio[trs.symbol].quantity += trs.quantity;
+        stocks[trs.symbol].totalSpent += trs.price * trs.quantity;
+        stocks[trs.symbol].quantity += trs.quantity;
       } else { // 'Sell order'
-        portfolio[trs.symbol].totalEarned += trs.price * trs.quantity;
-        portfolio[trs.symbol].quantity -= trs.quantity;        
+        stocks[trs.symbol].totalEarned += trs.price * trs.quantity;
+        stocks[trs.symbol].quantity -= trs.quantity;        
       }
     });
 
-    Object.keys(portfolio).forEach(function(symbol){
-      var sym = portfolio[symbol];
+    Object.keys(stocks).forEach(function(symbol){
+      var sym = stocks[symbol];
       var history = stockPrices.symbolHistory(symbol, bDate);
 
+      sym.symbol = symbol;
       sym.price = history.price;
       sym.costBasis = sym.totalSpent - sym.totalEarned;
       sym.currentValue = sym.price * sym.quantity;
-      sym.day1 = sym.currentValue + (sym.price - history.day1.diff * sym.quantity);
-      sym.day7 = sym.currentValue + (sym.price - history.day7.diff * sym.quantity);
-      sym.day30 = sym.currentValue + (sym.price - history.day30.diff * sym.quantity);
+      sym.day1 = sym.currentValue - ((sym.price - history.day1.diff) * sym.quantity);
+      sym.day7 = sym.currentValue - ((sym.price - history.day7.diff) * sym.quantity);
+      sym.day30 = sym.currentValue - ((sym.price - history.day30.diff) * sym.quantity);
+    
+      portfolio.push(sym);
     });
 
     return portfolio;

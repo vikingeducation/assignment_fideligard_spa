@@ -7,3 +7,32 @@
     <nav-select></nav-select>
   </div>
 </div>
+
+<table class="table table-condensed">
+  <thead>
+    <th sort-header label="Symbol" set-order-by="symbol" sort="sort"></th>
+    <th>Quantity</th>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>Current Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </thead>
+  <tbody>
+    <tr ng-repeat="stock in stocks | orderBy : sort.orderBy : sort.orderByReverse">
+      <td>{{ stock.symbol }}</td>
+      <td>{{ stock.quantity }}</td>
+      <td>{{ stock.costBasis | currency }}</td>
+      <td>{{ stock.currentValue | currency }}</td>
+      <td>{{ stock.currentValue - stock.costBasis | currency }}</td>
+      <td>{{ stock.price | currency }}</td>
+      <td>{{ stock.day1 | currency }}</td>
+      <td>{{ stock.day7 | currency }}</td>
+      <td>{{ stock.day30 | currency }}</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>

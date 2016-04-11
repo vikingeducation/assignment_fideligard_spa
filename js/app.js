@@ -31,7 +31,8 @@ simulator.config( function($stateProvider, $urlRouterProvider ){
     .state('Portfolio', {
       parent: 'main',
       url: '/portfolio',
-      templateUrl: 'js/templates/main/_portfolio.html'
+      templateUrl: 'js/templates/main/_portfolio.html',
+      controller: 'PortfolioCtrl'
     })
 
     .state('Trade', {
