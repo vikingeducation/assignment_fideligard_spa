@@ -46,6 +46,20 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
     return results;
   };
 
+  var symbolHistory = function(symbol, date){
+    var result;
+    var quoteForDate = quote(symbol, date);
+
+    if ( quoteForDate ) {
+      var price = Number(quoteForDate.Close);
+      result = _priceCompare(symbol, date, price);
+      result.price = price;
+      result.symbol = symbol;
+    }
+
+    return result;
+  };
+
   var quote = function(symbol, date){
     // key into the parsed date for a certain date and stock symbol
     // will return null or undefined if date or stock symbol aren't found 
@@ -117,6 +131,7 @@ simulator.factory('stockPrices', ['$filter', 'dateHelper', 'portfolioDates', 'ya
   return {
     init: init,
     historical: historical,
+    symbolHistory: symbolHistory,
     quote: quote,
     closingPrice: closingPrice,
     getSymbols: getSymbols,

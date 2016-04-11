@@ -22,8 +22,8 @@ var SEED_TRANSACTIONS = [
   }
 ];
 
-simulator.factory('portfolioLedger', ['dateHelper', '$filter', 
-  function(dateHelper, $filter){
+simulator.factory('portfolioLedger', ['dateHelper', 'stockPrices', '$filter', 
+  function(dateHelper, stockPrices, $filter){
 
   var _startingBalance = 200000;
   var _transactions = SEED_TRANSACTIONS;
@@ -38,6 +38,45 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
 
   var getTransactions = function(){
     return _transactions;
+  };
+
+  var buildForDate = function(date){
+    var bDate = new Date(date);
+    var fTransactions = _upToDate(bDate, _transactions);
+    var portfolio = {};
+
+    fTransactions.forEach(function(trs){
+      // create obj for symbol if it doesn't exist
+      if (!portfolio[trs.symbol]) {
+        portfolio[trs.symbol] = {
+          totalSpent: 0,
+          totalEarned: 0,
+          quantity: 0
+        };
+      }
+
+      if (trs.type == 'Buy') {
+        portfolio[trs.symbol].totalSpent += trs.price * trs.quantity;
+        portfolio[trs.symbol].quantity += trs.quantity;
+      } else { // 'Sell order'
+        portfolio[trs.symbol].totalEarned += trs.price * trs.quantity;
+        portfolio[trs.symbol].quantity -= trs.quantity;        
+      }
+    });
+
+    Object.keys(portfolio).forEach(function(symbol){
+      var sym = portfolio[symbol];
+      var history = stockPrices.symbolHistory(symbol, bDate);
+
+      sym.price = history.price;
+      sym.costBasis = sym.totalSpent - sym.totalEarned;
+      sym.currentValue = sym.price * sym.quantity;
+      sym.day1 = sym.currentValue + (sym.price - history.day1.diff * sym.quantity);
+      sym.day7 = sym.currentValue + (sym.price - history.day7.diff * sym.quantity);
+      sym.day30 = sym.currentValue + (sym.price - history.day30.diff * sym.quantity);
+    });
+
+    return portfolio;
   };
 
   var cashOnHand = function(date){
@@ -94,6 +133,7 @@ simulator.factory('portfolioLedger', ['dateHelper', '$filter',
   return {
     addTransaction: addTransaction,
     getTransactions: getTransactions,
+    buildForDate: buildForDate,
     cashOnHand: cashOnHand,
     quantityOnHand: quantityOnHand,
   };
