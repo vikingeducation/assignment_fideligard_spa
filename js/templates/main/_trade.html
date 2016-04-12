@@ -1,0 +1,103 @@
+<div class="row">
+  <div class="col-xs-10">
+    <h3>Trade</h3>
+  </div>
+
+  <div class="col-xs-2">
+    <nav-select></nav-select>
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-md-6">
+    <form name="tradeForm" ng-submit="placeOrder()" class="form-horizontal" trade-validations novalidate>
+
+      <!-- Originally just extended .has-error to .ng-valid
+      however this marks the entire form in red, even on load.
+      Use ng-class to mark individual inputs as invalid instead. -->
+
+      <div class="form-group" ng-class="{ 'has-error': tradeForm.symbol.$dirty && tradeForm.symbol.$invalid }">
+        <label for="symbol" class="col-sm-4 control-label">Symbol</label>
+        <div class="col-sm-5">
+          <select name="symbol" class="form-control" placeholder="Select a Symbol" ng-model="formData.symbol" ng-options="sym for sym in symbols" required></select>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error': tradeForm.buySell.$dirty && tradeForm.buySell.$invalid }">
+        <label for="buySell" class="col-sm-4 control-label">Buy/Sell</label>
+        <div class="col-sm-5">
+          <select name="buySell" class="form-control" ng-model="formData.buySell" ng-options="opt for opt in buySellArr" required></select>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error': tradeForm.quantity.$dirty && tradeForm.quantity.$invalid }">
+        <label for="quantity" class="col-sm-4 control-label">Quantity</label>
+        <div class="col-sm-5">
+          <input name="quantity" type="number" class="form-control" ng-model="formData.quantity" ng-min="1" required>
+        </div>
+      </div>
+
+      <div class="form-group" ng-class="{ 'has-error': tradeForm.date.$dirty && tradeForm.date.$invalid }">
+        <label for="date" class="col-sm-4 control-label">Date</label>
+        <div class="col-sm-5">
+          <input name="date" type="date" class="form-control" ng-model="formData.date" min="{{minDate | date:'yyyy-MM-dd'}}" max="{{maxDate | date:'yyyy-MM-dd'}}" required>
+        </div>
+      </div>
+
+      <div class="form-group" ng-show="formData.price">
+        <label class="col-sm-4 control-label">Price</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ formData.price | currency }}</p>
+        </div>
+      </div>
+
+      <div class="form-group" ng-show="displayTotal">
+        <label class="col-sm-4 control-label">Order Total</label>
+        <div class="col-sm-5">
+          <p class="form-control-static">{{ displayTotal | currency }}</p>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-5">
+          <button type="submit" ng-disabled="tradeForm.$invalid" class="btn btn-primary">Place Order!</button>
+        </div>
+      </div>            
+
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    
+    <strong>Cash Available</strong> ({{ formData.date | date : 'shortDate' }})
+    <p>{{ cashOnHand | currency }}</p>
+
+    <strong>Order Status</strong>
+    <p ng-show="tradeForm.$valid" class="text-success">
+      <strong>Valid</strong>
+    </p>
+    <p ng-show="tradeForm.$invalid" class="text-danger">
+      <strong>Invalid</strong>
+    </p>
+
+    <ul>
+      <li class="text-danger" ng-show="tradeForm.date.$error.min || tradeForm.date.$error.max">
+        Date is out of simluation range
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.currentBalance">
+        Insufficent funds for buy order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.futureBalance">
+        Leaves Insufficient funds for existing order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.currentQuantity">
+        Insufficient quantity for sell order
+      </li>
+      <li class="text-danger" ng-show="tradeForm.quantity.$dirty && tradeForm.quantity.$error.futureQuantity">
+        Leaves Insufficient quantity for existing order
+      </li>
+    </ul>
+
+  </div>
+</div>

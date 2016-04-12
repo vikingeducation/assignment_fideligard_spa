@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-1">
+    {{ dates.start | date : 'shortDate'}}
+  </div>
+
+  <div class="col-xs-11 text-right">
+    {{ dates.end | date : 'shortDate'}}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <input type="range" ng-model="rangeVal" min="0" max="{{ rangeMax }}">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <strong>Selected Date:</strong>
+      <form name="pickerForm" ng-class="{ 'has-error': pickerForm.date.$invalid }">
+        <input name="date" 
+               class="form-control date-input" 
+               type="date"
+               
+               ng-model="formData.date" 
+               ng-show="showInput"
+               ng-blur="tryUpdate()"
+               focus-when="{{ showInput }}"
+               blur-on-return
+
+               min="{{dates.start | date:'yyyy-MM-dd'}}" 
+               max="{{dates.end | date:'yyyy-MM-dd'}}" 
+               required>
+      </form>
+
+    <a href="javascript:void(0)"
+
+       ng-click="showInput = true; disableTip = true" 
+       ng-show="!showInput"
+
+       uib-tooltip="Click to enter a date." 
+       tooltip-placement="right"
+       tooltip-enable="!disableTip">
+
+      <strong>{{ dates.selected | date:'shortDate' }}</strong>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-sm-7">
+    <h4>Stocks <small>{{ dates.selected | date : 'shortDate' }}</small></h4>
+  </div>
+
+  <div class="col-sm-5 form-inline text-right">
+    <div class="form-group">
+      <input name="stock-filter" class="form-control input-sm" type="text" placeholder="Filter Symbols" ng-model="displaySymbol">
+    </div>
+  </div>
+  
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped table-condensed table-vcenter">
+      <thead>
+        <tr>
+          <th sort-header ng-repeat="header in headers" label="{{header.label}}" set-order-by="{{header.setOrderBy}}" sort="sort"></th>
+          <th>Trade?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="quote in quotes | filter:{symbol:displaySymbol} | orderBy : sort.orderBy : sort.orderByReverse">
+
+          <td>{{ quote.symbol }}</td>
+          <td>{{ quote.price | currency }}</td>
+          <td>{{ quote.day1.diff > 0 ? "+" : "" }}{{ quote.day1.diff | number:2 }}</td>
+          <td>{{ quote.day7.diff > 0 ? "+" : "" }}{{ quote.day7.diff | number:2 }}</td>
+          <td>{{ quote.day30.diff > 0 ? "+" : "" }}{{ quote.day30.diff | number:2 }}</td>
+          <td>
+            <button role="button" class="btn btn-default btn-xs" ui-sref="Trade({symbol: quote.symbol, date: dates.selected})">Trade</button>
+          </td>
+        </tr>
+      </tbody>      
+    </table>
+  </div>
+</div>
