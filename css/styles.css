@@ -5812,15 +5812,24 @@ button.close {
 .navbar-brand {
   padding: 10px 15px; }
 
-.date-picker form {
-  display: inline-block; }
-.date-picker .date-input {
-  display: inline-block;
-  width: 155px; }
-
-.stocks-panel .gi-half {
-  font-size: 0.8em; }
-.stocks-panel .table-vcenter td {
+.table-vcenter td {
   vertical-align: middle !important; }
+
+.gi-half {
+  font-size: 0.8em; }
+
+.date-picker {
+  height: 80px; }
+  .date-picker form {
+    display: inline-block; }
+  .date-picker .date-input {
+    display: inline-block;
+    width: 155px; }
+
+.portfolio-main h3 {
+  margin-top: 5px; }
+
+.stocks-panel h4 {
+  margin-top: 5px; }
 
 /*# sourceMappingURL=styles.css.map */

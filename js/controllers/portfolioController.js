@@ -9,7 +9,8 @@ simulator.controller('PortfolioCtrl', ['$scope', 'portfolioDates', 'portfolioLed
   };
 
   $scope.$watch('dates.selected', function(date){
-    $scope.stocks = portfolioLedger.buildForDate(date);
+    $scope.ledger = portfolioLedger.portfolioForDate(date);
+    $scope.stocks = $scope.ledger.stocks;
   });
 
 }]);

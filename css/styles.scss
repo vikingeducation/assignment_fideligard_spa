@@ -4,7 +4,17 @@
   padding: 10px 15px;
 }
 
+.table-vcenter td {
+   vertical-align: middle!important;
+}
+
+.gi-half {
+  font-size: 0.8em;
+}
+
 .date-picker {
+  height: 80px;
+
   form {
     display: inline-block;
   }
@@ -15,12 +25,14 @@
   }
 }
 
-.stocks-panel {
-  .gi-half {
-    font-size: 0.8em;
+.portfolio-main {
+  h3 {
+    margin-top: 5px;
   }
+}
 
-  .table-vcenter td {
-     vertical-align: middle!important;
-  }
+.stocks-panel {
+  h4 {
+    margin-top: 5px;
+  }  
 }
