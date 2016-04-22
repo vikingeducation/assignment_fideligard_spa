@@ -1,0 +1,111 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" ui-sref="stocks"> Fideligard Historical Portfolio Simulator</a>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-xs-5">
+      <div class="panel panel-default">
+
+        <h3>Stocks</h3>
+
+        <div class="form-group">
+          <label for="filter">Filter</label>
+          <input type="text" class="form-control" ng-model="filter"></input>
+        </div>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>
+                Symbol
+              </th>
+              <th>
+                Price
+              </th>
+              <th>
+                1d
+              </th>
+              <th>
+                7d
+              </th>
+              <th>
+                30d
+              </th>
+              <th>
+                Trade?
+              </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr ng-repeat="(symbol, stock) in stockData[ dateInfo.getDateString() ]">
+              <td>
+                {{ symbol }}
+              </td>
+              <td>
+                {{ stock.price | currency }}
+              </td>
+              <td>
+                {{ stock.price - priceOneDayAgo(symbol) | currency }}
+              </td>
+              <td>
+                {{ stock.price - priceOneWeekAgo(symbol) | currency }}
+              </td>
+              <td>
+                {{ stock.price - priceOneMonthAgo(symbol) | currency }}
+              </td>
+              <td>
+                <a ui-sref="stocks.trading({ symbol: symbol })">
+                  trade
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div class="col-xs-7">
+      <div class="panel panel-default">
+
+        <h3>Date</h3>
+
+        <form id="slider-holder">
+          <span class="pull-left">{{ dateInfo.startDate | date:"MMM dd, yyyy"}}</span>
+          <span class="text-center">{{ dateInfo.currentDate | date:"MMM dd, yyyy"}}</span>
+          <span class="pull-right">{{ dateInfo.endDate | date:"MMM dd, yyyy"}}</span>
+          <input type="range" step="1" min="0" max="{{ dateInfo.dateRange() }}" id="date-slider" ng-change='update()' ng-model='dateInfo.dateSelection'>
+        </form>
+
+      </div>
+
+      <div class="panel panel-default">
+
+        <div class="form-group">
+          <select class="form-control" ng-model="stockDataRoute" ng-change="go(stockDataRoute)">
+            <option value="portfolio">
+              Portfolio
+            </option>
+            <option value="trading">
+              Trading
+            </option>
+            <option value="transactions">
+              Transactions
+            </option>
+          </select>
+        </div>
+
+        <div ui-view></div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

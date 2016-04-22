@@ -1,0 +1,123 @@
+<h3>Portfolio</h3>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Cost Basis
+      </th>
+      <th>
+        Current Value
+      </th>
+      <th>
+        Profit/Loss
+      </th>
+      <th>
+        1d
+      </th>
+      <th>
+        7d
+      </th>
+      <th>
+        30d
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>
+        {{ portfolio.costBasis | currency }}
+      </td>
+      <td>
+        {{ portfolio.currentValue | currency }}
+      </td>
+      <td>
+        {{ portfolio.profitLoss | currency }}
+      </td>
+      <td>
+        {{ portfolio.oneDayAgo | currency }}
+      </td>
+      <td>
+        {{ portfolio.oneWeekAgo | currency }}
+      </td>
+      <td>
+        {{ portfolio.oneMonthAgo | currency }}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        Symbol
+      </th>
+      <th>
+        Quantity
+      </th>
+      <th>
+        Cost Basis
+      </th>
+      <th>
+        Current Value
+      </th>
+      <th>
+        Profit/Loss
+      </th>
+      <th>
+        Current Price
+      </th>
+      <th>
+        1d
+      </th>
+      <th>
+        7d
+      </th>
+      <th>
+        30d
+      </th>
+      <th>
+        Trade?
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="(symbol, stock) in portfolio.stocks">
+      <td>
+        {{ symbol }}
+      </td>
+      <td>
+        {{ stock.quantity }}
+      </td>
+      <td>
+        {{ stock.costBasis | currency }}
+      </td>
+      <td>
+        {{ stock.quantity * price(symbol) | currency }}
+      </td>
+      <td>
+        {{ stock.profitLoss | currency }}
+      </td>
+      <td>
+        {{ stockData[ dateInfo.getDateString() ][symbol].price | currency }}
+      </td>
+      <td>
+        {{ stock.oneDayAgo | currency }}
+      </td>
+      <td>
+        {{ stock.oneWeekAgo | currency }}
+      </td>
+      <td>
+        {{ stock.oneMonthAgo | currency }}
+      </td>
+      <td>
+        <a ui-sref="stocks.trading({ symbol: symbol })">
+          trade
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
