@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html ng-app="Fildegard">
+<html ng-app="TargetPractice">
   <head>
-    <title>Dylan Adrian Johnny</title>
+    <title>Dylan Adrian</title>
     <!--Lo-Dash -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
     <!-- Angular -->
@@ -12,9 +12,6 @@
     <!--CSS stylesheet-->
     <link rel="stylesheet" href="style.css">
 
-    <!-- jquery-->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js">
-
     <!-- Bstrp4  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
 
@@ -23,40 +20,38 @@
 
     <!--App-->
     <script src="app.js"></script>
-    <!-- Services -->
-    <script src="services/apiParams.js"></script>
-    <script src="services/stock.js"></script>
     <!--Controllers -->
-    <script src="controllers/dateController.js"></script>
-    <script src="controllers/stocksController.js"></script>
+
     <!--Directives -->
 
-
+    <!-- Services -->
     <!--Filters -->
   </head>
 
   <body>
     <div class="text-xs-center bg-faded">
-      <nav class="navbar navbar-dark bg-primary">
+      <nav class="navbar navbar-success bg-danger">
       <ul class="nav navbar-nav">
         <li class="nav-item active">
-          <a class="navbar-brand" ui-sref="normal">Fildegard Historical Portfolio Simulator</a>
+          <a class="navbar-brand" ui-sref="parent">MultiView</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">a</a>
+          <a class="nav-link" ui-sref="parent.child">Child</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link">b</a>
+          <a class="nav-link" ui-sref="parent.child.grandchild">Grandchild</a>
         </li>
       </nav>
 
 
-      
+      <h1> MULTI-VIEW TARGET PRACTICE</h1>
+      <span ui-view="main-header"></span>
+
+      <h2>Parent</h2>
+
       <div ui-view></div>
-      <div ui-view="dateWidget">LOADING</div>
-      <div ui-view="stocksWidget">LOADING STOCKS</div>
 
-
+      <div ui-view="named-parent"></div>
     
    
     </div>
