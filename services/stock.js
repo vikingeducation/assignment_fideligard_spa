@@ -46,9 +46,9 @@ app.factory('stockService', ['$http',function($http) {
     return Promise.resolve(_stocks);
   };
 
-  stub.getDates = function() {
-    console.log(_.values(_stocks))
-  }
+  // stub.getDate = function(index) {
+  //   return _stocks.AAPL[2014].dayListings[251 - index]
+  // }
 
 
 

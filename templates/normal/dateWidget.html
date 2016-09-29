@@ -7,9 +7,7 @@
    <input type="submit">
 </form>
 
-{{newDate | date : format : 'shortDate'}}
+{{datePicked}}</br>
 
-<form ng-submit="convertDate(datePicked)">
-  1/1/2015<input ng-model="datePicked" type="range" min="1" max="365">12/31/2015
-  <input type="submit">
-</form>
+1/1/2014<input ng-model="datePicked" type="range" min="0" max="252">12/31/2014
+
