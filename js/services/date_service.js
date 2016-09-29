@@ -7,8 +7,13 @@ app.factory('DateService', [function(){
     return _date;
   };
 
+  var setDate = function(date) {
+    return Promise.resolve(angular.copy(date, _date));
+  };
+
   return {
-    getDate: getDate
+    getDate: getDate,
+    setDate: setDate
   };
 
 }]);

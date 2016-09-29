@@ -10,7 +10,8 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/',
       views: {
         'date': {
-          templateUrl: 'js/templates/date.html'
+          templateUrl: 'js/templates/date.html',
+          controller: 'StocksCtrl'
         }
       },
       controller: 'StocksCtrl',
