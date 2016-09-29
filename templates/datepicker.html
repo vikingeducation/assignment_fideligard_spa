@@ -1,0 +1,8 @@
+<div id="datepicker">
+  <p>Start: {{ 1388552400000 | date}}</p>
+  <input ng-click="setShowInput()" type="range" min="1388552400000" max="1406865600000" step="86400000" ng-model="ourDate">
+  <p>End: {{ 1406865600000 | date}}</p>
+  <label>Current:</label>
+  <p>{{ourDate | date}}</p>
+  <input ng-show="showInput" type="text" ng-model="ourDate">
+</div>
