@@ -6,16 +6,19 @@ app.factory('stockService', ['$http',function($http) {
   stub.getStocks = function () {
     var url = "http://query.yahooapis.com/v1/public/yql?q=";
 
-    var append = "select%20*%20from%20yahoo.finance.historicaldata%20" +
-    "where%20symbol%20=%20AAPL%20"+
-    "and%20startDate%20=%202011-09-11%20" +
-    "and%20endDate%20=%202014-02-11%20" +
+    var append = "%20select%20*%20from%20yahoo.finance.historicaldata%20" +
+    "where%20symbol%20=%20"+
+    "%22AAPL%22%20" + 
+    "and%20startDate%20=%20%222014-01-01%22%20" +
+    "and%20endDate%20=%20%222014-12-31%22%20" +
     "&format=json%20" +
     "&diagnostics=true%20" +
     "&env=store://datatables.org/alltableswithkeys%20" +
     "&callback="
 
     var finalUrl = url + append;
+
+    console.log(finalUrl);
 
     $http.get(finalUrl).then( function(response) {
       console.log(response);
