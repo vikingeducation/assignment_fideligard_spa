@@ -37,10 +37,10 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
 
   .state('dashboard.transaction', {
     url: '/transaction',
-    controller: 'TransactionCtrl',
     views: {
       '@': {
-        templateUrl: 'templates/transaction.html'
+        templateUrl: 'templates/transaction.html',
+        controller: 'TransactionCtrl'
       }
     }
   });
