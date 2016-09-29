@@ -11,15 +11,15 @@ Fideligard.factory('yqlService', ['$http', function($http) {
   }
 
   fideligardService.getStocks = function() {
-    var url = encodeURIComponent('http://query.yahooapis.com/v1/public/yql?q=' +
-              'select * from yahoo.finance.historicaldata' +
-              'where symbol = "AAPL"' +
-              'and startDate = "2015-01-01"' +
-              'and endDate = "2015-12-31"' +
-              '&format=json'+
-              '&diagnostics=true' +
-              '&env=store://datatables.org/alltableswithkeys' +
-              '&callback=');
+    var url = 'http://query.yahooapis.com/v1/public/yql?q=' +
+              'select * from yahoo.finance.historicaldata ' +
+              'where symbol in ("AAPL", "ABC") ' +
+              'and startDate = "2015-01-01" ' +
+              'and endDate = "2015-12-31" ' +
+              '&format=json '+
+              '&diagnostics=true ' +
+              '&env=store://datatables.org/alltableswithkeys ' +
+              '&callback=';
     return $http.get(url).then(function(response) {
       return parseData(response);
     }) ;
