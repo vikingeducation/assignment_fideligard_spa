@@ -2,7 +2,7 @@
 app.factory('dateService', function(){
 	var stub = {};
 
-	var _date = {};
+	var _date = {index: 100};
 
 	stub.setDay = function(day) {
 		_date.index = day;
