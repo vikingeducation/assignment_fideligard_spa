@@ -19,6 +19,6 @@ app.config(function($stateProvider, $urlRouterProvider){
           return DateService.getDate();
         }]
       }
-    })
+    });
 
 });

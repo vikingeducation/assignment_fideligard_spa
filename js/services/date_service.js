@@ -9,6 +9,6 @@ app.factory('DateService', [function(){
 
   return {
     getDate: getDate
-  }
+  };
 
-}])
+}]);
