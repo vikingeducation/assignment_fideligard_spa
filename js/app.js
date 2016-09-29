@@ -1,9 +1,10 @@
 "use strict";
-var app = angular.module('stocks', ['ui-router']);
+var app = angular.module('stocks', ['ui.router']);
 
 //routes
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
-	$urlRouterProvider.otherwise('/fideligard');
+
+  $urlRouterProvider.otherwise('/fideligard');
 
 	$stateProvider
 		.state('main', {
@@ -22,7 +23,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			}
 		})
 		.state('main.portfolio', {
-			url: '',
+			url: '/portfolio',
 			templateUrl: 'js/templates/portfolio.html',
 			controller: 'PortfolioCtrl'
 		})
