@@ -7,7 +7,7 @@
    <input type="submit">
 </form>
 
-{{newDate}}
+{{newDate | date : format : 'mediumDate'}}
 
 <form ng-submit="convertDate(datePicked)">
   1/1/2015<input ng-model="datePicked" type="range" min="1" max="365">12/31/2015
