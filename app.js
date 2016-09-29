@@ -12,7 +12,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       url: '/',
       views: {
         "dateWidget@": {  
-          templateUrl: "templates/normal/dateWidget.html"
+          templateUrl: "templates/normal/dateWidget.html",
+          controller: "dateCtrl"
         } 
       }
     })
