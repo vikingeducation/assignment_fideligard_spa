@@ -11,16 +11,22 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('normal' , {
       url: '/',
       views: {
-        "dateWidget@": {  
+        "dateWidget@": {
           templateUrl: "templates/normal/dateWidget.html",
           controller: "dateCtrl"
         } ,
         "stocksWidget@": {
-          templateUrl: "templates/normal/dateWidget.html",
+          templateUrl: "templates/normal/stocksWidget.html",
           controller: "stocksCtrl"
         }
+      },
+      resolve: {
+        stocks: ['stockService', function(stockService) {
+            return stockService.getStocks();
+          }
+        ]
       }
-    })
+    });
 
     // .state('normal.trade', {
 
