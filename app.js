@@ -4,7 +4,7 @@ var fideligardApp = angular.module('fideligardApp',
 
 fideligardApp.config(function($urlRouterProvider, $stateProvider){
 
-  $urlRouterProvider.otherwise('main');
+  $urlRouterProvider.otherwise('/');
 
   $stateProvider
     .state('main', {
