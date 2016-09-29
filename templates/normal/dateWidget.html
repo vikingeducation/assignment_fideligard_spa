@@ -4,6 +4,12 @@
    <input type="text" ng-model="min"> </div>
   <label>max</label>
    <input type="text" ng-model="max"> </div>
-
    <input type="submit">
+</form>
+
+{{newDate}}
+
+<form ng-submit="convertDate(datePicked)">
+  1/1/2015<input ng-model="datePicked" type="range" min="1" max="365">12/31/2015
+  <input type="submit">
 </form>
