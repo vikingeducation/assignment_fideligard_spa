@@ -21,7 +21,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 					templateUrl: 'js/templates/mainContent.html'
 				}
 			},
-			
+      resolve: {
+        date: function(dateService) {
+          return dateService.getDate();
+        }
+      }
+
 		})
 		.state('main.portfolio', {
 			url: '/portfolio',

@@ -1,11 +1,11 @@
 "use strict";
-app.controller('MainCtrl', ["$scope", function($scope) {
+app.controller('MainCtrl', ["$scope", 'date', 'dateService', function($scope, date, dateService) {
 
-  $scope.selectedDate = 0;
+  $scope.selectedDate = date;
 
-  $scope.getDate = function(year, day) {
-    var date = new Date(year, 0); // initialize a date in `year-01-01`
-    return new Date(date.setDate(day)); // add the number of days
+  $scope.setDate = function(day) {
+    console.log(day);
+    dateService.setDate(day);
   };
 
 }]);

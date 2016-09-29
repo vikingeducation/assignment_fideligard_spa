@@ -1,4 +1,8 @@
 <div class="col-md-12">
-  <p>{{ getDate(2014, selectedDate) | date}}</p>
-  <span>1/01/2014</span><input class="form-control" type="range" ng-model="selectedDate" min="1" max="365"><span>12/31/2014</span>
+  <p>{{ selectedDate.date | date }}</p>
+
+  <span>1/01/2014</span>
+  <input class="form-control" type="range" min="1" max="365" ng-model="newDate" ng-change="setDate(newDate)">
+  <span>12/31/2014</span>
+
 </div>
