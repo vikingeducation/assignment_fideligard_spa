@@ -1,6 +1,8 @@
-app.controller('StocksCtrl', ['$scope', 'StockService', function($scope, StockService) {
+app.controller('StocksCtrl', ['date', '$scope', 'StockService', function(date, $scope, StockService) {
 
   StockService.all();
+
+  $scope.date = date;
 
   $scope.getMin = function(){
     console.log("Get min is called");

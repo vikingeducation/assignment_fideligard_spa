@@ -1,2 +1,1 @@
-<h4>Date: {{date | date}}</h4>
-<input type="range" min="{{getMin()}}" max="{{getMax()}}" ng-model="date">
+<input type="date" ng-model="date" min="{{minDate | date:'2014-01-01'}}" max="{{maxDate | date:'2014-12-31'}}">

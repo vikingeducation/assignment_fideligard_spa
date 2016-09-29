@@ -10,11 +10,15 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/',
       views: {
         'date': {
-          templateUrl: 'js/templates/date.html',
-          controller: 'StocksCtrl'
+          templateUrl: 'js/templates/date.html'
         }
       },
-      controller: 'StocksCtrl'
+      controller: 'StocksCtrl',
+      resolve: {
+        date: ['DateService', function(DateService){
+          return DateService.getDate();
+        }]
+      }
     })
 
 });
