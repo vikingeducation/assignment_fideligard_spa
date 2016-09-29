@@ -9,18 +9,19 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 	$stateProvider
 		.state('main', {
 			url: '/fideligard',
-			controller: "MainCtrl",
 			views: {
 				'stocksTicker':{
 					templateUrl: 'js/templates/stocksTicker.html'
 				},
 				'dateSlider':{
-					templateUrl: 'js/templates/dateSlider.html'
+					templateUrl: 'js/templates/dateSlider.html',
+					controller: "MainCtrl"
 				},
 				'mainContent':{
 					templateUrl: 'js/templates/mainContent.html'
 				}
-			}
+			},
+			
 		})
 		.state('main.portfolio', {
 			url: '/portfolio',
