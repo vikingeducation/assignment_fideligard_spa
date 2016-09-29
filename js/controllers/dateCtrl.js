@@ -1,15 +1,16 @@
 "use strict";
-app.controller('DateCtrl', ["$scope", 'date', 'dateService', function($scope, date, dateService) {
+app.controller('DateCtrl', ["$scope", 'date', 'dateService', 'dates', function($scope, date, dateService, dates) {
 
   $scope.editing = false;
   $scope.selectedDate = date;
+  $scope.dates = dates;
 
   $scope.setDate = function(day) {
     dateService.setDay(day);
   };
 
   $scope.changeDate = function(date){
-  	dateService.setDate(date);
+  	dateService.setDay(date);
   	$scope.editing = !$scope.editing;
   };
 

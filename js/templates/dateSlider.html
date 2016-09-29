@@ -1,11 +1,11 @@
 <div class="col-md-12">
-  <p ng-click="editing = !editing" ng-hide="editing">{{ selectedDate.date | date }}</p>
+  <p ng-click="editing = !editing" ng-hide="editing">{{ dates[selectedDate.index] }}</p>
   <input type="date" ng-show="editing" ng-model="chosenDate" min="2014-01-01" max="2014-12-31">
   <input type="submit" ng-show="editing" ng-click="changeDate(chosenDate)">
 
 
   <span>1/01/2014</span>
-  <input class="form-control" type="range" min="1" max="365" ng-model="newDate" ng-change="setDate(newDate)">
+  <input class="form-control" type="range" min="0" max="{{dates.length-1}}" ng-model="newDate" ng-change="setDate(newDate)">
   <span>12/31/2014</span>
 
 </div>

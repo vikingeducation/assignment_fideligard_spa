@@ -1,6 +1,11 @@
 "use strict";
 var app = angular.module('stocks', ['ui.router']);
 
+//lodash
+app.factory('_', ['$window', function($window){
+  return $window._;
+}]);
+
 //routes
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
@@ -11,8 +16,8 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			url: '/fideligard',
 			views: {
 				'stocksTicker':{
-					templateUrl: 'js/templates/stocksTicker.html',
-					controller: "StocksCtrl"
+					templateUrl: 'js/templates/stocksTicker.html'
+					//controller: "StocksCtrl"
 				},
 				'dateSlider':{
 					templateUrl: 'js/templates/dateSlider.html',
@@ -28,7 +33,10 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
         },
         stocks: function(StocksService){
           return StocksService.all();
-        }
+        },
+        dates: ['stocks', 'StocksService', function(stocks, StocksService){
+          return StocksService.getDateArr("AAPL");
+        }]
       }
 
 		})

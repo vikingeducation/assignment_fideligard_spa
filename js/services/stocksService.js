@@ -1,5 +1,5 @@
 "use strict";
-app.factory('StocksService', ['$http', 'dateService', function($http, dateService){
+app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateService, _){
 
 	var _stocks = {};
 	var stub = {};
@@ -11,7 +11,7 @@ app.factory('StocksService', ['$http', 'dateService', function($http, dateServic
 			method: "GET"
 		})
 		.then(function(response){
-			response.results.quote.forEach(function(stock) {
+			response.data.query.results.quote.forEach(function(stock) {
         _buildStockObject(stock);
         _buildDatesArr(stock);
       });
@@ -19,42 +19,49 @@ app.factory('StocksService', ['$http', 'dateService', function($http, dateServic
 		});
 	};
 
-  _buildStockObject = function(stock) {
-    if (_stock[stock.Symbol]) {
-      _stocks[stock.Symbol][stock.date] = stock;
+  var _buildStockObject = function(stock) {
+    if (_stocks[stock.Symbol]) {
+      _stocks[stock.Symbol][stock.Date] = stock;
     } else {
       _stocks[stock.Symbol] = {};
-      _stock[stock.Symbol][stock.date] = stock;
+      _stocks[stock.Symbol][stock.Date] = stock;
     }
-  }
+  };
 
-  _buildDatesArr = function(stock) {
+  var _buildDatesArr = function(stock) {
     if (_dates[stock.Symbol]) {
-      _dates[stock.Symbol].push(stock.date);
+      _dates[stock.Symbol].push(stock.Date);
     } else {
-      _dates[stock.Symbol] = [stock.date];
+      _dates[stock.Symbol] = [stock.Date];
     }
-  }
+  };
 
-  var _sevenDayAverage = function() {
+  stub.getDateArr = function(symbol){
+    console.log(_dates);
+    console.log(Object.keys(_dates));
+    console.log(symbol);
+    return _dates[symbol];
+  };
 
-  }
+  // var _sevenDayAverage = function() {
 
-  var stub.thirtyDayAverage = function(symbol) {
-    var dates = Object.keys(_stocks[symbol]);
-    return dates;
-  }
+  // };
 
-  var stub.currentPrice = function(symbol) {
-    return _stocks[symbol][dateService.getDate().date].close
-  }
+  // stub.thirtyDayAverage = function(symbol) {
+  //   var dates = Object.keys(_stocks[symbol]);
+  //   return dates;
+  // };
+
+  stub.currentPrice = function(symbol) {
+    return _stocks[symbol][dateService.getDate().date].close;
+  };
 
 	stub.all = function(){
-		if(_stocks.length){
+		if(!_.isEmpty(_stocks)){
 			return _stocks;
 		}
 		else{
-			return _populateStocks();
+			return _populateStock();
 		}
 	};
 

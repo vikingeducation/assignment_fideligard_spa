@@ -5,14 +5,8 @@ app.factory('dateService', function(){
 	var _date = {};
 
 	stub.setDay = function(day) {
-    var date = new Date(2014, 0);
-    var updatedDate = new Date(date.setDate(day));
-    angular.copy({date: updatedDate}, _date)
-	};
-
-	stub.setDate = function(date){
-		_date.date = date;
-	};
+		_date.index = day;
+    };
 
 	stub.getDate = function(){
 		return _date;
