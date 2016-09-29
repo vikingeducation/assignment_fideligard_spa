@@ -13,6 +13,10 @@ fideligardApp.config(function($urlRouterProvider, $stateProvider){
         'datepicker@': {
           templateUrl: 'templates/datepicker.html',
           controller: 'datepickerCtrl'
+        },
+        'stocks-panel@': {
+          templateUrl: 'templates/stocks.html',
+          controller: 'stocksPanelCtrl'
         }
       }
     })

@@ -13,13 +13,21 @@
     <script type="text/javascript" src="ui-bootstrap.min.js"></script>
   </head>
   <body>
-    <nav>
-      <a ui-sref="main">Main</a>
-    </nav>
+    <nav class="nav navbar-inverse">
+      <div class="navbar-header">
 
-    <div ui-view="datepicker"></div>
+        <a class="navbar-brand">Stock Portfolio</a>
+      </div>
+    </nav>
+    <div class="main container">
+      <div class="row">
+        <div ui-view="stocks-panel" class="col-md-4"></div>
+        <div ui-view="datepicker" class="col-md-8"></div>
+      </div>
+    </div>
   </body>
 
   <script src="app.js"></script>
   <script src='controllers/datepicker_controller.js'></script>
+  <script src='controllers/stocks_panel_controller.js'></script>
 </html>
