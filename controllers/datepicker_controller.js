@@ -1,4 +1,4 @@
-fideligardApp.controller('datepickerCtrl', ['$scope', '$window', 'stocksService', function($scope, $window){
+fideligardApp.controller('datepickerCtrl', ['$scope', '$window', 'stocksService', function($scope, $window, stocksService){
   $scope.tempDate = 0;
   $scope.showInput = false;
 

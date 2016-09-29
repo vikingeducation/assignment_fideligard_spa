@@ -1,7 +1,10 @@
 fideligardApp.controller('stocksPanelCtrl', ['$scope', 'stocksService', function($scope, stocksService){
 
-  stocksService.all().then(stocks){
-    $scope.stocks = stocks;
-  }
+  stocksService.all().then(function(stocks) {
+    $scope.allDays = stocks;
+    console.log(stocks);
+  });
+
+  $scope.stocks = stockService.all();
 
 }]);

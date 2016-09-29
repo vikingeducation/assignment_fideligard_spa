@@ -1,6 +1,10 @@
 var fideligardApp = angular.module('fideligardApp',
                                    ['ui.router', 'ui.bootstrap']);
 
+fideligardApp.factory("_", ["$window", function($window) {
+  return $window._
+}])
+
 
 fideligardApp.config(function($urlRouterProvider, $stateProvider){
 
