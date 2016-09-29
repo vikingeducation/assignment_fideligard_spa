@@ -12,6 +12,15 @@ app.config(function($stateProvider, $urlRouterProvider){
         'date': {
           templateUrl: 'js/templates/date.html',
           controller: 'StocksCtrl'
+        },
+        'index': {
+          templateUrl: 'js/templates/index.html',
+          controller: 'StocksCtrl',
+          resolve: {
+            stocks: ['StockService', function(StockService){
+              return StockService.all();
+            }]
+          }
         }
       },
       controller: 'StocksCtrl',
