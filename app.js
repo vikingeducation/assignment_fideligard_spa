@@ -11,6 +11,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     .state('parent', {
       url: '/',
       views: {
+<<<<<<< HEAD
         "@": {
           template: "Targeting unnamed view from parent state"
         },
@@ -42,8 +43,24 @@ app.config(function($stateProvider, $urlRouterProvider) {
         },
         "main-header@" : {
           template: "Targeting header from child state"
+=======
+        "dateWidget@": {
+          templateUrl: "templates/normal/dateWidget.html",
+          controller: "dateCtrl"
+        } ,
+        "stocksWidget@": {
+          templateUrl: "templates/normal/stocksWidget.html",
+          controller: "stocksCtrl"
+>>>>>>> 657a3699dac6a96f3bac162bc299d8533a61058d
         }
+      },
+      resolve: {
+        stocks: ['stockService', function(stockService) {
+            return stockService.getStocks();
+          }
+        ]
       }
+<<<<<<< HEAD
     })
     .state("parent.child.grandchild", {
       url: "/grandchild",
@@ -55,6 +72,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
         "named-grandchild@parent.child.grandchild": {
           template: '1 Targeting named grandchild view from grandchild state'
         },
+=======
+    });
+>>>>>>> 657a3699dac6a96f3bac162bc299d8533a61058d
 
         "@parent.child.grandchild" : {
           template: "2 Targeting unnamed grandchild view from grandchild state"
@@ -64,6 +84,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
           template: "3 Targeting header from grandchild state"
         },
 
+<<<<<<< HEAD
         "named-parent@" : {
           template: "4 Targeting named parent from grandchild state"
         },
@@ -78,3 +99,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
 })
+=======
+app.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+});
+>>>>>>> 657a3699dac6a96f3bac162bc299d8533a61058d
