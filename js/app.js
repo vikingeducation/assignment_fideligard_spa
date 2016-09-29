@@ -11,11 +11,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			url: '/fideligard',
 			views: {
 				'stocksTicker':{
-					templateUrl: 'js/templates/stocksTicker.html'
+					templateUrl: 'js/templates/stocksTicker.html',
+					controller: "StocksCtrl"
 				},
 				'dateSlider':{
 					templateUrl: 'js/templates/dateSlider.html',
-					controller: "MainCtrl"
+					controller: "DateCtrl"
 				},
 				'mainContent':{
 					templateUrl: 'js/templates/mainContent.html'
@@ -24,6 +25,9 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
       resolve: {
         date: function(dateService) {
           return dateService.getDate();
+        },
+        stocks: function(StocksService){
+          return StocksService.all();
         }
       }
 

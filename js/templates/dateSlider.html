@@ -1,5 +1,8 @@
 <div class="col-md-12">
-  <p>{{ selectedDate.date | date }}</p>
+  <p ng-click="editing = !editing" ng-hide="editing">{{ selectedDate.date | date }}</p>
+  <input type="date" ng-show="editing" ng-model="chosenDate" min="2014-01-01" max="2014-12-31">
+  <input type="submit" ng-show="editing" ng-click="changeDate(chosenDate)">
+
 
   <span>1/01/2014</span>
   <input class="form-control" type="range" min="1" max="365" ng-model="newDate" ng-change="setDate(newDate)">
