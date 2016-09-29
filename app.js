@@ -12,7 +12,8 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
       },
 
       'stocks@': {
-        templateUrl: 'templates/stocks.html'
+        templateUrl: 'templates/stocks.html',
+        controller: 'StocksCtrl'
       }
     }
   })

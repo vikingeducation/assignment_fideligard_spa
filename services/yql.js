@@ -5,8 +5,19 @@ Fideligard.factory('yqlService', ['$http', function($http) {
 
   var _quotes = [];
 
+  var organize = function(quotes) {
+    for (quote in _quotes) {
+
+    }
+  }
+
   var parseData = function(response) {
-    return response.data.query.results.quote;
+    var data = response.data.query.results.quote;
+    for (quote in data) {
+      if (_quotes[quote.symbol]) {
+        _quotes[quote.symbol]
+      }
+    }
   };
 
   var urlBuilder = function(companyArray, start, end) {
