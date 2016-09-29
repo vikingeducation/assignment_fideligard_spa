@@ -8,7 +8,8 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
     url: '',
     views: {
       'range@': {
-        templateUrl: 'templates/range.html'
+        templateUrl: 'templates/range.html',
+        controller: 'RangeCtrl'
       },
 
       'stocks@': {
