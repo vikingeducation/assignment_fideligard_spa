@@ -5,4 +5,23 @@ Buy low, sell high.
 
 Authors:
 
-Dylan, Adrian
+Dylan, Johnny, Adrian
+
+PSEUDO-CODE:
+
+
+Widgets:
+  Date
+    min, max date
+
+  Stocks
+    filter
+    Data Table
+
+  Portfolio Widget
+    Calculations table
+
+    Data Table
+
+Clicking Trade:
+  brings you to trade page.

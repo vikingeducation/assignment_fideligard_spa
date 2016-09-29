@@ -14,7 +14,19 @@ app.config(function($stateProvider, $urlRouterProvider) {
         "dateWidget@": {  
           templateUrl: "templates/normal/dateWidget.html",
           controller: "dateCtrl"
-        } 
+        } ,
+        "stocksWidget@": {
+          templateUrl: "templates/normal/dateWidget.html",
+          controller: "stocksCtrl"
+        }
       }
     })
+
+    // .state('normal.trade', {
+
+    // }
+});
+
+app.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
 });
