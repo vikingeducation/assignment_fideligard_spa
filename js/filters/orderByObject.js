@@ -1,5 +1,7 @@
-app.filter('orderByObject', function(orderByObject) {
-  return function(items) {
-    return items.slice().reverse();
-  };
-});
+// app.filter('selectedDate', function(orderByObject) {
+//   return function(items,field) {
+//     return _.filter(items, function(item) {
+//       return item['Date'] >
+//     });
+//   };
+// });

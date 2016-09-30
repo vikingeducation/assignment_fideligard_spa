@@ -11,10 +11,12 @@
 
   <tr
   stock-index-row
-  ng-repeat="stock in stocks['AAPL'][2014]['days']"
+  ng-repeat="stock in stocks['AAPL'][2014]['days'] | filter:{date: dateInfo}"
   stock='stock'
   index="{{$index}}"
   >
   </tr>
+
+  {{ dateInfo.currentDate | date:'yyyy-MM-dd' }}
 
 </table>
