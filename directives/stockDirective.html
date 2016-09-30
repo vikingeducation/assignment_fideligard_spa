@@ -1,12 +1,18 @@
 <td>
-
+{{stock.symbol}}
 </td>
 <td>
-{{getDayAnalytics()}}
+  {{ stock[2014].days[tradeDay].Close | currency }}
 </td>
 <td>
-
+  {{ getDayAnalytics() | currency }}
 </td>
 <td>
-
+  {{ getDayAnalytics(7) | currency }}
+</td>
+<td>
+  {{ getDayAnalytics(30) | currency }}
+</td>
+<td>
+  <a href="">trade</a>
 </td>
