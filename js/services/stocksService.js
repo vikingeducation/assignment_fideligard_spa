@@ -7,9 +7,32 @@ app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateS
   var _dateCollection = [];
   var _stockDates = {};
 
-	var _populateStock = function(){
+  var _stockSymbols = ['AAPL', 'GOOG', 'PHM', 'ICON', 'PCLN', 'PM', 'MO', 'GPOR', 'AREX', 'ATW', 'CMO', 'LTC', 'RNR', 'GILD'];
+
+	var _populateAllStocks = function(){
+     _stockSymbols.forEach(function(el){
+      console.log(el);
+        _populateStock(el);
+     });
+  };
+
+  var _buildStockString = function(symbol){
+    var thing = 'http://query.yahooapis.com/v1/public/yql?q= ' 
+    + 'select * from   yahoo.finance.historicaldata '
+    + 'where  symbol    = ' + '"' + symbol + '"' + ' '
+    + 'and    startDate = "2015-01-01" '
+    + 'and    endDate   = "2015-12-31" '
+    +'&format=json '
+    + '&diagnostics=true '
+    + '&env=store://datatables.org/alltableswithkeys '
+    + '&callback=';
+    return thing;
+  };
+
+  var _populateStock = function(symbol){
+    console.log(_buildStockString(symbol));
 		return $http({
-			url: 'AAPL.json',
+			url: _buildStockString(symbol),
 			method: "GET"
 		})
 		.then(function(response){
@@ -102,7 +125,7 @@ app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateS
 			return _stocks;
 		}
 		else{
-			return _populateStock();
+			return _populateAllStocks();
 		}
 	};
 
