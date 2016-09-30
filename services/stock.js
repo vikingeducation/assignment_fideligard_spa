@@ -4,6 +4,8 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
 
   };
 
+  var _day = 0;
+
   var _popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA", "^RUT"];
 
   var stub = {};
@@ -59,7 +61,13 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
     return _stocks["GOOGL"][2014]["dayListings"][251 - day]["Date"];
   };
 
+  stub.setDay = function(dayIndex){
+    _day = 251 - dayIndex;
+  };
 
+  stub.getDay = function(){
+    return _day
+  }
 
   return stub;
 }]);

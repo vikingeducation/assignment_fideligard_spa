@@ -1,5 +1,5 @@
 <form ng-submit="submitDate()">
-   
+
   <label>min</label>
    <input type="text" ng-model="min"> </div>
   <label>max</label>
@@ -7,7 +7,6 @@
    <input type="submit">
 </form>
 
-{{newDate}}</br>
+{{newDate | date}}</br>
 
 1/1/2014<input ng-model="datePicked" type="range" min="0" max="251">12/31/2014
-
