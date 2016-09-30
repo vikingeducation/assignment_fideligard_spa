@@ -5,9 +5,11 @@ app.directive('stockIndexRow', ['StockService', function(StockService) {
     templateUrl: 'js/directives/stock_index_row.html',
     scope: {
       stock: '=',
+      day: '=',
       index: '@',
     },
     link: function(scope) {
+      console.log(scope.stock);
       scope.getAgoAAPL = StockService.getPrevious('AAPL');
       scope.getAgo2014 = scope.getAgoAAPL(2014);
       scope.oneDayAgo = scope.getAgo2014(1)(scope.index,'Close');

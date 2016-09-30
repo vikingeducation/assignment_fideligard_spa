@@ -3,7 +3,7 @@ app.controller('StocksCtrl',
 function(date, stocksObj, $scope, StockService, DateService) {
 
   // $scope.dateInfo = DateService.getDateInfo();
-  $scope.stocks = stocksObj.stockData;
+  $scope.stockData = stocksObj.stockData;
   $scope.dates = stocksObj.dates;
   $scope.maxDateRange = $scope.dates.length-1;
   $scope.selectedDateIndex = 0;

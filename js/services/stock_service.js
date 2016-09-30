@@ -45,9 +45,7 @@ app.factory('StockService', ['$http', function($http) {
                     if (item['Date'] === date) {
                       if (_stockData[item['Symbol']]) {
                         if (_.isEmpty(_stockData[item['Symbol'][date]])) {
-                          _stockData[item['Symbol']][date] = {
-                            days: []
-                          };
+                          _stockData[item['Symbol']][date] = {};
                         }
                       }
                     }
@@ -62,7 +60,7 @@ app.factory('StockService', ['$http', function($http) {
               _.forEachRight(
                 response.data.query.results.quote,
                 function(item) {
-                  _stockData[item['Symbol']][item['Date']].days.push(item);
+                  angular.copy(item,_stockData[item['Symbol']][item['Date']]);
                 }
               );
               console.log(_stockData);
@@ -82,9 +80,9 @@ app.factory('StockService', ['$http', function($http) {
       return function(daysAgo) {
         return function(current,field) {
           return function () {
-            if (_stockData[symbol][year].days[current] && _stockData[symbol][year].days[current-daysAgo]) {
-              return _stockData[symbol][year].days[current][field] - _stockData[symbol][year].days[current-daysAgo][field];
-            }
+            // if (_stockData[symbol][current] && _stockData[symbol][current-daysAgo]) {
+            //   return _stockData[symbol][year][current][field] - _stockData[symbol][year][current-daysAgo][field];
+            // }
           };
         };
       };

@@ -11,7 +11,7 @@
 
   <tr
   stock-index-row
-  ng-repeat="stock in stocks['AAPL'][2014]['days'] | filter:{Date: dateInfo}"
+  ng-repeat="(day, stock) in stockData['AAPL'] | orderObjectBy"
   stock='stock'
   index="{{$index}}"
   >
