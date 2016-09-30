@@ -44,6 +44,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
          if (!_stocks[symbol]){
            _stocks[symbol] = {};
          }
+         _stocks[symbol].symbol= symbol;
          _stocks[symbol][year] = {
              dayListings: stock_data.results.quote,
              countWorkDays: stock_data.count

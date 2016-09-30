@@ -1,25 +1,24 @@
 <table class="table table-inverse table-bordered table-hover">
-  <th>
+  <theader>
     <tr>
-      <td>
+      <th>
         Symbol
-      </td>
-      <td>
+      </th>
+      <th>
         Date
-      </td>
-      <td>
+      </th>
+      <th>
         Open
-      </td>
-      <td>
+      </th>
+      <th>
         Close
-      </td>
-      <td>
+      </th>
+      <th>
         <a>trade button</a>
-      </td>
+      </th>
     </tr>
-  </th>
+  </theader>
   <tbody>
-    <stock-row ng-rpeat="stock in stocks"></stock-row>
+    <tr stock-row ng-repeat="stock in allStocks" stock="stock"></t>
   </tbody>
-
 </table>
