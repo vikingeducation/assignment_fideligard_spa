@@ -18,20 +18,35 @@ app.config(function($stateProvider, $urlRouterProvider){
           templateUrl: 'js/templates/date.html',
           controller: 'StocksCtrl'
         },
-        'index': {
-          templateUrl: 'js/templates/index.html',
+        'ticker': {
+          templateUrl: 'js/templates/ticker.html',
           controller: 'StocksCtrl'
+        },
+        'main': {
+          templateUrl: 'js/templates/main.html'
         }
       },
-      // controller: 'StocksCtrl',
       resolve: {
-        date: ['DateService', function(DateService){
-          return DateService.getDate();
-        }],
         stocks: ['StockService', function(StockService){
-          return StockService.all();
+          return StockService.getStocks();
+        }],
+        dates: ['StockService', function(StockService){
+          return StockService.allDates();
         }]
       }
-    });
+    })
+
+    .state('stocks.porfolio', {
+      url: '/porfolio',
+      templateUrl: 'js/templates/porfolio.html'
+    })
+    .state('stocks.trade', {
+      url: '/trade',
+      templateUrl: 'js/templates/trade.html'
+    })
+    .state('stocks.transactions', {
+      url: '/transactions',
+      templateUrl: 'js/templates/transactions.html'
+    })
 
 });

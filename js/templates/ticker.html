@@ -1,4 +1,5 @@
 <h3>Stocks</h3>
+<h5> Selected Date: {{ dateInfo.currentDate}}</h5>
 <table class="table">
   <tr>
     <th>Symbol</th>
@@ -9,7 +10,8 @@
     <th>Trade?</th>
   </tr>
 
-  <tr stock-index-row ng-repeat='stock in stocks'>
+  <tr stock-index-row ng-repeat='(key, value) in stocksInfo.stocks' stock="value" symbol="key" >
   </tr>
 
 </table>
+

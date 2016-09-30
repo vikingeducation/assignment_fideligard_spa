@@ -1,8 +1,14 @@
-app.factory('DateService', [function(){
+app.factory('DateService', ['StockService', function(StockService){
+
+
+  var _dates = StockService.allDates();
 
   var _dateInfo = {
-    currentDate: new Date('2014-01-01')
+    currentIndex: 0,
+    currentDate: _dates[0]
   };
+
+
 
   var getDateInfo = function(){
     return _dateInfo;
@@ -10,13 +16,13 @@ app.factory('DateService', [function(){
 
 
   var getDate = function(){
-    return _dateInfo.currentDate;
+    return _dateInfo.currentIndex;
   };
 
   var setDate = function(date) {
-    if (date > new Date('2014-01-01') && date < new Date('2015-01-01')) {
-      return _dateInfo.currentDate = date;
-    }
+    _dates = StockService.allDates()
+    _dateInfo.currentDate = _dates[date];
+    return _dateInfo.currentIndex = date;
   };
 
   return {

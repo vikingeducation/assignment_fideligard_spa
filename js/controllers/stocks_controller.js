@@ -1,21 +1,21 @@
 app.controller('StocksCtrl',
-['date', 'stocks', '$scope', 'StockService', 'DateService',
-function(date, stocks, $scope, StockService, DateService) {
+['stocks', '$scope', 'StockService', 'DateService', 'dates',
+function(stocks, $scope, StockService, DateService, dates) {
 
-  // StockService.all();
 
-  // console.log(date);
   $scope.dateInfo = DateService.getDateInfo();
-  $scope.stocks = stocks;
+  $scope.stocksInfo = StockService.getStocks('2015-01-01');
+  $scope.dates = dates;
 
-  $scope.storeDate = function() {
-    console.log("StoreDate firing");
-    DateService.setDate($scope.selectedDate);
+  $scope.setDate = function() {
+    DateService.setDate($scope.newDate);
+    $scope.stocksInfo = StockService.getStocks($scope.dateInfo.currentDate);
   };
 
-  // $scope.$watch('date', function(){
+  // $scope.$watch('currentDate', function(){
   //   console.log("watch firing");
-  //   $scope.date = $scope.selectedDate;
+  //   $scope.currentStocks = stocks[$scope.dateInfo.currentDate];
   // })
 
 }]);
+

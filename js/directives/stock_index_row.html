@@ -1,6 +1,6 @@
-<td>{{ stock.symbol }}</td>
-<td>{{ stock.price }}</td>
-<!-- <td>{{ stock.d1 }}</td>
-<td>{{ stock.d7 }}</td>
-<td>{{ stock.d30 }}</td> -->
+<td>{{ symbol }}</td>
+<td>{{ stock.price | currency }}</td>
+<td>{{ stock.oneDay | currency}}</td>
+<td>{{ stock.sevenDay | currency}}</td>
+<td>{{ stock.thirtyDay | currency}}</td>
 <td> trade </td>
