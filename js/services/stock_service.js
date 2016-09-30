@@ -9,24 +9,6 @@ app.factory('StockService', ['$http', function($http) {
   StockService.queryStocks = function() {
     return $http.get("http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22AAPL%22%20and%20startDate%20=%20%222014-01-01%22%20and%20endDate%20=%20%222014-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=")
             .then(function(response) {
-              console.log(response);
-              // Grab symbols.
-              _.forEach(
-                _.uniq(
-                  _.map(
-                    response.data.query.results.quote,
-                    function(item) {
-                      return item['Symbol'];
-                    }
-                  )
-                ),
-                function(symbol) {
-                  _stockData[symbol] = {};
-                }
-              );
-              return response;
-            })
-            .then(function(response) {
               // Grab dates.
               _.forEach(
                 _.uniq(
@@ -38,20 +20,37 @@ app.factory('StockService', ['$http', function($http) {
                   )
                 ),
                 function(date) {
+                  _stockData[date] = {};
+                  _dates.push(date);
+                }
+              );
+              return response;
+            })
+            .then(function(response) {
+              // Grab symbols.
+              _.forEach(
+                _.uniq(
+                  _.map(
+                    response.data.query.results.quote,
+                    function(item) {
+                      return item['Symbol'];
+                    }
+                  )
+                ),
+                function(symbol) {
                   response.data.query.results.quote.forEach(function(item) {
                     // If the item's date matches the current date in collection,
                     // and if that date doesn't already have an object in
                     // the form data.
-                    if (item['Date'] === date) {
-                      if (_stockData[item['Symbol']]) {
-                        if (_.isEmpty(_stockData[item['Symbol'][date]])) {
-                          _stockData[item['Symbol']][date] = {};
+                    if (item['Symbol'] === symbol) {
+                      if (_stockData[item['Date']]) {
+                        if (_.isEmpty(_stockData[item['Date'][symbol]])) {
+                          _stockData[item['Date']][symbol] = {};
                         }
                       }
                     }
                   });
-                  _dates.push(date);
-                  return date;
+                  return symbol;
                 }
               );
               return response;
@@ -60,7 +59,7 @@ app.factory('StockService', ['$http', function($http) {
               _.forEachRight(
                 response.data.query.results.quote,
                 function(item) {
-                  angular.copy(item,_stockData[item['Symbol']][item['Date']]);
+                  angular.copy(item,_stockData[item['Date']][item['Symbol']]);
                 }
               );
               console.log(_stockData);
