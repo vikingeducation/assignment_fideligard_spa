@@ -12,8 +12,14 @@ app.factory('DateService', [function(){
     return angular.copy(_dateInfo,{});
   };
 
+  // Might need to use this on stock service.
   var setDate = function(date) {
-    _dateInfo.currentDate = new Date(date);
+    var day = new Date(date);
+    var currMonth = day.getUTCMonth() + 1;
+    var currDay = day.getUTCDate();
+    var currYear = day.getUTCFullYear();
+    var currStr = currYear + "-" + currMonth + "-" + currDay;
+    _dateInfo.currentDate = currStr;
   };
 
   return {

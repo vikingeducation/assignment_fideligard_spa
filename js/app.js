@@ -19,11 +19,11 @@ app.config(function($stateProvider, $urlRouterProvider){
       views: {
         'date': {
           templateUrl: 'js/templates/date.html',
-          controller: 'StocksCtrl'
+          controller: 'StocksDateCtrl'
         },
         'index': {
           templateUrl: 'js/templates/index.html',
-          controller: 'StocksCtrl'
+          controller: 'StocksIndexCtrl'
         }
       },
       resolve: {
