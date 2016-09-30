@@ -8,15 +8,12 @@ app.factory('DateService', [function(){
     return _dateInfo;
   };
 
-
   var getDate = function(){
-    return _dateInfo.currentDate;
+    return angular.copy(_dateInfo,{});
   };
 
   var setDate = function(date) {
-    if (date > new Date('2014-01-01') && date < new Date('2015-01-01')) {
-      return _dateInfo.currentDate = date;
-    }
+    _dateInfo.currentDate = new Date(date);
   };
 
   return {
