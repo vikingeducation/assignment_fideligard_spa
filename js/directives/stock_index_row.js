@@ -8,16 +8,11 @@ app.directive('stockIndexRow', ['StockService', function(StockService) {
       index: '@',
     },
     link: function(scope) {
-      scope.getAgo = function(days) {
-        return function () {
-          if (StockService.getPrevious(scope.index,days,'Close')) {
-            return (StockService.getPrevious(scope.index,days,'Close')) ;
-          }
-        };
-      };
-      scope.oneDayAgo = scope.getAgo(1);
-      scope.sevenDaysAgo = scope.getAgo(7);
-      scope.sevenDaysAgo = scope.getAgo(30);
+      scope.getAgoAAPL = StockService.getPrevious('AAPL');
+      scope.getAgo2014 = scope.getAgoAAPL(2014);
+      scope.oneDayAgo = scope.getAgo2014(1)(scope.index,'Close');
+      scope.sevenDaysAgo = scope.getAgo2014(7)(scope.index,'Close');
+      scope.thirtyDaysAgo = scope.getAgo2014(30)(scope.index,'Close');
     }
   };
 }]);
