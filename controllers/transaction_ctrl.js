@@ -1,5 +1,16 @@
-Fideligard.controller('TransactionCtrl', ['$scope', 'yqlService', function($scope, yqlService){
+Fideligard.controller('TransactionCtrl', ['$scope', 'transactionService', function($scope, transactionService){
 
-  $scope.quotes = yqlService.getStocks();
+  $scope.transactions = transactionService.getTransactions();
+  $scope.sorter;
+  $scope.reverser;
+
+  $scope.sortBy = function(type) {
+    if ($scope.sorter === type) {
+      $scope.reverser = !$scope.reverser;
+    } else {
+      $scope.sorter = type;
+      $scope.reverser = false;
+    }
+  };
 
 }]);

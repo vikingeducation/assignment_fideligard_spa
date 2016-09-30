@@ -1,0 +1,6 @@
+<td>{{symbol}}</td>
+<td>{{value.Close | currency}}</td>
+<td>{{value.Close - one() | currency }}</td>
+<td>{{value.Close - seven() | currency }}</td>
+<td>{{value.Close - thirty() | currency }}</td>
+<td><a ui-sref="dashboard.trade({ sym: symbol })">Trade</a></td>

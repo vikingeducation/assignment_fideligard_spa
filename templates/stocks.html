@@ -1,3 +1,23 @@
 <h1>Stocks</h1>
 
-<div>{{quotes}}</div>
+<!-- <div>{{quotes[dates[date.index]]}}</div> -->
+
+<input style="float: right" type="text" ng-model="filterText">
+
+<table class="table table-striped">
+  <tr>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </tr>
+  <tr stockquote ng-repeat="(symbol, value) in quotes[dates[date.index]] | tickerFilter: filterText"
+    symbol="symbol"
+    value="value"
+    quotes="quotes"
+    dates="dates"
+    date="date">
+  </tr>
+</table>

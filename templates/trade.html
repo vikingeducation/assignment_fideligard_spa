@@ -1,1 +1,31 @@
-<h1>trade.html</h1>
+
+  <h1>Trade</h1>
+
+  <div class="row">
+
+    <div class="col-md-6">
+      <p>Symbol: {{sym}}</p>
+      <p>Buy/Sell: <select ng-model="choice">
+        <option value="buy">Buy</option>
+        <option value="sell">Sell</option>
+      </select></p>
+      <p>Quantity: <input type="number" ng-model="quantity"></input></p>
+      <p>Date: {{dates[date.index]}}</p>
+      <p>Price: {{quotes[dates[date.index]][sym].Close | currency}}</p>
+      <p>Cost: {{(quotes[dates[date.index]][sym].Close * quantity) | currency}}</p>
+      <input class="btn btn-primary"type="submit" value="Place order" ng-if="validTrade()" ng-click="makeTrade()">
+    </div>
+
+    <div class="col-md-6">
+      <p>Cash Available: {{cash.amount | currency}}</p>
+      <p>Trade is: 
+        <span ng-if="validTrade()">VALID</span>
+        <span ng-if="!validTrade()">INVALID</span>
+      </p>
+
+      <div>Current Portfolio: {{portfolio}}</div>
+    </div>
+
+  </div>
+
+

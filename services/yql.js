@@ -1,50 +1,40 @@
 Fideligard.factory('yqlService', ['$http', function($http) {
 
   var fideligardService = {};
-  var _companies = ["AAPL","ABC"];
+  var _companies = ["AAPL","GOOG"];
   var _start = "2015/01/01";
   var _end = "2015/12/31";
 
-  var _quotes = [];
-
-  var _organize = function(quotes) {
-    var startDate = new Date();
-
-    for (quote in _quotes) {
-
-
-    }
-  }
+  var _quotes = {};
+  var _dateArray = [];
 
   var parseData = function(response) {
     var data = response.data.query.results.quote;
 
-    var startDate = new Date(_start);
-    var currentDate = new Date(_start);
-    var endDate = new Date(_end);
-    endDate.setDate(endDate.getDate() + 1)
-    var quotes = [];
+    // var startDate = new Date(_start);
+    // var currentDate = new Date(_start);
+    // var endDate = new Date(_end);
+    // endDate.setDate(endDate.getDate() + 1)
+    var quotes = {};
 
     // add dates to an array
-    while ( currentDate < endDate ) {
-      var dateString = currentDate.toISOString().slice(0,10);
-      var dateObj = {
-        date: dateString,
-        data: {}
-      };
-      quotes.push(dateObj);
+    // while ( currentDate < endDate ) {
+    //   var dateString = currentDate.toISOString().slice(0,10);
+    //   quotes[dateString] = {};
+    //   currentDate.setDate(currentDate.getDate() + 1);
+    // }
 
-      currentDate.setDate(currentDate.getDate() + 1);
-
-    }
+    // angular.copy(Object.keys(quotes).sort(), _dateArray);
 
     for (var index in data) {
-      var dayDiff= new Date(data[index].Date) - startDate;
-      var dateIndex = Math.ceil(dayDiff / (1000 * 3600 * 24));
-      var symbol = data[index].Symbol;
-      quotes[dateIndex].data[symbol] = data[index];
+      if (quotes[data[index].Date]) {
+        quotes[data[index].Date][data[index].Symbol] = data[index]
+      } else {
+        quotes[data[index].Date] = {};
+        quotes[data[index].Date][data[index].Symbol] = data[index]
+      }
     }
-
+    angular.copy(Object.keys(quotes).sort(), _dateArray);
     return quotes;
   };
 
@@ -73,6 +63,10 @@ Fideligard.factory('yqlService', ['$http', function($http) {
 
   fideligardService.getStocks = function() {
     return _quotes;
+  };
+
+  fideligardService.getDates = function() {
+    return _dateArray;
   };
 
   fideligardService.apiStocks();

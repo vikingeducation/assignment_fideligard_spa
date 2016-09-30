@@ -3,7 +3,7 @@
   1/1/2015
   </div>
   <div class="col-md-3">
-  {{quotes[index].date}}
+  {{dates[index]}}
   </div>
   <div class="col-md-3" style="text-align: right">
   12/31/2015
@@ -12,8 +12,8 @@
 
 <div class="row">
   <div class="col-md-12">
-    <input type=range min='0' max='364' step='1' ng-model='index'>
+    <input type=range min='0' max='251' step='1' ng-model='index' ng-change='setDate(index)'>
   </div>
 </div>
 
-<div>{{quotes[index]}}</div>
+<!-- <div>{{quotes[dates[index]]}}</div> -->

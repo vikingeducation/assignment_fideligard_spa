@@ -28,21 +28,22 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
     }
   })
 
-  .state('dashboard.trade', {
-    url: '/trade',
-    views: {
-      '@': {
-        templateUrl: 'templates/trade.html'
-      }
-    }
-  })
-
   .state('dashboard.transaction', {
     url: '/transaction',
     views: {
       '@': {
         templateUrl: 'templates/transaction.html',
         controller: 'TransactionCtrl'
+      }
+    }
+  })
+
+  .state('dashboard.trade', {
+    url: '/:sym',
+    views: {
+      '@': {
+        templateUrl: 'templates/trade.html',
+        controller: 'TradeCtrl'
       }
     }
   });
