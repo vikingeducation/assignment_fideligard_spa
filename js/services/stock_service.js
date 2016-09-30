@@ -74,16 +74,12 @@ app.factory('StockService', ['$http', function($http) {
     return _stockData;
   };
 
-  StockService.getPrevious = function (symbol) {
-    return function(year) {
-      return function(daysAgo) {
-        return function(current,field) {
-          return function () {
-            // if (_stockData[symbol][current] && _stockData[symbol][current-daysAgo]) {
-            //   return _stockData[symbol][year][current][field] - _stockData[symbol][year][current-daysAgo][field];
-            // }
-          };
-        };
+  StockService.getPrevious = function(daysAgo) {
+    return function(current,field,symbol) {
+      return function () {
+        if (_stockData[current][symbol] && _stockData[current-daysAgo][symbol]) {
+          return _stockData[symbol][year][current][field] - _stockData[symbol][year][current-daysAgo][field];
+        }
       };
     };
   };

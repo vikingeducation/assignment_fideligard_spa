@@ -11,7 +11,9 @@ app.directive('stockIndexRow', ['StockService', function(StockService) {
     link: function(scope) {
       // scope.symbol = scope.stock;
       // console.log(scope.stock);
-      console.log(scope.day);
+      var day = new Date(scope.day);
+      console.log(day);
+      console.log(new Date(day.setDate(day.getDate()-1)));
       // scope.getAgoAAPL = StockService.getPrevious('AAPL');
       // scope.getAgo2014 = scope.getAgoAAPL(2014);
       // scope.oneDayAgo = scope.getAgo2014(1)(scope.index,'Close');
