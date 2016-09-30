@@ -1,33 +1,35 @@
-fideligardApp.controller('datepickerCtrl', ['$scope', '$window', 'stocksService', function($scope, $window, stocksService){
-  $scope.tempDate = 0;
+fideligardApp.controller('datepickerCtrl', ['$scope', 'stocksService', "dateService", function($scope,stocksService, dateService){
+
+  $scope.tempDate = 151;
   $scope.showInput = false;
 
-  (function() {
-    $scope.date = stocksService.getSelectedDate();
-  })();
+  $scope.$watch('tempDate', function(newValue) {
+    $scope.selectedDate = $scope.translateDate(newValue);
+  });
 
-  $scope.anotherFunction = function () {
-    if (e.target !== $("#date-slider")[0] && $scope.showInput) {
-      $scope.showInput = false;
-      console.log("setting show input to false");
-    }
-    console.log($scope);
-    console.log(e.target);
-    console.log($scope.showInput);
-  };
+  $scope.translateDate = function(dateIndex) {
+    var date = stocksService.getTimestampByDateIndex(dateIndex);  
+    var d = new Date(date);
+    d.setTime( d.getTime() + d.getTimezoneOffset()*60*1000 );;
+    return d.toDateString();
+  }
 
-  $scope.submitDateChange = function() {
-    $scope.currentDate = $scope.tempDate;
+
+  $scope.cancelDateChange = function() {
     $scope.showInput = false;
-  };
+    $scope.tempDate = dateService.getSelectedDate().date;
+  }
 
-  $scope.cancelDateChange = function () {
-    $scope.tempDate = $scope.currentDate;
+  $scope.submitDateChange = function(selectedDate) {
+    var date = stocksService.getDateIndexFromDate(selectedDate);
+    dateService.setSelectedDate({date: date})
+    $scope.tempDate = dateService.getSelectedDate().date;
     $scope.showInput = false;
-  };
+  }
 
   $scope.setShowInput = function() {
     $scope.showInput = true;
-    console.log("setting show input to tru")
-  };
+  }
+
+
 }]);

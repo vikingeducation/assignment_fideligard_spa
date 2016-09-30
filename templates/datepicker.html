@@ -1,13 +1,12 @@
 <div id="datepicker">
-  <p>Start: {{ 1388552400000 | date}}</p>
-  <input id="date-slider" ng-click="setShowInput()" type="range" min="1388552400000" max="1406865600000" step="86400000" ng-model="ourDate">
-  <p>End: {{ 1406865600000 | date}}</p>
+  <p>Start: {{ translateDate(0) }}</p>
+  <input " id="date-slider" ng-click="setShowInput()" type="range" min="0" max="251" step="1" ng-model="tempDate">
+  <p>End: {{ translateDate(251) }}</p>
   <label>Current:</label>
-  <p>{{currentDate | date}}</p>
+  <p>{{translateDate(tempDate)}}</p>
   <div ng-show="showInput">
-    <input type="text" ng-model="ourDate">
+    <input type="text" ng-model="selectedDate">
     <a href="#" ng-click="cancelDateChange()">Cancel</a>
-    <a href="#" ng-click="submitDateChange()">Submit</a>
+    <a href="#" ng-click="submitDateChange(selectedDate)">Submit</a>
   </div>
-  {{showInput}}
 </div>

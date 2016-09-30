@@ -1,23 +1,31 @@
-fideligardApp.factory('stocksService', ['$http', "$q", function($http, $q){
+fideligardApp.factory('stocksService', ['$http', "$q", "dateService", function($http, $q, dateService){
 
   var stocksService = {};
-  var _selectedDate = {};
   var _stocks = {};
-  var _symbols = ["MGT", "EBIO", "SPHS", "X", "SRPT", "WLL", "REN", "VRX", "CBS", "RH", "CLF", "CHK"];
+  // var _symbols = ["MGT", "EBIO", "SPHS", "X", "SRPT", "WLL", "REN", "VRX", "CBS", "RH", "CLF", "CHK"];
+  var _symbols = ["MGT", "EBIO"]
+  var _dates = [];
 
-  stocksService.getSelectedDate = function() {
-    return _selectedDate;
-  };
+  var _selectedDate = _dates[dateService.getSelectedDate()];
 
-  stocksService.setSelectedDate = function(date) {
-    angular.copy(_selectedDate, date);
-  };
+  stocksService.getTimestampByDateIndex = function(dateIndex) {
+    return _dates[dateIndex]
+  }
+  
+  stocksService.getTimestampByDateObject = function(dateObj) {
+      console.log("getting timestamp by date object")
+      return _dates[dateObj.date]
+    }
+
+
+  stocksService.getStocksByTimestamp = function(timestamp) {
+    return _stocks[timestamp]
+  }
 
   var _addEntriesToStocks = function(arr){
     var stock;
     for(var i = 0; i < arr.length; i++){
       stock = arr[i];
-      console.log(stock.Date);
       if(_stocks[stock.Date]) {
         _stocks[stock.Date].push(stock);
       } else {
@@ -34,25 +42,38 @@ fideligardApp.factory('stocksService', ['$http', "$q", function($http, $q){
       }));
     }
 
-    return $q.all(requests).then(function(response) {
-      console.log('RESPONSE');
-      console.log(response);
-      for (var i = 0; i < response.length; i++) {
-        _addEntriesToStocks(response[i].data.query.results.quote);
-      }
-      return _stocks;
-    }, function(response) {
-      console.error(response);
-    });
+    return $q.all(requests)
+      .then(function(response) {
+        for (var i = 0; i < response.length; i++) {
+          _addEntriesToStocks(response[i].data.query.results.quote);
+          _dates = Object.keys(_stocks).sort()
+        }
+        return _stocks;
+      }, function(response) {
+        console.error(response);
+      });
   };
 
   stocksService.getStocks = function() {
     return _stocks;
   };
 
-  stocksService.getDates = function() {
-    return Object.keys(_stocks).sort();
+  stocksService.allDates = function() {
+    return _dates;
   };
+
+  stocksService.getDateIndexFromDate = function(date) {
+    date = new Date(date).toISOString().slice(0, 10);
+    for (var i = 0; i < _dates.length; i++) {
+      if (_dates[i] === date) {
+        return i
+      }
+    }
+  }
+
+  stocksService.getStocksByDateIndex = function(dateIndex) {
+
+  }
 
 
   return stocksService;
