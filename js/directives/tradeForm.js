@@ -24,6 +24,7 @@ app.directive('tradeForm', ['StocksService', 'dateService', 'accountService', fu
 
 			scope.formData = {};
 			scope.updateForm();
+			scope.formData.action = "buy";
 			scope.formData.symbol = scope.symbol;
 			scope.formData.quantity = 100;
 
