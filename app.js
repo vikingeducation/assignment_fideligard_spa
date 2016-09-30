@@ -27,10 +27,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         ]
       }
     });
-
-    // .state('normal.trade', {
-
-    // }
 });
 
 app.run(function($rootScope){

@@ -6,11 +6,10 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
 
   var _day = 0;
 
-  var _popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA", "^RUT"];
+  var _popularStocks = ["AAPL", "GOOGL"];
+  //, "MSFT", "TSLA", "^RUT"];
 
   var stub = {};
-
-
 
   stub.getStock = function(symb, startYear) {
     var symb = symb || "AAPL";
@@ -60,6 +59,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
   };
 
   stub.getDate = function(day) {
+    // we know gooogl has stocks always, this is just to get the date.
     return _stocks["GOOGL"][2014]["days"][day]["Date"];
   };
 
@@ -68,7 +68,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
   };
 
   stub.getDay = function(){
-    return _day
+    return _day;
   }
 
   return stub;

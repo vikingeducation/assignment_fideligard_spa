@@ -1,12 +1,11 @@
 app.controller("dateCtrl", ["$scope", 'dateService', "stockService", function($scope, dateService, stockService) {
 
+  $scope.newDate;
   $scope.datePicked = 126;
-  $scope.sendDate = 0;
 
   $scope.$watch("datePicked", function() {
-    $scope.sendDate = $scope.datePicked;
     stockService.setDay($scope.datePicked);
-    $scope.newDate = stockService.getDate($scope.sendDate);
+    $scope.newDate = stockService.getDate($scope.datePicked);
   });
 
 }])

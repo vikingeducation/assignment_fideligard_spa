@@ -2,7 +2,7 @@
 {{stock.symbol}}
 </td>
 <td>
-  {{ stock[2014].days[tradeDay].Close | currency }}
+  {{ stock[2014].days[tradeDay()].Close | currency }}
 </td>
 <td>
   {{ getDayAnalytics() | currency }}

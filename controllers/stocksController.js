@@ -1,8 +1,7 @@
 app.controller("stocksCtrl",
-  ['$scope', 'dateService','stockService', 'stocks',
-  function($scope, dateService, stockService, stocks) {
+  ['$scope','stocks',
+  function($scope, stocks) {
 
+  $scope.nameFilter = "";
   $scope.allStocks = stocks;
-
-  
 }]);
