@@ -30,8 +30,8 @@ app.directive('tradeForm', ['StocksService', 'dateService', 'accountService', fu
 			scope.placeTrade = function(){
 				if(scope.formData.action === "buy"){
 					//check buy
-					if(accountService.checkValidBuy(scope.formData.quantity*scope.formData.price)){
-						accountService.makeBuy(scope.formData.symbol, scope.formData.quantity, scope.formData.price);
+					if(accountService.checkValidBuy(scope.formData)){
+						accountService.makeBuy(scope.formData);
 						scope.orderStatus = "Order Placed!";
 					}
 					else{

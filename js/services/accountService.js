@@ -16,8 +16,12 @@ app.factory('accountService', function(){
 		return _account;
 	};
 
-	stub.checkValidBuy = function(amount){
-		return amount <= _account.cash;
+	stub.getTransactions = function(){
+		return _transactions;
+	};
+
+	stub.checkValidBuy = function(formData){
+		return  formData.price * formData.quantity <= _account.cash;
 	};
 
 	stub.checkValidSell = function(formData){
@@ -30,6 +34,7 @@ app.factory('accountService', function(){
 		stub.makeTransaction(-formData.quantity*formData.price);
 		//add to transactions
 		var newTransaction = {
+			date: formData.date,
 			symbol: formData.symbol,
 			quantity: formData.quantity,
 			type: "SELL",
@@ -43,27 +48,28 @@ app.factory('accountService', function(){
 		//console.log("Portfolio: ", _portfolio);
 	};
 
-	stub.makeBuy = function(symbol, quantity, price){
+	stub.makeBuy = function(formData){
 		//substract from balance
-		stub.makeTransaction(quantity*price);
+		stub.makeTransaction(formData.quantity*formData.price);
 		//add to transactions
 		var newTransaction = {
-			symbol: symbol,
-			quantity: quantity,
+			date: formData.date,
+			symbol: formData.symbol,
+			quantity: formData.quantity,
 			type: "BUY",
-			price: price
+			price: formData.price
 		};
 		_transactions.push(newTransaction);
 		//console.log("Transactions: ", _transactions);
 		//add to portfolio
-		if(_portfolio[symbol]){
-			_portfolio[symbol].quantity += quantity;
-			_portfolio[symbol].moneySpent += (quantity*price);
+		if(_portfolio[formData.symbol]){
+			_portfolio[formData.symbol].quantity += formData.quantity;
+			_portfolio[formData.symbol].moneySpent += (formData.quantity*formData.price);
 		}
 		else{
-			_portfolio[symbol] = {
-				quantity: quantity,
-				moneySpent: quantity*price,
+			_portfolio[formData.symbol] = {
+				quantity: formData.quantity,
+				moneySpent: formData.quantity*formData.price,
 				moneyEarned: 0
 			};
 		}

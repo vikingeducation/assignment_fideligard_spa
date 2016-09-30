@@ -58,8 +58,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		})
 		.state('main.transactions', {
 			url: '/transactions',
-			templateUrl: 'js/templates/transactions.html',
-			controller: 'TransactionsCtrl'
+			views: {
+				'mainContent@': {
+					templateUrl: 'js/templates/transactions.html',
+					controller: 'TransactionsCtrl'
+				}
+			}
 		});
 
 }]);

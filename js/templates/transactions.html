@@ -1,1 +1,21 @@
-transactions.html
+<a ui-sref="main.trade({symbol: 'AAPL'})">Trade</a>
+<label>Filter:
+	<input type="text" ng-model="filterInput">
+</label>
+<table class="table table-striped table-bordered">
+<caption>Transactions</caption>
+<tr>
+	<th>Date</th>
+	<th>Symbol</th>
+	<th>Type</th>
+	<th>Quantity</th>
+	<th>Price</th>
+</tr>
+<tr ng-repeat="t in transactions | filter: filterInput | orderBy: 'date' ">
+	<td>{{t.date}}</td>
+	<td>{{t.symbol}}</td>
+	<td>{{t.type}}</td>
+	<td>{{t.quantity}}</td>
+	<td>{{t.price}}</td>
+</tr>
+</table>
