@@ -10,12 +10,12 @@ app.factory('_', ['$window', function($window) {
 
 app.config(function($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.otherwise('/');
+  $urlRouterProvider.otherwise('/trade');
 
   $stateProvider
 
     .state('stocks', {
-      url: '/',
+      abstract: true,
       views: {
         'date': {
           templateUrl: 'js/templates/date.html',
@@ -33,6 +33,14 @@ app.config(function($stateProvider, $urlRouterProvider){
         stocksObj: ['StockService', function(StockService){
           return StockService.queryStocks();
         }]
+      }
+    })
+    .state('stocks.trade', {
+      url: '/trade',
+      views: {
+        'trade@': {
+          templateUrl: 'js/templates/trade.html'
+        }
       }
     });
 

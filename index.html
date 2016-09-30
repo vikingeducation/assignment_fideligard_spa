@@ -11,11 +11,24 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.2/lodash.js"></script>
 </head>
+
 <body>
   <div class="container">
-    <div ui-view="date"></div>
-    <div ui-view="index"></div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="row">
+          <div ui-view="index"></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class='card'>
+          <div ui-view="date"></div>
+          <div ui-view="trade"></div>
+        </div>
+      </div>
+    </div>
   </div>
+
   <script src="js/app.js"></script>
 
   <!-- Services -->
@@ -29,6 +42,8 @@
   <script src="js/directives/stock_index_row.js"></script>
 
   <!-- Filters -->
+  <script src="js/filters/filterByTicker.js"></script>
   <script src="js/filters/orderObjectBy.js"></script>
+  <script src="js/filters/objLimitTo.js"></script>
 </body>
 </html>

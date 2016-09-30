@@ -9,6 +9,7 @@ function(date, stocksObj, $scope, StockService, DateService) {
   $scope.selectedDateIndex = 0;
   $scope.selectedSymbol = 'AAPL';
   $scope.dateInfo = date;
+  $scope.tickerState = false;
 
   $scope.$watch('selectedDateIndex', function(){
     DateService.setDate($scope.dates[$scope.selectedDateIndex]);

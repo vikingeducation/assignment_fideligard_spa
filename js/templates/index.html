@@ -1,30 +1,34 @@
-<h3>Stocks</h3>
-<table class="table">
-  <theader>
-    <tr>
-      <th>Symbol</th>
-      <th>Price</th>
-      <th>1d</th>
-      <th>7d</th>
-      <th>30d</th>
-      <th>Trade?</th>
-    </tr>
-  </theader>
+<div class="col-md-12">
+  <h3>Stocks</h3>
+  <div class="table-responsive">
+    <table class="table">
+      <theader>
+        <tr>
+          <th>Symbol</th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade?</th>
+        </tr>
+      </theader>
 
-  <tbody
-  ng-repeat="(day, stocks) in stockData"
-  stocks="stocks"
-  day="day"
-  >
-    <tr
-    ng-repeat="stock in stocks | orderObjectBy"
-    stock-index-row
-    stock='stock'
-    day="day"
-    >
-    </tr>
-  </tbody>
+      <tbody
+      ng-repeat="(day, stocks) in stockData | objLimitTo:12"
+      stocks="stocks"
+      day="day"
+      >
+        <tr
+        ng-repeat="stock in stocks"
+        stock-index-row
+        stock='stock'
+        day="day"
+        >
+        </tr>
+      </tbody>
 
-  <!-- {{ dateInfo.currentDate | date:'yyyy-MM-dd' }} -->
+      <!-- {{ dateInfo.currentDate | date:'yyyy-MM-dd' }} -->
 
-</table>
+    </table>
+  </div>
+</div>
