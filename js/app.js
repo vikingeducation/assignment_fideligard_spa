@@ -47,8 +47,14 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		})
 		.state('main.trade', {
 			url: '/trade',
-			templateUrl: 'js/templates/trade.html',
-			controller: 'TradeCtrl'
+			params: {symbol: ''},
+			views: {
+				'mainContent@':{
+					templateUrl: 'js/templates/trade.html',
+					controller: 'TradeCtrl'
+				}
+			}
+			
 		})
 		.state('main.transactions', {
 			url: '/transactions',
