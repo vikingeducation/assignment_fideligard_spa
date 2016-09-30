@@ -23,13 +23,12 @@ app.config(function($stateProvider, $urlRouterProvider){
           controller: 'StocksCtrl'
         }
       },
-      // controller: 'StocksCtrl',
       resolve: {
         date: ['DateService', function(DateService){
           return DateService.getDate();
         }],
         stocks: ['StockService', function(StockService){
-          return StockService.all();
+          return StockService.queryStocks();
         }]
       }
     });

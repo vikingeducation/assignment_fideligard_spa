@@ -9,7 +9,12 @@
     <th>Trade?</th>
   </tr>
 
-  <tr stock-index-row ng-repeat='stock in stocks'>
+  <tr
+  stock-index-row
+  ng-repeat='stock in stocks'
+  stock='stock'
+  index="{{$index}}"
+  >
   </tr>
 
 </table>

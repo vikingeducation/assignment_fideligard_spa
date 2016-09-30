@@ -6,7 +6,7 @@ app.factory('DateService', [function(){
 
   var getDateInfo = function(){
     return _dateInfo;
-  }
+  };
 
 
   var getDate = function(){

@@ -1,12 +1,22 @@
 app.factory('StockService', ['$http', function($http) {
   var StockService = {};
-  var _stockData = {};
+  var _stockData = [];
 
-  StockService.all = function() {
-    return $http.get('js/data/stocks.json').then(function(response) {
-      console.log(response.data);
-      return response.data;
-    });
+  StockService.queryStocks = function() {
+    return $http.get('js/data/stocks.json')
+            .then(function(response) {
+              return angular.copy(response.data, _stockData);
+            });
+  };
+
+  StockService.getStocks = function() {
+    return _stockData;
+  };
+
+  StockService.getPrevious = function (current, daysAgo, field) {
+    if (_stockData[current] && _stockData[current-daysAgo]) {
+      return _stockData[current-daysAgo][field];
+    }
   };
 
   return StockService;
