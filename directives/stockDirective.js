@@ -6,15 +6,17 @@ app.directive("stockRow", ['stockService', function(stockService){
       stock: "="
     },
     link: function(scope){
-      console.log(scope.stock);
-      console.log(scope.stock[2014].symbol)
       scope.tradeDay = stockService.getDay();
+      console.log(scope.tradeDay);
 
       scope.getDayAnalytics = function(numDays){
-        var numDays = numDays || 0;
-        var intialDay = scope.stock[2014].dayListings[scope.tradeDay].Open;
-        var finalDay = scope.stock[2014].dayListings[scope.tradeDay - numDays].Close;
-      }
+        var numDays = numDays || 1;
+        numDays--;
+        var intialDay = scope.stock[2014].days[scope.tradeDay].Open;
+        var finalDay = scope.stock[2014].days[scope.tradeDay - numDays].Close;
+
+        return finalDay - intialDay;
+      };
     }
   };
 }]);

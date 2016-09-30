@@ -12,15 +12,16 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
 
 
 
-  stub.getStock = function(symb, year) {
+  stub.getStock = function(symb, startYear) {
     var symb = symb || "AAPL";
     var url = "http://query.yahooapis.com/v1/public/yql?q=";
-    var year = year || 2014;
+    var startYear = startYear || 2014;
+    var endYear = endYear || 2014;
     var append = "%20select%20*%20from%20yahoo.finance.historicaldata%20" +
     "where%20symbol%20=%20"+
     "%22"+ symb + "%22%20" +
-    "and%20startDate%20=%20%22"+ year + "-01-01%22%20" +
-    "and%20endDate%20=%20%22" + year + "-12-31%22%20" +
+    "and%20startDate%20=%20%22"+ startYear + "-01-01%22%20" +
+    "and%20endDate%20=%20%22" + endYear + "-12-31%22%20" +
     "&format=json%20" +
     "&diagnostics=true%20" +
     "&env=store://datatables.org/alltableswithkeys%20" +
@@ -46,7 +47,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
          }
          _stocks[symbol].symbol= symbol;
          _stocks[symbol][year] = {
-             dayListings: stock_data.results.quote,
+             days: stock_data.results.quote.reverse(),
              countWorkDays: stock_data.count
          };
        }
@@ -59,11 +60,11 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
   };
 
   stub.getDate = function(day) {
-    return _stocks["GOOGL"][2014]["dayListings"][251 - day]["Date"];
+    return _stocks["GOOGL"][2014]["days"][day]["Date"];
   };
 
   stub.setDay = function(dayIndex){
-    _day = 251 - dayIndex;
+    _day = dayIndex;
   };
 
   stub.getDay = function(){
