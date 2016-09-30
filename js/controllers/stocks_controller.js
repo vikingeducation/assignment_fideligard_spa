@@ -5,8 +5,6 @@ function(date, stocks, $scope, StockService, DateService) {
   $scope.dateInfo = DateService.getDateInfo();
   $scope.stocks = stocks;
 
-  console.log($scope.stocks);
-
   $scope.storeDate = function() {
     DateService.setDate($scope.selectedDate);
   };
