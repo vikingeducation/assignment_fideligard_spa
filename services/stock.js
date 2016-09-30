@@ -57,7 +57,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
 
   stub.getDate = function(index, year) {
     var year = year || 2014;
-    return _stocks.AAPL[year].dayListings[251 - index];
+    return _stocks.AAPL[year].dayListings[251 - index].Date;
   };
 
 
