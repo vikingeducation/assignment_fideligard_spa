@@ -19,48 +19,49 @@ app.factory('StockService', ['$http', function($http) {
                 ),
                 function(symbol) {
                   _stockData[symbol] = {};
-                  _stockData[symbol][2014] = {};
+                  _stockData[symbol][2014] = {
+                    days: []
+                  };
                 }
               );
               return response;
             })
-            .then(function(response) {
-              // Grab dates.
-              _.forEach(
-                _.uniq(
-                  _.map(
-                    response.data,
-                    function(item) {
-                      return item['Date'];
-                    }
-                  )
-                ),
-                function(date) {
-                  response.data.forEach(function(item) {
-                    // If the item's date matches the current date in collection,
-                    // and if that date doesn't already have an object in
-                    // the form data.
-                    if (item['Date'] === date) {
-                      if (_stockData[item['Symbol']]) {
-                        if (_.isEmpty(_stockData[item['Symbol'][date]])) {
-                          _stockData[item['Symbol']][2014][date] = [];
-                        }
-                      }
-                    }
-                  });
-                  return date;
-                }
-              );
-              return response;
-            })
+            // .then(function(response) {
+            //   // Grab dates.
+            //   _.forEach(
+            //     _.uniq(
+            //       _.map(
+            //         response.data,
+            //         function(item) {
+            //           return item['Date'];
+            //         }
+            //       )
+            //     ),
+            //     function(date) {
+            //       response.data.forEach(function(item) {
+            //         // If the item's date matches the current date in collection,
+            //         // and if that date doesn't already have an object in
+            //         // the form data.
+            //         if (item['Date'] === date) {
+            //           if (_stockData[item['Symbol']]) {
+            //             if (_.isEmpty(_stockData[item['Symbol'][date]])) {
+            //               _stockData[item['Symbol']][2014].days = [];
+            //             }
+            //           }
+            //         }
+            //       });
+            //       return date;
+            //     }
+            //   );
+            //   return response;
+            // })
             .then(function(response) {
               _.forEachRight(
                 response.data,
                 function(item) {
-                  _stockData[item['Symbol']][2014][item['Date']].push(item);
+                  _stockData[item['Symbol']][2014].days.push(item);
                 }
               );
-              console.log(_stockData);
               return _stockData;
             })
             .catch(function(reason) {

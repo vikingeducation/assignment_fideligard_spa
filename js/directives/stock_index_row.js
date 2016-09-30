@@ -4,7 +4,7 @@ app.directive('stockIndexRow', ['StockService', function(StockService) {
     restrict: 'A',
     templateUrl: 'js/directives/stock_index_row.html',
     scope: {
-      stock: '=',
+      stockYear: '=',
       // stocks: '@',
       index: '@',
     },
