@@ -8,16 +8,16 @@ app.directive('stockTicker', ['StocksService', 'dateService', function(StocksSer
 		},
     link: function(scope) {
     scope.currentDate = dateService.getDate();
-    scope.$watch('currentDate.index', function(){
-    	scope.currentPrice = StocksService.currentPrice(scope.symbol);
-      scope.thirtyDay = StocksService.priceChange(scope.symbol, 30);
-      scope.sevenDay = StocksService.priceChange(scope.symbol, 7);
-      scope.oneDay = StocksService.priceChange(scope.symbol, 1);
-    });
+    scope.getData = function(){
       scope.currentPrice = StocksService.currentPrice(scope.symbol);
       scope.thirtyDay = StocksService.priceChange(scope.symbol, 30);
       scope.sevenDay = StocksService.priceChange(scope.symbol, 7);
       scope.oneDay = StocksService.priceChange(scope.symbol, 1);
+    };
+    scope.$watch('currentDate.index', function(){
+      scope.getData();
+    });
+      scope.getData();
     }
 	};
 }]);
