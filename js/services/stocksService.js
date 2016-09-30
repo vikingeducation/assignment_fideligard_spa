@@ -1,8 +1,8 @@
 "use strict";
-app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateService, _){
+app.factory('StocksService', ['$http', 'dateService', '_', '$q', function($http, dateService, _, $q){
 
-	var _stocks = {};
 	var stub = {};
+  var _stocks = {}; 
   var _dates = {};
   var _dateCollection = [];
   var _stockDates = {};
@@ -10,9 +10,18 @@ app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateS
   var _stockSymbols = ['AAPL', 'GOOG', 'PHM', 'ICON', 'PCLN', 'PM', 'MO', 'GPOR', 'AREX', 'ATW', 'CMO', 'LTC', 'RNR', 'GILD'];
 
 	var _populateAllStocks = function(){
+    var requests = [];
      _stockSymbols.forEach(function(el){
-      console.log(el);
-        _populateStock(el);
+      requests.push(_populateStock(el));
+     });
+     return $q.all(requests).then(function(response){
+        response.forEach(function(stock){
+          _buildCollections(stock);
+        });
+        _buildDateCollection();
+        return _stocks;
+     }, function(error){
+          console.log(error);
      });
   };
 
@@ -30,31 +39,33 @@ app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateS
   };
 
   var _populateStock = function(symbol){
-    console.log(_buildStockString(symbol));
 		return $http({
 			url: _buildStockString(symbol),
 			method: "GET"
-		})
-		.then(function(response){
-			response.data.query.results.quote.forEach(function(stock) {
-        _buildStockObject(stock);
-        _buildDatesArr(stock);
-        _buildStockDates(stock);
-      });
-      var sortedDates = Object.keys(_dates).sort(function(a,b) {
-        var aDate = new Date(a);
-        var bDate = new Date(b);
-        if (aDate > bDate) {
-          return 1;
-        } else if (aDate < bDate) {
-          return -1;
-        } else {
-          return 0;
-        }
-      })
-      angular.copy(sortedDates, _dateCollection)
-      return _stocks;
 		});
+  };
+
+  var _buildCollections = function(response){
+		response.data.query.results.quote.forEach(function(stock) {
+      _buildStockObject(stock);
+      _buildDatesArr(stock);
+      _buildStockDates(stock);
+    });
+  };
+    
+  var _buildDateCollection = function(){
+    var sortedDates = Object.keys(_dates).sort(function(a,b) {
+      var aDate = new Date(a);
+      var bDate = new Date(b);
+      if (aDate > bDate) {
+        return 1;
+      } else if (aDate < bDate) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    angular.copy(sortedDates, _dateCollection);
 	};
 
   var _buildStockObject = function(stock) {
@@ -86,34 +97,40 @@ app.factory('StocksService', ['$http', 'dateService', '_', function($http, dateS
     return _dateCollection;
   };
 
-  stub.sevenDayAverage = function(symbol) {
-    var today;
-    for (var i = 0; i < _stockDates[symbol].length; i++) {
-      if (_stockDates[symbol][i] === _dateCollection[dateService.getDate().index]) {
-        today = i;
-        break;
-      }
-    }
-    var avgPrice = 0;
-    for (var j = today - 6; j <= today; j++ ) {
-      avgPrice += Number(_stocks[symbol][_stockDates[symbol][j]].Close);
-    }
-    return Math.round(avgPrice / 7 * 100) / 100;
-  };
+  // stub.sevenDayAverage = function(symbol) {
+  //   var today;
+  //   for (var i = 0; i < _stockDates[symbol].length; i++) {
+  //     if (_stockDates[symbol][i] === _dateCollection[dateService.getDate().index]) {
+  //       today = i;
+  //       break;
+  //     }
+  //   }
+  //   var avgPrice = 0;
+  //   for (var j = today - 6; j <= today; j++ ) {
+  //     avgPrice += Number(_stocks[symbol][_stockDates[symbol][j]].Close);
+  //   }
+  //   return Math.round(avgPrice / 7 * 100) / 100;
+  // };
 
-  stub.thirtyDayAverage = function(symbol) {
-    var today;
-    for (var i = 0; i < _stockDates[symbol].length; i++) {
-      if (_stockDates[symbol][i] === _dateCollection[dateService.getDate().index]) {
-        today = i;
-        break;
-      }
-    }
-    var avgPrice = 0;
-    for (var j = today - 29; j <= today; j++ ) {
-      avgPrice += Number(_stocks[symbol][_stockDates[symbol][j]].Close);
-    }
-    return Math.round(avgPrice / 30 * 100) / 100;
+  // stub.thirtyDayAverage = function(symbol) {
+  //   var today;
+  //   for (var i = 0; i < _stockDates[symbol].length; i++) {
+  //     if (_stockDates[symbol][i] === _dateCollection[dateService.getDate().index]) {
+  //       today = i;
+  //       break;
+  //     }
+  //   }
+  //   var avgPrice = 0;
+  //   for (var j = today - 29; j <= today; j++ ) {
+  //     avgPrice += Number(_stocks[symbol][_stockDates[symbol][j]].Close);
+  //   }
+  //   return Math.round(avgPrice / 30 * 100) / 100;
+  // };
+
+  stub.priceChange = function(symbol, days){
+    var date = _dateCollection[dateService.getDate().index - days];
+    var thenPrice = Math.round(_stocks[symbol][date].Close * 100) / 100;
+    return Math.round((stub.currentPrice(symbol) - thenPrice) * 100) / 100;
   };
 
   stub.currentPrice = function(symbol) {

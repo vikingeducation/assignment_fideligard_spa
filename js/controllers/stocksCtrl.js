@@ -6,4 +6,11 @@ app.controller('StocksCtrl', ["$scope", 'date', 'stocks', 'dates', function($sco
 	$scope.stocks = stocks;
   $scope.dates = dates;
 
+  $scope.sortBy = "symbol";
+	$scope.sortTable = function(property){
+		if(property == "symbol"){
+			return "-symbol";
+		}
+	}; 
+
 }]);

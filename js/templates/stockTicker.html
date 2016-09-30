@@ -1,6 +1,8 @@
 <tr>
 	<td>{{ symbol }}</td>
-  <td>{{ currentPrice }}</td>
-  <td>{{ sevenDay }}</td>
-  <td>{{ thirtyDay }}</td>
+  <td>{{ currentPrice | currency }}</td>
+  <td>{{ oneDay | myCurrency }}</td>
+  <td>{{ sevenDay | myCurrency }}</td>
+  <td>{{ thirtyDay | myCurrency }}</td>
+  <td>trade</td>
 </tr>
