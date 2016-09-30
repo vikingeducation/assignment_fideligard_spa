@@ -1,4 +1,4 @@
-app.factory('stockService', ['$http',function($http) {
+app.factory('stockService', ['$http', '$q',function($http, $q) {
 
   var _stocks = {
 
@@ -26,29 +26,39 @@ app.factory('stockService', ['$http',function($http) {
 
     var finalUrl = url + append;
 
-    return $http.get(finalUrl).then(function(response){
-       var stock_data = response.data.query;
-       var symbol = stock_data["results"]["quote"][0]["Symbol"];
-       if (!_stocks[symbol]){
-         _stocks[symbol] = {};
+    return $http.get(finalUrl);
+  };
+
+  stub.getStocks = function(year){
+    var requests = [];
+    var year = year || 2014;
+    for(var i = 0; i < _popularStocks.length; i++){
+      requests.push(stub.getStock(_popularStocks[i], year));
+    }
+    return $q.all(requests).then(function(response){
+      for (var i = 0; i < response.length; i++) {
+         var stock_data = response[i].data.query;
+         var symbol = stock_data.results.quote[0].Symbol;
+         if (!_stocks[symbol]){
+           _stocks[symbol] = {};
+         }
+         _stocks[symbol][year] = {
+             dayListings: stock_data.results.quote,
+             countWorkDays: stock_data.count
+         };
        }
-       _stocks[symbol][year] = {
-           dayListings: stock_data.results.quote,
-           countWorkDays: stock_data.count
-       };
+       return _stocks;
      });
   };
 
-  stub.getStocks = function(){
-    _popularStocks.forEach(function(stockSym){
-      stub.getStock(stockSym);
-    });
-    return Promise.resolve(_stocks);
+  stub.getCurrentStocks = function() {
+    return _stocks;
   };
 
-  // stub.getDate = function(index) {
-  //   return _stocks.AAPL[2014].dayListings[251 - index]
-  // }
+  stub.getDate = function(index, year) {
+    var year = year || 2014;
+    return _stocks.AAPL[year].dayListings[251 - index];
+  };
 
 
 
