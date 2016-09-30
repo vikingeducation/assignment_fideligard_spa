@@ -30,7 +30,7 @@ app.config(function($stateProvider, $urlRouterProvider){
         date: ['DateService', function(DateService){
           return DateService.getDate();
         }],
-        stocks: ['StockService', function(StockService){
+        stocksObj: ['StockService', function(StockService){
           return StockService.queryStocks();
         }]
       }

@@ -52,6 +52,7 @@ app.factory('StockService', ['$http', function($http) {
                       }
                     }
                   });
+                  _dates.push(date);
                   return date;
                 }
               );
@@ -65,7 +66,7 @@ app.factory('StockService', ['$http', function($http) {
                 }
               );
               console.log(_stockData);
-              return _stockData;
+              return {stockData: _stockData, dates: _dates};
             })
             .catch(function(reason) {
               console.log(reason);
@@ -88,6 +89,10 @@ app.factory('StockService', ['$http', function($http) {
         };
       };
     };
+  };
+
+  StockService.getDates = function() {
+    return _dates;
   };
 
 
