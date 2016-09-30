@@ -18,13 +18,13 @@
     <nav class="nav navbar-inverse">
       <div class="navbar-header">
 
-        <a class="navbar-brand">Stock Portfolio</a>
+        <a class="navbar-brand">Stock Simulator</a>
       </div>
     </nav>
     <div class="main container">
-      <div class="row">
-        <div ui-view="stocks-panel" class="col-md-4"></div>
-        <div ui-view="datepicker" class="col-md-8"></div>
+      <div class="row margin-top">
+        <div ui-view="stocks-panel" class="col-md-5"></div>
+        <div ui-view="datepicker" class="col-md-7"></div>
       </div>
     </div>
   </body>
@@ -34,4 +34,5 @@
   <script src='controllers/stocks_panel_controller.js'></script>
   <script src='services/stocks_service.js'></script>
   <script src='services/dateService.js'></script>
+  <script src='filters/addPlusSign.js'></script>
 </html>
