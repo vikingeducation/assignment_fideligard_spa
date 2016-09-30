@@ -6,7 +6,6 @@ function(date, stocksObj, $scope, StockService, DateService) {
   $scope.stockData = stocksObj.stockData;
   $scope.dates = stocksObj.dates;
   $scope.maxDateRange = $scope.dates.length-1;
-  $scope.selectedSymbol = 'AAPL';
   $scope.dateInfo = date;
 
 }]);
