@@ -4,5 +4,5 @@ app.controller("stocksCtrl",
 
   $scope.allStocks = stocks;
 
-  console.log($scope.allStocks);
+  
 }]);
