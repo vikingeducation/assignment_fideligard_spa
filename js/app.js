@@ -1,5 +1,10 @@
 var app = angular.module('fideligard', ['ui.router']);
 
+app.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+});
+
+
 app.config(function($stateProvider, $urlRouterProvider){
 
   $urlRouterProvider.otherwise('/');
@@ -15,18 +20,16 @@ app.config(function($stateProvider, $urlRouterProvider){
         },
         'index': {
           templateUrl: 'js/templates/index.html',
-          controller: 'StocksCtrl',
-          resolve: {
-            stocks: ['StockService', function(StockService){
-              return StockService.all();
-            }]
-          }
+          controller: 'StocksCtrl'
         }
       },
-      controller: 'StocksCtrl',
+      // controller: 'StocksCtrl',
       resolve: {
         date: ['DateService', function(DateService){
           return DateService.getDate();
+        }],
+        stocks: ['StockService', function(StockService){
+          return StockService.all();
         }]
       }
     });
