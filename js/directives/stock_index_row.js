@@ -12,14 +12,13 @@ app.directive('stockIndexRow', ['StockService', function(StockService) {
       scope.getAgo = function(days) {
         return function () {
           if (StockService.getPrevious(scope.index,days,'Close')) {
-            return scope.stock['Close'] - (StockService.getPrevious(scope.index,days,'Close'));
-          } else {
-            return undefined;
+            return (StockService.getPrevious(scope.index,days,'Close')) ;
           }
         };
       };
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);
+      scope.sevenDaysAgo = scope.getAgo(30);
     }
   };
 }]);
