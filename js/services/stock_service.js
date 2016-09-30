@@ -74,11 +74,29 @@ app.factory('StockService', ['$http', function($http) {
     return _stockData;
   };
 
-  StockService.getPrevious = function(daysAgo) {
-    return function(current,field,symbol) {
+  StockService.getPrevious = function(current,field,symbol) {
+    return function(daysAgo) {
       return function () {
-        if (_stockData[current][symbol] && _stockData[current-daysAgo][symbol]) {
-          return _stockData[symbol][year][current][field] - _stockData[symbol][year][current-daysAgo][field];
+        var day = new Date(current);
+        var prevDay = angular.copy(day);
+        prevDay.setDate(day.getDate()-daysAgo);
+
+        // Building date strings.
+        var currMonth = day.getUTCMonth() + 1;
+        var currDay = day.getUTCDate();
+        var currYear = day.getUTCFullYear();
+
+        var prevMonth = prevDay.getUTCMonth() + 1;
+        var previousDay = prevDay.getUTCDate();
+        var prevYear = prevDay.getUTCFullYear();
+
+        var currStr = currYear + "-" + currMonth + "-" + currDay;
+        var prevStr = prevYear + "-" + prevMonth + "-" + previousDay;
+
+        if (_stockData[currStr] && _stockData[prevStr]) {
+          if (_stockData[currStr][symbol] && _stockData[prevStr][symbol]) {
+            return (_stockData[currStr][symbol][field] - _stockData[prevStr][symbol][field]);
+          }
         }
       };
     };
