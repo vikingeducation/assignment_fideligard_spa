@@ -1,5 +1,5 @@
 app.factory('StockService', ['$http', '$q', function($http, $q) {
-  var _stockSymbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN', 'FB', 'XOM', 'GE', 'T', 'JPM']
+  var _stockSymbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN', 'FB', 'XOM', 'GE', 'T', 'JPM', 'VZ', 'WMT']
 
   var _dates = [];
   var _stocksObject = {};
@@ -25,7 +25,7 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
 
   var _buildDatesArray = function(){
     angular.copy(Object.keys(_stocks).sort(), _dates);
-    console.log(_dates);
+    console.log("Dates built");
   }
 
   var _buildStockObjects = function(response) {
@@ -105,7 +105,7 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
     + 'select * from   yahoo.finance.historicaldata '
     + 'where  symbol    = ' + '"' + symbol + '"' + ' '
     + 'and    startDate = "2015-01-01" '
-    + 'and    endDate   = "2015-06-10" '
+    + 'and    endDate   = "2015-12-31" '
     +'&format=json '
     + '&diagnostics=true '
     + '&env=store://datatables.org/alltableswithkeys '
@@ -115,11 +115,16 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
 
   var getStocks = function(date){
     if (date === undefined) {
-      date = '2015-01-01';
+      date = '2015-01-02';
     }
-    if (_stocks.length === undefined) {
-      _generateData();
+    if (!_stocksObject.stocks) {
+      return _generateData()
+      .then(function(){
+        return _stocksObject.stocks = _stocks[date];
+      });
     }
+    console.log(date);
+    console.log(_stocks[date]);
     _stocksObject.stocks = _stocks[date];
     return _stocksObject;
   }

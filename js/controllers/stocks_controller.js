@@ -4,8 +4,8 @@ function(stocks, $scope, StockService, DateService, dates) {
 
 
   $scope.dateInfo = DateService.getDateInfo();
-  $scope.stocksInfo = StockService.getStocks('2015-01-01');
-  $scope.dates = dates;
+  $scope.stocksInfo = StockService.getStocks('2015-01-02');
+  $scope.sliderLength = dates.length - 1;
 
   $scope.setDate = function() {
     DateService.setDate($scope.newDate);

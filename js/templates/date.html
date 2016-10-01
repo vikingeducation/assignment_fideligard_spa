@@ -1,9 +1,9 @@
-<span>1/1/2015</span>
+<span>1/2/2015</span>
 <span class="pull-right">12/31/2015</span>
 <input type="range" class="form-control"
 ng-model='newDate'
 ng-change='setDate()'
 min="0"
-max="dates.length">
+max="{{sliderLength}}">
 
 {{ dateInfo.currentDate | date}}
