@@ -1,28 +1,31 @@
-<div class="panel panel-primary">
-  <div class="panel-heading">Stocks</div>
-  <div class="panel-body">
-    <table class="table table-hover">
-      <thead>
-        <tr>
-          <th>Symbol</th>
-          <th>Price</th>
-          <th>1d</th>
-          <th>7d</th>
-          <th>30d</th></th>
-          <th>Trade?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="stock in stocks[dates[date.date]]">
-          <td>{{stock["Symbol"]}}</td>
-          <td>{{stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -1]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -5]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -22]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-          <td><a href="#">Trade</a></td>
-        </tr>
-      </tbody>
-    </table>
+<div class="row">
+<div class="col-xs-12">
+    <div class="panel panel-primary">
+      <div class="panel-heading">Stocks</div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Symbol</th>
+              <th>Price</th>
+              <th>1d</th>
+              <th>7d</th>
+              <th>30d</th></th>
+              <th>Trade?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="stock in stocks[dates[date.date]]">
+              <td>{{stock["Symbol"]}}</td>
+              <td>{{stock["Close"] | number:2 | addPlusSign }}</td>
+              <td>{{stocks[dates[date.date -1]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+              <td>{{stocks[dates[date.date -5]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+              <td>{{stocks[dates[date.date -22]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+              <td><a href="#">Trade</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
-

@@ -26,15 +26,17 @@
     <div class="main container">
       <div class="row margin-top">
 
-        <div ui-view="stocks-panel" class="col-md-5"></div>
 
-        <div class="col-md-7">
+        <div class="col-md-7 col-md-push-5">
           <div class="row">
             <div ui-view="datepicker" class="col-xs-12"></div>
             <div ui-view="trade-panel" class="col-xs-12"></div>
           </div>
         </div>
 
+        <div class="col-md-5 col-md-pull-7">
+          <div ui-view="stocks-panel" ></div>
+        </div>
       </div>
     </div>
   </body>
