@@ -3,79 +3,112 @@ app.factory('StockService', ['$http', function($http) {
   var _stockData = {};
   var _symbols = [];
   var _dates = [];
+  var STOCK_SYMBOLS = ['AAPL', 'GOOGL', 'TWTR', 'AMZN'];
 
-  var YQL_QUERY = "http://query.yahooapis.com/v1/public/yql?q=\
-        select * from   yahoo.finance.historicaldata\
-                 where  symbol    in (\"AAPL\", \"GOOGL\", \"TWTR\")\
-                 and    startDate = \"2011-09-11\"\
-                 and    endDate   = \"2014-02-11\"\
-        &format=json\
-        &diagnostics=true\
-        &env=store://datatables.org/alltableswithkeys\
-        &callback=";
+  // Callbacks for querying stocks.
+  function _yqlQuery (symbol) {
+    return 'http://query.yahooapis.com/v1/public/yql?q= '
+      + 'select * from   yahoo.finance.historicaldata '
+      + 'where  symbol    = ' + '"' + symbol + '"' + ' '
+      + 'and    startDate = "2015-01-01" '
+      + 'and    endDate   = "2015-12-31" '
+      + '&format=json '
+      + '&diagnostics=true '
+      + '&env=store://datatables.org/alltableswithkeys '
+      + '&callback=';
+  }
+
+  function _populateDates (date) {
+    _stockData[date] = {};
+    _dates.push(date);
+  }
+
+  function _grabDates (response) {
+    _.forEach(
+      _.uniq(
+        _.map(
+          response.data.query.results.quote,
+          function(item) {
+            return item['Date'];
+          }
+        )
+      ),
+      _populateDates
+    );
+    return response;
+  }
+
+  function _objectifySymbol (response) {
+    return function (symbol) {
+      response.data.query.results.quote.forEach(function(item) {
+        // If the item's symbol matches the current symbol in collection,
+        // and if that symbol doesn't already have an object in
+        // the stock data.
+        if (item['Symbol'] === symbol) {
+          if (_stockData[item['Date']]) {
+            if (_.isEmpty(_stockData[item['Date'][symbol]])) {
+              _stockData[item['Date']][symbol] = {};
+            }
+          }
+        }
+      });
+      return symbol;
+    };
+  }
+
+  function _grabSymbols (response) {
+    // Grab symbols.
+    _.forEach(
+      _.uniq(
+        _.map(
+          response.data.query.results.quote,
+          function(item) {
+            return item['Symbol'];
+          }
+        )
+      ),
+      _objectifySymbol(response)
+    );
+    return response;
+  }
+
+  function _populateSymbolObj(response) {
+    _.forEach(
+      response.data.query.results.quote,
+      function(item) {
+        // Don't use angular.copy here. Closure issue.
+        // Populating the symbol in a given date.
+        _stockData[item['Date']][item['Symbol']] = item;
+      }
+    );
+  }
+
+  // Response after Promise.all is an array of resolved promises.
+  function _buildStockData (response) {
+    _.forEach(
+      response,
+      _populateSymbolObj
+    );
+    return {stockData: _stockData, dates: _dates};
+  }
 
   StockService.queryStocks = function() {
-    return $http.get(YQL_QUERY)
-            .then(function(response) {
-              // Grab dates.
-              _.forEach(
-                _.uniq(
-                  _.map(
-                    response.data.query.results.quote,
-                    function(item) {
-                      return item['Date'];
-                    }
-                  )
-                ),
-                function(date) {
-                  _stockData[date] = {};
-                  _dates.push(date);
-                }
-              );
-              return response;
-            })
-            .then(function(response) {
-              // Grab symbols.
-              _.forEach(
-                _.uniq(
-                  _.map(
-                    response.data.query.results.quote,
-                    function(item) {
-                      return item['Symbol'];
-                    }
-                  )
-                ),
-                function(symbol) {
-                  response.data.query.results.quote.forEach(function(item) {
-                    // If the item's date matches the current date in collection,
-                    // and if that date doesn't already have an object in
-                    // the form data.
-                    if (item['Symbol'] === symbol) {
-                      if (_stockData[item['Date']]) {
-                        if (_.isEmpty(_stockData[item['Date'][symbol]])) {
-                          _stockData[item['Date']][symbol] = {};
-                        }
-                      }
-                    }
-                  });
-                  return symbol;
-                }
-              );
-              return response;
-            })
-            .then(function(response) {
-              _.forEachRight(
-                response.data.query.results.quote,
-                function(item) {
-                  angular.copy(item,_stockData[item['Date']][item['Symbol']]);
-                }
-              );
-              console.log(_stockData);
-              return {stockData: _stockData, dates: _dates};
-            })
-            .catch(function(reason) {
-              console.log(reason);
-            });
+    return Promise.all(
+      _.map(
+        STOCK_SYMBOLS,
+        (
+          function(symbol) {
+            return $http.get(_yqlQuery(symbol))
+              .then(_grabDates)
+              .then(_grabSymbols);
+          }
+        )
+      )
+    )
+    .then(_buildStockData)
+    .catch(function(reason) {
+        console.log(reason);
+    });
   };
 
   StockService.getStocks = function() {
