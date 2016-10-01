@@ -1,24 +1,35 @@
 var fideligard = angular.module("fideligard", ['ui.router']);
 
-Fideligard.config(function($stateProvider, $urlRouterProvider) {
+fideligard.factory('_', [
+  '$window',
+  function($window) {
+    return $window._;
+  }
+]);
 
-  $urlRouterProvider.otherwise('dashboard')
+fideligard.config([
+  '$stateProvider',
+  '$urlRouterProvider',
+  function($stateProvider, $urlRouterProvider) {
 
-  $stateProvider.state('dashboard', {
-    url: 'dashboard',
-    views: {
-      'stocks': {
-        templateUrl: 'stocks.html',
-        controller: 'StocksCtrl'
-      },
-      'datepicker': {
-        templateUrl: 'date_picker.html',
-        controller: 'DatePickerCtrl'
+    $urlRouterProvider.otherwise('/')
+
+    $stateProvider.state('dashboard', {
+      url: '/',
+      views: {
+        'stocks@': {
+          templateUrl: '/app/templates/stocks.html',
+          controller: 'StocksCtrl'
+        },
+        'datepicker@': {
+          templateUrl: '/app/templates/slider.html',
+          controller: 'DatePickerCtrl'
+        }
       }
-    }
-  }).state('dashboard.trade', {
+    })
+  }
+]);
 
-
-  })
-
+fideligard.run(function($rootScope) {
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
 });

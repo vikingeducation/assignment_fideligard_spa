@@ -1,11 +1,11 @@
-app.directive('stockTicker', ['StockService', 'dateService'], function(StockService, dateService){
+fideligard.directive('stockTicker', ['StockService'], function(StockService){
 
   return{
-    restrict: 'A',
-    templateUrl: '',
+    restrict: 'AE',
+    templateUrl: '/app/templates/stock_template',
     scope: {
-// stock symbol
-// date object
+      stock: '=',
+      stockData: '='
     }
   }
 

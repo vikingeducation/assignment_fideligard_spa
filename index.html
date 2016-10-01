@@ -3,42 +3,58 @@
 
 <head>
   <meta charset="utf-8">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.1/lodash.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
+  <link rel="stylesheet" href="/app/styles.css" media="screen" title="no title" charset="utf-8">
   <title>Fideligard</title>
 </head>
+<body>
 
 <header>
   <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
-      <a class="navbar-brand" href="#">Fideligard</a>
-      <ul class="nav navbar-nav">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Contact</a>
-        </li>
-      </ul>
-    </nav>
+    <a class="navbar-brand" href="#">Fideligard</a>
+    <ul class="nav navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Portfolio</a>
+      </li>
+    </ul>
+  </nav>
 </header>
 
-<body>
   <div class="container">
     <div class="row">
-      <ui-view></ui-view>
+      <div class="col-sm-4">
+        <div ui-view="stocks">
+          loading..
+        </div>
+      </div>
+      <div class="col-sm-8">
+        <div ui-view='datepicker'>
+        </div>
+        <!-- show stock here -->
+        <div class="">
+          stocks{{stocks}}
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script type="text/javascript" src='app/app.js'></script>
+  <!-- directives -->
+  <script type="text/javascript" src='app/directives/stock_ticker_directive.js'></script>
+  <!-- controllers -->
+  <script type="text/javascript" src='app/controllers/stock_ctrl.js'></script>
   <script type="text/javascript" src='app/controllers/date_picker_ctrl.js'></script>
-  <script type="text/javascript" src='app/app.js'></script>
-  <script type="text/javascript" src='app/app.js'></script>
+<!-- services -->
+<script type="text/javascript" src="/app/services/stock_service.js">
 
+</script>
 
 
 
