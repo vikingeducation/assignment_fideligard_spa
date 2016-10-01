@@ -16,12 +16,11 @@
         <tr ng-repeat="stock in stocks[dates[date.date]]">
           <td>{{stock["Symbol"]}}</td>
           <td>{{stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -1]][$index]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -5]][$index]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-          <td>{{stocks[dates[date.date -22]][$index]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+          <td>{{stocks[dates[date.date -1]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+          <td>{{stocks[dates[date.date -5]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
+          <td>{{stocks[dates[date.date -22]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
           <td><a href="#">Trade</a></td>
         </tr>
-        {{allStocks}}
       </tbody>
     </table>
   </div>

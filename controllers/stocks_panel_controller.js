@@ -9,10 +9,8 @@ fideligardApp.controller('stocksPanelCtrl', ['$scope', 'stocksService', 'dateSer
     console.log($scope.stocks);
     
   });
-  $scope.$watch('date', function(newValue) {
-    $scope.allStocks = $scope.stocks[$scope.dates[newValue.date]];
-  });
 
   $scope.date = dateService.getSelectedDate();
+
 
 }]);
