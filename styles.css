@@ -1,3 +1,25 @@
 .margin-top {
-  margin-top: 60px !important;
+  margin-top: 30px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.margin-right {
+  margin-right: 20px;
+}
+
+#datepicker {
+  margin-bottom: 10px;
+  height: 140px;
+}
+
+.margin-bottom {
+  margin-bottom: 10px;
+}
+
+.move-up {
+  position: relative;
+  top: -10px;
 }

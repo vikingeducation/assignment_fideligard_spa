@@ -1,12 +1,11 @@
 <div id="datepicker">
   <p>Start: {{ translateDate(0) }}</p>
   <input " id="date-slider" ng-mousedown="setShowInput()" type="range" min="0" max="251" step="1" ng-model="tempDate">
-  <p>End: {{ translateDate(251) }}</p>
-  <label>Current:</label>
-  <p>{{translateDate(currentlySelectedDate.date)}}</p>
-  <div ng-show="showInput">
+  <p class="margin-bottom">End: {{ translateDate(251) }}</p>
+  <span class="inline-block move-up margin-right margin-top">Current: {{translateDate(currentlySelectedDate.date)}}</span>
+  <div ng-show="showInput" class="inline-block move-up">
     <input type="text" ng-model="selectedDate">
-    <a href="#" ng-click="cancelDateChange()">Cancel</a>
-    <a href="#" ng-click="submitDateChange(selectedDate)">Submit</a>
+    <a class="btn btn-primary" href="#" ng-click="cancelDateChange()">Cancel</a>
+    <a class="btn btn-primary" href="#" ng-click="submitDateChange(selectedDate)">Submit</a>
   </div>
 </div>
