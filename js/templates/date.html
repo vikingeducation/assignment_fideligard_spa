@@ -1,8 +1,11 @@
-<input
-ng-model="selectedDateIndex"
-type="range"
-min="0"
-max={{maxDateRange}}>
+<label>
+  {{dateInfo.currentDate}}<br>
+  <input
+  ng-model="selectedDateIndex"
+  type="range"
+  min="0"
+  max={{maxDateRange}}>
+</label><br>
 
 <!-- <input
 type="date"
