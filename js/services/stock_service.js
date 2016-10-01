@@ -98,7 +98,8 @@ app.factory('StockService', ['$http', function($http) {
         STOCK_SYMBOLS,
         (
           function(symbol) {
-            return $http.get(_yqlQuery(symbol))
+            return $http
+              .get(_yqlQuery(symbol))
               .then(_grabDates)
               .then(_grabSymbols);
           }
