@@ -16,7 +16,7 @@
       {{ dateInfo }}
 
       <tbody
-      ng-repeat="(day, stocks) in stockData | objLimitTo:12 | filterObjectBy:dateInfo.currentDate"
+      ng-repeat="(day, stocks) in stockData"
       stocks="stocks"
       day="day"
       >
