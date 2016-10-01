@@ -14,7 +14,7 @@ function(StockService, DateService) {
       scope.$watch('day', function() {
         scope.day.currentDate = DateService.getDateInfo().currentDate;
       });
-      scope.getAgo = StockService.getPrevious(scope.day,'Close','AAPL');
+      scope.getAgo = StockService.getPrevious(scope.day.currentDate,'Close','AAPL');
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);
       scope.thirtyDayAgo = scope.getAgo(30);
