@@ -10,6 +10,7 @@ function(StockService, DateService) {
       indexStock: '@'
     },
     link: function(scope) {
+      // Dates.
       scope.day = DateService.getDateInfo();
       scope.$watch('day', function() {
         scope.day.currentDate = DateService.getDateInfo().currentDate;
@@ -22,6 +23,11 @@ function(StockService, DateService) {
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);
       scope.thirtyDaysAgo = scope.getAgo(30);
+
+      // Trade.
+      scope.trade = function(ev) {
+        StockService.setSelectedStock(scope.stock);
+      };
     }
   };
 }]);

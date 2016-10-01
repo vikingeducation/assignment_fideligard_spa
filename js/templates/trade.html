@@ -1,39 +1,39 @@
 <h3>Trade</h3>
-<form>
+<form ng-submit='placeOrder'>
   <label>
     Symbol
-    <input type='text' ng-model='Symbol'>
+    <input type='text' ng-model='trade.symbol'>
   </label><br>
 
   <label>
     Buy/Sell
-    <input type='dropdown' ng-model='tradeType'>
+    <input type='dropdown' ng-model='trade.type'>
   </label><br>
 
   <label>
     Quantity
-    <input type='text' ng-model='tradeQuantity'>
+    <input type='text' ng-model='trade.quantity'>
   </label><br>
 
   <label>
     Date
-    <input type='date' ng-model='tradeDate'>
+    <input type='date' ng-model='trade.date'>
   </label><br>
 
   <label>
     Price
-    <input ng-model='tradePrice'>
+    <input ng-model='trade.price'>
   </label><br>
 
   <label>
     Cash available
-    <input ng-model='cashAvailable'>
+    <input ng-model='trade.cashAvailable'>
   </label><br>
 
   <label>
     Order status
-    <input ng-model='orderStatus'>
+    <input ng-model='trade.orderStatus'>
   </label><br>
 
-  <input type='submit' value='Submit'>
+  <input type='submit' value='PLACE ORDER'>
 </form>

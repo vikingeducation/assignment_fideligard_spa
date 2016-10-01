@@ -38,7 +38,8 @@ app.config(function($stateProvider, $urlRouterProvider){
       url: '/trade',
       views: {
         'trade@': {
-          templateUrl: 'js/templates/trade.html'
+          templateUrl: 'js/templates/trade.html',
+          controller: 'StocksTradeCtrl'
         }
       }
     });

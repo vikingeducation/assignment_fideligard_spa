@@ -5,6 +5,10 @@ app.factory('StockService', ['$http', function($http) {
   var _dates = [];
   var STOCK_SYMBOLS = ['AAPL', 'GOOGL', 'TWTR', 'AMZN'];
 
+  var _selectedStock = {
+    stock: {}
+  };
+
   // Callbacks for querying stocks.
   function _yqlQuery (symbol) {
     return 'http://query.yahooapis.com/v1/public/yql?q= '
@@ -134,37 +138,16 @@ app.factory('StockService', ['$http', function($http) {
     };
   };
 
-
-  // StockService.getPrevious = function(current,field,symbol) {
-  //   return function(daysAgo) {
-  //     return function () {
-        // var day = new Date(current);
-        // var prevDay = angular.copy(day);
-        // prevDay.setDate(day.getDate()-daysAgo);
-        //
-        // // Building date strings.
-        // var currMonth = day.getUTCMonth() + 1;
-        // var currDay = day.getUTCDate();
-        // var currYear = day.getUTCFullYear();
-        //
-        // var prevMonth = prevDay.getUTCMonth() + 1;
-        // var previousDay = prevDay.getUTCDate();
-        // var prevYear = prevDay.getUTCFullYear();
-        //
-        // var currStr = currYear + "-" + currMonth + "-" + currDay;
-        // var prevStr = prevYear + "-" + prevMonth + "-" + previousDay;
-  //
-  //       if (_stockData[currStr] && _stockData[prevStr]) {
-  //         if (_stockData[currStr][symbol] && _stockData[prevStr][symbol]) {
-            // return (_stockData[currStr][symbol][field] - _stockData[prevStr][symbol][field]);
-  //         }
-  //       }
-  //     };
-  //   };
-  // };
-
   StockService.getDates = function() {
     return _dates;
+  };
+
+  StockService.setSelectedStock = function (stock) {
+    _selectedStock.stock = stock;
+  };
+
+  StockService.getSelectedStock = function (stock) {
+    return _selectedStock;
   };
 
   return StockService;
