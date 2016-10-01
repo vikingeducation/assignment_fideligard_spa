@@ -21,7 +21,7 @@ function(StockService, DateService) {
       );
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);
-      scope.thirtyDayAgo = scope.getAgo(30);
+      scope.thirtyDaysAgo = scope.getAgo(30);
     }
   };
 }]);
