@@ -1,5 +1,5 @@
 "use strict";
-app.factory('accountService', function(){
+app.factory('accountService', [ function(){
 	var stub = {};
 
 	var _account = { cash: 100000 };
@@ -43,8 +43,8 @@ app.factory('accountService', function(){
 		_transactions.push(newTransaction);
 		//console.log("Transactions: ", _transactions);
 		//adjust porfolio
-		_portfolio[formData.symbol].quantity -= formData.quantity;
-		_portfolio[formData.symbol].moneyEarned += formData.quantity * formData.price;
+		// _portfolio[formData.symbol].quantity -= formData.quantity;
+		// _portfolio[formData.symbol].moneyEarned += formData.quantity * formData.price;
 		//console.log("Portfolio: ", _portfolio);
 	};
 
@@ -62,19 +62,51 @@ app.factory('accountService', function(){
 		_transactions.push(newTransaction);
 		//console.log("Transactions: ", _transactions);
 		//add to portfolio
-		if(_portfolio[formData.symbol]){
-			_portfolio[formData.symbol].quantity += formData.quantity;
-			_portfolio[formData.symbol].moneySpent += (formData.quantity*formData.price);
-		}
-		else{
-			_portfolio[formData.symbol] = {
-				quantity: formData.quantity,
-				moneySpent: formData.quantity*formData.price,
-				moneyEarned: 0
-			};
-		}
+		// if(_portfolio[formData.symbol]){
+		// 	_portfolio[formData.symbol].quantity += formData.quantity;
+		// 	_portfolio[formData.symbol].moneySpent += (formData.quantity*formData.price);
+		// }
+		// else{
+		// 	_portfolio[formData.symbol] = {
+		// 		quantity: formData.quantity,
+		// 		moneySpent: formData.quantity*formData.price,
+		// 		moneyEarned: 0
+		// 	};
+		// }
 		//console.log("Portfolio: ", _portfolio);
 	};
 
+	stub.buildPortfolio = function(date, dateCollection){
+		//filter transactions for those before the date
+		var currentDate = dateCollection[date.index];
+		var filteredTransactions = _transactions.filter(function(t){
+			return t.date <= currentDate;
+		});
+		//build a portfolio from scratch using these transacations
+		filteredTransactions.forEach(function(t){
+			if(t.type == "BUY"){
+				if(_portfolio[t.symbol]){
+					_portfolio[t.symbol].quantity += t.quantity;
+					_portfolio[t.symbol].moneySpent += t.quantity * t.price;
+				}
+				else{
+					_portfolio[t.symbol] = {
+						quantity: t.quantity,
+						moneySpent: t.quantity * t.price,
+						moneyEarned: 0
+					};
+				}
+			}
+			else{
+				_portfolio[t.symbol].quantity -= t.quantity;
+				_portfolio[t.symbol].moneyEarned += t.quantity * t.price;
+			}
+		});
+	};
+
+	stub.getPortfolio = function(){
+		return _portfolio;
+	};
+
 	return stub;
-});
+}]);

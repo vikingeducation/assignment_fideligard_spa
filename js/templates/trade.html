@@ -1,3 +1,17 @@
-<a ui-sref="main.transactions">Transactions</a>
+<div class="col-md-8">
+		<h2>Trade</h2>
+</div>
+	<div class="col-md-4">
+		<div class="btn-group">
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Trade<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu">
+				<li><a ui-sref="main.portfolio">Portfolio</a></li>
+				<li><a ui-sref="main.transactions">Transactions</a></li>
+			</ul>
+		</div>
+</div>
+
 <trade-form symbol="symbol" dates="dates"></trade-form>
 

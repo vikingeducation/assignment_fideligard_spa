@@ -9,7 +9,7 @@ app.factory('_', ['$window', function($window){
 //routes
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.otherwise('/fideligard');
+  $urlRouterProvider.otherwise('/fideligard/portfolio');
 
 	$stateProvider
 		.state('main', {
@@ -42,8 +42,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 		})
 		.state('main.portfolio', {
 			url: '/portfolio',
-			templateUrl: 'js/templates/portfolio.html',
-			controller: 'PortfolioCtrl'
+			views:{
+				'mainContent@': {
+					templateUrl: 'js/templates/portfolio.html',
+					controller: 'PortfolioCtrl'
+				}
+			}
 		})
 		.state('main.trade', {
 			url: '/trade',
