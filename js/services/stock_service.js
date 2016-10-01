@@ -29,7 +29,7 @@ app.factory('StockService', ['$http', function($http) {
         _.map(
           response.data.query.results.quote,
           function(item) {
-            return item['Date'];
+            return item.Date;
           }
         )
       ),
@@ -44,10 +44,10 @@ app.factory('StockService', ['$http', function($http) {
         // If the item's symbol matches the current symbol in collection,
         // and if that symbol doesn't already have an object in
         // the stock data.
-        if (item['Symbol'] === symbol) {
-          if (_stockData[item['Date']]) {
-            if (_.isEmpty(_stockData[item['Date'][symbol]])) {
-              _stockData[item['Date']][symbol] = {};
+        if (item.Symbol === symbol) {
+          if (_stockData[item.Date]) {
+            if (_.isEmpty(_stockData[item.Date[symbol]])) {
+              _stockData[item.Date][symbol] = {};
             }
           }
         }
@@ -63,7 +63,7 @@ app.factory('StockService', ['$http', function($http) {
         _.map(
           response.data.query.results.quote,
           function(item) {
-            return item['Symbol'];
+            return item.Symbol;
           }
         )
       ),
@@ -78,7 +78,7 @@ app.factory('StockService', ['$http', function($http) {
       function(item) {
         // Don't use angular.copy here. Closure issue.
         // Populating the symbol in a given date.
-        _stockData[item['Date']][item['Symbol']] = item;
+        _stockData[item.Date][item.Symbol] = item;
       }
     );
   }

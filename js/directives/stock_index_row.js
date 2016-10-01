@@ -14,12 +14,14 @@ function(StockService, DateService) {
       scope.$watch('day', function() {
         scope.day.currentDate = DateService.getDateInfo().currentDate;
       });
-      scope.getAgo = StockService.getPrevious(scope.day.currentDate,'Close','AAPL');
+      scope.getAgo = StockService.getPrevious(
+        scope.day.currentDate,
+        'Close',
+        scope.stock.Symbol
+      );
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);
       scope.thirtyDayAgo = scope.getAgo(30);
-      // scope.sevenDaysAgo = scope.getAgo2014(7)(scope.index,'Close');
-      // scope.thirtyDaysAgo = scope.getAgo2014(30)(scope.index,'Close');
     }
   };
 }]);
