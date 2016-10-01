@@ -1,16 +1,19 @@
-app.directive('stockIndexRow', ['StockService', function(StockService) {
+app.directive('stockIndexRow',
+['StockService', 'DateService',
+function(StockService, DateService) {
 
   return {
     restrict: 'A',
     templateUrl: 'js/directives/stock_index_row.html',
     scope: {
       stock: '=',
-      day: '=',
-      indexStock: '@',
+      indexStock: '@'
     },
     link: function(scope) {
-      // scope.symbol = scope.stock;
-      // console.log(scope.stock);
+      scope.day = DateService.getDateInfo();
+      scope.$watch('day', function() {
+        scope.day.currentDate = DateService.getDateInfo().currentDate;
+      });
       scope.getAgo = StockService.getPrevious(scope.day,'Close','AAPL');
       scope.oneDayAgo = scope.getAgo(1);
       scope.sevenDaysAgo = scope.getAgo(7);

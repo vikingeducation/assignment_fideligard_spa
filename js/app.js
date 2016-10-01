@@ -28,7 +28,7 @@ app.config(function($stateProvider, $urlRouterProvider){
       },
       resolve: {
         date: ['DateService', function(DateService){
-          return DateService.getDate();
+          return DateService.getDateInfo();
         }],
         stocksObj: ['StockService', function(StockService){
           return StockService.queryStocks();

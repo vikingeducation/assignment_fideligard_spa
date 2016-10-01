@@ -8,10 +8,6 @@ app.factory('DateService', [function(){
     return _dateInfo;
   };
 
-  var getDate = function(){
-    return angular.copy(_dateInfo,{});
-  };
-
   // Might need to use this on stock service.
   var setDate = function(date) {
     var day = new Date(date);
@@ -33,7 +29,6 @@ app.factory('DateService', [function(){
   };
 
   return {
-    getDate: getDate,
     setDate: setDate,
     getDateInfo: getDateInfo
   };

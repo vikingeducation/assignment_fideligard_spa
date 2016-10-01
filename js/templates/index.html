@@ -16,15 +16,13 @@
       {{ dateInfo }}
 
       <tbody
-      ng-repeat="(day, stocks) in stockData | filterObjectBy:dateInfo.currentDate"
+      ng-repeat="(day, stocks) in stockData | filterDays:dateInfo.currentDate"
       stocks="stocks"
-      day="day"
       >
         <tr
         ng-repeat="stock in stocks"
         stock-index-row
         stock='stock'
-        day="day"
         >
         </tr>
       </tbody>
