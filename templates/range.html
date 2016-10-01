@@ -12,8 +12,9 @@
 
 <div class="row">
   <div class="col-md-12">
-    <input type=range min='0' max='251' step='1' ng-model='index' ng-change='setDate(index)'>
+    <input type='range' min='31' max='{{dates.length - 1}}' step='1' ng-model='index' ng-change='setDate(index)'>
   </div>
 </div>
 
 <!-- <div>{{quotes[dates[index]]}}</div> -->
+<div>{{dates.length}}</div>

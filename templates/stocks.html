@@ -13,11 +13,12 @@
     <th>30d</th>
     <th>Trade?</th>
   </tr>
-  <tr stockquote ng-repeat="(symbol, value) in quotes[dates[date.index]] | tickerFilter: filterText"
-    symbol="symbol"
-    value="value"
-    quotes="quotes"
-    dates="dates"
-    date="date">
+  <tr ng-repeat="(symbol, value) in quotes[dates[date.index]] | tickerFilter: filterText">
+    <td>{{symbol}}</td>
+    <td>{{value.Close | currency}}</td>
+    <td>{{value[1] | currency }}</td>
+    <td>{{value[7] | currency }}</td>
+    <td>{{value[30] | currency }}</td>
+    <td><a ui-sref="dashboard.trade({ sym: symbol })">Trade</a></td>
   </tr>
 </table>
