@@ -19,7 +19,10 @@ app.factory('StockService', ['$http', function($http) {
   }
 
   function _populateDates (date) {
-    _stockData[date] = {};
+    // Only create a new object for date if not yet cached.
+    if (!_stockData[date]) {
+      _stockData[date] = {};
+    }
     _dates.push(date);
   }
 
@@ -35,6 +38,8 @@ app.factory('StockService', ['$http', function($http) {
       ),
       _populateDates
     );
+    _dates = _.uniq(_dates);
+    console.log(_dates);
     return response;
   }
 
