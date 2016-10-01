@@ -1,0 +1,70 @@
+<div class="row">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Trade</div>
+    <div class="panel-body">
+
+    <!-- left side -->
+      <div class="col-xs-8">
+        <div class="row">
+
+
+          <form>
+            <div class="form-group row">
+              <label for="symbol" class="col-xs-2 col-form-label">Symbol</label>
+              <div class="col-xs-8">
+                <input class="form-control" type="text" ng-model="symbol" id="symbol">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="buy-or-sell" class="col-xs-2 col-form-label">Buy/Sell</label>
+              <div class="col-xs-8">
+                <select class="form-control" ng-model="buyOrSell" id="buy-or-sell">
+                  <option>Buy</option>
+                  <option>Sell</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="quantity" class="col-xs-2 col-form-label">Quantity</label>
+              <div class="col-xs-8">
+                <input class="form-control" type="text" ng-model="quantity" id="quantity">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="date" class="col-xs-2 col-form-label">Date</label>
+              <div class="col-xs-8">
+                <input class="form-control" type="date" ng-model="date" id="date">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="price" class="col-xs-2 col-form-label">Price</label>
+              <div class="col-xs-8">
+                {{price}}
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="cost" class="col-xs-2 col-form-label">Cost</label>
+              <div class="col-xs-8">
+                {{cost}}
+              </div>
+            </div>
+
+          </form>
+
+        </div>  
+      </div>
+
+      <!-- right side -->
+      <div class="col-xs-6">
+        <div class="row">
+
+
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

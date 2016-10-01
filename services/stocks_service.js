@@ -2,8 +2,8 @@ fideligardApp.factory('stocksService', ['$http', "$q", "dateService", function($
 
   var stocksService = {};
   var _stocks = {};
-  // var _symbols = ["MGT", "EBIO", "SPHS", "X", "SRPT", "WLL", "REN", "VRX", "CBS", "RH", "CLF", "CHK"];
-  var _symbols = ["MGT", "EBIO", "SPHS", "X"]
+  var _symbols = ["MGT", "EBIO", "SPHS", "X", "SRPT", "WLL", "REN", "VRX", "CBS", "RH", "CLF", "CHK"];
+  // var _symbols = ["MGT", "EBIO", "SPHS", "X"]
   var _dates = [];
 
   var _selectedDate = _dates[dateService.getSelectedDate()];

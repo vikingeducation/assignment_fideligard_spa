@@ -22,9 +22,17 @@
       </div>
     </nav>
     <div class="main container">
-      <div class="row margin-top">
+      <div class="row" style="margin-top: 20px">
+
         <div ui-view="stocks-panel" class="col-md-5"></div>
-        <div ui-view="datepicker" class="col-md-7"></div>
+
+        <div class="col-md-7">
+          <div class="row">
+            <div ui-view="datepicker" class="col-xs-12"></div>
+            <div ui-view="trade-panel" class="col-xs-12"></div>
+          </div>
+        </div>
+
       </div>
     </div>
   </body>
@@ -32,6 +40,7 @@
   <script src="app.js"></script>
   <script src='controllers/datepicker_controller.js'></script>
   <script src='controllers/stocks_panel_controller.js'></script>
+  <script src='controllers/tradePanelCtrl.js'></script>
   <script src='services/stocks_service.js'></script>
   <script src='services/dateService.js'></script>
   <script src='filters/addPlusSign.js'></script>

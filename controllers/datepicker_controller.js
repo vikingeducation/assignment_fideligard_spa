@@ -2,6 +2,7 @@ fideligardApp.controller('datepickerCtrl', ['$scope', 'stocksService', "dateServ
 
   $scope.tempDate = 151;
   $scope.showInput = false;
+  $scope.currentlySelectedDate = dateService.getSelectedDate() || {}
 
   $scope.$watch('tempDate', function(newValue) {
     $scope.selectedDate = $scope.translateDate(newValue);

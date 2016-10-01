@@ -21,6 +21,10 @@ fideligardApp.config(function($urlRouterProvider, $stateProvider){
         'stocks-panel@': {
           templateUrl: 'templates/stocks.html',
           controller: 'stocksPanelCtrl'
+        },
+        'trade-panel@': {
+          templateUrl: 'templates/trade.html',
+          controller: 'tradePanelCtrl'
         }
       }
     })

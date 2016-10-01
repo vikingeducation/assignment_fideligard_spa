@@ -1,9 +1,9 @@
 <div id="datepicker">
   <p>Start: {{ translateDate(0) }}</p>
-  <input " id="date-slider" ng-click="setShowInput()" type="range" min="0" max="251" step="1" ng-model="tempDate">
+  <input " id="date-slider" ng-mousedown="setShowInput()" type="range" min="0" max="251" step="1" ng-model="tempDate">
   <p>End: {{ translateDate(251) }}</p>
   <label>Current:</label>
-  <p>{{translateDate(tempDate)}}</p>
+  <p>{{translateDate(currentlySelectedDate.date)}}</p>
   <div ng-show="showInput">
     <input type="text" ng-model="selectedDate">
     <a href="#" ng-click="cancelDateChange()">Cancel</a>
