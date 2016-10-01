@@ -13,8 +13,6 @@
         </tr>
       </theader>
 
-      {{ dateInfo }}
-
       <tbody
       ng-repeat="(day, stocks) in stockData | filterDays:dateInfo.currentDate"
       stocks="stocks"

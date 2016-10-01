@@ -1,6 +1,7 @@
-app.directive('loading',   ['$http' ,function ($http) {
+app.directive('loadingScreen', ['$http' ,function ($http) {
   return {
     restrict: 'A',
+    templateUrl: 'js/directives/loading_screen.html',
     link: function (scope, elem, attrs) {
       scope.isLoading = function () {
           return $http.pendingRequests.length > 0;

@@ -125,11 +125,9 @@ app.factory('StockService', ['$http', function($http) {
       return function () {
         var currDayIndex = _.indexOf(_dates,current);
         var prevDayIndex = currDayIndex - daysAgo;
-        console.log(prevDayIndex);
         if (_dates[prevDayIndex]) {
           var currStr = current;
           var prevStr = _dates[prevDayIndex];
-          console.log(currStr);
           return (_stockData[currStr][symbol][field] - _stockData[prevStr][symbol][field]);
         }
       };

@@ -13,7 +13,6 @@ app.config(function($stateProvider, $urlRouterProvider){
   $urlRouterProvider.otherwise('/trade');
 
   $stateProvider
-
     .state('stocks', {
       abstract: true,
       views: {
