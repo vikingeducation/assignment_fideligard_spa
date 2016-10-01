@@ -38,7 +38,7 @@ app.factory('StockService', ['$http', function($http) {
       ),
       _populateDates
     );
-    _dates = _.uniq(_dates);
+    _dates = _.reverse(_.uniq(_dates));
     console.log(_dates);
     return response;
   }
