@@ -12,5 +12,12 @@ fideligardApp.controller('stocksPanelCtrl', ['$scope', 'stocksService', 'dateSer
 
   $scope.date = dateService.getSelectedDate();
 
+  $scope.reverse = true;
+  $scope.propertyName = "Symbol"
+
+  $scope.sortBy = function(propertyName) {
+      $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+      $scope.propertyName = propertyName;
+    };
 
 }]);

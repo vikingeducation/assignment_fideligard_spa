@@ -4,12 +4,19 @@
       <div class="panel-heading">Stocks</div>
       <div class="panel-body">
         <label for="symbol-filter">Search by Ticker Symbol</label>
-        <input type="text" name="symbol-filter" ng-model="symbol">
+        <input type="text" name="symbol-filter" id="symbol-filter" ng-model="symbol">
+        <button ng-click="proprtyName = null; reverse = false">View unsorted</button>
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Symbol</th>
-              <th>Price</th>
+              <th ng-click="sortBy('Symbol')">
+                Symbol
+                <span class="sortorder" ng-show="propertyName === 'Symbol'" ng-class="{reverse: reverse}"></span>
+              </th>
+              <th ng-click="sortBy('Close')">
+                Price
+                <span class="sortorder" ng-show="propertyName === 'Close'" ng-class="{reverse: reverse}"></span>
+              </th>
               <th>1d</th>
               <th>7d</th>
               <th>30d</th></th>
@@ -17,7 +24,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr ng-repeat="stock in stocks[dates[date.date]] | filterBySymbol:symbol">
+            <tr ng-repeat="stock in stocks[dates[date.date]] | convertStockToArray | filter:{'Symbol': symbol} | orderBy:propertyName:reverse">
               <td>{{stock["Symbol"]}}</td>
               <td>{{stock["Close"] | number:2 | addPlusSign }}</td>
               <td>{{stocks[dates[date.date -1]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
