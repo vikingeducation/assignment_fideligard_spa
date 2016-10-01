@@ -9,7 +9,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   $stateProvider
     .state('normal' , {
-      url: '/',
+      url: '',
       views: {
         "dateWidget@": {
           templateUrl: "templates/normal/dateWidget.html",
@@ -18,6 +18,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
         "stocksWidget@": {
           templateUrl: "templates/normal/stocksWidget.html",
           controller: "stocksCtrl"
+        },
+        "mainWidget@": {
+          templateUrl: "templates/normal/mainWidget.html",
+          controller: "mainCtrl"
         }
       },
       resolve: {
@@ -26,7 +30,40 @@ app.config(function($stateProvider, $urlRouterProvider) {
           }
         ]
       }
-    });
+    })
+    .state('normal.portfolio', {
+      url:'/portfolio',
+      views: {
+        "widget@normal": {
+          templateUrl: "templates/portfolio.html",
+          controller: "portfolioCtrl"
+        }
+      }
+    })
+
+    .state('normal.transactions', {
+      url:'/transactions',
+      views: {
+        "widget@normal": {
+          templateUrl: "templates/transactions.html",
+          controller: "transactionsCtrl"
+        }
+      }
+    })
+
+    .state('normal.trade', {
+      url: '/trade/:symb',
+      views: {
+        "widget@normal": {
+          templateUrl: "templates/trade.html",
+          controller: "tradeCtrl"
+        }
+
+
+      }
+    })
+
+    
 });
 
 app.run(function($rootScope){

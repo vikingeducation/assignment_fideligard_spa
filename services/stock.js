@@ -5,9 +5,9 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
   };
 
   var _day = 0;
-
+  var _tradeStock = {};
   var _popularStocks = ["AAPL", "GOOGL"];
-  //, "MSFT", "TSLA", "^RUT"];
+  //, "MSFT", "TSLA"];
 
   var stub = {};
 
@@ -66,9 +66,16 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
   stub.setDay = function(dayIndex){
     _day = dayIndex;
   };
-
   stub.getDay = function(){
     return _day;
+  }
+  
+  stub.setTradeStock = function(stock) {
+    _tradeStock = stock;
+  };
+  stub.getTradeStock = function() {
+    console.log(_tradeStock);
+    return _tradeStock;
   }
 
   return stub;

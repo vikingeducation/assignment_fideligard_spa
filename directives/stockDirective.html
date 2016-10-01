@@ -1,18 +1,20 @@
-<td>
-{{stock.symbol}}
-</td>
-<td>
-  {{ stock[2014].days[tradeDay()].Close | currency }}
-</td>
-<td>
-  {{ getDayAnalytics() | currency }}
-</td>
-<td>
-  {{ getDayAnalytics(7) | currency }}
-</td>
-<td>
-  {{ getDayAnalytics(30) | currency }}
-</td>
-<td>
-  <a href="">trade</a>
-</td>
+<tr>
+  <td>
+  {{stock.symbol}}
+  </td>
+  <td>
+    {{ stock[2014].days[tradeDay()].Close | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics() | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics(7) | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics(30) | currency }}
+  </td>
+  <td>
+    <button ui-sref="normal.trade({symb: stock.symbol })" class="btn btn-sm btn-outline-info">trade</button>
+  </td>
+</tr>

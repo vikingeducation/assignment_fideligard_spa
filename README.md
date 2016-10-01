@@ -25,3 +25,15 @@ Widgets:
 
 Clicking Trade:
   brings you to trade page.
+
+  question: how do i get 
+
+1.clickign trade.
+2. mainpanel shows trade.
+3. get the info of stockSYMB and stockINDEX to mainpanel
+4. get main paenl to access from the stock service to populate data.
+
+clicking trade --> gives info to stock controller
+of the stock, and index.
+
+selectdropdown in mainview --> uisrefs to the trade view

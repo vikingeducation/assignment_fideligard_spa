@@ -28,19 +28,23 @@
     <!-- Services -->
     <script src="services/date.js"></script>
     <script src="services/stock.js"></script>
+    <script src="services/portfolio.js"></script>
     <!--Controllers -->
     <script src="controllers/stocksController.js"></script>
     <script src="controllers/dateController.js"></script>
+    <script src="controllers/mainController.js"></script>
+    <script src="controllers/tradeController.js"></script>
+    <script src="controllers/transactionsController.js"></script>
+    <script src="controllers/portfolioController.js"></script>
     <!--Directives -->
     <script src="directives/stockDirective.js"></script>
-
     <!--Filters -->
     <script src="filters/filterBySymbol.js"></script>
 
   </head>
 
   <body>
-    <div class="text-xs-center bg-faded">
+    <div class="text-xs-center">
       <nav class="navbar navbar-dark bg-primary">
       <ul class="nav navbar-nav">
         <li class="nav-item active">
@@ -54,11 +58,27 @@
         </li>
       </nav>
 
+      <br>
+
+      <div class="">
+        <div class="col-sm-5">
+          <div ui-view="stocksWidget">
+            LOADING STOCKS WIDGET
+          </div>
+        </div>
+        <div class="col-sm-7">   
+          <div ui-view="dateWidget">
+            LOADING DATE WIDGET
+          </div>
 
 
-      <div ui-view></div>
-      <div ui-view="dateWidget">LOADING</div>
-      <div ui-view="stocksWidget">LOADING STOCKS</div>
+          <div ui-view="mainWidget">
+            LOADING MAIN WIDGET
+          </div>
+          
+
+        </div>
+      </div>
 
 
 

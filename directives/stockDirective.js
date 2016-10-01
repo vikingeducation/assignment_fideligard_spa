@@ -7,7 +7,6 @@ app.directive("stockRow", ['stockService', function(stockService){
     },
     link: function(scope){
       scope.tradeDay = function() {
-        console.log(stockService.getDay());
         return stockService.getDay();
       };
 

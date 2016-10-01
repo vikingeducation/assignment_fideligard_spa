@@ -1,41 +1,48 @@
-
-<div class="col-sm-12">
-  <div class="col-sm-3">
-    <h1>Stocks Widget</h1>
+<div class="card card-outline-primary">
+  <div class="card-header bg-primary">
+    Stocks Widget
   </div>
-  <div class="col-sm-9">
-    <div class="col-sm-2">
-      <h4>Filter</h4>
+
+  <div class="card-block" style="width: 100%; padding: 0px; margin: 0px">
+    <div class="col-sm-4">
     </div>
-    <div class="col-sm-10">
-      <input type="text" style="text-transform:uppercase" ng-model="nameFilter" class="form-control" ng-value="">
+    <div class="col-sm-8">
+      <div class="col-sm-5">
+        Filter 
+      </div>
+      <div class="col-sm-7">
+        <input type="text" style="text-transform:uppercase" ng-model="nameFilter" class="form-control" ng-value="">
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-inverse table-bordered table-hover text-xs-center">
+        <thead class="text-xs-center">
+          <tr>
+            <th>
+              Symbol
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              1d
+            </th>
+            <th>
+              7d
+            </th>
+            <th>
+              30d
+            </th>
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stock-row ng-repeat="stock in allStocks | filterBySymbol:(nameFilter|uppercase)" stock="stock"></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
 
-<table class="table table-inverse table-bordered table-hover text-xs-center">
-  <theader class="text-xs-center">
-    <tr>
-      <th>
-        Symbol
-      </th>
-      <th>
-        Price
-      </th>
-      <th>
-        1d
-      </th>
-      <th>
-        7d
-      </th>
-      <th>
-        30d
-      </th>
-      <th>
-      </th>
-    </tr>
-  </theader>
-  <tbody>
-    <tr stock-row ng-repeat="stock in allStocks | filterBySymbol:(nameFilter|uppercase)" stock="stock"></th>
-  </tbody>
-</table>
