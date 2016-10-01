@@ -25,6 +25,10 @@ fideligardApp.factory('stocksService', ['$http', "$q", "dateService", function($
     var stock;
     for(var i = 0; i < arr.length; i++){
       stock = arr[i];
+      stock.Close = parseInt(stock.Close);
+      stock.Open = parseInt(stock.Open);
+      stock.High = parseInt(stock.High);
+      stock.Low = parseInt(stock.Low);
       if(_stocks[stock.Date]) {
         _stocks[stock.Date][stock["Symbol"]] = stock;
       } else {
