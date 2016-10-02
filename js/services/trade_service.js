@@ -17,7 +17,7 @@ app.factory('TradeService', [function() {
     // If he owns stock for that day.
     if (tradeInfo.user.owned[date]) {
       // If he owns stock for that symbol.
-      if (tradeInfo.user.owned[symbol]) {
+      if (tradeInfo.user.owned[date][symbol]) {
         tradeInfo.user.owned[date][symbol].quantity += tradeQuant;
       } else {
         tradeInfo.user.owned[date][symbol] = {
@@ -40,7 +40,7 @@ app.factory('TradeService', [function() {
     if (tradeInfo.user.owned[date]) {
       // If he owns stock for that symbol
       if (tradeInfo.user.owned[date][symbol]) {
-        console.log(tradeInfo.user.owned[date][symbol].quantity);
+        // console.log(tradeInfo.user.owned[date][symbol].quantity);
         tradeInfo.user.owned[date][symbol].quantity -= tradeQuant;
         if (tradeInfo.user.owned[date][symbol].quantity <= 0) {
           delete tradeInfo.user.owned[date][symbol];
@@ -127,7 +127,6 @@ app.factory('TradeService', [function() {
   };
 
   TradeService.getTransactions = function () {
-    console.log(_tradeInfo.user.transactions);
     return _tradeInfo.user.transactions;
   };
 

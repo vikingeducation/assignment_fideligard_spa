@@ -39,6 +39,7 @@ function($scope, StockService, TradeService) {
     var date = $scope.trade.formData.date;
     var symbol = $scope.trade.formData.symbol;
     var owned = $scope.trade.user.owned[date];
+    console.log($scope.trade.user);
     if ($scope.trade.formData.type === 'sell') {
       if (owned) {
         return owned[symbol].quantity;
