@@ -3,9 +3,13 @@ table {
 }
 
 .valid-order {
-  color: green
+  color: green;
 }
 
 .invalid-order {
-  color: red
+  color: red;
+}
+
+a[ng-click] {
+  cursor: pointer;
 }

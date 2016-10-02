@@ -9,17 +9,17 @@
   <table class="table">
     <theader>
       <tr>
-        <th style="width:50">Date</th>
-        <th style="width:50">Symbol</th>
-        <th style="width:50">Type</th>
-        <th style="width:50">Quantity</th>
-        <th style="width:50">Price</th>
+        <th style="width:50"><a ng-click="sortType='date'">Date</a></th>
+        <th style="width:50"><a ng-click="sortType='symbol'">Symbol</a></th>
+        <th style="width:50"><a ng-click="sortType='type'">Type</a></th>
+        <th style="width:50"><a ng-click="sortType='quantity'">Quantity</a></th>
+        <th style="width:50"><a ng-click="sortType='price'">Price</a></th>
       </tr>
     </theader>
 
     <tbody>
       <tr
-      ng-repeat="(id, transaction) in transactions | filterObjectBy:searchKey"
+      ng-repeat="(id, transaction) in transactions | filterObjectBy:searchKey | orderObjectBy:sortType:sortReverse"
       stock-transaction-row
       transaction='transaction'
       >
