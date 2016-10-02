@@ -21,15 +21,16 @@ function($scope, StockService, TradeService) {
     }
   };
 
+  // Cost helpers.
   $scope.showCost = function() {
     if ($scope.trade.formData.cost) {
       return $scope.trade.formData.cost;
     }
   };
 
-  $scope.computeCost = function() {
+  $scope.computeCost = function(values) {
     var priceQuant = _.map(
-                      _.slice(newValues,0,2),
+                      _.slice(values,0,2),
                       _.parseInt
                     );
     _.multiply(priceQuant[0],priceQuant[1]);
@@ -45,7 +46,7 @@ function($scope, StockService, TradeService) {
     'trade.stock'],
     function(newValues) {
       $scope.trade.formData.price = newValues[1];
-      $scope.trade.formData.cost = $scope.computeCost();
+      $scope.trade.formData.cost = $scope.computeCost(newValues);
       $scope.trade.formData.date = $scope.formattedDate();
     }
   );

@@ -1,7 +1,6 @@
 app.factory('StockService', ['$http', function($http) {
   var StockService = {};
   var _stockData = {};
-  var _symbols = [];
   var _dates = [];
   var STOCK_SYMBOLS = ['AAPL', 'GOOGL', 'TWTR', 'AMZN'];
 
@@ -148,6 +147,10 @@ app.factory('StockService', ['$http', function($http) {
 
   StockService.getSelectedStock = function (stock) {
     return _selectedStock;
+  };
+
+  StockService.getSymbols = function() {
+    return STOCK_SYMBOLS;
   };
 
   return StockService;
