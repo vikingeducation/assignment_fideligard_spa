@@ -1,5 +1,5 @@
 <h3>Trade</h3>
-<form ng-submit='placeOrder()'>
+<form ng-submit='placeOrder()' name='tradeForm'>
   <label>
     Symbol
     <input
@@ -55,10 +55,10 @@
   </label><br>
 
 
-  <label>
-    Order status
-    <input
-    ng-model='trade.formData.orderStatus'>
+  <label id="order-status">
+    Order status<br>
+    <p ng-show="tradeForm.$valid" class='valid-order'>VALID</p>
+    <p ng-hide="tradeForm.$valid" class='invalid-order'>INVALID</p>
   </label><br>
 
   <input type='submit' value='PLACE ORDER'>

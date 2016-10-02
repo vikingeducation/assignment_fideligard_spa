@@ -1,3 +1,11 @@
 table {
   table-layout: fixed;
 }
+
+.valid-order {
+  color: green
+}
+
+.invalid-order {
+  color: red
+}
