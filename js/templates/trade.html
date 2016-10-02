@@ -1,4 +1,5 @@
 <h3>Trade</h3>
+<!-- Don't give a form the same name as the value used in a validator -->
 <form ng-submit='placeOrder()' name='tradeForm'>
   <label>
     Symbol
@@ -12,8 +13,7 @@
   <label>
     Buy/Sell
     <select
-    ng-model='trade.formData.type'
-    valid-type>
+    ng-model='trade.formData.type'>
       <option value='buy'>Buy</option>
       <option value='sell'>Sell</option>
     </select>
@@ -23,8 +23,11 @@
     Quantity
     <input
     type='number'
-    ng-model='trade.formData.quantity'>
+    ng-model='trade.formData.quantity'
+    min='{{minQuant()}}'>
   </label><br>
+
+  <!-- max='{{maxQuant()}}' -->
 
   <label>
     Date

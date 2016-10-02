@@ -3,12 +3,8 @@ app.controller('StocksTradeCtrl',
 function($scope, StockService, TradeService) {
 
   $scope.trade = StockService.getSelectedStock();
-  $scope.trade.formData = {};
   TradeService.setUserData($scope.trade);
-
-  // $scope.showType = function() {
-  //   console.log($scope.trade.formDtype);
-  // };
+  $scope.trade.formData = {};
 
   $scope.placeOrder = function() {
     TradeService.placeOrder($scope.trade);
@@ -36,6 +32,18 @@ function($scope, StockService, TradeService) {
 
   $scope.showOrderStatus = function(status) {
     return status ? 'VALID' : 'INVALID';
+  };
+
+  $scope.minQuant = function() {
+    if ($scope.trade.formData.type === 'sell') {
+      if ($scope.trade.user.owned[$scope.trade.formData.symbol]) {
+        return $scope.trade.user.owned[$scope.trade.formData.symbol].quantity;
+      } else {
+        return Number.MAX_SAFE_INTEGER;
+      }
+    } else {
+      return 0;
+    }
   };
 
   // You have to watch what exactly is being changed. Trade object itself never
