@@ -37,8 +37,14 @@ function($scope, StockService, TradeService) {
 
   $scope.maxQuant = function() {
     if ($scope.trade.formData.type === 'sell') {
-      var owned = $scope.trade.user.owned[$scope.trade.formData.symbol];
-      return owned ? owned.quantity : 0;
+      if ($scope.trade.user.owned) {
+        var date = $scope.trade.formData.date;
+        var symbol = $scope.trade.formData.symbol;
+        var owned = $scope.trade.user.owned[date][symbol];
+        return owned.quantity;
+      } else {
+        return 0;
+      }
     } else {
       // 0 = cashAvailable - (price * quant)
       // 0 - cashAvailable = - (price * quant)

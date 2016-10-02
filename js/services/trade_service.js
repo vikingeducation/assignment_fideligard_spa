@@ -35,7 +35,7 @@ app.factory('TradeService', [function() {
     }
   }
 
-  function _sell (tradeInfo) {
+  function _sell (tradeInfo, date, symbol, tradeQuant) {
     // If he owns stock for that day
     if (tradeInfo.user.owned[date]) {
       // If he owns stock for that symbol
@@ -64,9 +64,11 @@ app.factory('TradeService', [function() {
         var tradeQuant = tradeInfo.tradeData.quantity;
 
         _buy(tradeInfo, date, symbol, tradeQuant);
+        _tradeInfo.user.cashAvailable -= _tradeInfo.tradeData.cost;
         break;
       case 'sell':
-        _sell(tradeInfo);
+        _sell(tradeInfo, date, symbol, tradeQuant);
+        _tradeInfo.user.cashAvailable += _tradeInfo.tradeData.cost;
         break;
     }
   }
@@ -112,7 +114,6 @@ app.factory('TradeService', [function() {
     });
     _tradeInfo.user = trade.user;
     _adjustQuant(_tradeInfo, trade);
-    _tradeInfo.user.cashAvailable -= _tradeInfo.tradeData.cost;
     _addTransaction(_tradeInfo);
   };
 
