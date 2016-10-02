@@ -11,19 +11,13 @@
       </tr>
     </theader>
 
-    <!-- <tbody
-    ng-repeat="(day, stocks) in stockData | filterDays:dateInfo.currentDate"
-    stocks="stocks"
-    >
+    <tbody>
       <tr
-      ng-repeat="stock in stocks"
-      stock-index-row
-      stock='stock'
+      ng-repeat="(id, transaction) in transactions"
+      stock-transaction-row
+      transaction='transaction'
       >
       </tr>
-    </tbody> -->
-
-    <!-- {{ dateInfo.currentDate | date:'yyyy-MM-dd' }} -->
-
+    </tbody>
   </table>
 </div>
