@@ -24,9 +24,6 @@ fideligardApp.config(function($urlRouterProvider, $stateProvider){
         },
         'tradeWrapper': {
           templateUrl: 'templates/_trade.html',
-          controller: function() {
-            console.log("_tradeWrapperController")
-          }
         }
       }
     })
