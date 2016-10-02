@@ -70,6 +70,7 @@ function($scope, StockService, TradeService) {
       $scope.trade.formData.price = newValues[1];
       $scope.trade.formData.cost = $scope.computeCost(newValues[0], newValues[1]);
       $scope.trade.formData.date = $scope.formattedDate();
+      $scope.trade.formData.symbol = $scope.trade.stock.Symbol;
     }
   );
 
