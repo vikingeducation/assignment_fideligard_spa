@@ -11,8 +11,8 @@ function(StockService, DateService, TradeService) {
         'trade.formData.symbol',
         'trade.formData.type'], function (newValues) {
           var tradeType = newValues[2];
+          var date = newValues[0];
           if (tradeType === 'buy') {
-            var date = newValues[0];
             var inRange = _.includes(
               StockService.getDates(),
               DateService.stringifyDate(date)
@@ -24,6 +24,11 @@ function(StockService, DateService, TradeService) {
             var afterLatest = +date >= +latestStock;
             var validity = latestStock ? (inRange && afterLatest) : inRange;
             ctrl.$setValidity('validDate', validity);
+          } else if (tradeType === 'sell') {
+            var ownedDates = Object.keys(TradeService.getOwnedStocks());
+            if (_.includes(ownedDates,date.toString())) {
+              ctrl.$setValidity('validDate', true);
+            }
           }
         }
       );

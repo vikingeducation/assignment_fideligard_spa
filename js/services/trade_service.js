@@ -132,5 +132,9 @@ app.factory('TradeService', [function() {
     return _tradeInfo.user.transactions;
   };
 
+  TradeService.getOwnedStocks = function () {
+    return _tradeInfo.user.owned;
+  };
+
   return TradeService;
 }]);
