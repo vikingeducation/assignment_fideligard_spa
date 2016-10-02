@@ -2,7 +2,8 @@
 <!-- Don't give a form the same name as the value used in a validator -->
 <form
 name='tradeForm'
-ng-submit='placeOrder()'>
+novalidate
+ng-submit='tradeForm.$valid && placeOrder()'>
   <div
   class='form-group'
   ng-class="{ 'has-danger': tradeForm.symbol.$invalid, 'has-success' : tradeForm.symbol.$valid}">
