@@ -6,6 +6,10 @@ function($scope, StockService, TradeService) {
   $scope.trade.formData = {};
   TradeService.setUserData($scope.trade);
 
+  // $scope.showType = function() {
+  //   console.log($scope.trade.formDtype);
+  // };
+
   $scope.placeOrder = function() {
     TradeService.placeOrder($scope.trade);
     TradeService.setUserData($scope.trade);
@@ -26,12 +30,8 @@ function($scope, StockService, TradeService) {
     }
   };
 
-  $scope.computeCost = function(values) {
-    var priceQuant = _.map(
-                      _.slice(values,0,2),
-                      _.parseFloat
-                    );
-    return _.multiply(priceQuant[0],priceQuant[1]);
+  $scope.computeCost = function(quant, price) {
+    return quant ? _.multiply(quant,price) : price;
   };
 
   $scope.showOrderStatus = function(status) {
@@ -47,9 +47,9 @@ function($scope, StockService, TradeService) {
     'trade.stock.Close',
     'trade.stock'],
     function(newValues) {
-      $scope.trade.formData.quantity = parseFloat(newValues[0]);
-      $scope.trade.formData.price = parseFloat(newValues[1]);
-      $scope.trade.formData.cost = $scope.computeCost(newValues);
+      $scope.trade.formData.quantity = newValues[0];
+      $scope.trade.formData.price = newValues[1];
+      $scope.trade.formData.cost = $scope.computeCost(newValues[0], newValues[1]);
       $scope.trade.formData.date = $scope.formattedDate();
     }
   );
