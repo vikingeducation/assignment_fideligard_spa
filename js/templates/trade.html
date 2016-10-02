@@ -1,50 +1,67 @@
 <h3>Trade</h3>
 <!-- Don't give a form the same name as the value used in a validator -->
-<form name='tradeForm' ng-submit='placeOrder()'>
-  <div class='form-group'>
+<form
+name='tradeForm'
+ng-submit='placeOrder()'>
+  <div
+  class='form-group'
+  ng-class="{ 'has-danger': tradeForm.symbol.$invalid, 'has-success' : tradeForm.symbol.$valid}">
     <label>
       Symbol
       <input class='form-control'
       type='text'
       ng-model='trade.formData.symbol'
       placeholder="{{trade.stock.Symbol}}"
+      name='symbol'
       valid-symbol>
     </label><br>
   </div>
 
-  <div class='form-group'>
+  <div
+  class='form-group'
+  ng-class="{ 'has-danger': tradeForm.type.$invalid, 'has-success' : tradeForm.type.$valid}">
     <label>
       Buy/Sell
-      <select
-      ng-model='trade.formData.type'>
+      <select class='form-control'
+      ng-model='trade.formData.type'
+      name='type'
+      required>
         <option value='buy'>Buy</option>
         <option value='sell'>Sell</option>
       </select>
     </label><br>
   </div>
 
-  <div class='form-group'>
+  <div
+  class='form-group'
+  ng-class="{ 'has-danger': tradeForm.quantity.$invalid, 'has-success' : tradeForm.quantity.$valid}">
     <label>
       Quantity
       <input class='form-control'
       type='number'
       ng-model='trade.formData.quantity'
+      name='quantity'
       min='1'
-      max='{{maxQuant()}}'>
+      max='{{maxQuant()}}'
+      required>
     </label><br>
   </div>
 
-  <div class='form-group'>
+  <div
+  class='form-group'
+  ng-class="{ 'has-danger': tradeForm.date.$invalid, 'has-success' : tradeForm.date.$valid}">
     <label>
       Date
       <input class='form-control'
       type='date'
       ng-model='trade.formData.date'
+      name='date'
       value="{{trade.formData.date}}">
     </label><br>
   </div>
 
-  <div class='form-group'>
+  <div
+  class='form-group'>
     <label>
       Price
       <p ng-model='trade.formData.price'>
