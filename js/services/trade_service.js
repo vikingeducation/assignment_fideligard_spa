@@ -49,7 +49,7 @@ app.factory('TradeService', [function() {
           delete tradeInfo.user.owned[date];
         }
       } else {
-        throw new Error("You can't sell what you don't own!!")
+        throw new Error("You can't sell what you don't own!!");
       }
     }
   }
