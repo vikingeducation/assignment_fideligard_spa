@@ -6,9 +6,11 @@ app.factory('TradeService', [function() {
       id: 1,
       username: '',
       owned: {},
+      transactions: {},
       cashAvailable: 10000,
     },
   };
+  var _transactionId;
 
   // Helpers for _adjustQuant.
   function _buy (tradeInfo, date, symbol, tradeQuant) {
@@ -23,7 +25,6 @@ app.factory('TradeService', [function() {
           type: tradeInfo.tradeData.type,
           price: tradeInfo.tradeData.price
         };
-        console.log(tradeInfo.user.owned);
       }
     // Otherwise, initialize the objects.
     } else {
@@ -70,11 +71,49 @@ app.factory('TradeService', [function() {
     }
   }
 
+  // function _nextTransactionId() {
+  //   if (!_transactionId) {
+  //     if (_.isEmpty(_comments)) {
+  //      _transactionId = 1;
+  //      return _transactionId;
+  //     }
+  //     var ids = _.map(Object.keys(_comments), function(id) {
+  //      return parseInt(id);
+  //     });
+  //     _transactionId = _.max(ids);
+  //     return _transactionId + 1;
+  //     }
+  //     return _transactionId + 1;
+  //   }
+  //   return _transactionId+1;
+  // }
+
+  function _nextTransactionId() {
+    if (!_transactionId) {
+      _transactionId = 0;
+    }
+    var nextId = _transactionId + 1;
+    return nextId;
+  }
+
+  function _addTransaction (tradeInfo) {
+    var nextId = _nextTransactionId();
+    tradeInfo.user.transactions[nextId] = {};
+    angular.copy(tradeInfo.tradeData,tradeInfo.user.transactions[nextId]);
+    _transactionId++;
+    console.log(tradeInfo.user.transactions);
+  }
+
   TradeService.placeOrder = function (trade) {
     _tradeInfo.tradeData = trade.formData;
+    console.log({
+      tradeData: _tradeInfo.tradeData,
+      formData: trade.formData
+    });
     _tradeInfo.user = trade.user;
     _adjustQuant(_tradeInfo, trade);
     _tradeInfo.user.cashAvailable -= _tradeInfo.tradeData.cost;
+    _addTransaction(_tradeInfo);
   };
 
   TradeService.setUserData = function (trade) {
@@ -87,6 +126,10 @@ app.factory('TradeService', [function() {
     if (latestDate && _tradeInfo.user.owned[latestDate][symbol]) {
       return new Date(latestDate);
     }
+  };
+
+  TradeService.getTransactions = function () {
+    return _tradeInfo.user.transactions;
   };
 
   return TradeService;

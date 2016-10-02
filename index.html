@@ -23,20 +23,28 @@
       <div class="col-md-5" style="margin-left:-100">
         <div class="row">
           <!-- Stocks -->
-          <div loading-screen></div>
-          <div ui-view="index"></div>
+          <div class="col-md-12">
+            <div class="card">
+              <div loading-screen></div>
+              <div ui-view="index"></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-7">
+      <div class="col-md-8">
         <div class="row">
-          <route-dropdown></route-dropdown>
+          <div class="col-md-12">
+            <route-dropdown></route-dropdown>
+          </div>
         </div>
         <!-- Trade, Portfolio and Transactions -->
         <div class="row">
-          <div class='card'>
-            <div ui-view="date"></div>
-            <div ui-view="trade"></div>
-            <div ui-view="transactions"></div>
+          <div class="col-md-12">
+            <div class='card'>
+              <div ui-view="date"></div>
+              <div ui-view="trade"></div>
+              <div ui-view="transactions"></div>
+            </div>
           </div>
         </div>
       </div>
