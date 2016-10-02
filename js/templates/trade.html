@@ -10,9 +10,11 @@
 
   <label>
     Buy/Sell
-    <input
-    type='dropdown'
+    <select
     ng-model='trade.formData.type'>
+      <option value='buy'>Buy</option>
+      <option value='sell'>Sell</option>
+    </select>
   </label><br>
 
   <label>
@@ -32,16 +34,25 @@
 
   <label>
     Price
-    <input
-    ng-model='trade.formData.price'
-    placeholder="{{trade.stock.Close}}">
+    <p ng-model='trade.formData.price'>
+      {{trade.stock.Close}}
+    </p>
   </label><br>
 
   <label>
     Cash available
-    <input
-    ng-model='trade.formData.cashAvailable'>
+    <p ng-model='trade.formData.cashAvailable'>
+      {{trade.user.cashAvailable}}
+    </p>
   </label><br>
+
+  <label>
+    Cost
+    <p>
+      {{ showCost() }}
+    </p>
+  </label><br>
+
 
   <label>
     Order status
