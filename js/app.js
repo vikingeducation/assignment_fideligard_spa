@@ -42,6 +42,15 @@ app.config(function($stateProvider, $urlRouterProvider){
           controller: 'StocksTradeCtrl'
         }
       }
+    })
+    .state('stocks.transactions', {
+      url: '/transactions',
+      views: {
+        'transactions@': {
+          templateUrl: 'js/templates/transactions.html',
+          controller: 'StocksTransactionsCtrl'
+        }
+      }
     });
 
 });

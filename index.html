@@ -28,11 +28,15 @@
         </div>
       </div>
       <div class="col-md-7">
-        <!-- Portfolio and Transactions -->
+        <div class="row">
+          <route-dropdown></route-dropdown>
+        </div>
+        <!-- Trade, Portfolio and Transactions -->
         <div class="row">
           <div class='card'>
             <div ui-view="date"></div>
             <div ui-view="trade"></div>
+            <div ui-view="transactions"></div>
           </div>
         </div>
       </div>
@@ -50,6 +54,7 @@
   <script src="js/controllers/stocks_index_controller.js"></script>
   <script src="js/controllers/stocks_date_controller.js"></script>
   <script src="js/controllers/stocks_trade_controller.js"></script>
+  <script src="js/controllers/stocks_transactions_controller.js"></script>
 
   <!-- Directives -->
   <script src="js/directives/stock_index_row.js"></script>
@@ -57,6 +62,7 @@
   <script src="js/directives/valid_symbol.js"></script>
   <script src="js/directives/valid_type.js"></script>
   <script src="js/directives/valid_date.js"></script>
+  <script src="js/directives/route_dropdown.js"></script>
 
   <!-- Filters -->
   <script src="js/filters/filterByTicker.js"></script>
