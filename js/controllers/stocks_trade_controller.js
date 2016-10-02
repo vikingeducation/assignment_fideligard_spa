@@ -4,9 +4,7 @@ function($scope, StockService, TradeService) {
 
   $scope.trade = StockService.getSelectedStock();
   $scope.trade.formData = {};
-  $scope.trade.user = {
-    cashAvailable: 1000
-  };
+  TradeService.setUserData($scope.trade);
 
   $scope.placeOrder = function() {
     TradeService.placeOrder($scope.trade);
