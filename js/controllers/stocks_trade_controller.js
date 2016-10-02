@@ -11,6 +11,7 @@ function($scope, StockService, TradeService) {
     TradeService.setUserData($scope.trade);
   };
 
+
   $scope.formattedDate = function() {
     if ($scope.trade.stock.Date) {
       return new Date($scope.trade.stock.Date.replace('-','/'));

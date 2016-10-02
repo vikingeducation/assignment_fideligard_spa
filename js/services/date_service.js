@@ -1,16 +1,16 @@
 app.factory('DateService', [function(){
 
+  var DateService = {};
+
   var _dateInfo = {
     currentDate: new Date('2014-01-01')
   };
 
-  var getDateInfo = function(){
+  DateService.getDateInfo = function(){
     return _dateInfo;
   };
 
-  // Might need to use this on stock service.
-  var setDate = function(date) {
-    var day = new Date(date);
+  DateService.stringifyDate = function(day) {
     var currMonth = day.getUTCMonth() + 1;
     var currDay = day.getUTCDate();
 
@@ -24,13 +24,14 @@ app.factory('DateService', [function(){
 
     var currYear = day.getUTCFullYear();
 
-    var currStr = currYear + "-" + currMonth + "-" + currDay;
-    _dateInfo.currentDate = currStr;
+    return currYear + "-" + currMonth + "-" + currDay;
   };
 
-  return {
-    setDate: setDate,
-    getDateInfo: getDateInfo
+  // Might need to use this on stock service.
+  DateService.setDate = function(date) {
+    var day = new Date(date);
+    _dateInfo.currentDate = DateService.stringifyDate(day);
   };
 
+  return DateService;
 }]);
