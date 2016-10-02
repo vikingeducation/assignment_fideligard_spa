@@ -36,6 +36,10 @@ function($scope, StockService, TradeService) {
     _.multiply(priceQuant[0],priceQuant[1]);
   };
 
+  $scope.showOrderStatus = function(status) {
+    return status ? 'VALID' : 'INVALID';
+  };
+
   // You have to watch what exactly is being changed. Trade object itself never
   // gets changed, so you have to watch its stock prop.
   // However, trade.stock always gets re-assigned, so you can watch the
