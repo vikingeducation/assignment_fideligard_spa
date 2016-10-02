@@ -29,9 +29,9 @@ function($scope, StockService, TradeService) {
   $scope.computeCost = function(values) {
     var priceQuant = _.map(
                       _.slice(values,0,2),
-                      _.parseInt
+                      _.parseFloat
                     );
-    _.multiply(priceQuant[0],priceQuant[1]);
+    return _.multiply(priceQuant[0],priceQuant[1]);
   };
 
   $scope.showOrderStatus = function(status) {
@@ -47,6 +47,7 @@ function($scope, StockService, TradeService) {
     'trade.stock.Close',
     'trade.stock'],
     function(newValues) {
+      $scope.trade.formData.quantity = newValues[0];
       $scope.trade.formData.price = newValues[1];
       $scope.trade.formData.cost = $scope.computeCost(newValues);
       $scope.trade.formData.date = $scope.formattedDate();
