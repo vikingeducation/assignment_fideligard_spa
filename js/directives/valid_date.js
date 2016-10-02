@@ -7,26 +7,23 @@ function(StockService, DateService, TradeService) {
     require: 'ngModel',
     link: function(scope, elem, attrs, ctrl) {
       scope.$watchGroup(
-        ['trade.formData.date', 'trade.formData.symbol'], function (newValues) {
-          var date = newValues[0];
-          if (date) {
-            date = DateService.stringifyDate(newValues[0]);
+        ['trade.formData.date',
+        'trade.formData.symbol',
+        'trade.formData.type'], function (newValues) {
+          var tradeType = newValues[2];
+          if (tradeType === 'buy') {
+            var date = newValues[0];
+            if (date) {
+              date = DateService.stringifyDate(newValues[0]);
+            }
+            var inRange = _.includes(StockService.getDates(), date);
+            // Time travel problem. Shouldn't be able to buy stock at date,
+            // then buy stock at earlier date for that symbol.
+            var latestStock = TradeService.getLatestStock(newValues[1]);
+            var afterLatest = date >= latestStock;
+            var validity = latestStock ? (inRange && afterLatest) : inRange;
+            ctrl.$setValidity('validDate', validity);
           }
-          var inRange = _.includes(StockService.getDates(), date);
-          // Time travel problem. Shouldn't be able to buy stock at date,
-          // then buy stock at earlier date for that symbol.
-          var latestStock = TradeService.getLatestStock(newValues[1]);
-          var afterLatest = date >= latestStock;
-          var validity = latestStock ? (inRange && afterLatest) : inRange;
-
-          console.log({
-            date: date,
-            inRange: inRange,
-            latestStock: latestStock,
-            afterLatest: afterLatest,
-            validity: validity
-          });
-          ctrl.$setValidity('validDate', validity);
         }
       );
 
