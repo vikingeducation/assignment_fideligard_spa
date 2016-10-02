@@ -10,10 +10,15 @@ function($scope, StockService, TradeService) {
 
   $scope.placeOrder = function() {
     TradeService.placeOrder($scope.trade);
+    TradeService.setUserData($scope.trade);
   };
 
   $scope.formattedDate = function() {
-    return $scope.trade.stock.Date ? $scope.trade.stock.Date : '2015-01-01';
+    if ($scope.trade.stock.Date) {
+      return new Date($scope.trade.stock.Date.replace('-','/'));
+    } else {
+      return new Date('2015/01/01');
+    }
   };
 
   $scope.showCost = function() {
@@ -24,13 +29,16 @@ function($scope, StockService, TradeService) {
 
   // You have to watch what exactly is being changed. Trade object itself never
   // gets changed, so you have to watch its stock prop.
+  // However, trade.stock always gets re-assigned, so you can watch the
+  // stock object nested within trade.
   $scope.$watchGroup(
     ['trade.formData.quantity',
     'trade.formData.price',
-    'trade.stock.Close'],
+    'trade.stock'],
     function(newValues) {
       $scope.trade.formData.price = newValues[2];
       $scope.trade.formData.cost = parseInt(_.multiply(newValues.slice(0,1)));
+      $scope.trade.formData.date = $scope.formattedDate();
     }
   );
 
