@@ -19,8 +19,11 @@ app.factory('TradeService', [function() {
         tradeInfo.user.owned[date][symbol].quantity += tradeQuant;
       } else {
         tradeInfo.user.owned[date][symbol] = {
-          quantity: tradeQuant
+          quantity: tradeQuant,
+          type: tradeInfo.tradeData.type,
+          price: tradeInfo.tradeData.price
         };
+        console.log(tradeInfo.user.owned);
       }
     // Otherwise, initialize the objects.
     } else {
@@ -82,7 +85,7 @@ app.factory('TradeService', [function() {
     // owned obj organized by date, then symbol.
     var latestDate = _.max(Object.keys(_tradeInfo.user.owned));
     if (latestDate && _tradeInfo.user.owned[latestDate][symbol]) {
-      return latestDate;
+      return new Date(latestDate);
     }
   };
 

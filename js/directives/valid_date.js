@@ -13,14 +13,15 @@ function(StockService, DateService, TradeService) {
           var tradeType = newValues[2];
           if (tradeType === 'buy') {
             var date = newValues[0];
-            if (date) {
-              date = DateService.stringifyDate(newValues[0]);
-            }
-            var inRange = _.includes(StockService.getDates(), date);
+            var inRange = _.includes(
+              StockService.getDates(),
+              DateService.stringifyDate(date)
+            );
             // Time travel problem. Shouldn't be able to buy stock at date,
             // then buy stock at earlier date for that symbol.
             var latestStock = TradeService.getLatestStock(newValues[1]);
-            var afterLatest = date >= latestStock;
+            // Need to convert date objects to ints for comparison.
+            var afterLatest = +date >= +latestStock;
             var validity = latestStock ? (inRange && afterLatest) : inRange;
             ctrl.$setValidity('validDate', validity);
           }
