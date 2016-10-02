@@ -34,17 +34,27 @@ function($scope, StockService, TradeService) {
     return status ? 'VALID' : 'INVALID';
   };
 
-  $scope.minQuant = function() {
+  $scope.maxQuant = function() {
     if ($scope.trade.formData.type === 'sell') {
-      if ($scope.trade.user.owned[$scope.trade.formData.symbol]) {
-        return $scope.trade.user.owned[$scope.trade.formData.symbol].quantity;
-      } else {
-        return Number.MAX_SAFE_INTEGER;
-      }
+      var owned = $scope.trade.user.owned[$scope.trade.formData.symbol];
+      return owned ? owned.quantity : 0;
     } else {
-      return 0;
+      // 0 = cashAvailable - (price * quant)
+      // 0 - cashAvailable = - (price * quant)
+      // cashAvailalable = (price * quant)
+      // cashAvailable / price = quant
+      return ($scope.trade.user.cashAvailable / $scope.trade.stock.Close);
     }
   };
+
+  $scope.minQuant = function() {
+    if ($scope.trade.formData.type === 'sell') {
+      var owned = $scope.trade.user.owned[$scope.trade.formData.symbol];
+      return owned.quantity ? 1 : Number.MAX_SAFE_INTEGER;
+    }
+    return 1;
+  };
+
 
   // You have to watch what exactly is being changed. Trade object itself never
   // gets changed, so you have to watch its stock prop.
