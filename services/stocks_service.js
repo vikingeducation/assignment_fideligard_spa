@@ -52,6 +52,7 @@ fideligardApp.factory('stocksService', ['$http', "$q", "dateService", function($
           _addEntriesToStocks(response[i].data.query.results.quote);
           _dates = Object.keys(_stocks).sort()
         }
+        console.log(_stocks)
         return _stocks;
       }, function(response) {
         console.error(response);
@@ -77,6 +78,12 @@ fideligardApp.factory('stocksService', ['$http', "$q", "dateService", function($
 
   stocksService.getStocksByDateIndex = function(dateIndex) {
 
+  }
+
+  stocksService.getPrice = function(symbol, date) {
+    console.log("getting stock price for selected date")
+    var timestamp = stocksService.getTimestampByDateObject(date);
+    return _stocks[timestamp][symbol]["Close"]
   }
 
 

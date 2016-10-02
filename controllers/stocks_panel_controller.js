@@ -5,15 +5,13 @@ fideligardApp.controller('stocksPanelCtrl', ['$scope', 'stocksService', 'dateSer
 
   stocksService.all().then(function(stocks) {
     $scope.stocks = stocksService.getStocks();
-    $scope.dates = stocksService.allDates();
-    console.log($scope.stocks);
-    
+    $scope.dates = stocksService.allDates();  
   });
 
   $scope.date = dateService.getSelectedDate();
 
-  $scope.reverse = true;
-  $scope.propertyName = "Symbol"
+  $scope.reverse = false
+  $scope.propertyName = null
 
   $scope.sortBy = function(propertyName) {
       $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;

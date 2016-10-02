@@ -7,7 +7,6 @@
       <div class="col-xs-8">
         <div class="row">
 
-
           <form>
             <div class="form-group row">
               <label for="symbol" class="col-xs-2 col-form-label">Symbol</label>
@@ -33,7 +32,7 @@
             <div class="form-group row">
               <label for="date" class="col-xs-2 col-form-label">Date</label>
               <div class="col-xs-8">
-                <input class="form-control" type="date" ng-model="date" id="date">
+                <input class="form-control" type="date" ng-model="formattedDate" id="date">
               </div>
             </div>
             <div class="form-group row">
@@ -45,7 +44,7 @@
             <div class="form-group row">
               <label for="cost" class="col-xs-2 col-form-label">Cost</label>
               <div class="col-xs-8">
-                {{cost}}
+                {{quantity * price}}
               </div>
             </div>
 

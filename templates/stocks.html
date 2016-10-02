@@ -26,11 +26,11 @@
           <tbody>
             <tr ng-repeat="stock in stocks[dates[date.date]] | convertStockToArray | filter:{'Symbol': symbol} | orderBy:propertyName:reverse">
               <td>{{stock["Symbol"]}}</td>
-              <td>{{stock["Close"] | number:2 | addPlusSign }}</td>
+              <td>{{stock["Close"] | number:2 }}</td>
               <td>{{stocks[dates[date.date -1]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
               <td>{{stocks[dates[date.date -5]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
               <td>{{stocks[dates[date.date -22]][stock.Symbol]["Close"] - stock["Close"] | number:2 | addPlusSign }}</td>
-              <td><a href="#">Trade</a></td>
+              <td><a ui-sref="main.trades({symbol: stock.Symbol})">Trade</a></td>
             </tr>
           </tbody>
         </table>

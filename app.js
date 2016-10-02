@@ -22,17 +22,25 @@ fideligardApp.config(function($urlRouterProvider, $stateProvider){
           templateUrl: 'templates/stocks.html',
           controller: 'stocksPanelCtrl'
         },
-        'trade-panel@': {
-          templateUrl: 'templates/trade.html',
-          controller: 'tradePanelCtrl'
+        'tradeWrapper': {
+          templateUrl: 'templates/_trade.html',
+          controller: function() {
+            console.log("_tradeWrapperController")
+          }
         }
       }
     })
-  ;
+
+    .state("main.trades", {
+      url: "/trades/:symbol/",
+      templateUrl: 'templates/trade.html',
+      controller: 'tradePanelCtrl'
+    })
+
 });
 
 
-// ADDING ERROR HANDLING
+// ERROR HANDLING
 fideligardApp.run(function($rootScope){
   $rootScope.$on("$stateChangeError", console.log.bind(console));
 });
