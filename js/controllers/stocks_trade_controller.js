@@ -27,17 +27,25 @@ function($scope, StockService, TradeService) {
     }
   };
 
+  $scope.computeCost = function() {
+    var priceQuant = _.map(
+                      _.slice(newValues,0,2),
+                      _.parseInt
+                    );
+    _.multiply(priceQuant[0],priceQuant[1]);
+  };
+
   // You have to watch what exactly is being changed. Trade object itself never
   // gets changed, so you have to watch its stock prop.
   // However, trade.stock always gets re-assigned, so you can watch the
   // stock object nested within trade.
   $scope.$watchGroup(
     ['trade.formData.quantity',
-    'trade.formData.price',
+    'trade.stock.Close',
     'trade.stock'],
     function(newValues) {
-      $scope.trade.formData.price = newValues[2];
-      $scope.trade.formData.cost = parseInt(_.multiply(newValues.slice(0,1)));
+      $scope.trade.formData.price = newValues[1];
+      $scope.trade.formData.cost = $scope.computeCost();
       $scope.trade.formData.date = $scope.formattedDate();
     }
   );
