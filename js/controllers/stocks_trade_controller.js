@@ -47,8 +47,8 @@ function($scope, StockService, TradeService) {
     'trade.stock.Close',
     'trade.stock'],
     function(newValues) {
-      $scope.trade.formData.quantity = newValues[0];
-      $scope.trade.formData.price = newValues[1];
+      $scope.trade.formData.quantity = parseFloat(newValues[0]);
+      $scope.trade.formData.price = parseFloat(newValues[1]);
       $scope.trade.formData.cost = $scope.computeCost(newValues);
       $scope.trade.formData.date = $scope.formattedDate();
     }

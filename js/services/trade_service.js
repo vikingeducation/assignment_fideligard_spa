@@ -23,7 +23,6 @@ app.factory('TradeService', [function() {
     }
 
     _tradeInfo.user.cashAvailable -= trade.formData.cost;
-    console.log(_tradeInfo);
   };
 
   TradeService.setUserData = function (trade) {

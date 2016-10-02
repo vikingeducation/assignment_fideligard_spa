@@ -7,10 +7,14 @@ app.directive('validType', ['TradeService', function(StockService) {
       ctrl.$validators.type = function(modelValue, viewValue) {
         switch (modelValue) {
           case 'sell':
-            return !!(scope.trade.user.owned[scope.trade.formData.symbol]);
+            var owned = scope.trade.user.owned;
+            var symbol = scope.trade.formData.symbol;
+            var sellQuant = scope.trade.formData.quantity;
+            // Validity needs to be checked everytime quantity changes,
+            // even though transaction type has already been selected.
+            return owned[symbol] && owned[symbol].quantity >= sellQuant;
           case 'buy':
-            return true;
-            // return (scope.trade.user.cashAvailable - scope.computeCost()) >= 0;
+            return (scope.trade.user.cashAvailable - scope.computeCost()) >= 0;
           default:
             return true;
         }
