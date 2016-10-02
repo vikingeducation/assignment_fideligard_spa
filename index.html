@@ -32,15 +32,11 @@
         </div>
       </div>
       <div class="col-md-8">
-        <div class="row">
-          <div class="col-md-12">
-            <route-dropdown></route-dropdown>
-          </div>
-        </div>
         <!-- Trade, Portfolio and Transactions -->
         <div class="row">
           <div class="col-md-12">
             <div class='card'>
+              <route-dropdown></route-dropdown>
               <div ui-view="date"></div>
               <div ui-view="trade"></div>
               <div ui-view="transactions"></div>

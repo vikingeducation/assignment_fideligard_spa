@@ -40,6 +40,7 @@ app.factory('TradeService', [function() {
     if (tradeInfo.user.owned[date]) {
       // If he owns stock for that symbol
       if (tradeInfo.user.owned[date][symbol]) {
+        console.log(tradeInfo.user.owned[date][symbol].quantity);
         tradeInfo.user.owned[date][symbol].quantity -= tradeQuant;
         if (tradeInfo.user.owned[date][symbol].quantity <= 0) {
           delete tradeInfo.user.owned[date][symbol];
@@ -47,22 +48,23 @@ app.factory('TradeService', [function() {
         if (_.isEmpty(tradeInfo.user.owned[date])) {
           delete tradeInfo.user.owned[date];
         }
+      } else {
+        throw new Error("You can't sell what you don't own!!")
       }
     }
   }
 
   // Increment/set quantity of owned stocks for that symbol.
   function _adjustQuant (tradeInfo, trade) {
+    var date = tradeInfo.tradeData.date;
+    var symbol = tradeInfo.tradeData.symbol;
+    var tradeQuant = tradeInfo.tradeData.quantity;
+
     switch (trade.formData.type) {
       case 'buy':
         if (tradeInfo.tradeData.cost > tradeInfo.user.cashAvailable) {
           throw new Error("Invalid purchase! Can't buy more than you can afford!");
         }
-
-        var date = tradeInfo.tradeData.date;
-        var symbol = tradeInfo.tradeData.symbol;
-        var tradeQuant = tradeInfo.tradeData.quantity;
-
         _buy(tradeInfo, date, symbol, tradeQuant);
         _tradeInfo.user.cashAvailable -= _tradeInfo.tradeData.cost;
         break;
@@ -103,15 +105,10 @@ app.factory('TradeService', [function() {
     tradeInfo.user.transactions[nextId] = {};
     angular.copy(tradeInfo.tradeData,tradeInfo.user.transactions[nextId]);
     _transactionId++;
-    console.log(tradeInfo.user.transactions);
   }
 
   TradeService.placeOrder = function (trade) {
     _tradeInfo.tradeData = trade.formData;
-    console.log({
-      tradeData: _tradeInfo.tradeData,
-      formData: trade.formData
-    });
     _tradeInfo.user = trade.user;
     _adjustQuant(_tradeInfo, trade);
     _addTransaction(_tradeInfo);
@@ -130,6 +127,7 @@ app.factory('TradeService', [function() {
   };
 
   TradeService.getTransactions = function () {
+    console.log(_tradeInfo.user.transactions);
     return _tradeInfo.user.transactions;
   };
 

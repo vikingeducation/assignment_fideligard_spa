@@ -36,12 +36,12 @@ function($scope, StockService, TradeService) {
   };
 
   $scope.maxQuant = function() {
+    var date = $scope.trade.formData.date;
+    var symbol = $scope.trade.formData.symbol;
+    var owned = $scope.trade.user.owned[date];
     if ($scope.trade.formData.type === 'sell') {
-      if ($scope.trade.user.owned) {
-        var date = $scope.trade.formData.date;
-        var symbol = $scope.trade.formData.symbol;
-        var owned = $scope.trade.user.owned[date][symbol];
-        return owned.quantity;
+      if (owned) {
+        return owned[symbol].quantity;
       } else {
         return 0;
       }
