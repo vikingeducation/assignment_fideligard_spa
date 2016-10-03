@@ -5,7 +5,8 @@ app.directive('stockIndexRow', function() {
     templateUrl: 'js/directives/stock_index_row.html',
     scope: {
       stock: "=",
-      symbol: "="
+      symbol: "=",
+      date: "="
     }
   };
 

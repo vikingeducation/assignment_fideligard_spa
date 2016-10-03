@@ -1,6 +1,6 @@
 <h3>Stocks</h3>
 <h5> Selected Date: {{ dateInfo.currentDate}}</h5>
-<h5>Filter: <input type="text" ng-model="companyFilter"></h5>
+<h5>Filter: <input type="text" ng-model="symbolFilter"></h5>
 <table class="table">
   <tr>
     <th>Symbol</th>
@@ -11,7 +11,7 @@
     <th>Trade?</th>
   </tr>
 
-  <tr stock-index-row ng-repeat='(key, value) in stocksInfo.stocks' stock="value" symbol="key" >
+  <tr stock-index-row ng-repeat='value in stocksInfo.stocks | tickerFilter | filter: {symbol: symbolFilter} | orderBy: "symbol"' stock="value" date="dateInfo.currentDate">
   </tr>
 
 </table>

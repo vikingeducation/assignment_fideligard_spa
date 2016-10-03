@@ -1,5 +1,5 @@
-app.factory('StockService', ['$http', '$q', function($http, $q) {
-  var _stockSymbols = ['AAPL', 'GOOG', 'MSFT', 'AMZN', 'FB', 'XOM', 'GE', 'T', 'JPM', 'VZ', 'WMT']
+app.factory('StockService', ['$http', '$q', '$window', function($http, $q, $window) {
+  var _stockSymbols = [ 'GOOG', 'AAPL','MSFT', 'AMZN', 'FB', 'XOM', 'GE', 'T', 'JPM', 'VZ', 'WMT']
 
   var _dates = [];
   var _stocksObject = {};
@@ -18,7 +18,7 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
       _buildDatesArray();
     }, 
       function(error) {
-        console.log(error);
+        $window.alert("Uh oh! Looks like the data failed to load. Please refresh the page.")
       }
     );
   };
@@ -37,7 +37,8 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
         _stocks[day.Date][day.Symbol].price = Number(day.Close);
         _stocks[day.Date][day.Symbol].oneDay = buildPrevDay(day.Date, day.Symbol, 1, day.Close); 
         _stocks[day.Date][day.Symbol].sevenDay = buildPrevDay(day.Date, day.Symbol, 7, day.Close); 
-        _stocks[day.Date][day.Symbol].thirtyDay = buildPrevDay(day.Date, day.Symbol, 30, day.Close); 
+        _stocks[day.Date][day.Symbol].thirtyDay = buildPrevDay(day.Date, day.Symbol, 30, day.Close);
+        _stocks[day.Date][day.Symbol].symbol = day.Symbol
         if (index + 1 < stockArray.length) {
           var extraDaysNeeded = ((new Date (stockArray[index + 1].Date) - new Date(day.Date)) / 86400000) - 1;
           for (var i = 0; i < extraDaysNeeded; i++) {
@@ -50,7 +51,8 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
         _stocks[day.Date][day.Symbol].price = Number(day.Close);
         _stocks[day.Date][day.Symbol].oneDay = buildPrevDay(day.Date, day.Symbol, 1, day.Close); 
         _stocks[day.Date][day.Symbol].sevenDay = buildPrevDay(day.Date, day.Symbol, 7, day.Close); 
-        _stocks[day.Date][day.Symbol].thirtyDay = buildPrevDay(day.Date, day.Symbol, 30, day.Close); 
+        _stocks[day.Date][day.Symbol].thirtyDay = buildPrevDay(day.Date, day.Symbol, 30, day.Close);
+        _stocks[day.Date][day.Symbol].symbol = day.Symbol 
         if (index + 1 < stockArray.length) {
           var extraDaysNeeded = ((new Date (stockArray[index + 1].Date) - new Date(day.Date)) / 86400000) - 1;
           for (var i = 0; i < extraDaysNeeded; i++) {
@@ -67,7 +69,8 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
       _stocks[date][symbol].price = prevInfo.price;
       _stocks[date][symbol].oneDay = buildPrevDay(date, symbol, 1, prevInfo.price); 
       _stocks[date][symbol].sevenDay = buildPrevDay(date, symbol, 7, prevInfo.price); 
-      _stocks[date][symbol].thirtyDay = buildPrevDay(date, symbol, 30, prevInfo.price); 
+      _stocks[date][symbol].thirtyDay = buildPrevDay(date, symbol, 30, prevInfo.price);
+      _stocks[date][symbol].symbol = symbol
 
     } else {
       _stocks[date] = {};
@@ -75,7 +78,8 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
       _stocks[date][symbol].price = prevInfo.price;
       _stocks[date][symbol].oneDay = buildPrevDay(date, symbol, 1, prevInfo.price); 
       _stocks[date][symbol].sevenDay = buildPrevDay(date, symbol, 7, prevInfo.price); 
-      _stocks[date][symbol].thirtyDay = buildPrevDay(date, symbol, 30, prevInfo.price); 
+      _stocks[date][symbol].thirtyDay = buildPrevDay(date, symbol, 30, prevInfo.price);
+      _stocks[date][symbol].symbol = symbol
     }
   }
 
@@ -113,6 +117,10 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
     return $http.get(url);
   };
 
+  var getStockSymbols = function(){
+    return _stockSymbols;
+  }
+
   var getStocks = function(date){
     if (date === undefined) {
       date = '2015-01-02';
@@ -123,8 +131,6 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
         return _stocksObject.stocks = _stocks[date];
       });
     }
-    console.log(date);
-    console.log(_stocks[date]);
     _stocksObject.stocks = _stocks[date];
     return _stocksObject;
   }
@@ -136,7 +142,8 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
 
   return {
     allDates: allDates,
-    getStocks: getStocks
+    getStocks: getStocks,
+    getStockSymbols: getStockSymbols
 
 
   };
@@ -153,18 +160,18 @@ app.factory('StockService', ['$http', '$q', function($http, $q) {
 
 // dates: ["1/1/2015", "1/2/2015" ...]
 // stocks_hash:    {
-//       '1/1/2015': {
-//         APPL: {
-//           oneDay: 100,
-//           sevenDay: -2.43,
-//           thirtyDay: -3.50
-//         }
-//         GOOG: {
-//           oneDay: 100,
-//           sevenDay: -2.43,
-//           thirtyDay: -3.50
-//         }
-//       },
+      // '1/1/2015': {
+      //   APPL: {
+      //     oneDay: 100,
+      //     sevenDay: -2.43,
+      //     thirtyDay: -3.50
+      //   }
+      //   GOOG: {
+      //     oneDay: 100,
+      //     sevenDay: -2.43,
+      //     thirtyDay: -3.50
+      //   }
+      // },
 //       '1/2/2015': {
 //         APPL: {
 //           oneDay: 102,

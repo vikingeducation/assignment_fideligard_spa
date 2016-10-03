@@ -12,7 +12,7 @@ app.config(function($stateProvider, $urlRouterProvider){
   $stateProvider
 
     .state('stocks', {
-      url: '/',
+      url: '',
       views: {
         'date': {
           templateUrl: 'js/templates/date.html',
@@ -36,17 +36,37 @@ app.config(function($stateProvider, $urlRouterProvider){
       }
     })
 
-    .state('stocks.porfolio', {
-      url: '/porfolio',
-      templateUrl: 'js/templates/porfolio.html'
+    .state('stocks.portfolio', {
+      url: '/portfolio',
+      views: {
+        "main@" : {
+          templateUrl: 'js/templates/portfolio.html',
+          controller: 'PortfolioCtrl'
+        }
+      }
     })
     .state('stocks.trade', {
-      url: '/trade',
-      templateUrl: 'js/templates/trade.html'
+      url: '/trade/:stock',
+      params: {
+        symbol: null,
+        price: null,
+        date: null
+      },
+      views: {
+        "main@" : {
+          templateUrl: 'js/templates/trade.html',
+          controller: 'TradeCtrl'
+        }
+      }
     })
     .state('stocks.transactions', {
       url: '/transactions',
-      templateUrl: 'js/templates/transactions.html'
+      views: {
+        "main@" : {
+          templateUrl: 'js/templates/transactions.html',
+          controller: 'TransactionsCtrl'
+        }
+      }
     })
 
 });

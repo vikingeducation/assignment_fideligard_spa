@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-xs-10 col-xs-offset-1">
+    <div class="row">
+      <div class="col-xs-6">
+        <h4>Portfolio on {{dateInfo.currentDate}}</h4>
+      </div>
+    </div>
+    <table class="table table-hover">
+      <tr>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>Current Price</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
+        <th>Trade?</th>
+      </tr>
+      <tr ng-repeat="(key, value) in portfolio[dateInfo.currentDate]">
+        <td>{{key}}</td>
+        <td>{{value}}</td> 
+      </tr>
+
+    </table>
+
+
+  </div>
+</div>
