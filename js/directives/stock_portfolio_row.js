@@ -10,12 +10,12 @@ app.directive('stockPortfolioRow',
       },
       link: function(scope, elem, attrs) {
         scope.dateInfo = DateService.getDateInfo();
-        scope.computizedData = PortfolioService.computize(
+        scope.computized = PortfolioService.computize(
           {
             stock: scope.transaction,
             symbol: scope.transaction.symbol,
             portfolio: TradeService.getTransactions(),
-            endDate: scope.dateInfo.currentDate,
+            endDate: Date.now(),
             field: 'Close',
             dates: _.map(
               TradeService.getTransactions(),
@@ -26,7 +26,7 @@ app.directive('stockPortfolioRow',
           }
         );
         scope.testing = function() {
-          console.log(scope.computizedData);
+          console.log(scope.computized);
         };
       }
     };
