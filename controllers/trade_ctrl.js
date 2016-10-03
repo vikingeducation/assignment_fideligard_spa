@@ -16,14 +16,15 @@ Fideligard.controller('TradeCtrl', ['$scope', 'yqlService', 'dateService', '$sta
   };
 
   $scope.makeTrade = function() {
+    var date = $scope.dates[$scope.date.index]
     var cost = $scope.quotes[$scope.dates[$scope.date.index]]
               [$scope.sym].Close * $scope.quantity;
 
     if ($scope.choice === 'buy') {
-      portfolio.makeTrade($scope.sym, $scope.quantity, -cost);
+      portfolio.makeTrade($scope.sym, $scope.quantity, -cost, date);
       $scope.addTransaction();
     } else if ($scope.choice === 'sell') {
-      portfolio.makeTrade($scope.sym, -$scope.quantity, cost);
+      portfolio.makeTrade($scope.sym, -$scope.quantity, cost, date);
       $scope.addTransaction();
     }
   };

@@ -1,7 +1,7 @@
-Fideligard.factory('yqlService', ['$http', function($http) {
+Fideligard.factory('yqlService', ['$http', '$q', function($http, $q) {
 
   var fideligardService = {};
-  var _companies = ["AAPL"];
+  var _companies = ["AAPL", "GOOG", "AMZN", "MSFT", "TSLA", "FB", "TWTR", "ATVI"];
   var _start = "2014/12/01";
   var _end = "2015/12/31";
 
@@ -16,7 +16,7 @@ Fideligard.factory('yqlService', ['$http', function($http) {
       scrubDate(_dateArray[i]);
       extendDate(_dateArray[i]);
     }
-    // angular.copy(Object.keys(_quotes).sort(), _dateArray);
+    extendDate(_dateArray[_dateArray.length - 1]);
   };
 
   var convertToDate = function(date) {
@@ -25,20 +25,9 @@ Fideligard.factory('yqlService', ['$http', function($http) {
     return realDate;
   };
 
-  var changeDate = function(date, change) {
-    var newDate = convertToDate(date);
-    newDate.setDate(newDate.getDate() + change);
-    return newDate.toISOString().slice(0,10);
-  }
-
   var scrubDate = function(date) {
     var data = _quotes[date];
-    // var currentDate = convertToDate(date);
-    // currentDate.setDate(currentDate.getDate() + 1);
-    // var dateString = currentDate.toISOString().slice(0,10);
-    // currentDate.setDate(currentDate.getDate() + 1);
-    // var dateString2 = currentDate.toISOString().slice(0,10);
-    var dateString = changeDate(date, 1);
+    var dateString = fideligardService.changeDate(date, 1);
     if (Object.keys(_quotes[dateString]).length === 0) {
       _quotes[dateString] = data;
     }
@@ -46,7 +35,7 @@ Fideligard.factory('yqlService', ['$http', function($http) {
 
   var priceChange = function(date, sym, change) {
     var currentPrice = _quotes[date][sym].Close;
-    var newDate = changeDate(date, -change);
+    var newDate = fideligardService.changeDate(date, -change);
     var changePrice = _quotes[newDate][sym].Close;
     _quotes[date][sym][String(change)] = currentPrice - changePrice;
   };
@@ -59,36 +48,38 @@ Fideligard.factory('yqlService', ['$http', function($http) {
     });
   };
 
-  var parseData = function(response) {
-    var data = response.data.query.results.quote;
+  var setDates = function() {
     var startDate = new Date(_start);
     var currentDate = new Date(_start);
     var endDate = new Date(_end);
     endDate.setDate(endDate.getDate() + 1)
-    // var quotes = {};
-
     while ( currentDate < endDate ) {
       var dateString = currentDate.toISOString().slice(0,10);
       _quotes[dateString] = {};
       currentDate.setDate(currentDate.getDate() + 1);
     }
-
     angular.copy(Object.keys(_quotes).sort(), _dateArray);
+  };
 
+  var parseData = function(response) {
+    var data = response.data.query.results.quote;
     for (var index in data) {
       _quotes[data[index].Date][data[index].Symbol] = data[index]
     }
-
-    // angular.copy(Object.keys(_quotes).sort(), _dateArray);
-    // return quotes;
   };
 
-  var urlBuilder = function(companyArray) {
-    var companyString = "'" + companyArray.join("','") + "'";
+  var parseResponse = function(response) {
+    angular.forEach(response, function(obj) {
+      parseData(obj);
+    });
+  };
+
+  var urlBuilder = function(symbol) {
+    // var companyString = "'" + companyArray.join("','") + "'";
 
     return 'http://query.yahooapis.com/v1/public/yql?q=' +
               'select * from yahoo.finance.historicaldata ' +
-              'where symbol in (' + companyString + ') ' +
+              'where symbol = "' + symbol + '" ' +
               'and startDate = "' + _start + '" ' +
               'and endDate = "' + _end + '" ' +
               '&format=json '+
@@ -98,13 +89,25 @@ Fideligard.factory('yqlService', ['$http', function($http) {
   };
 
   fideligardService.apiStocks = function() {
-    var url = urlBuilder(_companies);
+    setDates();
+    var requests = [];
     console.log("sending data")
-    return $http.get(url).then(function(response) {
+    angular.forEach(_companies, function(company) {
+      var url = urlBuilder(company);
+      requests.push($http.get(url))
+    })
+
+     return $q.all(requests).then(function(response) {
       console.log("data returned")
-      parseData(response);
+      parseResponse(response);
       scrubData();
-    }) ;
+    });
+  };
+
+  fideligardService.changeDate = function(date, change) {
+    var newDate = convertToDate(date);
+    newDate.setDate(newDate.getDate() + change);
+    return newDate.toISOString().slice(0,10);
   };
 
   fideligardService.getStocks = function() {
@@ -115,7 +118,7 @@ Fideligard.factory('yqlService', ['$http', function($http) {
     return _dateArray;
   };
 
-  fideligardService.apiStocks();
+  // fideligardService.apiStocks();
 
   return fideligardService;
 

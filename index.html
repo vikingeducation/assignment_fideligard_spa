@@ -25,9 +25,10 @@
 <body>
 
   <navbar></navbar>
-  <div style="margin-left: 10px">
-    <a ui-sref="dashboard.portfolio">Portfolio</a>
-    <a ui-sref="dashboard.transaction">Transaction</a>
+
+  <div style="text-align: center" ng-show='stateIsLoading'>
+    <h1>Welcome to Fideligard</h1><hr width="300">
+    <h2>Loading Stocks..</h2>
   </div>
 
   <div class="row">
@@ -39,7 +40,7 @@
       </div>
 
       <div class="row">
-        <div ui-view  class="col-md-12"></div>
+        <div ui-view class="col-md-12"></div>
       </div>
     </div>
   </div>
@@ -50,6 +51,7 @@
 <!-- directives -->
 <script src="directives/navbar.js"></script>
 <script src="directives/stockquote.js"></script>
+<script src="directives/dropnav.js"></script>
 
 <!-- services -->
 <script type="text/javascript" src="services/yql.js"></script>
@@ -66,5 +68,6 @@
 <script type="text/javascript" src="controllers/stocks_ctrl.js"></script>
 <script type="text/javascript" src="controllers/range_ctrl.js"></script>
 <script type="text/javascript" src="controllers/trade_ctrl.js"></script>
+<script type="text/javascript" src="controllers/portfolio_ctrl.js"></script>
 
 </html>

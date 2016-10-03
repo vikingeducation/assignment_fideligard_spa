@@ -1,1 +1,63 @@
-<h1>portfolio.html</h1>
+<h1>Portfolio</h1>
+
+<dropnav initial="'dashboard.portfolio'"></dropnav>
+
+<table class="table table-striped">
+  <tr>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+  </tr>
+  <tr>
+    <td>{{-totalValues[0].cost | currency}}</td>
+    <td>{{totalValues[0].value | currency}}</td>
+    <td>{{totalValues[0].value + totalValues[0].cost | currency}}</td>
+    <td>{{totalValues[1].value + totalValues[0].cost | currency}}</td>
+    <td>{{totalValues[2].value + totalValues[0].cost | currency}}</td>
+    <td>{{totalValues[3].value + totalValues[0].cost | currency}}</td>
+  </tr>
+</table>
+<!-- <br> -->
+<table class="table table-striped">
+  <tr>
+    <th ng-click="reverse()">Symbol</th>
+    <th>Quantity</th>
+    <th>Cost Basis</th>
+    <th>Current Value</th>
+    <th>Profit/Loss</th>
+    <th>Current Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </tr>
+  <tr>
+    <td>CASH</td>
+    <td>{{cash.amount | currency}}</td>
+    <td>{{cash.amount | currency}}</td>
+    <td>{{cash.amount | currency}}</td>
+    <td>$0.00</td>
+    <td>$1.00</td>
+    <td>+$0.00</td>
+    <td>+$0.00</td>
+    <td>+$0.00</td>
+  </tr>
+  <tr ng-repeat="company in currentPortfolio | orderBy:'sym':reverser">
+    <td>{{company.sym}}</td>
+    <td>{{company.stock}}</td>
+    <td>{{-company.cost | currency}}</td>
+    <td>{{quotes[dates[date.index]][company.sym].Close * company.stock | currency}}</td>
+    <td>{{(quotes[dates[date.index]][company.sym].Close * company.stock) + company.cost | currency}}</td>
+    <td>{{quotes[dates[date.index]][company.sym].Close | currency}}</td>
+    <td>{{quotes[dates[date.index]][company.sym][1] | currency}}</td>
+    <td>{{quotes[dates[date.index]][company.sym][7] | currency}}</td>
+    <td>{{quotes[dates[date.index]][company.sym][30] | currency}}</td>
+    <td><a ui-sref="dashboard.trade({ sym: company.sym })">Trade</a></td>
+  </tr>
+
+</table>
+
+<!-- <div>{{currentPortfolio}}</div> -->

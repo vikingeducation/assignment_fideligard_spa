@@ -1,15 +1,17 @@
 
   <h1>Trade</h1>
 
+  <dropnav initial="'dashboard.trade'"></dropnav>
+  <br><br>
   <div class="row">
 
     <div class="col-md-6">
-      <p>Symbol: {{sym}}</p>
-      <p>Buy/Sell: <select ng-model="choice">
+      <p>Symbol <input class="form-control" type="text" value="{{sym}}" readonly></p>
+      <p>Buy/Sell <select class="form-control" ng-model="choice">
         <option value="buy">Buy</option>
         <option value="sell">Sell</option>
       </select></p>
-      <p>Quantity: <input type="number" ng-model="quantity"></input></p>
+      <p>Quantity <input class="form-control" type="number" ng-model="quantity"></input></p>
       <p>Date: {{dates[date.index]}}</p>
       <p>Price: {{quotes[dates[date.index]][sym].Close | currency}}</p>
       <p>Cost: {{(quotes[dates[date.index]][sym].Close * quantity) | currency}}</p>
@@ -23,9 +25,7 @@
         <span ng-if="!validTrade()">INVALID</span>
       </p>
 
-      <div>Current Portfolio: {{portfolio}}</div>
+      <!-- <div>Current Portfolio: {{portfolio}}</div> -->
     </div>
 
   </div>
-
-

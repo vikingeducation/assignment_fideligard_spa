@@ -6,19 +6,19 @@
 
 <table class="table table-striped">
   <tr>
-    <th>Symbol</th>
-    <th>Price</th>
-    <th>1d</th>
-    <th>7d</th>
-    <th>30d</th>
+    <th ng-click="sortBy('Symbol')">Symbol</th>
+    <th ng-click="sortBy('Close')">Price</th>
+    <th ng-click="sortBy('1')">1d</th>
+    <th ng-click="sortBy('7')">7d</th>
+    <th ng-click="sortBy('30')">30d</th>
     <th>Trade?</th>
   </tr>
-  <tr ng-repeat="(symbol, value) in quotes[dates[date.index]] | tickerFilter: filterText">
-    <td>{{symbol}}</td>
+  <tr ng-repeat="value in quotes[dates[date.index]] | tickerFilter: filterText | orderBy: sorter : reverser">
+    <td>{{value.Symbol}}</td>
     <td>{{value.Close | currency}}</td>
     <td>{{value[1] | currency }}</td>
     <td>{{value[7] | currency }}</td>
     <td>{{value[30] | currency }}</td>
-    <td><a ui-sref="dashboard.trade({ sym: symbol })">Trade</a></td>
+    <td><a ui-sref="dashboard.trade({ sym: value.Symbol })">Trade</a></td>
   </tr>
 </table>

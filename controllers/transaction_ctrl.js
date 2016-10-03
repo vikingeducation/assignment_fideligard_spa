@@ -1,4 +1,4 @@
-Fideligard.controller('TransactionCtrl', ['$scope', 'transactionService', function($scope, transactionService){
+Fideligard.controller('TransactionCtrl', ['$scope', 'transactionService', '$state', function($scope, transactionService, $state){
 
   $scope.transactions = transactionService.getTransactions();
   $scope.sorter;
@@ -12,5 +12,11 @@ Fideligard.controller('TransactionCtrl', ['$scope', 'transactionService', functi
       $scope.reverser = false;
     }
   };
+
+  $scope.$watch('switch', function(value) {
+    if(value) {
+      $state.go(value);
+    }
+  });
 
 }]);

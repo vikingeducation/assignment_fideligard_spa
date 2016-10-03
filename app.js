@@ -1,10 +1,22 @@
 var Fideligard = angular.module('Fideligard', ['ui.router']);
 
+Fideligard.run(['$rootScope', '$state', function($rootScope, $state){
+  $rootScope.stateIsLoading = true;
+  $rootScope.$on('$stateChangeSuccess',function(){
+    $rootScope.stateIsLoading = false;
+  });
+}]);
+
 Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
   $urlRouterProvider.otherwise("");
 
   $stateProvider.state('dashboard', {
+    resolve: {
+      stocks: ['yqlService', function(yqlService){
+        return yqlService.apiStocks();
+      }]
+    },
     url: '',
     views: {
       'range@': {
@@ -23,7 +35,8 @@ Fideligard.config(['$stateProvider', '$urlRouterProvider', function($stateProvid
     url: '/portfolio',
     views: {
       '@': {
-        templateUrl: 'templates/portfolio.html'
+        templateUrl: 'templates/portfolio.html',
+        controller: 'PortfolioCtrl'
       }
     }
   })
