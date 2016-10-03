@@ -21,8 +21,7 @@
       <tr
       ng-repeat="(id, transaction) in transactions | filterObjectBy:searchKey | orderObjectBy:sortType:sortReverse"
       stock-transaction-row
-      transaction='transaction'
-      >
+      transaction='transaction'>
       </tr>
     </tbody>
   </table>

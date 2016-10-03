@@ -16,16 +16,12 @@
       </tr>
     </theader>
 
-    <div ng-click='testing()'>
-      TESTING
-    </div>
 
     <tbody>
       <tr
-      ng-repeat="(id, transaction) in transactions | orderObjectBy:sortType:sortReverse"
+      ng-repeat="(id, transaction) in portfolio"
       stock-portfolio-row
-      transaction='transaction'
-      >
+      transaction='transaction'>
       </tr>
     </tbody>
   </table>

@@ -4,6 +4,10 @@ function($scope, TradeService, PortfolioService) {
 
   $scope.portfolio = TradeService.getTransactions();
 
+  $scope.testing = function () {
+    console.log($scope.portfolio);
+  };
+
 }]);
 
 

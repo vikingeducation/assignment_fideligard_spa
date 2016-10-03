@@ -4,7 +4,7 @@ app.factory('PortfolioService',
   var PortfolioService = {};
 
   function _currentValue (stock) {
-    return stock.quantity * stock.price;
+    return stock.quantity * parseFloat(stock.price);
   }
 
   // Total Cost Basis.
@@ -13,8 +13,10 @@ app.factory('PortfolioService',
       return _.reduce(
         portfolio,
         function(m,v) {
+          debugger
+          // Check date validator to see how dates are compared.
           if (v.type === type && v.date <= endDate) {
-            return operator(m,v.cost);
+            return operator(m,parseFloat(v.price));
           } else {
             return m;
           }
@@ -36,7 +38,7 @@ app.factory('PortfolioService',
   function _profitLoss (stock, symbol, portfolio, endDate) {
     return _.subtract(
       _currentValue(stock),
-      _totalCostBasis(stock, symbol, portfolio, endDate)
+      _totalCostBasis(symbol, portfolio, endDate)
     );
   }
 
@@ -50,10 +52,11 @@ app.factory('PortfolioService',
       totalCostBasis: _totalCostBasis(data.symbol, data.portfolio, data.endDate),
       profitLoss: _profitLoss(data.stock, data.symbol, data.portfolio, data.endDate),
       getAgo: _getAgo(data.endDate, data.field, data.symbol, data),
-      oneDayAgo: computized.getAgo(1),
-      sevenDaysAgo: computized.getAgo(7),
-      thirtyDaysAgo: computized.getAgo(30)
     };
+
+    computized.oneDayAgo = computized.getAgo(1);
+    computized.sevenDaysAgo = computized.getAgo(7);
+    computized.thirtyDaysAgo = computized.getAgo(30);
 
     return computized;
   };
