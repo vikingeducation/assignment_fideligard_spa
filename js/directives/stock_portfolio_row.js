@@ -22,6 +22,7 @@ app.directive('stockPortfolioRow',
         );
 
         scope.getAgo = function(daysAgoStr) {
+          console.log(scope.computizedInfo.computized.previousTransactions);
           return function() {
             var prev = _.find(
               scope.computizedInfo.computized.previousTransactions,
@@ -43,8 +44,12 @@ app.directive('stockPortfolioRow',
         };
 
         scope.oneDayAgo = scope.getAgo('oneDayAgo');
-        scope.sevenDayAgo = scope.getAgo('sevenDaysAgo');
-        scope.thirtyDayAgo = scope.getAgo('thirtyDaysAgo');
+        scope.sevenDaysAgo = scope.getAgo('sevenDaysAgo');
+        scope.thirtyDaysAgo = scope.getAgo('thirtyDaysAgo');
+        //
+        // scope.consoleLog = function () {
+        //   scope.sevenDaysAgo();
+        // };
       }
     };
 

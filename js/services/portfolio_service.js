@@ -82,13 +82,13 @@ app.factory('PortfolioService',
             transaction.date,
             transaction.symbol
           ),
-          sevenDayAgo: _findPrev(
+          sevenDaysAgo: _findPrev(
             7,
             transactions,
             transaction.date,
             transaction.symbol
           ),
-          thirtyDayAgo: _findPrev(
+          thirtyDaysAgo: _findPrev(
             30,
             transactions,
             transaction.date,
