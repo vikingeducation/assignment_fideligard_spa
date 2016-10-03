@@ -123,19 +123,19 @@ app.factory('StockService', ['$http', function($http) {
     return _stockData;
   };
 
-  StockService.getPrevious = function(current,field,symbol,option) {
+  StockService.getPrevious = function(current,field,symbol,dateOnly) {
     return function(daysAgo) {
       return function () {
         var currDayIndex = _.indexOf(_dates,current);
         var prevDayIndex = currDayIndex - daysAgo;
-        if (_dates[prevDayIndex] && !option) {
+        if (_dates[prevDayIndex]) {
           var currStr = current;
           var prevStr = _dates[prevDayIndex];
-          return (_stockData[currStr][symbol][field] - _stockData[prevStr][symbol][field]);
-        } else if (option && option.dates[prevDayIndex]) {
-          var currStr = current;
-          var prevStr = option.dates[prevDayIndex];
-          return (option.portfolio[currStr][symbol][field] - option.portfolio[prevStr][symbol][field]);
+          if (dateOnly){
+            return new Date(prevStr);
+          } else {
+            return (_stockData[currStr][symbol][field] - _stockData[prevStr][symbol][field]);
+          }
         }
       };
     };

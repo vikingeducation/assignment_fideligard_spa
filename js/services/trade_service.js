@@ -86,11 +86,11 @@ app.factory('TradeService', [function() {
     var nextId = _nextTransactionId();
     tradeInfo.user.transactions[nextId] = {};
     angular.copy(tradeInfo.tradeData,tradeInfo.user.transactions[nextId]);
+    tradeInfo.user.transactions[nextId].id = nextId;
     _transactionId++;
   }
 
   TradeService.placeOrder = function (trade) {
-    console.log(trade);
     _tradeInfo.tradeData = trade.formData;
     _tradeInfo.user = trade.user;
     _adjustQuant(_tradeInfo, trade);

@@ -8,9 +8,6 @@ app.factory('TransactionSeeder', [function(faker) {
   //      stock: {},
   //      user: {}
   //    };
-  //    newProduct.category_id = Math.floor(Math.random()*5);
-  //    _products[_product_id.toString()] = newProduct;
-  //    CategoriesService.updateCategoryProducts(newProduct.category_id, newProduct.id);
   //  }
 
 }]);

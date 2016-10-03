@@ -1,5 +1,5 @@
 app.factory('PortfolioService',
-['StockService', function(StockService) {
+['StockService', 'DateService', function(StockService, DateService) {
 
   var PortfolioService = {};
   var _computizedInfo = {};
@@ -47,23 +47,72 @@ app.factory('PortfolioService',
     );
   }
 
-  function _getAgo (currDate, field, symbol, portfolioData) {
-    return StockService.getPrevious(currDate, field, symbol, portfolioData);
+  function _getAgo (currDate, field, symbol) {
+    return StockService.getPrevious(currDate, field, symbol, true);
+  }
+
+  // Finding transactions from previous days.
+  function _compareDates(vDate, pDate) {
+    var vStr = DateService.stringifyDate(vDate);
+    var pStr = DateService.stringifyDate(pDate);
+    return vStr === pStr;
+  }
+
+  function _findPrev(daysAgo,transactions,date,symbol) {
+    var strDate = DateService.stringifyDate(date);
+    var prevDate = _getAgo(strDate,'Close',symbol);
+    return _.find(
+      transactions,
+      function(v,k) {
+        var previous = prevDate(daysAgo)();
+        return _compareDates(v.date,previous);
+      }
+    );
+  }
+
+  function _gatherPrevious(transactions) {
+    return _.map(
+      transactions,
+      function(transaction) {
+        return {
+          transactionId: transaction.id,
+          oneDayAgo: _findPrev(
+            1,
+            transactions,
+            transaction.date,
+            transaction.symbol
+          ),
+          sevenDayAgo: _findPrev(
+            7,
+            transactions,
+            transaction.date,
+            transaction.symbol
+          ),
+          thirtyDayAgo: _findPrev(
+            30,
+            transactions,
+            transaction.date,
+            transaction.symbol
+          )
+        };
+      }
+    );
   }
 
   PortfolioService.computize = function(data) {
     var computized = {
+      transactionId: data.id,
       currentValue: _currentValue(data.stock),
       totalCostBasis: _totalCostBasis(data.symbol, data.portfolio, data.endDate),
       profitLoss: _profitLoss(data.stock, data.symbol, data.portfolio, data.endDate),
-      getAgo: _getAgo(data.endDate, data.field, data.symbol, data),
+      previousTransactions: _gatherPrevious(data.portfolio)
     };
+        // search portfolio values
+        // find value whose date matches the prevDate
+        // can you find it? if not, return a null
+        // if you can find it, subtract prevDate's profit from currDate's profit
 
     _computizedInfo.computized = computized;
-
-    computized.oneDayAgo = computized.getAgo(1);
-    computized.sevenDaysAgo = computized.getAgo(7);
-    computized.thirtyDaysAgo = computized.getAgo(30);
 
     return _computizedInfo;
   };
