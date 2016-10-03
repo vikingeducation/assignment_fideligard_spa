@@ -7,7 +7,7 @@ app.controller("mainCtrl",
 
   $scope.widgets = [
 
-    {
+    { 
       name: "portfolio",
       route: "normal.portfolio"
     },

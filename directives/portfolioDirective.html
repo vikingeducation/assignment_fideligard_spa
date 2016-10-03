@@ -1,0 +1,32 @@
+<tr>
+  <td>
+  {{stock.symbol | uppercase }}
+  </td>
+  <td>
+    {{ stock.buy - stock.sell }}
+  </td>
+  <td>
+    {{ costBasis }}
+  </td>
+  <td> <!-- curr val -->
+    {{ getDayPrice() * (stock.buy - stock.sell) }}
+  </td>
+  <td> <!--NET-->
+    {{ stock.total + getDayPrice() * (stock.buy - stock.sell) }}
+  </td>
+  <td>
+    {{ getDayPrice() | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics() | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics(7) | currency }}
+  </td>
+  <td>
+    {{ getDayAnalytics(30) | currency }}
+  </td>
+  <td>
+    <button class="btn btn-outline-danger btn-sm">Trade</button>
+  </td>
+</tr>

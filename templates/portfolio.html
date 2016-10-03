@@ -1,1 +1,41 @@
-PORTFOLIO ME.
+<div class="table-responsive">
+  <table class="table table-inverse table-bordered table-hover text-xs-center" style="margin: 0px;">
+    <thead class="text-xs-center">
+      <tr>
+        <th>
+          Symbol
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th>
+          Cost Basis
+        </th>
+        <th>
+          Curr Val
+        </th>
+        <th>
+          Net
+        </th>
+        <th>
+          Curr Price
+        </th>
+        <th>
+          1d
+        </th>
+        <th>
+          7d
+        </th>
+        <th>
+          30d
+        </th>
+        <th>
+          Trade?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr portfolio-row ng-repeat="stock in portfolio[date]" stock="stock"></tr>
+    </tbody>
+  </table>
+</div>

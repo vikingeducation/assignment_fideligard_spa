@@ -1,6 +1,6 @@
 app.controller("transactionsCtrl",
-  ['$scope', 'stocks', 'portfolioService',
-  function($scope, stocks, portfolioService) {
+  ['$scope', 'portfolioService',
+  function($scope, portfolioService) {
 
     $scope.reverse = false;
     $scope.orderCol = "";
