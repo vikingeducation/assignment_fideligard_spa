@@ -7,17 +7,15 @@ app.factory('portfolioService',
   */
 
   /* portfolio = {
+    date: {
     stockSymbol: {
-        stockid:
-
+        stuff
+      }
     }
-
   }
-
   */
 
   var _transactions = [];
-  var _namesOfStocks = {};
   var _portfolio = {};
 
   var stub = {};
@@ -57,16 +55,6 @@ app.factory('portfolioService',
 
   };
 
-  stub.getNamesOfStocks = function(date) {
-    _namesOfStocks = {};
-    _transactions.forEach( function(el) {
-      if (el.date < date) {
-        _namesOfStocks[el.symbol] = el.symbol;
-      }
-    })
-    return _namesOfStocks;
-  };
-
   stub.createPortfolio = function(date) {
     _portfolio[date] = {};
 
@@ -77,7 +65,8 @@ app.factory('portfolioService',
           _portfolio[date][el.symbol] = {
             buy: 0,
             sell: 0,
-            total: 0
+            total: 0,
+            basis: 0
           };
         }
 
@@ -89,37 +78,20 @@ app.factory('portfolioService',
         if (el.action === "Buy") {
          _portfolio[date][el.symbol].buy += el.quantity;
          _portfolio[date][el.symbol].total -= el.quantity * el.price;
+
+          //to calculate cost basis
+          _portfolio[date][el.symbol].basis += el.quantity * el.price;
         } else {
           _portfolio[date][el.symbol].sell += el.quantity;
           _portfolio[date][el.symbol].total += el.quantity * el.price;
         }
-        
-
-        
-        
       }
     });
   };
 
-
-
   stub.getPortfolio = function() {
     return _portfolio;
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   stub.addTransaction = function(stockObject) {
     var newStock = {

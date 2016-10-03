@@ -6,7 +6,7 @@
     {{ stock.buy - stock.sell }}
   </td>
   <td>
-    {{ costBasis }}
+    {{ stock.basis / stock.buy }}
   </td>
   <td> <!-- curr val -->
     {{ getDayPrice() * (stock.buy - stock.sell) }}
@@ -27,6 +27,6 @@
     {{ getDayAnalytics(30) | currency }}
   </td>
   <td>
-    <button class="btn btn-outline-danger btn-sm">Trade</button>
+    <button ui-sref="normal.trade({symb: stock.symbol })" class="btn btn-sm btn-outline-danger">trade</button>
   </td>
 </tr>
