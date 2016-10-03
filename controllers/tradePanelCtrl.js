@@ -1,8 +1,8 @@
 fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateService", "stocksService", "portfolioService", function($scope, $stateParams, dateService, stocksService, portfolioService) {
 
-  var _insufficientFundsMesssage = "You seem to have insufficient funds. Please speak with one of our consultants if this is an issue."
-  var _transactionCompleteMessage = "Transaction recorded."
-
+  var _insufficientFunds = "You seem to have insufficient funds. Please speak with one of our consultants if this is an issue."
+  var _transactionComplete = "Transaction recorded."
+  var _insufficientStock = "You do not own enought shares of that stock."
   $scope.symbol = $stateParams.symbol;
   $scope.buyOrSell = "Buy"
 
@@ -24,7 +24,7 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
   $scope.trade = function() {
     var trade = {} 
     trade.type = $scope.buyOrSell;
-    trade.quantity = String($scope.quantity);
+    trade.quantity = parseInt($scope.quantity);
     trade.price = $scope.price;
     trade.symbol = $scope.symbol;
     trade.date = $scope.formattedDate;
@@ -32,21 +32,36 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
   }
 
   $scope.handleTrade = function() {
-    console.log("trading...")
     var trade = $scope.trade()
-    console.log(trade)
-    console.log(validTrade(trade))
     if (validTrade(trade)) {
-      console.log("Trade is valid")
       portfolioService.handleTrade($scope.trade())
-      $scope.message = _transactionCompleteMessage
-    } else {
-      $scope.message = _insufficientFundsMesssage
+      $scope.message = _transactionComplete
     }
   }
 
   var validTrade = function(trade) {
-    return trade.quantity * trade.price < $scope.cash.cash
+    if (trade.type === "Buy") {
+      if (trade.quantity * trade.price < $scope.cash.cash) {
+        return true
+      } else {
+        $scope.message = _insufficientFunds
+        return false
+      }
+    } else if (trade.type === "Sell") {
+      var transactions = portfolioService.getPastTransactions($scope.formattedDate);
+      console.log(transactions)
+      if (transactions[trade.symbol]) {
+        if (transactions[trade.symbol] >= trade.quantity) {
+          return true
+        } else {
+          $scope.message = _insufficientStock
+          return false
+        }
+      } else {
+        $scope.message = _insufficientStock
+        return false
+      }
+    }
   }
 
 
