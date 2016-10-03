@@ -4,7 +4,7 @@ app.factory('PortfolioService',
   var PortfolioService = {};
 
   function _currentValue (stock) {
-    return stock.quantity * price;
+    return stock.quantity * stock.price;
   }
 
   // Total Cost Basis.
