@@ -6,6 +6,10 @@ app.factory('_', ['$window', function($window){
   return $window._;
 }]);
 
+app.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+});
+
 //routes
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 

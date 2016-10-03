@@ -1,5 +1,5 @@
 "use strict";
-app.factory('accountService', [ function(){
+app.factory('accountService', ['StocksService', function(StocksService){
 	var stub = {};
 
 	var _account = { cash: 100000 };
@@ -77,10 +77,23 @@ app.factory('accountService', [ function(){
 	};
 
 	stub.buildPortfolio = function(date, dateCollection){
+		//clear portolio
+		angular.copy({}, _portfolio);
 		//filter transactions for those before the date
 		var currentDate = dateCollection[date.index];
 		var filteredTransactions = _transactions.filter(function(t){
 			return t.date <= currentDate;
+		});
+		filteredTransactions.sort(function(a,b){
+			if(a.date < b.date){
+				return -1;
+			}
+			else if(a.date > b.date){
+				return 1;
+			}
+			else{
+				return 0;
+			}
 		});
 		//build a portfolio from scratch using these transacations
 		filteredTransactions.forEach(function(t){
@@ -102,6 +115,35 @@ app.factory('accountService', [ function(){
 				_portfolio[t.symbol].moneyEarned += t.quantity * t.price;
 			}
 		});
+	};
+
+	stub.getPortfolioStats = function(){
+		var _stats = {
+			costBasis: 0,
+			currentValue: 0,
+			profitLoss: 0,
+			oneDay: 0,
+			sevenDay: 0,
+			thirtyDay: 0
+		};
+		//for each portfolio entry, calculate costBasis, currentValue, profitLoss, 1d,7d,30d and add the stats
+		for (var p in _portfolio){
+			var cp = StocksService.currentPrice(p);
+			var cv = _portfolio[p].quantity * cp;
+			_stats.currentValue += cv;
+			var cb = _portfolio[p].moneySpent - _portfolio[p].moneyEarned;
+			_stats.costBasis += cb;
+			var pl = cv - cb;
+			_stats.profitLoss += pl;
+			var td = StocksService.priceChange(p, 30);
+			_stats.thirtyDay += td;
+			var sd = StocksService.priceChange(p, 7);
+			_stats.sevenDay += sd;
+			var od = StocksService.priceChange(p, 1);
+			_stats.oneDay += od;
+		}
+
+		return _stats;
 	};
 
 	stub.getPortfolio = function(){
