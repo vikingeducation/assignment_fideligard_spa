@@ -17,14 +17,20 @@
 
 <body>
   <div class="container">
-    <h1>Fideligard Portfolio Simulator</h1>
+    <div class="card">
+      <div class="card-block">
+        <h1>Fideligard Portfolio Simulator</h1>
+      </div>
+    </div>
 
     <div class="row">
       <div class="col-md-5" style="margin-left:-100">
         <!-- Stocks -->
         <div class="card">
-          <div loading-screen></div>
-          <div ui-view="index"></div>
+          <div class="card-block">
+            <div loading-screen></div>
+            <div ui-view="index"></div>
+          </div>
         </div>
       </div>
       <div class="col-md-8" style="margin-left:5">
@@ -32,17 +38,21 @@
         <div class="row">
           <div class="col-md-12">
             <div class='card'>
-              <route-dropdown></route-dropdown>
+              <div class="card-block">
+                <route-dropdown></route-dropdown>
+              </div>
             </div>
           </div>
         </idv>
         <div class="row">
           <div class="col-md-12">
-            <div class='card'>
-              <div ui-view="date"></div>
-              <div ui-view="trade"></div>
-              <div ui-view="transactions"></div>
-              <div ui-view="portfolio"></div>
+            <div class='card card-inverse card-info text-xs-center'>
+              <div class="card-block">
+                <div ui-view="date"></div>
+                <div ui-view="trade"></div>
+                <div ui-view="transactions"></div>
+                <div ui-view="portfolio"></div>
+              </div>
             </div>
           </div>
         </div>

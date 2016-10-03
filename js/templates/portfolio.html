@@ -1,29 +1,42 @@
-<h3>Portfolio</h3>
-<div class="table-responsive">
-  <table class="table">
-    <theader>
-      <tr>
-        <th style="width:50"><a ng-click="sortType='symbol'">Symbol</a></th>
-        <th style="width:50"><a ng-click="sortType='quantity'">Quantity</a></th>
-        <th style="width:50"><a ng-click="sortType='costBasis'">Cost Basis</a></th>
-        <th style="width:50"><a ng-click="sortType='currentValue'">Current Value</a></th>
-        <th style="width:50"><a ng-click="sortType='profitLoss'">Net</a></th>
-        <th style="width:50"><a ng-click="sortType='currentPrice'">Current Price</a></th>
-        <th style="width:50"><a ng-click="sortType='oneDay'">1d</a></th>
-        <th style="width:50"><a ng-click="sortType='sevenDay'">7d</a></th>
-        <th style="width:50"><a ng-click="sortType='thirtyDay'">30d</a></th>
-        <th style="width:50">Trade?</th>
-      </tr>
-    </theader>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header">
+      <h3>Portfolio</h3>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-block">
+      <div class="table-responsive">
+        <table class="table" style="color:white">
+          <theader>
+            <tr>
+              <th style="width:50"><a ng-click="sortType='symbol'">Symbol</a></th>
+              <th style="width:50"><a ng-click="sortType='quantity'">Quantity</a></th>
+              <th style="width:50"><a ng-click="sortType='costBasis'">Cost Basis</a></th>
+              <th style="width:50"><a ng-click="sortType='currentValue'">Current Value</a></th>
+              <th style="width:50"><a ng-click="sortType='profitLoss'">Net</a></th>
+              <th style="width:50"><a ng-click="sortType='currentPrice'">Current Price</a></th>
+              <th style="width:50"><a ng-click="sortType='oneDay'">1d</a></th>
+              <th style="width:50"><a ng-click="sortType='sevenDay'">7d</a></th>
+              <th style="width:50"><a ng-click="sortType='thirtyDay'">30d</a></th>
+              <th style="width:50">Trade?</th>
+            </tr>
+          </theader>
 
 
-    <tbody>
-      <tr
-      ng-repeat="(id, transaction) in portfolio"
-      stock-portfolio-row
-      transaction='transaction'
-      id='id'>
-      </tr>
-    </tbody>
-  </table>
+          <tbody>
+            <tr
+            ng-repeat="(id, transaction) in portfolio"
+            stock-portfolio-row
+            transaction='transaction'
+            id='id'>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

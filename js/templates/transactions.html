@@ -1,28 +1,41 @@
-<h3>Transactions</h3>
-<div class="table-responsive">
-  <input
-  class='form-control'
-  type='search'
-  ng-model='searchKey'
-  placeholder='Filter transactions.'>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header">
+      <h3>Transactions</h3>
+    </div>
+  </div>
+</div>
 
-  <table class="table">
-    <theader>
-      <tr>
-        <th style="width:50"><a ng-click="sortType='date'">Date</a></th>
-        <th style="width:50"><a ng-click="sortType='symbol'">Symbol</a></th>
-        <th style="width:50"><a ng-click="sortType='type'">Type</a></th>
-        <th style="width:50"><a ng-click="sortType='quantity'">Quantity</a></th>
-        <th style="width:50"><a ng-click="sortType='price'">Price</a></th>
-      </tr>
-    </theader>
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-block">
+      <div class="table-responsive">
+        <input
+        class='form-control'
+        type='search'
+        ng-model='searchKey'
+        placeholder='Filter transactions.'>
 
-    <tbody>
-      <tr
-      ng-repeat="(id, transaction) in transactions | filterObjectBy:searchKey | orderObjectBy:sortType:sortReverse"
-      stock-transaction-row
-      transaction='transaction'>
-      </tr>
-    </tbody>
-  </table>
+        <table class="table" style="color:white">
+          <theader>
+            <tr>
+              <th style="width:50"><a ng-click="sortType='date'">Date</a></th>
+              <th style="width:50"><a ng-click="sortType='symbol'">Symbol</a></th>
+              <th style="width:50"><a ng-click="sortType='type'">Type</a></th>
+              <th style="width:50"><a ng-click="sortType='quantity'">Quantity</a></th>
+              <th style="width:50"><a ng-click="sortType='price'">Price</a></th>
+            </tr>
+          </theader>
+
+          <tbody>
+            <tr
+            ng-repeat="(id, transaction) in transactions | filterObjectBy:searchKey | orderObjectBy:sortType:sortReverse"
+            stock-transaction-row
+            transaction='transaction'>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
