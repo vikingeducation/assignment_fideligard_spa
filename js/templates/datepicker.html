@@ -1,1 +1,18 @@
-<h1>DATEPICKER ALIVE</h1>
+<div class="col-sm-12" ng-controller="DatePickerCtrl">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="pull-left">{{startDate}}</p>
+    </div>
+
+    <div class="col-sm-6">
+      <p class="pull-right">{{endDate}}</p>
+    </div>
+  </div>
+
+  <input name="slider" type="range" defaultValue="0" min="0" max={{dateRange.length-1}} ng-model="selectedDateIndex" ng-change="updateSelected(selectedDateIndex)">
+  
+  <p style="margin-left: {{selectedDateIndex * 2}}px">{{selectedDate}}</p>
+
+
+</div>

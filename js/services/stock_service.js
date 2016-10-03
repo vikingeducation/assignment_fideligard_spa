@@ -1,0 +1,6 @@
+StockApp.factory("stockService", [function(){
+
+
+  
+
+}]);

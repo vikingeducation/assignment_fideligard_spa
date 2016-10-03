@@ -12,10 +12,10 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
     .state('main', {
       url: "",
       views: {
-        "@": {
-          templateUrl: "/js/templates/portfolio.html",
-          controller: "PortfolioCtrl"
-        },
+        // "@": {
+        //   templateUrl: "/js/templates/portfolio.html",
+        //   controller: "PortfolioCtrl"
+        // },
         'stocks@': {
           templateUrl: "/js/templates/stocks.html",
           controller: "StocksCtrl"
