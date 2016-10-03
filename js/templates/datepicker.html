@@ -11,8 +11,8 @@
   </div>
 
   <input name="slider" type="range" defaultValue="0" min="0" max={{dateRange.length-1}} ng-model="selectedDateIndex" ng-change="updateSelected(selectedDateIndex)">
-  
-  <p style="margin-left: {{selectedDateIndex * 2}}px;">{{selectedDate}}</p>
+  <!-- use percentage the dateindex is accross to calculate the margin -->
+  <p style="margin-left: {{selectedDateIndex * 1}}px;">{{selectedDate}}</p>
 
 
 </div>

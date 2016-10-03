@@ -21,17 +21,18 @@
           <th>Trade</th>
         </tr>
 
-
-        <tr>
-          <td>{{ apple.Symbol }}</td>  
-          <td>{{ apple.Close | currency }}</td>
-          <td>{{ appleOne | currency}}</td>
-          <td>{{ appleSeven | currency }}</td>
-          <td>{{ appleThirty | currency }}</td>
-          <td><a>Trade</a>
-
-
-        </tr>
+        <tbody ng-repeat="(ticker, days) in stocks">
+        
+          <tr ng-repeat="day in days">
+            
+            <td>{{ day.Symbol }}</td>  
+            <td>{{ day.Close | currency }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a>Trade</a></td>
+          </tr>
+        </tbody>
 
 
 
