@@ -5,6 +5,6 @@
 <td>{{ computizedInfo.computized.profitLoss | number:2 }}</td>
 <td>{{ transaction.price | number:2 }}</td>
 <td>{{ oneDayAgo() | number:2 }}</td>
-<td>7d</td>
-<td>30d</td>
-<td>Trade?</td>
+<td>{{ sevenDaysAgo() | number:2 }}</td>
+<td>{{ thirtyDaysAgo() | number:2 }}</td>
+<td><a>trade</a></td>
