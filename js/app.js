@@ -51,6 +51,15 @@ app.config(function($stateProvider, $urlRouterProvider){
           controller: 'StocksTransactionsCtrl'
         }
       }
+    })
+    .state('stocks.portfolio', {
+      url: '/portfolio',
+      views: {
+        'portfolio@': {
+          templateUrl: 'js/templates/portfolio.html',
+          controller: 'StocksPortfolioCtrl'
+        }
+      }
     });
 
 });

@@ -40,7 +40,6 @@ app.factory('TradeService', [function() {
     if (tradeInfo.user.owned[date]) {
       // If he owns stock for that symbol
       if (tradeInfo.user.owned[date][symbol]) {
-        // console.log(tradeInfo.user.owned[date][symbol].quantity);
         tradeInfo.user.owned[date][symbol].quantity -= tradeQuant;
         if (tradeInfo.user.owned[date][symbol].quantity <= 0) {
           delete tradeInfo.user.owned[date][symbol];
@@ -75,23 +74,6 @@ app.factory('TradeService', [function() {
     }
   }
 
-  // function _nextTransactionId() {
-  //   if (!_transactionId) {
-  //     if (_.isEmpty(_comments)) {
-  //      _transactionId = 1;
-  //      return _transactionId;
-  //     }
-  //     var ids = _.map(Object.keys(_comments), function(id) {
-  //      return parseInt(id);
-  //     });
-  //     _transactionId = _.max(ids);
-  //     return _transactionId + 1;
-  //     }
-  //     return _transactionId + 1;
-  //   }
-  //   return _transactionId+1;
-  // }
-
   function _nextTransactionId() {
     if (!_transactionId) {
       _transactionId = 0;
@@ -108,6 +90,7 @@ app.factory('TradeService', [function() {
   }
 
   TradeService.placeOrder = function (trade) {
+    console.log(trade);
     _tradeInfo.tradeData = trade.formData;
     _tradeInfo.user = trade.user;
     _adjustQuant(_tradeInfo, trade);

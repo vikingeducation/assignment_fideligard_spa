@@ -1,0 +1,5 @@
+app.controller('StocksPortfolioCtrl', [function() {
+
+
+
+}]);
