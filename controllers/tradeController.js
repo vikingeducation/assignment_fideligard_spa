@@ -9,7 +9,7 @@ app.controller("tradeCtrl",
     var stockName = stateParams.symb;
     $scope.selectStock = stocks[stockName][2014].days[stockService.getDay()];
 
-    console.log($scope.selectStock);
+    console.log('selectStock: ',$scope.selectStock);
 
     $scope.total = function() {
       q = parseInt($scope.myForm.quantity) || 0;
@@ -18,15 +18,16 @@ app.controller("tradeCtrl",
     };
 
     $scope.actionStock = function() {
-      console.log($scope.myForm)
-      debugger;
       var stockObject = {
-        symbol: $scope.myForm.symbol,
-        price: $scope.myForm.cost,
+        symbol: $scope.selectStock.Symbol,
+        price: $scope.selectStock.Open,
         quantity: $scope.myForm.quantity,
-        date: $scope.myForm.date,
+        date: $scope.selectStock.Date,
         action: $scope.myForm.action 
-      }
+      };
+
+      console.log('stockObject: ', stockObject);
+     
 
       portfolioService.addTransaction(stockObject);
 

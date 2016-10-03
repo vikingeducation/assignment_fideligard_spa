@@ -1,10 +1,18 @@
 app.controller("transactionsCtrl",
-  ['$scope', '$stateParams', 'stocks', 'portfolioService',
-  function($scope, stateParams, stocks, portfolioService) {
+  ['$scope', 'stocks', 'portfolioService',
+  function($scope, stocks, portfolioService) {
 
-    console.log("stateparams smybol IS: ", stateParams.symb);
+    $scope.reverse = false;
+    $scope.orderCol = "";
 
-    console.log("transactions");
-    console.log(portfolioService.getTransactions());
+    console.log("transactions: ", portfolioService.getTransactions());
+
+    $scope.transactions = portfolioService.getTransactions();
+
+    $scope.toggle = function() {
+      console.log('orderby: ', $scope.orderCol);
+      console.log("toggled: ", $scope.reverse);
+      $scope.reverse = !($scope.reverse);
+    }
 
 }]);

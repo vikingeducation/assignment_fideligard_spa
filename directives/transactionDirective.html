@@ -1,0 +1,17 @@
+<tr>
+  <td>
+  {{transaction.date | date }}
+  </td>
+  <td>
+    {{ transaction.symbol | uppercase }}
+  </td>
+  <td>
+    {{ transaction.action | uppercase }}
+  </td>
+  <td>
+    {{ transaction.quantity }}
+  </td>
+  <td>
+    {{ transaction.price | currency }}
+  </td>
+</tr>

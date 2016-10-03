@@ -1,1 +1,26 @@
-TRANSACTIONS ME
+<div class="table-responsive">
+  <table class="table table-inverse table-bordered table-hover text-xs-center">
+    <thead class="text-xs-center">
+      <tr>
+        <th ng-click="orderCol ='date'; toggle()">
+          Date
+        </th>
+        <th ng-click="orderCol ='symbol'; toggle()">
+          Symbol
+        </th>
+        <th ng-click="orderCol ='type'; toggle()">
+          Type
+        </th>
+        <th ng-click="orderCol ='quantity'; toggle()">
+          Quantity
+        </th>
+        <th ng-click="orderCol ='price'; toggle()">
+          Price
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr transaction-row ng-repeat="transaction in transactions | orderBy:orderCol:reverse"></tr>
+    </tbody>
+  </table>
+</div>
