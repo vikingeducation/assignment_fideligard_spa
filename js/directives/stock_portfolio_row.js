@@ -42,14 +42,9 @@ app.directive('stockPortfolioRow',
             }
           };
         };
-
         scope.oneDayAgo = scope.getAgo('oneDayAgo');
         scope.sevenDaysAgo = scope.getAgo('sevenDaysAgo');
         scope.thirtyDaysAgo = scope.getAgo('thirtyDaysAgo');
-        //
-        // scope.consoleLog = function () {
-        //   scope.sevenDaysAgo();
-        // };
       }
     };
 

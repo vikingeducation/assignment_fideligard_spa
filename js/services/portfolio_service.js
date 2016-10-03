@@ -28,9 +28,6 @@ app.factory('PortfolioService',
   var _totalSaleGain = _totalCost('sell',_.add);
   var _totalBuyLoss = _totalCost('buy',_.add);
 
-  // var _totalSaleGain = _totalCost('sell',_.subtract);
-  // var _totalBuyLoss = _totalCost('buy',_.add);
-
   function _totalCostBasis (symbol, portfolio, endDate) {
     var a = _totalSaleGain(symbol, portfolio, endDate);
     var b = _totalBuyLoss(symbol, portfolio, endDate);
@@ -114,14 +111,20 @@ app.factory('PortfolioService',
       profitLoss: _profitLoss(data.stock, data.symbol, data.portfolio, data.endDate),
       previousTransactions: _gatherPrevious(data.portfolio)
     };
-        // search portfolio values
-        // find value whose date matches the prevDate
-        // can you find it? if not, return a null
-        // if you can find it, subtract prevDate's profit from currDate's profit
 
     _computizedInfo.computized = computized;
 
+    console.log(_computizedInfo);
+
     return _computizedInfo;
+  };
+
+  PortfolioService.getComputized = function () {
+    return _computizedInfo;
+  };
+
+  PortfolioService.setComputized = function (computizedInfo) {
+    computizedInfo.computized = _computizedInfo.computized;
   };
 
   return PortfolioService;
