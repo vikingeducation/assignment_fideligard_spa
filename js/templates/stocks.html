@@ -23,7 +23,7 @@
 
         <tbody ng-repeat="(ticker, days) in stocks">
         
-          <tr ng-repeat="day in days">
+          <tr ng-repeat="day in days | filter:{Date: selectedDate}">
             
             <td>{{ day.Symbol }}</td>  
             <td>{{ day.Close | currency }}</td>

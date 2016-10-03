@@ -1,4 +1,4 @@
-StockApp.factory("stockService", ["$http", function($http){
+StockApp.factory("stockService", ["$http", '_', function($http, _){
   
   var service = {};
 
@@ -105,6 +105,26 @@ StockApp.factory("stockService", ["$http", function($http){
     return days;
   };
 
+  var _extendStock = function(stock){
+    stock.oneDayPerformance = function(){
+      var sym = stock.Symbol;
+      //_stocks[sym] is correct
+      var endIndex = _.indexOf(_stocks[sym], stock);
+      console.log(endIndex + "  LOOK")
+      var startIndex = endIndex - 1;
+      var result = _stocks[sym][endIndex].Close - _stocks[sym][startIndex].Close;
+
+      return result;
+
+    }
+  }
+
+  var _extendStocks = function(stocks){
+    stocks.forEach(function(stock){
+      _extendStock(stock);
+    })
+  }
+
   service.getStocks = function(){
     var promises = _makeStockPromises();
     for(var i = 0; i < promises.length; i++){
@@ -113,6 +133,11 @@ StockApp.factory("stockService", ["$http", function($http){
         var symbol = data[0].Symbol;
 
         _stocks[symbol] = data;
+
+        //extend stocks
+        for(ticker in _stocks){
+          _extendStocks(_stocks[ticker]);
+        }
         console.log("handled promise");
       }, function error(){
         console.log("there was an error handling the promise");

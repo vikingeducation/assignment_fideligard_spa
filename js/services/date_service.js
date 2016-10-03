@@ -4,9 +4,9 @@ StockApp.factory("dateService", [function(){
 
   
 
-  service.startDate = "2014-01-02";
+  service.startDate = "2015-01-02";
 
-  service.endDate = "2014-12-31";
+  service.endDate = "2015-12-31";
   
 
   //SELECTED DATE
