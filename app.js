@@ -34,6 +34,12 @@ fideligardApp.config(function($urlRouterProvider, $stateProvider){
       controller: 'tradePanelCtrl'
     })
 
+    .state("main.transactions", {
+      url: "/transactions",
+      templateUrl: "templates/transactions.html", 
+      controller: "transactionsPanelCtrl"
+    })
+
 });
 
 
