@@ -28,15 +28,22 @@
     <!-- Nav -->
     <main-nav></main-nav>
 
-    <main class="container" style="width: 940px">
+    <main class="container">
       <div class="col-xs-5">
-        <div id="left-side" style="border: 1px solid black; height: 500px;">
-          
+        <div class="view-container" id="stocks-container">
+          SAY YOU WILL
         </div>
       </div>
       <div class="col-xs-7">
-        <div id="right-side" style="border: 1px solid black; height: 500px;">
-          
+        <div class="view-container" id="date-picker-container">
+          <div id="earliest-date" class='date-picker-date'>January 1, 2014</div>
+          <div id="latest-date" class='date-picker-date'>December 31, 2014</div>
+          <div id="date-line"></div>
+          <div id="date-line-placer" class="glyphicon glyphicon-bell"></div>
+        </div>
+
+        <div class='view-container' id="main-view">
+          MAIN VIEW - THE AREA THAT WILL BE CHANGING THE MOST FROM THE LOOKS OF IT
         </div>
       </div>
     </main>

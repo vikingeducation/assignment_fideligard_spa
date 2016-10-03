@@ -1,17 +1,75 @@
-#navbar-logo-link {
-  font-size: 24px;
-  padding: 15px;
+main-nav{
+
+  .navbar {
+    margin-bottom: 50px;
+
+    #navbar-logo-link {
+      font-size: 24px;
+      padding: 15px;
+    }
+
+    #navbar-name-link {
+      color: #777;
+      display: inline-block;
+      font-size: 21px;
+      line-height: 25px;
+      padding: 15px 0; 
+      text-decoration: none;
+    }
+
+    #navbar-name-link:hover {
+      color: #5e5e5e;
+    }
+  }
 }
 
-#navbar-name-link {
-  color: #777;
-  display: inline-block;
-  font-size: 21px;
-  line-height: 25px;
-  padding: 15px 0; 
-  text-decoration: none;
-}
+.container {
+  width: 940px;
 
-#navbar-name-link:hover {
-  color: #5e5e5e;
+  .view-container {
+    border: 1px solid black;
+    padding: 15px;
+  }
+
+  #stocks-container {
+    height: 500px;
+  }
+
+  .date-picker-date {
+    color: gray;
+    position: absolute;
+    top: -25px;
+  }
+
+  #earliest-date {
+    left: 5px;
+  }
+
+  #latest-date {
+    right: 5px;
+  }
+
+  #date-picker-container {
+    margin-bottom: 15px;
+    position: relative;
+
+    #date-line {
+      border-top: 1px solid black;
+      position: relative;
+      width: 100%;
+    }
+
+    #date-line-placer {
+      color: #D4AF37;
+      font-size: 20px;
+
+      position: absolute;
+      left: 3px;
+      top: 5px;
+    }
+  }
+
+  #main-view {
+    height: 300px;
+  }
 }
