@@ -19,12 +19,22 @@ fideligard.config([
       views: {
         'stocks@': {
           templateUrl: '/app/templates/stocks.html',
-          controller: 'StocksCtrl'
+          controller: 'StockCtrl'
         },
         'datepicker@': {
           templateUrl: '/app/templates/slider.html',
           controller: 'DatePickerCtrl'
         }
+      },
+      resolve: {
+        stocks: ['StockService', function(StockService) {
+            return StockService.getAllStocks();
+          }
+        ],
+        date: ['DateService', function(DateService) {
+          DateService.setDate(1439784000000);
+          return DateService.getDate().time;
+        }]
       }
     })
   }

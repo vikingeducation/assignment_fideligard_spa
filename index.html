@@ -30,16 +30,14 @@
     <div class="row">
       <div class="col-sm-4">
         <div ui-view="stocks">
-          loading..
+          loading stocks..
         </div>
       </div>
       <div class="col-sm-8">
         <div ui-view='datepicker'>
+          loading date picker...
         </div>
         <!-- show stock here -->
-        <div class="">
-          stocks{{stocks}}
-        </div>
       </div>
 
     </div>
@@ -48,13 +46,12 @@
   <script type="text/javascript" src='app/app.js'></script>
   <!-- directives -->
   <script type="text/javascript" src='app/directives/stock_ticker_directive.js'></script>
+  <!-- services -->
+  <script type="text/javascript" src="/app/services/stock_service.js"></script>
+  <script type="text/javascript" src="/app/services/date_service.js"></script>
   <!-- controllers -->
   <script type="text/javascript" src='app/controllers/stock_ctrl.js'></script>
   <script type="text/javascript" src='app/controllers/date_picker_ctrl.js'></script>
-<!-- services -->
-<script type="text/javascript" src="/app/services/stock_service.js">
-
-</script>
 
 
 

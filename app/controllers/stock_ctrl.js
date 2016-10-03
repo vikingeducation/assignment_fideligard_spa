@@ -1,6 +1,8 @@
-fideligard.controller('StockController', ['$scope', 'StockService', function($scope, StockService){
+fideligard.controller('StockCtrl', ['$scope', 'StockService',
+'stocks', 'DateService', function($scope, StockService, stocks, DateService){
 
-  $scope.stocks;
-  $scope.dates = dates;
+  $scope.stocks = stocks;
+  $scope.date = DateService.getDate().time;
+
 
 }])

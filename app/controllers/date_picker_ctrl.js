@@ -1,8 +1,12 @@
 fideligard.controller('DatePickerCtrl', [
-  '$scope',
-  function($scope) {
-    $scope.PickedDate;
-    $scope.dates = dates
+  '$scope', 'DateService', 'date',
+  function($scope, DateService, date) {
+    $scope.currentDate = date;
 
+    $scope.setDate = function() {
+      console.log('setting date')
+      var date = parseInt($scope.currentDate)
+      DateService.setDate(date);
+    }
 
 }]);
