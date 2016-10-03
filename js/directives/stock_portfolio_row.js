@@ -20,6 +20,24 @@ app.directive('stockPortfolioRow',
             endDate: Date.now()
           }
         );
+        scope.oneDayAgo = function() {
+          var prev = _.find(
+            scope.computizedInfo.computized.previousTransactions,
+            function(transaction) {
+              if (transaction.transactionId === scope.transaction.id) {
+                if (transaction.oneDayAgo) {
+                  return transaction.oneDayAgo.symbol === scope.transaction.symbol;
+                }
+              }
+            }
+          );
+          if (prev) {
+            return _.subtract(
+              scope.transaction.cost,
+              prev.cost
+            );
+          }
+        };
         scope.testing = function() {
           console.log(scope.computizedInfo.computized);
         };

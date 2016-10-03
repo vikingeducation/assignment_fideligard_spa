@@ -1,3 +1,10 @@
-<div ng-click="testing()">
-  TESTING {{ id }}
-</div>
+<td>{{ transaction.symbol }}</td>
+<td>{{ transaction.quantity }}</td>
+<td>{{ computizedInfo.computized.totalCostBasis | number:2 }}</td>
+<td>{{ computizedInfo.computized.currentValue | number:2 }}</td>
+<td>{{ computizedInfo.computized.profitLoss | number:2 }}</td>
+<td>{{ transaction.price | number:2 }}</td>
+<td>{{ oneDayAgo() | number:2 }}</td>
+<td>7d</td>
+<td>30d</td>
+<td>Trade?</td>

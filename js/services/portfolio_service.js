@@ -99,6 +99,13 @@ app.factory('PortfolioService',
     );
   }
 
+  PortfolioService.getCVDelta = function (curr, prev) {
+    return _.subtract(
+      _currentValue(curr),
+      _currentValuep(prev)
+    );
+  };
+
   PortfolioService.computize = function(data) {
     var computized = {
       transactionId: data.id,
