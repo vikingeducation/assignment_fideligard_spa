@@ -6,8 +6,7 @@ app.factory('stockService', ['$http', '$q',function($http, $q) {
 
   var _day = 0;
   var _tradeStock = {};
-  var _popularStocks = ["AAPL", "GOOGL"];
-  //, "MSFT", "TSLA"];
+  var _popularStocks = ["AAPL", "GOOGL", "MSFT", "TSLA"];
 
   var stub = {};
 

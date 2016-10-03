@@ -1,5 +1,16 @@
-<div class="table-responsive">
-  <table class="table table-inverse table-bordered table-hover text-xs-center">
+<div class="col-sm-4">
+</div>
+<div class="col-sm-8">
+  <div class="col-sm-5">
+    Filter 
+  </div>
+  <div class="col-sm-7">
+    <input type="text" style="text-transform:uppercase" ng-model="nameFilter" class="form-control" ng-value="">
+  </div>
+</div>
+
+<div ng-show="!!(transactions.length)" class="table-responsive">
+  <table class="table table-inverse table-bordered table-hover text-xs-center" style="margin: 0px;">
     <thead class="text-xs-center">
       <tr>
         <th ng-click="orderCol ='date'; toggle()">
@@ -20,7 +31,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr transaction-row ng-repeat="transaction in transactions | orderBy:orderCol:reverse"></tr>
+      <tr transaction-row ng-repeat="transaction in transactions | orderBy:orderCol:reverse | filterBySymbol:(nameFilter|uppercase)"></tr>
     </tbody>
   </table>
 </div>

@@ -4,6 +4,7 @@
     <div class="col-sm-9">
       Main Widget
     </div>
+    <br>
     <div class="col-sm-3">
       <select ng-change='changeView()' ng-model="selectedView"
         ng-options="widget.name for widget in widgets">
@@ -12,7 +13,7 @@
     </div>
   </div>
 
-  <div class="card-block">
+  <div class="card-block" id="main-widget">
     
     <div ui-view="widget"> </div>
 

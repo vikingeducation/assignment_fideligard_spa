@@ -4,6 +4,7 @@ app.controller("transactionsCtrl",
 
     $scope.reverse = false;
     $scope.orderCol = "";
+    $scope.nameFilter = "";
 
     console.log("transactions: ", portfolioService.getTransactions());
 

@@ -1,4 +1,4 @@
-var app = angular.module('Fildegard', ["ui.router"]);
+var app = angular.module('Fildegard', ["ui.router", "ui.bootstrap", 'ui.bootstrap.progressbar']);
 
 app.factory('_', ['$window', function($window) {
   return $window._;
