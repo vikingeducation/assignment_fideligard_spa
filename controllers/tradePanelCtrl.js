@@ -13,7 +13,6 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
     if ($scope.dates && $scope.dateObj) {
       var d = new Date($scope.dates[$scope.dateObj.date]);
       d.setTime( d.getTime() + d.getTimezoneOffset() * 60 * 1000); // fix timezone bug
-      console.log("setting formatted date")
       $scope.formattedDate = d;
       $scope.cash = portfolioService.availableCash($scope.formattedDate);
     }
@@ -23,7 +22,6 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
     if ($scope.dates && $scope.dateObj) {
       var d = new Date($scope.dates[$scope.dateObj.date]);
       d.setTime( d.getTime() + d.getTimezoneOffset() * 60 * 1000); // fix timezone bug
-      console.log("setting formatted date")
       $scope.formattedDate = d;
       $scope.cash = portfolioService.availableCash($scope.formattedDate);
     }
@@ -45,7 +43,7 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
 
   $scope.handleTrade = function() {
     var trade = $scope.trade()
-    if (validTrade(trade)) {
+    if (validTrade($scope.trade()) && portfolioService.validTrade($scope.trade())) {
       portfolioService.handleTrade($scope.trade())
       $scope.cash = portfolioService.availableCash($scope.formattedDate);
       $scope.message = _transactionComplete
@@ -61,8 +59,7 @@ fideligardApp.controller("tradePanelCtrl", ["$scope", "$stateParams", "dateServi
         return false
       }
     } else if (trade.type === "Sell") {
-      var transactions = portfolioService.getCurrentPortfolio($scope.formattedDate);
-      console.log(transactions)
+      var transactions = portfolioService.getPortfolioByDate($scope.formattedDate);
       if (transactions[trade.symbol]) {
         if (transactions[trade.symbol] >= trade.quantity) {
           return true
