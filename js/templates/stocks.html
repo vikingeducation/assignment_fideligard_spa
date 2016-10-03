@@ -1,1 +1,43 @@
-<h1>STOCKS LOADED</h1>
+<div class="row">
+  <div id="stocks-wrapper">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-6">
+          <h1>Stocks</h1>
+        </div>
+
+        <div class="col-xs-6">
+          <h2 style="display: inline-block;">Filter:</h2><input type="text">
+        </div>
+      </div>
+
+      <table class="table table-bordered table-striped">
+        <tr>
+          <th>Symbol<span></span></th>
+          <th>Price</th>
+          <th>1d</th>
+          <th>7d</th>
+          <th>30d</th>
+          <th>Trade</th>
+        </tr>
+
+
+        <tr>
+          <td>{{ apple.Symbol }}</td>  
+          <td>{{ apple.Close | currency }}</td>
+          <td>{{ appleOne | currency}}</td>
+          <td>{{ appleSeven | currency }}</td>
+          <td>{{ appleThirty | currency }}</td>
+          <td><a>Trade</a>
+
+
+        </tr>
+
+
+
+      </table>
+
+    </div>
+
+  </div>
+</div>

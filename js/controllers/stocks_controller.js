@@ -1,3 +1,1 @@
-StockApp.controller("StocksCtrl", ['$scope', function($scope){
-
-}])
+//GETTING WEIRD ERRORS WHEN DEFINING THE CONTROLLER HERE SO DOING IT IN APP.JS

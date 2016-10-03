@@ -1,6 +1,26 @@
 var StockApp = angular.module("StockApp", ['ui.router']);
 
 
+angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', 'dateService', function($scope, stockService, dateService){
+
+  stockService.getAPPL().then(function(appleData){
+    $scope.days = appleData.query.results.quote;
+    $scope.data = appleData;
+    foo = dateService.selectedDate;
+    $scope.selectedDate = dateService.selectedDate;
+    
+    $scope.apple = stockService.findDateForDay("APPL", $scope.selectedDate);
+
+    $scope.appleOne = stockService.findChange("APPL", $scope.selectedDate, 1);
+    $scope.appleSeven = stockService.findChange("APPL", $scope.selectedDate, 7);
+    $scope.appleThirty = stockService.findChange("APPL", $scope.selectedDate, 30);
+
+    $scope.appleSe
+
+  });
+
+
+}])
 
 
 StockApp.config(function($stateProvider, $urlRouterProvider){
