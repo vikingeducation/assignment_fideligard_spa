@@ -105,12 +105,14 @@
         <div class='form-group'>
           <label id="order-status">
             Order status<br>
-            <p ng-show="tradeForm.$valid" class='valid-order'>VALID</p>
-            <p ng-hide="tradeForm.$valid" class='invalid-order'>INVALID</p>
+            <div class="card">
+              <p ng-show="tradeForm.$valid" class='valid-order'>VALID</p>
+              <p ng-hide="tradeForm.$valid" class='invalid-order'>INVALID</p>
+            </div>
           </label><br>
         </div>
 
-        <button type='submit' class='btn btn-primary'>PLACE ORDER</button>
+        <button type='submit' class='btn btn-success'>PLACE ORDER</button>
       </div>
     </form>
   </div>
