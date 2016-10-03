@@ -16,6 +16,10 @@
       </tr>
     </theader>
 
+    <div ng-click='testing()'>
+      TESTING
+    </div>
+
     <tbody>
       <tr
       ng-repeat="(id, transaction) in transactions | orderObjectBy:sortType:sortReverse"
