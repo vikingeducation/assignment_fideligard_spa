@@ -1,1 +1,1 @@
-StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.router'])
+var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.router'])
