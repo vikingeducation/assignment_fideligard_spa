@@ -3,7 +3,7 @@
   <head>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-    <script src="javascripts/angular-ui-router.js"></script>
+    <script src="js/angular-ui-router.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
 
     
@@ -17,9 +17,31 @@
 
 
   <body>
+    <nav-bar></nav-bar>
     
+    <main class="container">
+      <div class="row">
+        <div class="col-sm-4" id="stocks-wrapper">
+          <div ui-view="stocks"></div>
+        </div>
 
-    <script src="javascripts/app.js"></script>
+        <div class="col-sm-8">
+          <div class="row">
+          <!-- put the date picker here -->
+            <div ui-view="datepicker"></div>
+
+          </div>
+
+          <div class="row" id="main-content">
+            <div ui-view></div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/directives/navbar.js"></script>
     
   </body>
 
