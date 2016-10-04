@@ -31,6 +31,9 @@
     <!-- Lodash -->
     <script src="/bower_components/lodash/lodash.js"></script>
 
+    <!-- Moment -->
+    <script src="/bower_components/moment/moment.js"></script>
+
   </head>
   <body ng-controller="StocksController">
     <!-- Nav -->
@@ -55,19 +58,21 @@
                 <th>30d</th>
                 <th>Trade?</th>
               </tr>
-              <tr>
-                <td>{{ request.query.results.quote[0].Symbol }}</td>
+              <tr ng-repeat="stock in stockDetailsByDate[results[rangeValue].Date]">
                 <td>
-                  {{ request.query.results.quote[0].Close }}
+                  {{ stock.symbol }}
                 </td>
                 <td>
-                  1
+                  {{ stock.priceOnDate | currency }}
                 </td>
                 <td>
-                  1
+                  {{ stock.priceADayAgo ? (stock.priceADayAgo | currency) : notAvailableString }}
                 </td>
                 <td>
-                  1
+                  {{ stock.priceSevenDaysAgo ? (stock.priceSevenDaysAgo | currency) : notAvailableString }}
+                </td>
+                <td>
+                  {{ stock.priceThirtyDaysAgo ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
                 </td>
                 <td>
                   <a href="">

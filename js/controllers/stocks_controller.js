@@ -7,8 +7,12 @@ StockPortfolioSimulator.controller('StocksController',
 			$scope.results = request;
 
 			$scope.rangeMax = $scope.results.length - 1;
+
+			$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
 		});
 
 	$scope.rangeValue = 0;
+
+	$scope.notAvailableString = "N/A";
 
 }]);

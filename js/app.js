@@ -9,3 +9,7 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.rou
 StockPortfolioSimulator.constant('_', 
 	window._
 );
+
+StockPortfolioSimulator.constant('moment', 
+	window.moment
+);
