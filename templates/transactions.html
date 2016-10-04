@@ -3,6 +3,7 @@
     <div class="panel-heading">Transactions</div>
 
     <div class="panel-body">
+
       <table class="table table-hover">
         <thead>
           <tr>
@@ -13,7 +14,13 @@
             <th>Price</th>
           </tr>
           <tbody>
-            <td>Testing...</td>
+            <tr ng-repeat="transaction in transactions">
+              <td>{{transaction.date | date}}</td>
+              <td>{{transaction.symbol}}</td>
+              <td>{{transaction.type}}</td>
+              <td>{{transaction.quantity}}</td>
+              <td>{{transaction.price}}</td>
+            </tr>
           </tbody>
         </thead>
       </table>

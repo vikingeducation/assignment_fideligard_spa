@@ -45,7 +45,9 @@ fideligardApp.factory("portfolioService", ["_", function(_) {
   }
 
   portfolioService.getPortfolioByDate = function(today, portfolio) {
-    if (!portfolio) { var portfolio = _transactions } // handle optional arg
+    // handle optional args
+    if (!portfolio) { var portfolio = _transactions } 
+
     var out = {}
     today = today.toISOString().slice(0, 10)
     for (var i = 0; i < portfolio.length; i++) {
@@ -79,6 +81,10 @@ fideligardApp.factory("portfolioService", ["_", function(_) {
     }
 
     return true
+  }
+
+  portfolioService.transactionHistory = function() {
+    return _transactions
   }
 
 
