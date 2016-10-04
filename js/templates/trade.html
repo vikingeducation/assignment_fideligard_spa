@@ -43,6 +43,8 @@
           <label>Cost</label>
           <p>{{ cost | currency }}</p>
         </div>
+
+        <button ng-click="makeTransaction(date, symbol, type, quantity, price)" class="btn-primary btn-lg">Place Order</button>
       </form>
     </div>
 

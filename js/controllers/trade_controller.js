@@ -1,7 +1,10 @@
-StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$stateParams', '$timeout', function($scope, dateService, stockService, $stateParams, $timeout){
+StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$stateParams', '$timeout', 'portfolioService', 'transactionService', function($scope, dateService, stockService, $stateParams, $timeout, portfolioService, transactionService){
 
   $scope.selectedDate = dateService.selectedDate;
 
+  $scope.makeTransaction = function(date, symbol, type, quantity, price){
+    transactionService.createTransaction(date, symbol, type, quantity, price);
+  };
 
   
   $scope.quantity = 100;
@@ -18,15 +21,11 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     $scope.cost = $scope.price * newQuantity;
   });
 
-
-
-  
-  
   //update price, cost selectedDate when date changes
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
-      $timeout(function(){ initializing = false; }, 10000);
+      $timeout(function(){ initializing = false; }, 1000);
     } else {
       return dateService.selectedDate;
     }
@@ -35,5 +34,8 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     $scope.price = stockService.findSpecificDay($scope.symbol, newDate).Close;
     $scope.cost = $scope.price * $scope.quantity;
   });
+
+
+  $scope.orderValid
 
 }]);
