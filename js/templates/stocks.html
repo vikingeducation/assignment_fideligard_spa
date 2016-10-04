@@ -27,9 +27,9 @@
             
             <td>{{ day.Symbol }}</td>  
             <td>{{ day.Close | currency }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{ day.oneDayPerformance() | currency }}</td>
+            <td>{{ day.sevenDayPerformance() | currency }}</td>
+            <td>{{ day.thirtyDayPerformance | currency }}</td>
             <td><a>Trade</a></td>
           </tr>
         </tbody>

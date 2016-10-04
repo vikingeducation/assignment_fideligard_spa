@@ -74,7 +74,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
 
   var _makeStockPromises = function(){
     var beginEP = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
-    var endEP = "%22%20and%20startDate%20=%20%222015-01-01%22%20and%20endDate%20=%20%222015-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
+    var endEP = "%22%20and%20startDate%20=%20%222014-12-01%22%20and%20endDate%20=%20%222015-12-31%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=";
     var promises = [];
 
     _stockSymbols.forEach(function(symbol){
@@ -110,14 +110,61 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
       var sym = stock.Symbol;
       //_stocks[sym] is correct
       var endIndex = _.indexOf(_stocks[sym], stock);
-      console.log(endIndex + "  LOOK")
-      var startIndex = endIndex - 1;
-      var result = _stocks[sym][endIndex].Close - _stocks[sym][startIndex].Close;
 
-      return result;
+      if(endIndex > 0){
+        console.log(endIndex + "  LOOK")
+        var startIndex = endIndex - 1;
+        var startStock = _stocks[sym][startIndex];
+        var endStock = _stocks[sym][endIndex];
+        start = startStock;
+        fin = endStock;
+        var result = _stocks[sym][endIndex].Close - _stocks[sym][startIndex].Close;
+
+        return result;
+      }
+      
+
+    },
+
+    stock.sevenDayPerformance = function(){
+      var sym = stock.Symbol;
+      //_stocks[sym] is correct
+      var endIndex = _.indexOf(_stocks[sym], stock);
+
+      if(endIndex > 6){
+        
+        var startIndex = endIndex - 7;
+        var startStock = _stocks[sym][startIndex];
+        var endStock = _stocks[sym][endIndex];
+        start = startStock;
+        fin = endStock;
+        var result = _stocks[sym][endIndex].Close - _stocks[sym][startIndex].Close;
+
+        return result;
+      }
+      
+
+    },
+
+    stock.thirtyDayPerformance = function(){
+      var sym = stock.Symbol;
+      //_stocks[sym] is correct
+      var endIndex = _.indexOf(_stocks[sym], stock);
+
+      if(endIndex > 29){
+        
+        var startIndex = endIndex - 30;
+        var startStock = _stocks[sym][startIndex];
+        var endStock = _stocks[sym][endIndex];
+        
+        var result = endStock.Close - startStock.Close;
+
+        return result;
+      }
+      
 
     }
-  }
+  }//end extendStock
 
   var _extendStocks = function(stocks){
     stocks.forEach(function(stock){
@@ -137,7 +184,10 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
         //extend stocks
         for(ticker in _stocks){
           _extendStocks(_stocks[ticker]);
+          _stocks[ticker] = _stocks[ticker].reverse();
         }
+
+
         console.log("handled promise");
       }, function error(){
         console.log("there was an error handling the promise");
