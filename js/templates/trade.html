@@ -29,7 +29,7 @@
           <input ng-min="1" ng-required="true" type="text" value={{quantity}} ng-model="quantity">
         </div>
 
-        <p class="invalid" ng-if="!validFields()">Not enough funds</p>
+        <!-- <p class="invalid" ng-if="!validFields()">Not enough funds</p> -->
 
         <div class="form-group">
           <label>Date</label>
@@ -46,7 +46,7 @@
           <p>{{ cost | currency }}</p>
         </div>
 
-        <button ng-click="makeTransaction(date, symbol, type, quantity, price)" class="btn-primary btn-lg">Place Order</button>
+        <button ng-click="makeTransaction(selectedDate, symbol, type, quantity, price)" class="btn-primary btn-lg">Place Order</button>
       </form>
     </div>
 

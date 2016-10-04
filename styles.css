@@ -14,3 +14,10 @@ a.navbar-brand {
 p.invalid {
   color: red;
 }
+
+
+.transactions-wrapper {
+  h4 {
+    display: inline-block;
+  }
+}

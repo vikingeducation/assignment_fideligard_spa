@@ -25,6 +25,10 @@ StockApp.factory("transactionService", [function(){
     
   };
 
+  service.transactionsByStock = function(){
+    return _transactions;
+  };
+
 
 
 

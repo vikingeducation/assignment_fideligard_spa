@@ -9,24 +9,7 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     
   };
 
-  $scope.validFields = function(){
-    if($scope.type === "BUY"){
-        if($scope.availableCash > $scope.cost && $scope.validDate()){
-        return true;
-      } else {
-        return false;
-      }
-    } else if($scope.type === "SELL"){
-      //if owned shares cost is < scope.cost return false
-      //else return true
-
-      //return true for placeholder
-      return true;
-    } else {
-      return false;
-    }
-    
-  };
+  
 
   $scope.validDate = function(){
     return dateService.validDate($scope.selectedDate);
@@ -58,7 +41,7 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
-      $timeout(function(){ initializing = false; }, 1000);
+      $timeout(function(){ initializing = false; }, 3000);
     } else {
       return dateService.selectedDate;
     }
@@ -67,6 +50,25 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     $scope.price = parseInt(stockService.findSpecificDay($scope.symbol, newDate).Close);
     $scope.cost = $scope.price * $scope.quantity;
   });
+
+  $scope.validFields = function(){
+    if($scope.type === "BUY"){
+        if($scope.availableCash > $scope.cost && $scope.validDate()){
+        return true;
+      } else {
+        return false;
+      }
+    } else if($scope.type === "SELL"){
+      //if owned shares cost is < scope.cost return false
+      //else return true
+
+      //return true for placeholder
+      return true;
+    } else {
+      return false;
+    }
+    
+  };
 
 
   

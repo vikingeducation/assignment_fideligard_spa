@@ -65,6 +65,16 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
       }
     })
 
+    .state("main.transactions", {
+      url: "/transactions",
+      views: {
+        "@": {
+          templateUrl: "js/templates/transactions.html",
+          controller: "TransactionsCtrl"
+        }
+      }
+    })
+
     .state("main.trade", {
       url: "/trade/:symbol/:price",
       views: {
