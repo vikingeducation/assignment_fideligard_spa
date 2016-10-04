@@ -29,8 +29,6 @@ app.factory('PortfolioService',
   var _totalBuyLoss = _totalCost('buy',_.add);
 
   function _totalCostBasis (symbol, portfolio, endDate) {
-    var a = _totalSaleGain(symbol, portfolio, endDate);
-    var b = _totalBuyLoss(symbol, portfolio, endDate);
     return _.subtract(
       _totalSaleGain(symbol, portfolio, endDate),
       _totalBuyLoss(symbol, portfolio, endDate)
