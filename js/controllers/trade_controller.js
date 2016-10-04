@@ -18,9 +18,11 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     $scope.cost = $scope.price * newQuantity;
   });
 
+
+
   
-  //TRYING TO GET UPDATED PRICE BUT BUG IN stockService
-  //update price and selectedDate when date changes
+  
+  //update price, cost selectedDate when date changes
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
@@ -31,6 +33,7 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
   }, function(newDate){
     $scope.selectedDate = newDate;
     $scope.price = stockService.findSpecificDay($scope.symbol, newDate).Close;
+    $scope.cost = $scope.price * $scope.quantity;
   });
 
 }]);
