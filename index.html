@@ -40,13 +40,17 @@
     <main-nav></main-nav>
 
     <main class="container">
-      <div class="col-xs-5">
+      <div class="col-xs-6">
         <div class="view-container" id="stocks-container">
           <div id="stocks-header-container">
             <div id="stocks-header">Stocks</div>
             <div id="filter-container">
               Filter: <input type="text">
             </div>
+          </div>
+
+          <div id="table-explanation">
+            <p>1d: Price on selected day minus the price 1 day ago...</p>
           </div>
 
           <table class='table table-striped'>
@@ -83,7 +87,7 @@
             </table>
         </div>
       </div>
-      <div class="col-xs-7">
+      <div class="col-xs-6">
         <div class="view-container" id="date-picker-container">
           <div id="earliest-date" class='date-picker-date'>
             {{ results[0].Date }}

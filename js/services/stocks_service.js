@@ -24,11 +24,11 @@ StockPortfolioSimulator.factory('StocksService',
 			return i;
 		};
 
-		var _setPriceForStockOnPreviousDay = function( previousDate, symbol, currentDate, currentStockIndex, nameOfProperty ){
+		var _setDifferenceInStockPrices = function( previousDate, symbol, currentDate, currentStockIndex, nameOfProperty ){
 			if ( _stockDetailsByDate[previousDate] ){
 				_.each(_stockDetailsByDate[previousDate], function(oldStock){
 					if(oldStock.symbol === symbol){
-						_stockDetailsByDate[currentDate][currentStockIndex][nameOfProperty] = oldStock.priceOnDate;
+						_stockDetailsByDate[currentDate][currentStockIndex][nameOfProperty] = _stockDetailsByDate[currentDate][currentStockIndex].priceOnDate - oldStock.priceOnDate;
 						return false;
 					};
 				});
@@ -41,6 +41,17 @@ StockPortfolioSimulator.factory('StocksService',
 
 		var StocksService = {};
 
+		// To get the JSON list for all stock names and their symbols
+		// 1. Get the CSV file from: 
+		// http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange=nasdaq&render=download
+		// 2. Convery the CSV file at: 
+		// http://www.convertcsv.com/csv-to-json.htm
+
+
+		// Currently this just gets stocks from the json file
+		// I want to make this dynamic
+		// This request worked in getting a json file back...
+		// http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20(%22AAPL%22,%20%22GOOGL%22,%22YHOO%22)%20and%20startDate%20=%20%222013-09-11%22%20and%20endDate%20=%20%222014-02-11%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=
 		StocksService.request = function(){
 			// Get JSON response object
 			return $http({
@@ -75,11 +86,11 @@ StockPortfolioSimulator.factory('StocksService',
 				var thirtyDaysAgo = _returnDateDaysAgo(stock.Date, 30);
 				var currentStockIndex = _returnCurrentStockIndexByDate(stock.Date, stock.Symbol);
 
-				_setPriceForStockOnPreviousDay( oneDayAgo, stock.Symbol, stock.Date, currentStockIndex, "priceADayAgo" );
+				_setDifferenceInStockPrices( oneDayAgo, stock.Symbol, stock.Date, currentStockIndex, "priceADayAgo" );
 
-				_setPriceForStockOnPreviousDay( sevenDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceSevenDaysAgo" );
+				_setDifferenceInStockPrices( sevenDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceSevenDaysAgo" );
 
-				_setPriceForStockOnPreviousDay( thirtyDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceThirtyDaysAgo" );
+				_setDifferenceInStockPrices( thirtyDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceThirtyDaysAgo" );
 
 			});
 

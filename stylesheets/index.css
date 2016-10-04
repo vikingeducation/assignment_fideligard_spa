@@ -19,7 +19,6 @@ main-nav .navbar {
     border: 1px solid black;
     padding: 15px; }
   .container #stocks-container {
-    height: 500px;
     position: relative; }
     .container #stocks-container #stocks-header-container {
       margin-bottom: 15px; }
