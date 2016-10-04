@@ -1,0 +1,24 @@
+<h1>Transactions</h1>
+
+<!-- <a ui-sref="dashboard.portfolio">Portfolio</a> -->
+
+<dropnav initial="'dashboard.transaction'"></dropnav>
+
+<input style="float: right" type="text" ng-model="filterText">
+
+<table class="table table-striped">
+  <tr>
+    <th ng-click="sortBy('date')">Date</th>
+    <th ng-click="sortBy('symbol')">Symbol</th>
+    <th>Type</th>
+    <th>Quantity</th>
+    <th>Price</th>
+  </tr>
+  <tr ng-repeat="transaction in transactions | transactionFilter: filterText | orderBy: sorter : reverser">
+    <td>{{transaction.date}}</td>
+    <td>{{transaction.symbol}}</td>
+    <td>{{transaction.type.toUpperCase()}}</td>
+    <td>{{transaction.quantity}}</td>
+    <td>{{transaction.price | currency}}</td>
+  </tr>
+</table>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="Fideligard">
+<head>
+  <title>Fideligard</title>
+  <!-- underscore -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+  <!-- Angular -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+  <!-- ui-router -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+</head>
+<body>
+
+  <navbar></navbar>
+
+  <div style="text-align: center" ng-show='stateIsLoading'>
+    <h1>Welcome to Fideligard</h1><hr width="300">
+    <h2>Loading Stocks..</h2>
+  </div>
+
+  <div class="row">
+    <div ui-view="stocks" class="col-md-4 col-md-offset-1"></div>
+
+    <div class="col-md-6">
+      <div class="row">
+        <div ui-view="range" class="col-md-12"></div>
+      </div>
+
+      <div class="row">
+        <div ui-view class="col-md-12"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+<script type="text/javascript" src="app.js"></script>
+
+<!-- directives -->
+<script src="directives/navbar.js"></script>
+<script src="directives/stockquote.js"></script>
+<script src="directives/dropnav.js"></script>
+
+<!-- services -->
+<script type="text/javascript" src="services/yql.js"></script>
+<script type="text/javascript" src="services/date_service.js"></script>
+<script type="text/javascript" src="services/portfolio_service.js"></script>
+<script src="services/transaction_service.js"></script>
+
+<!-- filters -->
+<script type="text/javascript" src="filters/ticker_filter.js"></script>
+<script type="text/javascript" src="filters/transaction_filter.js"></script>
+
+<!-- controllers -->
+<script type="text/javascript" src="controllers/transaction_ctrl.js"></script>
+<script type="text/javascript" src="controllers/stocks_ctrl.js"></script>
+<script type="text/javascript" src="controllers/range_ctrl.js"></script>
+<script type="text/javascript" src="controllers/trade_ctrl.js"></script>
+<script type="text/javascript" src="controllers/portfolio_ctrl.js"></script>
+
+</html>

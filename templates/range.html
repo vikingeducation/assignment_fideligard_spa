@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-md-6">
+  1/1/2015
+  </div>
+  <div class="col-md-3">
+  {{dates[index]}}
+  </div>
+  <div class="col-md-3" style="text-align: right">
+  12/31/2015
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <input type='range' min='31' max='{{dates.length - 1}}' step='1' ng-model='index' ng-change='setDate(index)'>
+  </div>
+</div>
+
+<!-- <div>{{quotes[dates[index]]}}</div> -->
+<!-- <div>{{dates.length}}</div> -->
