@@ -1,0 +1,6 @@
+<td>{{ stock.symbol}}</td>
+<td>{{ stock.price | currency }}</td>
+<td>{{ stock.oneDay | currency}}</td>
+<td>{{ stock.sevenDay | currency}}</td>
+<td>{{ stock.thirtyDay | currency}}</td>
+<td> <a ui-sref="stocks.trade({symbol: stock.symbol, date: date, price: stock.price})" class="btn btn-primary">Trade</a> </td>
