@@ -8,12 +8,18 @@ StockSimulator.factory('transactionService', function () {
 		if (params.type === "buy") {
 			_userCash -= params.quantity * params.price;
 			if (_userStocks[params.symbol] === undefined) {
-				_userStocks[params.symbol] = 0;
+				_userStocks[params.symbol] = {
+					quantity: 0,
+					stockId: params.stockId,
+					costBasis: 0
+				};
 			}
-			_userStocks[params.symbol] += params.quantity;
+			_userStocks[params.symbol].quantity += params.quantity;
+			_userStocks[params.symbol].costBasis += params.quantity * params.price
 		} else {
 			_userCash += params.quantity * params.price;
-			_userStocks[params.symbol] -= params.quantity;
+			_userStocks[params.symbol].quantity -= params.quantity;
+			_userStocks[params.symbol].costBasis -= params.quantity * params.price
 		}
 	};
 

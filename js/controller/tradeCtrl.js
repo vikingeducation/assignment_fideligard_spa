@@ -8,7 +8,8 @@ StockSimulator.controller('tradeCtrl', ['$scope', '$stateParams', 'stockService'
 			type: 'buy',
 			date: new Date($scope.stock.Date),
 			price: $scope.stock.Close,
-			quantity: 0
+			quantity: 0,
+			stockId: $scope.stock.id
 		};
 
 		$scope.cash = transactionService.getCash();
@@ -26,9 +27,7 @@ StockSimulator.controller('tradeCtrl', ['$scope', '$stateParams', 'stockService'
 			if ($scope.transaction.type === 'buy') {
 				return Math.floor($scope.cash / $scope.transaction.price)
 			} else {
-				var max = transactionService.getUserStocks()[$scope.transaction.symbol] || 0;
-				console.log(transactionService.getUserStocks());
-				console.log(max);
+				var max = transactionService.getUserStocks()[$scope.transaction.symbol].quantity || 0;
 				return max;
 			}
 		};
