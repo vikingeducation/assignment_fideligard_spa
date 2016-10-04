@@ -11,7 +11,19 @@ StockApp.factory("transactionService", [function(){
     this.type = type;
     this.quantity = quantity;
     this.price = price;
-  }
+  };
+
+
+  service.createTransaction = function(date, symbol, type, quantity, price){
+    var transaction = new service.transaction(date, symbol, type, quantity, price);
+    if(_transactions[symbol]){
+      _transactions[symbol].push(transaction);
+    } else {
+      _transactions[symbol] = [];
+      _transactions[symbol].push(transaction);
+    }
+    
+  };
 
 
 

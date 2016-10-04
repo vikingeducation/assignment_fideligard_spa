@@ -7,6 +7,18 @@ StockApp.factory("dateService", [function(){
   service.startDate = "2015-01-02";
 
   service.endDate = "2015-12-31";
+
+  service.validDate = function(date){
+    var start = new Date(service.startDate);
+    var finish = new Date(service.endDate);
+    var current = new Date(date);
+
+    if(current >= start && current <= finish){
+      return true;
+    } else {
+      return false;
+    }
+  };
   
 
   //SELECTED DATE

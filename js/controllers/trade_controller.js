@@ -3,13 +3,45 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
   $scope.selectedDate = dateService.selectedDate;
 
   $scope.makeTransaction = function(date, symbol, type, quantity, price){
-    transactionService.createTransaction(date, symbol, type, quantity, price);
+    if($scope.validFields()){
+      transactionService.createTransaction(date, symbol, type, quantity, price);
+    }
+    
   };
 
+  $scope.validFields = function(){
+    if($scope.type === "BUY"){
+        if($scope.availableCash > $scope.cost && $scope.validDate()){
+        return true;
+      } else {
+        return false;
+      }
+    } else if($scope.type === "SELL"){
+      //if owned shares cost is < scope.cost return false
+      //else return true
+
+      //return true for placeholder
+      return true;
+    } else {
+      return false;
+    }
+    
+  };
+
+  $scope.validDate = function(){
+    return dateService.validDate($scope.selectedDate);
+  };
+  
+  //watch and set availableCash
+  $scope.$watch(function(){
+    return portfolioService.availableCash();
+  }, function(newQuantity){
+    $scope.availableCash = portfolioService.availableCash();
+  });
   
   $scope.quantity = 100;
   $scope.symbol = $stateParams.symbol;
-  $scope.price = $stateParams.price;
+  $scope.price = parseInt($stateParams.price);
 
   $scope.cost = $scope.price * $scope.quantity;
 
@@ -22,6 +54,7 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
   });
 
   //update price, cost selectedDate when date changes
+  //wait for stocks to load before updating
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
@@ -31,11 +64,11 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     }
   }, function(newDate){
     $scope.selectedDate = newDate;
-    $scope.price = stockService.findSpecificDay($scope.symbol, newDate).Close;
+    $scope.price = parseInt(stockService.findSpecificDay($scope.symbol, newDate).Close);
     $scope.cost = $scope.price * $scope.quantity;
   });
 
 
-  $scope.orderValid
+  
 
 }]);

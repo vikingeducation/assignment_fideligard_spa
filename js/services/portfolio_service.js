@@ -9,7 +9,9 @@ StockApp.factory("portfolioService", [function(){
 
 
 
-
+  service.availableCash = function(){
+    return _cash
+  };
 
   return service;
 }]);
