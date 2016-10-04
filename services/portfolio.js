@@ -1,6 +1,6 @@
 app.factory('portfolioService', 
-  [
-  function() {
+  ['stockService',
+  function(stockService) {
   /* transactions = {
    [{stock objects with symbol,price, quantity, and action}]   
   }
@@ -14,6 +14,7 @@ app.factory('portfolioService',
     }
   }
   */
+  var _stocks = stockService.getCurrentStocks();
 
   var _transactions = [];
   var _portfolio = {};
@@ -55,6 +56,17 @@ app.factory('portfolioService',
 
   };
 
+  stub.evalTotNetGain = function(date) {
+    var value = 0;
+
+    for (var stock in _portfolio[date]) {
+      var dayPrice = _stocks[stock.symbol][2014].days[stockService.getDay()].Open;
+
+      value += stock.total + dayPrice * (stock.buy - stock.sell);
+    }
+    return value;
+  };
+
   stub.createPortfolio = function(date) {
     _portfolio[date] = {};
 
@@ -91,7 +103,7 @@ app.factory('portfolioService',
 
   stub.getPortfolio = function() {
     return _portfolio;
-  }
+  };
 
   stub.addTransaction = function(stockObject) {
     var newStock = {
