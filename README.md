@@ -1,15 +1,21 @@
-# assignment_fideligard_spa
+# fideligard_yahoo_stocks
 Buy low, sell high.
 
-[An AngularJS JavaScript single-page web application using services, directives, ui-router, and good modular code to create a stock portfolio simulator using Yahoo's finance trading data](http://adrianmui.me/fideligard_yahoo_stocks/)
+* Singlepaged Web Application with Angularjs front-end.
+* Multi-Views and Nested States with ui.router
+* custom filter, directives, controllers, and services
+* Takes API data from Yahoo Finance API with AJAX request
+* modular code
 
-Main Author:
+[hosted on github pages](http://adrianmui.me/fideligard_yahoo_stocks/)
 
- Adrian
+**Main Author:**
 
-Contributors:
+> Adrian
 
-Dylan, Johnny
+**Contributors:**
+
+> Dylan, Johnny
 
 __________________________________________
 
@@ -17,22 +23,21 @@ PSEUDO-CODE:
 
 
 Widgets:
-  Date
+  *Date
     min, max date
 
-  Stocks
+  *Stocks
     filter
     Data Table
 
-  Portfolio Widget
+  *Portfolio 
     Calculations table
-
     Data Table
 
 Clicking Trade:
   brings you to trade page.
 
-  question: how do i get 
+  question: how do i get to..
 
 1. clicking trade.
 2. mainpanel shows trade.
