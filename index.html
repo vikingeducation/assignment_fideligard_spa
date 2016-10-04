@@ -33,13 +33,8 @@
           </div>
 
           <div class="row" id="main-content">
-            <div class="col-xs-12">
-              <a ui-sref="main.transactions">Transactions</a>
-              <select>
-                <option><a ui-sref="main.trade">Trade</a></option>
-                <option><a ui-sref="main.transactions">Transaction</a></option>
-              </select>
-            </div>
+            <div ui-view="statepicker"></div>
+
             <div ui-view></div>
 
           </div>
@@ -52,6 +47,7 @@
     <script src="js/services/date_service.js"></script>
     <script src="js/services/transaction_service.js"></script>
     <script src="js/services/portfolio_service.js"></script>
+    <script src="js/controllers/state_controller.js"></script>
     <script src="js/controllers/date_picker_controller.js"></script>
     <script src="js/controllers/transactions_controller.js"></script>
     <script src="js/controllers/trade_controller.js"></script>

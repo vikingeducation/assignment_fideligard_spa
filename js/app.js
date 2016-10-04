@@ -61,9 +61,15 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
         'datepicker@': {
           templateUrl: "/js/templates/datepicker.html",
           controller: "DatePickerCtrl"
+        },
+
+        'statepicker@': {
+          templateUrl: "/js/templates/statepicker.html",
+          controller: "StateCtrl"
         }
+
       }
-    })
+    })//end main state
 
     .state("main.transactions", {
       url: "/transactions",
