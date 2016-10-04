@@ -8,6 +8,12 @@ app.factory('accountService', ['StocksService', function(StocksService){
 
 	var _portfolio = {};
 
+	stub.reset = function(){
+		angular.copy([], _transactions);
+		angular.copy({}, _portfolio);
+		angular.copy({cash:100000}, _account);
+	};
+
 	stub.makeTransaction = function(amount){
 		 _account.cash -= amount;
 	};
