@@ -23,14 +23,18 @@ PSEUDO-CODE:
 
 
 Widgets:
-  *Date
+
+  * Date
+  
     min, max date
 
-  *Stocks
+  * Stocks
+  
     filter
     Data Table
 
-  *Portfolio 
+  * Portfolio 
+  
     Calculations table
     Data Table
 
