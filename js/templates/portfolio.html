@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!-- general table -->
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <td><strong>Current Cash</strong></td>
+          <td><strong>Profit/Loss</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ userCash | currency }}</td>
+          <td>{{ userCash - 1000000 | currency }}</td>
+        </tr>
+      </tbody>
+
+      <!-- user stocks table -->
+      <table class="tabel table-bordered table-striped text-center">
+        <thead>
+          <tr>
+            <td><strong>Symbol</strong></td>
+            <td><strong>Quantity</strong></td>
+            <td><strong>Cost Basis</strong></td>
+            <td><strong>Current Value</strong></td>
+            <td><strong>Profit/Loss</strong></td>
+            <td><strong>Current Price</strong></td>
+          </tr>
+        </thead>
+      </table>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="col-md-5">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <h3 class="col-md-8"><strong>Stocks</strong></h3>
+        <h3 class="col-md-4">
+          <input type="text" class="form-control" id="filter" placeholder="Filter" ng-model="symbolFilter">
+        </h3>
+      </div>
+      <!-- stock table -->
+      <table class="table table-striped table-bordered" ng-if="stocks.length > 0">
+        <thead>
+          <tr class="text-center">
+            <td><strong><a href="" ng-click="setSort('Symbol')">Symbol</a></strong></td>
+            <td><strong><a href="" ng-click="setSort('Close')">Price</a></strong></td>
+            <td><strong><a href="" ng-click="setSort('oneDifference')">1d</a></strong></td>
+            <td><strong><a href="" ng-click="setSort('sevenDifference')">7d</a></strong></td>
+            <td><strong><a href="" ng-click="setSort('thirtyDifference')">30d</a></strong></td>
+            <td><strong>Trade</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="stock in stocks | filter: symbolFilter | orderBy: sort" class="text-center">
+            <td>{{ stock.Symbol }}</td>
+            <td>{{ stock.Close | currency }}</td>
+            <td>{{ stock.oneDifference | currency }}</td>
+            <td>{{ stock.sevenDifference | currency }}</td>
+            <td>{{ stock.thirtyDifference | currency }}</td>
+            <td><a ui-sref="dashboard.trade({id: {{ stock.id }}})">Trade</a></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="alert alert-info" ng-if="stocks.length < 1 || stocks === undefined">
+        <h1 class="text-center">Holiday or Weekends</h1>
+      </div>
+    </div>
+  </div>
+</div>

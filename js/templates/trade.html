@@ -1,0 +1,87 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6">
+        <h3 class="text-center"><strong>Trade</strong></h3>
+        <form class="form-horizontal" name="transactionForm">
+          <div class="form-group">
+            <label for="symbol" class="col-sm-3 control-label">Symbol:</label>
+            <div class="col-sm-9">
+              <p class="form-control">{{ transaction.symbol }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="buy" class="col-sm-3 control-label">Buy/Sell:</label>
+            <div class="col-sm-9">
+              <select class="form-control" ng-model="transaction.type" name="buy" ng-change="maxQuantity()">
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="quantity" class="col-sm-3 control-label">Quantity:</label>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" name="quantity" ng-max="maxQuantity()" ng-min="1" ng-model="transaction.quantity">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="date" class="col-sm-3 control-label">Date:</label>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" name="date" ng-model="transaction.date">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Price:</label>
+            <div class="col-sm-9">
+              <p class="form-control">{{ transaction.price | currency }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Cost:</label>
+            <div class="col-sm-9">
+              <p class="form-control">{{ transaction.quantity * transaction.price | currency }}</p>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button type="button" name="button" class="btn btn-primary btn-lg btn-block" ng-click="placeOrder(transactionForm.$valid)">Place Order</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="col-md-6">
+        <div class="text-right">
+          <a ui-sref="dashboard.portfolio">Portfolio</a>
+          <a ui-sref="dashboard.transaction">Transactions</a>
+        </div>
+        <h4>
+          <strong>Cash Available:</strong>
+        </h4>
+        <p>
+          {{ cash | currency }}
+        </p>
+
+        <h4>
+          <strong>Order Status:</strong>
+        </h4>
+        <div class="alert alert-success text-center" ng-if="transactionForm.$valid">
+          <strong>Valid</strong>
+        </div>
+        <div class="alert alert-danger text-center" ng-if="transactionForm.$invalid">
+          <strong>Invalid</strong>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

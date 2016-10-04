@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="row">
+      <h3 class="col-md-8"><strong>Transactions</strong></h3>
+      <h3 class="col-md-4">
+        <input type="text" class="form-control" placeholder="Filter" ng-model="transacFilter">
+      </h3>
+    </div>
+
+    <table class="table table-striped table-bordered text-center">
+      <thead>
+        <tr>
+          <td><strong>Date</strong></td>
+          <td><strong>Symbol</strong></td>
+          <td><strong>Type</strong></td>
+          <td><strong>Quantity</strong></td>
+          <td><strong>Price</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="transaction in transactions | filter: transacFilter">
+          <td>{{ transaction.date | date }}</td>
+          <td>{{ transaction.symbol }}</td>
+          <td>{{ transaction.type }}</td>
+          <td>{{ transaction.quantity }}</td>
+          <td>{{ transaction.price | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="text-right">
+      <a ui-sref="dashboard.portfolio">Portfolio</a>
+    </div>
+  </div>
+</div>
