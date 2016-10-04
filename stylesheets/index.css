@@ -19,27 +19,37 @@ main-nav .navbar {
     border: 1px solid black;
     padding: 15px; }
   .container #stocks-container {
-    height: 500px; }
-  .container .date-picker-date {
-    color: gray;
-    position: absolute;
-    top: -25px; }
-  .container #earliest-date {
-    left: 5px; }
-  .container #latest-date {
-    right: 5px; }
+    height: 500px;
+    position: relative; }
+    .container #stocks-container #stocks-header-container {
+      margin-bottom: 15px; }
+      .container #stocks-container #stocks-header-container #stocks-header {
+        display: inline-block;
+        font-size: 25px; }
+      .container #stocks-container #stocks-header-container #filter-container {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        font-size: 13px; }
   .container #date-picker-container {
     margin-bottom: 15px;
     position: relative; }
-    .container #date-picker-container #date-line {
-      border-top: 1px solid black;
-      position: relative;
-      width: 100%; }
+    .container #date-picker-container .date-picker-date {
+      color: gray;
+      position: absolute;
+      top: -25px; }
+    .container #date-picker-container #earliest-date {
+      left: 5px; }
+    .container #date-picker-container #current-date {
+      color: black;
+      left: 205px; }
+    .container #date-picker-container #latest-date {
+      right: 5px; }
     .container #date-picker-container #date-line-placer {
       color: #D4AF37;
       font-size: 20px;
       position: absolute;
-      left: 3px;
+      left: 5px;
       top: 5px; }
   .container #main-view {
     height: 300px; }

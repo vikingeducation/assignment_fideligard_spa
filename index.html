@@ -23,27 +23,77 @@
 
     <!-- CSS --> 
     <link rel="stylesheet" href="/stylesheets/index.css">
+
+    <!-- Rangeslider -->
+    <script src="/bower_components/rangeslider.js/dist/rangeslider.min.js"></script>
+    <link rel="stylesheet" href="/bower_components/rangeslider.js/dist/rangeslider.css">
+
+    <!-- Lodash -->
+    <script src="/bower_components/lodash/lodash.js"></script>
+
   </head>
-  <body>
+  <body ng-controller="StocksController">
     <!-- Nav -->
     <main-nav></main-nav>
 
     <main class="container">
       <div class="col-xs-5">
         <div class="view-container" id="stocks-container">
-          SAY YOU WILL
+          <div id="stocks-header-container">
+            <div id="stocks-header">Stocks</div>
+            <div id="filter-container">
+              Filter: <input type="text">
+            </div>
+          </div>
+
+          <table class='table table-striped'>
+              <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>1d</th>
+                <th>7d</th>
+                <th>30d</th>
+                <th>Trade?</th>
+              </tr>
+              <tr>
+                <td>{{ request.query.results.quote[0].Symbol }}</td>
+                <td>
+                  {{ request.query.results.quote[0].Close }}
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  1
+                </td>
+                <td>
+                  <a href="">
+                    trade
+                  </a>
+                </td>
+              </tr>
+            </table>
         </div>
       </div>
       <div class="col-xs-7">
         <div class="view-container" id="date-picker-container">
-          <div id="earliest-date" class='date-picker-date'>January 1, 2014</div>
-          <div id="latest-date" class='date-picker-date'>December 31, 2014</div>
-          <div id="date-line"></div>
-          <div id="date-line-placer" class="glyphicon glyphicon-bell"></div>
+          <div id="earliest-date" class='date-picker-date'>
+            {{ results[0].Date }}
+          </div>
+          <div id="current-date" class='date-picker-date'>
+            {{ results[rangeValue].Date }}
+          </div>
+          <div id="latest-date" class='date-picker-date'>
+            {{ results[rangeMax].Date }}
+          </div>
+          <input type="range" min="0" max="{{ rangeMax }}" step="1"  data-orientation="horizontal" ng-model="rangeValue">
+
         </div>
 
         <div class='view-container' id="main-view">
-          MAIN VIEW - THE AREA THAT WILL BE CHANGING THE MOST FROM THE LOOKS OF IT
         </div>
       </div>
     </main>
@@ -53,5 +103,11 @@
 
     <!-- Directives -->
     <script src="/js/directives/main_nav.js"></script>
+
+    <!-- Services -->
+    <script src="/js/services/stocks_service.js"></script>
+
+    <!-- Controllers -->
+    <script src="/js/controllers/stocks_controller.js"></script>
   </body>
 </html>

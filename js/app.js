@@ -5,3 +5,7 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.rou
 		$urlRouterProvider.otherwise("/");
 
 	})
+
+StockPortfolioSimulator.constant('_', 
+	window._
+);

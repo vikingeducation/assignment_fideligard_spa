@@ -33,30 +33,47 @@ main-nav{
 
   #stocks-container {
     height: 500px;
-  }
+    position: relative;
 
-  .date-picker-date {
-    color: gray;
-    position: absolute;
-    top: -25px;
-  }
+    #stocks-header-container {
+      margin-bottom: 15px;
 
-  #earliest-date {
-    left: 5px;
-  }
+      #stocks-header {
+        display: inline-block;
+        font-size: 25px;
+      };
 
-  #latest-date {
-    right: 5px;
+      #filter-container {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+
+        font-size: 13px;
+      }
+    }
   }
 
   #date-picker-container {
     margin-bottom: 15px;
     position: relative;
 
-    #date-line {
-      border-top: 1px solid black;
-      position: relative;
-      width: 100%;
+    .date-picker-date {
+      color: gray;
+      position: absolute;
+      top: -25px;
+    }
+
+    #earliest-date {
+      left: 5px;
+    }
+
+    #current-date {
+      color: black;
+      left: 205px;
+    }
+
+    #latest-date {
+      right: 5px;
     }
 
     #date-line-placer {
@@ -64,7 +81,7 @@ main-nav{
       font-size: 20px;
 
       position: absolute;
-      left: 3px;
+      left: 5px;
       top: 5px;
     }
   }
