@@ -17,10 +17,16 @@
 
 <body>
   <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h1 style='text-align:center'>Fideligard Portfolio Simulator</h1>
-      </div>
+    <div class="row">
+      <!-- <div class="col-md-6" style="margin-left:-100;margin-right:-100;width:100%"> -->
+        <!-- <div class="card" style="width:100%"> -->
+        <div class="card">
+          <div class="card-header" style="width:100%">
+            <h1 style='text-align:center'>Fideligard Portfolio Simulator</h1>
+          </div>
+        </div>
+        <!-- </div> -->
+      <!-- </div>  -->
     </div>
 
     <div class="row">
@@ -36,17 +42,13 @@
           </div>
         </div>
       </div>
-      <div class="col-md-8" style="margin-left:5">
-        <div class="row">
-          <div class="col-md-12">
-            <div class='card card-inverse card-primary text-xs-center'>
-              <div class="card-block">
-                <div ui-view="date"></div>
-                <div ui-view="trade"></div>
-                <div ui-view="transactions"></div>
-                <div ui-view="portfolio"></div>
-              </div>
-            </div>
+      <div class="col-md-9" style="margin-left:5;margin-right:-100">
+        <div class='card card-inverse card-primary text-xs-center'>
+          <div class="card-block">
+            <div ui-view="date"></div>
+            <div ui-view="trade"></div>
+            <div ui-view="transactions"></div>
+            <div ui-view="portfolio"></div>
           </div>
         </div>
       </div>
