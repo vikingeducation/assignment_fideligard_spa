@@ -49,10 +49,10 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
     .state('main', {
       url: "",
       views: {
-        // "@": {
-        //   templateUrl: "/js/templates/portfolio.html",
-        //   controller: "PortfolioCtrl"
-        // },
+        "@": {
+          templateUrl: "/js/templates/portfolio.html"//,
+          //controller: "PortfolioCtrl"
+        },
         'stocks@': {
           templateUrl: "/js/templates/stocks.html",
           controller: "StocksCtrl"
@@ -65,11 +65,12 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
       }
     })
 
-    .state("main.stocks", {
-      url: "/stocks/:id",
+    .state("main.trade", {
+      url: "/trade/:symbol/:price",
       views: {
         "@": {
-          templateUrl: "js/templates/stock.html"
+          templateUrl: "js/templates/trade.html",
+          controller: "TradeCtrl"
         }
       }
     })

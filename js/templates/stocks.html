@@ -20,7 +20,7 @@
           <th>30d</th>
           <th>Trade</th>
         </tr>
-        <p ng-hide="true">{{selectedDate}}</p>
+        
         <tbody ng-repeat="(ticker, days) in stocks">
 
           <tr ng-repeat="day in days | filter:{Date: selectedDate} | orderBy:'Symbol' | filter:{Symbol: tickerFilter}">
@@ -31,7 +31,7 @@
             <td>{{ day.sevenDayPerformance() | currency }}</td>
             <!-- not hiding very well.. -->
             <td><span ng-hide="day.thirtyDayPerformace() < 0"></span>{{ day.thirtyDayPerformance() | currency }}</td>
-            <td><a>Trade</a></td>
+            <td ui-sref="main.trade({symbol: day.Symbol, price: day.Close, day: day.Date})"><a>Trade</a></td>
           </tr>
         </tbody>
 

@@ -46,31 +46,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
   };
 
 
-  service.findDateForDay = function(ticker, date){
-    console.log(ticker);
-    console.log(date);
-    
-    var targetDay = "not found";
-    
-
-    var stocks = service.stocksGetter();
-    gop = ticker;
-    gabble = stocks;
-    console.log("the ticker is " + ticker)
-    console.log("THE critical val is " + stocks[ticker]);
-    if(stocks[ticker]){
-      for(var i = 0; i < _stocks[ticker].length; i++){
-
-        console.log("INSIDE MIS SION CRITICAL");
-        if(_stocks[ticker][i].Date === date){
-          targetDay = _stocks[ticker][i];
-        } 
-      }
-      
-    }
-    return targetDay;
-
-  };
+  
 
   var _makeStockPromises = function(){
     var beginEP = "http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22";
@@ -84,26 +60,26 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
     return promises;
   }
 
-  service.allStocksByDay = function(day){
-    console.log("RUNNINGGG  " + day);
-    var days = [];
-    _stockSymbols.forEach(function(symbol){
-      var targetDay;
-      //var targetDay = service.findDateForDay(symbol, day);
-      console.log(typeof symbol);
-      service.stocksGetter()[symbol].forEach(function(dataDay){
-        var targetDay = "";
-        if(dataDay.Date === day){
-          targetDay = dataDay;
-          days.push(targetDay);
-        }
-      })
+  // service.allStocksByDay = function(day){
+  //   console.log("RUNNINGGG  " + day);
+  //   var days = [];
+  //   _stockSymbols.forEach(function(symbol){
+  //     var targetDay;
+  //     //var targetDay = service.findDateForDay(symbol, day);
+  //     console.log(typeof symbol);
+  //     service.stocksGetter()[symbol].forEach(function(dataDay){
+  //       var targetDay = "";
+  //       if(dataDay.Date === day){
+  //         targetDay = dataDay;
+  //         days.push(targetDay);
+  //       }
+  //     })
 
       
-    })
+  //   })
 
-    return days;
-  };
+  //   return days;
+  // };
 
   var _extendStock = function(stock){
     stock.oneDayPerformance = function(){
@@ -196,7 +172,22 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
     console.log("returning");
     return _stocks;
 
-  }
+  };
+
+
+  service.findSpecificDay = function(symbol, date){
+    var stocks = service.stocksGetter();
+    
+    var daysData = stocks[symbol];
+
+    var targetDay;
+    for(var i = 0; i < daysData.length; i++){
+      if(daysData[i].Date === date){
+        targetDay = daysData[i];
+        return targetDay;
+      }
+    }
+  };
 
   service.stocksGetter = function(){
     return _stocks;
