@@ -1,16 +1,23 @@
 <div class="card card-outline-warning">
 
-  <div class="card-header bg-warning"> 
-    <div class="col-sm-9">
-      Main Widget
+  <div class="card-header bg-warning text-xs-center"> 
+    <div class="col-sm-12">
+      <div class="col-sm-4">
+      </div>
+      <div class="col-sm-4">
+        Main Widget
+      </div>
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm-3">
+        <select ng-change='changeView()' ng-model="selectedView"
+          ng-options="widget.name for widget in widgets">
+
+       </select>
+      </div>
     </div>
     <br>
-    <div class="col-sm-3">
-      <select ng-change='changeView()' ng-model="selectedView"
-        ng-options="widget.name for widget in widgets">
-
-      </select>
-    </div>
+    
   </div>
 
   <div class="card-block" id="main-widget">
