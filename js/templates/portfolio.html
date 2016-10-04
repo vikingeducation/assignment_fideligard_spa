@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <!-- general table -->
+    <table class="table table-bordered table-striped text-center">
+      <thead>
+        <tr>
+          <td><strong>Current Cash</strong></td>
+          <td><strong>Profit/Loss</strong></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ userCash | currency }}</td>
+          <td>{{ userCash - 1000000 | currency }}</td>
+        </tr>
+      </tbody>
+
+      <!-- user stocks table -->
+      <table class="table table-bordered table-striped text-center">
+        <thead>
+          <tr>
+            <td><strong>Symbol</strong></td>
+            <td><strong>Quantity</strong></td>
+            <td><strong>Cost Basis</strong></td>
+            <!-- <td><strong>Current Value</strong></td>
+            <td><strong>Profit/Loss</strong></td>
+            <td><strong>Current Price</strong></td> -->
+            <td><strong>Trade</strong></td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="(symbol, stock) in userStocks">
+            <td>{{ symbol }}</td>
+            <td>{{ stock.quantity }}</td>
+            <td>{{ stock.costBasis | currency }}</td>
+            <td><a ui-sref="dashboard.trade({id: stock.stockId})">Trade</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </table>
+  </div>
+</div>
