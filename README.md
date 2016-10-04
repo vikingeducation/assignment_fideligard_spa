@@ -7,7 +7,7 @@ Buy low, sell high.
 * Takes API data from Yahoo Finance API with AJAX request
 * modular code
 
-[hosted on github pages](http://adrianmui.me/fideligard_yahoo_stocks/)
+[hosted on github pages](http://adrianmui.me/assignment_fideligard_spa/)
 
 **Main Author:**
 
