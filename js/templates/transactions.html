@@ -19,7 +19,8 @@
       <tr ng-repeat="transaction in transactions.all">
         <td>{{transaction.date}}</td>
         <td>{{transaction.symbol}}</td>
-        <td>{{transaction.buySell}}</td>
+        <td ng-show="transaction.buySell == 1">Buy</td>
+        <td ng-show="transaction.buySell == -1">Sell</td>
         <td>{{transaction.quantity}}</td>
         <td>{{transaction.price | currency}}</td>        
       </tr>

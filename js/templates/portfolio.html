@@ -1,11 +1,33 @@
 <div class="row">
-  <div class="col-xs-10 col-xs-offset-1">
+  <div class="col-xs-12">
     <div class="row">
-      <div class="col-xs-6">
+      <div class="col-xs-12">
         <h4>Portfolio on {{dateInfo.currentDate}}</h4>
       </div>
     </div>
-    <table class="table table-hover">
+    <br>
+    <h4>Overview</h4>
+    <table class="table">
+      <tr>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
+      </tr>
+      <tr>
+        <td>$100,000</td>
+        <td>{{getPortValue() | currency}}</td>
+        <td>{{100000 - getPortValue() | currency}}</td>
+        <td>{{getPortValue() - getPrevValue(1) | currency }}</td>
+        <td>{{getPortValue() - getPrevValue(7) | currency }}</td>
+        <td>{{getPortValue() - getPrevValue(30) | currency }}</td>
+      </tr>
+    </table>
+    <br>
+    <h4>Full Portfolio</h4>
+    <table class="table table-striped">
       <tr>
         <th>Symbol</th>
         <th>Quantity</th>
@@ -18,9 +40,17 @@
         <th>30d</th>
         <th>Trade?</th>
       </tr>
-      <tr ng-repeat="(key, value) in portfolio[dateInfo.currentDate]">
-        <td>{{key}}</td>
-        <td>{{value}}</td> 
+      <tr ng-repeat="holding in portfolio[dateInfo.currentDate] | tickerFilter | filter: greaterThan('quantity', 0)">
+        <td>{{holding.symbol}}</td>
+        <td>{{holding.quantity | number: 2}}</td>
+        <td>{{holding.costBasis | currency}}</td>
+        <td>{{(holding.quantity * holding.currentPrice) | currency}}</td>
+        <td>{{(holding.quantity * holding.currentPrice) - holding.costBasis| currency}}</td>
+        <td>{{holding.currentPrice | currency}}</td> 
+        <td>{{getDaysBack(holding.symbol, 1) | currency}}</td> 
+        <td>{{getDaysBack(holding.symbol, 7) | currency}}</td> 
+        <td>{{getDaysBack(holding.symbol, 30) | currency}}</td>
+        <td><a ng-if="holding.symbol !== 'CASH'" ui-sref="stocks.trade({symbol: holding.symbol, date: dateInfo.currentDate, price: holding.currentPrice})" class="btn btn-primary">Trade</a></td>
       </tr>
 
     </table>

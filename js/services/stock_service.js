@@ -12,6 +12,7 @@ app.factory('StockService', ['$http', '$q', '$window', function($http, $q, $wind
     });
     return $q.all(requests).then(function(responses){
       responses.forEach(function(response) {
+        console.log("Is it running at all?")
         _buildStockObjects(response);
       });
       console.log("Data done!");
@@ -139,13 +140,16 @@ app.factory('StockService', ['$http', '$q', '$window', function($http, $q, $wind
     return _dates;
   };
 
+  var allStocks = function(){
+    return _stocks;
+  }
+
 
   return {
     allDates: allDates,
     getStocks: getStocks,
-    getStockSymbols: getStockSymbols
-
-
+    getStockSymbols: getStockSymbols,
+    allStocks: allStocks
   };
 
 }]);

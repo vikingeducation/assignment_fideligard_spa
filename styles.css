@@ -20,3 +20,11 @@ label {
 #quantity-form{
   width: 50%;
 }
+
+h4 {
+  text-align: center;
+}
+
+td {
+  font-size: 12px;
+}

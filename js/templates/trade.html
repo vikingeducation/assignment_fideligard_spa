@@ -1,6 +1,6 @@
 <h1>Trade!</h1>
 
-<div class="row">
+<div ng-show="tradeChosen()" class="row">
   <div class="col-xs-5 col-xs-offset-1">
     <form name='tradeStock'>
       <div class='form-group'>
@@ -31,7 +31,7 @@
         <h5 class="trade-form">{{price * quantity | currency}}</h5>
       </div>
       <div ng-show="price * quantity > cash">You can't afford this</div>
-      <input type='submit' ng-click="submitOrder()" ng-disabled='price * quantity > cash' class="btn btn-primary btn-block" value="Place Order">
+      <input type='submit' ng-click="submitOrder()" ng-disabled='invalidTrade()' class="btn btn-primary btn-block" value="Place Order">
       <h5>{{tradePreventer}}</h5>
     </form>
 
@@ -41,7 +41,7 @@
   <h3>Cash Available:</h3>
   <h4>{{cash | currency}}</h4>
   <h3>Order Status</h3>
-  <h4 ng-show="price * quantity <= cash">VALID</h4>
+  <h4 ng-show="$scope.trade">VALID</h4>
   <h4 ng-show="price * quantity > cash">INVALID</h4>
   </div>
 </div>
