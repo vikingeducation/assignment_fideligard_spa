@@ -29,6 +29,16 @@ StockApp.factory("transactionService", [function(){
     return _transactions;
   };
 
+  service.allTransactions = function(){
+    var result = [];
+    for(ticker in _transactions){
+      _transactions[ticker].forEach(function(transaction){
+        result.push(transaction);
+      })
+    }
+    return result;
+  };
+
 
 
 
