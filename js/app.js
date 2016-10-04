@@ -13,7 +13,7 @@ app.run(function($rootScope){
 //routes
 app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider){
 
-  $urlRouterProvider.otherwise('/fideligard/portfolio');
+  $urlRouterProvider.otherwise('/fideligard');
 
 	$stateProvider
 		.state('main', {
@@ -24,11 +24,12 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 					controller: "StocksCtrl"
 				},
 				'dateSlider':{
-					templateUrl: 'js/templates/dateSlider.html',
-					controller: "DateCtrl"
+					templateUrl: 'js/templates/introOptions.html',
+					controller: 'IntroCtrl'
 				},
 				'mainContent':{
-					templateUrl: 'js/templates/mainContent.html'
+					templateUrl: 'js/templates/portfolio.html',
+					controller: 'PortfolioCtrl'
 				}
 			},
       resolve: {
@@ -42,18 +43,17 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
           return StocksService.getDateCollection();
         }]
       }
-
 		})
 		.state('main.portfolio', {
 			url: '/portfolio',
 			views:{
-				'mainContent@': {
-					templateUrl: 'js/templates/portfolio.html',
-					controller: 'PortfolioCtrl'
+				'dateSlider@': {
+					templateUrl: 'js/templates/dateSlider.html',
+					controller: "DateCtrl"
 				}
 			}
 		})
-		.state('main.trade', {
+		.state('main.portfolio.trade', {
 			url: '/trade',
 			params: {symbol: ''},
 			views: {
@@ -64,7 +64,7 @@ app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $ur
 			}
 			
 		})
-		.state('main.transactions', {
+		.state('main.portfolio.transactions', {
 			url: '/transactions',
 			views: {
 				'mainContent@': {

@@ -1,11 +1,8 @@
 "use strict";
-app.controller('DateCtrl', ["$scope", 'date', 'dateService', 'dates', 'mainService', function($scope, date, dateService, dates, mainService) {
-
-  $scope.state = mainService.getState();
-  $scope.selectedDate = date;
+app.controller('GameDateCtrl', ["$scope", 'date', 'dateService', 'dates', function($scope, date, dateService, dates) {
 
   $scope.editing = false;
-
+  $scope.selectedDate = date;
   $scope.newDate = date.index;
   $scope.dates = dates;
 
@@ -30,7 +27,6 @@ app.controller('DateCtrl', ["$scope", 'date', 'dateService', 'dates', 'mainServi
   $scope.currentDate = function(){
     return dates[$scope.selectedDate.index];
   };
-
   //make it more obvious that you can click on the date to change it
 
 }]);

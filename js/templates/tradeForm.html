@@ -26,8 +26,18 @@
 		</form>	
 	</div>
 	<div class="col-md-6">
-		<p>Cash Available: {{ account.cash | currency }}</p>
-		<p>Order Status</p>
-		<p>{{ orderStatus }}</p>
+		<h3>Cash Available: {{ account.cash | currency }}</h3>
 	</div>
+</div>
+<div class="alert alert-danger alert-dismissible" role="alert" ng-show="invalid">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Invalid Order! Make sure you own the shares you would like to sell.
+</div>
+<div class="alert alert-warning alert-dismissible" role="alert" ng-show="insufficientFunds">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  You don't have enough funds!
+</div>
+<div class="alert alert-success alert-dismissible" role="alert" ng-show="success">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Order successfully placed!
 </div>

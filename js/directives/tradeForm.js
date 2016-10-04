@@ -17,6 +17,8 @@ app.directive('tradeForm', ['StocksService', 'dateService', 'accountService', fu
 			scope.currentDate = dateService.getDate();
 			scope.$watch('currentDate.index', function(){
       	scope.updateForm();
+      	//rebuild portfolio whenever date changes
+      	accountService.buildPortfolio(scope.currentDate, StocksService.getDateCollection());
     	});
 
     	scope.account = accountService.getBalance();
@@ -28,15 +30,24 @@ app.directive('tradeForm', ['StocksService', 'dateService', 'accountService', fu
 			scope.formData.symbol = scope.symbol;
 			scope.formData.quantity = 100;
 
+			scope.resetAlerts = function(){
+				scope.invalid = false;
+				scope.insufficientFunds = false;
+				scope.success= false;
+			};
+
 			scope.placeTrade = function(){
+				scope.resetAlerts();
 				if(scope.formData.action === "buy"){
 					//check buy
 					if(accountService.checkValidBuy(scope.formData)){
 						accountService.makeBuy(scope.formData);
 						scope.orderStatus = "Order Placed!";
+						scope.success = true;
 					}
 					else{
 						scope.orderStatus = "Not enough money!";
+						scope.insufficientFunds = true;
 					}
 				}
 				else if(scope.formData.action === "sell"){
@@ -44,9 +55,11 @@ app.directive('tradeForm', ['StocksService', 'dateService', 'accountService', fu
 						if(accountService.checkValidSell(scope.formData)){
 							accountService.makeSell(scope.formData);
 							scope.orderStatus = "Sell confirmed!";
+							scope.success = true;
 						}
 						else{
 							scope.orderStatus = "Invalid";
+							scope.invalid = true;
 						}
 				}
 			};

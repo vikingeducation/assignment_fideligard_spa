@@ -13,6 +13,13 @@
   <!-- font awesome -->
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+  <!--Loading Bar-->
+  <script src="js/vendor/pace.min.js"></script>
+  <link rel="stylesheet" href="js/vendor/loadingbar.css">
+
+  <!--my styles-->
+  <link rel="stylesheet" href="styles.css">
+
   <!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -38,10 +45,15 @@
 	  </div><!-- /.container-fluid -->
 	</nav>
 
+	<div class="btn-group" role="group">
+		<button ui-sref="main.game" ng-show="{{currentPath===''}}">Game</button>
+		<button ui-sref="main.portfolio" ng-show="{{currentPath===''}}">Just Explore</button>
+	</div>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4">
-				<div ui-view="stocksTicker">Loading...</div>
+				<div ui-view="stocksTicker"></div>
 			</div>
 			<div class="col-md-7 col-md-offset-1">
 				<div class="row">
@@ -59,12 +71,15 @@
   <script src="js/services/dateService.js"></script>
   <script src="js/services/stocksService.js"></script>
   <script src="js/services/accountService.js"></script>
+  <script src="js/services/mainService.js"></script>
   <!--Controllers-->
   <script src="js/controllers/dateCtrl.js"></script>
   <script src="js/controllers/stocksCtrl.js"></script>
   <script src="js/controllers/tradeCtrl.js"></script>
   <script src="js/controllers/transactionsCtrl.js"></script>
   <script src="js/controllers/portfolioCtrl.js"></script>
+  <script src="js/controllers/gameDateCtrl.js"></script>
+  <script src="js/controllers/introCtrl.js"></script>
   <!--Directives-->
   <script src="js/directives/stockTicker.js"></script>
   <script src="js/directives/tradeForm.js"></script>
