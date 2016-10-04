@@ -21,10 +21,17 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
   
   $scope.selectedDate = dateService.selectedDate;
 
+  $scope.$watch(function(){
+    return dateService.selectedDate;
+  }, function(newDate){
+    $scope.selectedDate = newDate;
+  });
+  
+
   
   $scope.stocks = stockService.getStocks();
   
-  zip = "BELOW STOCKS";
+  
   //$scope.currentStocks = stockService.allStocksByDay($scope.selectedDate);
  
   

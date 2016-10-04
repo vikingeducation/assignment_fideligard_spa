@@ -20,9 +20,9 @@
           <th>30d</th>
           <th>Trade</th>
         </tr>
-
+        <p ng-hide="true">{{selectedDate}}</p>
         <tbody ng-repeat="(ticker, days) in stocks">
-        
+
           <tr ng-repeat="day in days | filter:{Date: selectedDate}">
             
             <td>{{ day.Symbol }}</td>  
