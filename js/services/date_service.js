@@ -18,7 +18,10 @@ StockApp.factory("dateService", [function(){
 
   var _range = [];
   while(startDate < endDate){
-    _range.push(angular.copy(startDate));
+    if(startDate.getDay() > 0 && startDate.getDay() < 6){
+      _range.push(angular.copy(startDate));
+    }
+    
     startDate = new Date(startDate.setDate(startDate.getDate() + 1));
   }
   _range.push(endDate);

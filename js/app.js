@@ -17,7 +17,7 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
   //   $scope.appleThirty = stockService.findChange("APPL", $scope.selectedDate, 30);
 
   // });
-   
+  $scope.tickerFilter = "";
   
   $scope.selectedDate = dateService.selectedDate;
 

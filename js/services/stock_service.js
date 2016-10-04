@@ -112,7 +112,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
       var endIndex = _.indexOf(_stocks[sym], stock);
 
       if(endIndex > 0){
-        console.log(endIndex + "  LOOK")
+        
         var startIndex = endIndex - 1;
         var startStock = _stocks[sym][startIndex];
         var endStock = _stocks[sym][endIndex];
