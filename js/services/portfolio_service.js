@@ -1,4 +1,4 @@
-StockApp.factory("portfolioService", ['transactionService', function(transactionService){
+StockApp.factory("portfolioService", ['portfolioGenerator', 'transactionService', function(portfolioGenerator, transactionService){
   //ADDING THE portfolioGenerator dependency throws nasty error
   var service = {};
 
