@@ -107,6 +107,8 @@ StockPortfolioSimulator.factory('StocksService',
 		};
 
 		StocksService.stockDetailsByDate = function(){
+			_stockDetailsByDate = {};
+
 			_.each(_stocksQuery, function(stock){
 				if ( !_stockDetailsByDate[stock.Date] ){
 					_stockDetailsByDate[stock.Date] = [];
