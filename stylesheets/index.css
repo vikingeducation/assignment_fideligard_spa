@@ -36,6 +36,12 @@ main-nav .navbar {
       margin-bottom: 5px; }
     .container #get-stocks-container #buttons-container {
       margin-bottom: 15px; }
+      .container #get-stocks-container #buttons-container #all-button {
+        width: 25%; }
+      .container #get-stocks-container #buttons-container #clear-button {
+        width: 25%; }
+      .container #get-stocks-container #buttons-container #submit-button {
+        width: 48%; }
     .container #get-stocks-container #table-container {
       height: 300px;
       overflow: auto; }

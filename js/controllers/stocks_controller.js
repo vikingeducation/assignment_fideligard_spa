@@ -24,9 +24,11 @@ StockPortfolioSimulator.controller('StocksController',
 			.then(function(request){
 				$scope.results = request;
 
-				$scope.rangeMax = $scope.results.length - 1;
-
 				$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
+
+				$scope.dates = Object.keys($scope.stockDetailsByDate);
+
+				$scope.rangeMax = $scope.dates.length -1;
 			});
 	};
 
@@ -35,6 +37,8 @@ StockPortfolioSimulator.controller('StocksController',
 	// ---------------------------
 
 	$scope.rangeValue = 0;
+
+	$scope.searchText = "";
 
 	$scope.notAvailableString = "N/A";
 
