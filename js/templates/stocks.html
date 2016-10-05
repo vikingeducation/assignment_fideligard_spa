@@ -21,19 +21,19 @@
           <th>Trade</th>
         </tr>
         
-        <tbody ng-repeat="(ticker, days) in stocks">
+        
 
-          <tr ng-repeat="day in days | filter:{Date: selectedDate} | orderBy:'Symbol' | filter:{Symbol: tickerFilter}">
-            
-            <td>{{ day.Symbol }}</td>  
-            <td>{{ day.Close | currency }}</td>
-            <td>{{ day.oneDayPerformance() | currency }}</td>
-            <td>{{ day.sevenDayPerformance() | currency }}</td>
-            <!-- not hiding very well.. -->
-            <td><span ng-hide="day.thirtyDayPerformace() < 0"></span>{{ day.thirtyDayPerformance() | currency }}</td>
-            <td ui-sref="main.trade({symbol: day.Symbol, price: day.Close, day: day.Date})"><a>Trade</a></td>
-          </tr>
-        </tbody>
+        <tr ng-repeat="stock in stocks | filter:{Date: selectedDate} | orderBy:'Symbol' | filter:{Symbol: tickerFilter}">
+          
+          <td>{{ stock.Symbol }}</td>  
+          <td>{{ stock.Close | currency }}</td>
+          <td>{{ stock.oneDayPerformance() | currency }}</td>
+          <td>{{ stock.sevenDayPerformance() | currency }}</td>
+          <!-- not hiding very well.. -->
+          <td><span ng-hide="stock.thirtyDayPerformace() < 0"></span>{{ stock.thirtyDayPerformance() | currency }}</td>
+          <td ui-sref="main.trade({symbol: stock.Symbol, price: stock.Close, stock: stock.Date})"><a>Trade</a></td>
+        </tr>
+        
 
 
 

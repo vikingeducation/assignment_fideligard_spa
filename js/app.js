@@ -21,19 +21,20 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
   
   $scope.selectedDate = dateService.selectedDate;
 
+
+
   $scope.$watch(function(){
     return dateService.selectedDate;
   }, function(newDate){
     $scope.selectedDate = newDate;
-  });
-  
 
-  
-  $scope.stocks = stockService.getStocks();
+    $scope.stocks = stockService.stocksByDate($scope.selectedDate);
+  });
   
   
   //$scope.currentStocks = stockService.allStocksByDay($scope.selectedDate);
- 
+ stockService.getStocks();
+ $scope.stocks = stockService.stocksByDate($scope.selectedDate);
   
   
 

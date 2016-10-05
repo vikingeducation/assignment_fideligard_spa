@@ -174,6 +174,20 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
 
   };
 
+  service.stocksByDate = function(date){
+    var stocks = [];
+
+    for(ticker in _stocks){
+      _stocks[ticker].forEach(function(stock){
+        if(stock.Date === date){
+          stocks.push(stock);
+        }
+      })
+    }
+
+    return stocks;
+  };
+
 
   service.findSpecificDay = function(symbol, date){
     var stocks = service.stocksGetter();
