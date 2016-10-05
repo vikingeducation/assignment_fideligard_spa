@@ -21,16 +21,17 @@
     
     <main class="container">
       <div class="row">
+
+        <div ui-view="datepicker"></div>
+
+      </div>
+      <div class="row">
         <div class="col-md-4" id="stocks-wrapper">
           <div ui-view="stocks"></div>
         </div>
 
         <div class="col-md-8">
-          <div class="row">
-          <!-- put the date picker here -->
-            <div ui-view="datepicker"></div>
-
-          </div>
+          
 
           <div class="row" id="main-content">
             <div ui-view="statepicker"></div>

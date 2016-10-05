@@ -21,3 +21,11 @@ p.invalid {
     display: inline-block;
   }
 }
+
+
+
+@media(min-width: 1000px){
+  #stocks-wrapper {
+    margin-top: -40px;
+  }
+}
