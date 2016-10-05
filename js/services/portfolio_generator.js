@@ -40,6 +40,7 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     stock.costBasis = function(){
       return valueBuys - valueSells;
     };
+
     stock.currentPrice = function(){
       var currentDay = new Date(date);
 
@@ -112,6 +113,31 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     return stock;
   }
 
+  var _addAggregateData = function(){
+    var totalCost = 0;
+    var totalValue = 0;
+    var totalPL = 0;
+    var totalOneDP = 0;
+    var totalSevenDP = 0;
+    var totalThirtyDP = 0;
+
+    _portfolio.stocks.forEach(function(stock){
+      totalCost += stock.costBasis();
+      totalValue += stock.currentValue();
+      totalPL += stock.profitLoss();
+      totalOneDP += stock.oneDayPerformance();
+      totalSevenDP += stock.sevenDayPerformance();
+      totalThirtyDP += stock.thirtyDayPerformance();
+    });
+
+    _portfolio.costBasis = totalCost;
+    _portfolio.currentValue = totalValue;
+    _portfolio.profitLoss = totalPL;
+    _portfolio.oneDayPerformance = totalOneDP;
+    _portfolio.sevenDayPerformance = totalSevenDP;
+    _portfolio.thirtyDayPerformance = totalThirtyDP;
+  }
+
   service.generatePortfolio = function(date){
     //turn transactions into a beautiful portfolio
     var transactions = transactionService.transactionsBeforeDate(date);
@@ -132,6 +158,8 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     }
     console.log("done generating portfolio");
     //add portfolio wide data
+
+    _addAggregateData();
     
     return _portfolio;
   };// end generate portfolio

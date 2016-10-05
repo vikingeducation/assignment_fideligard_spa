@@ -20,8 +20,12 @@
 
     
     <tr>
-      <td></td>
-      <td></td>
+      <td>{{ portfolio.costBasis | currency }}</td>
+      <td>{{ portfolio.currentValue | currency}}</td>
+      <td>{{ portfolio.profitLoss | currency }}</td>
+      <td>{{ portfolio.oneDayPerformance | currency }}</td>
+      <td>{{ portfolio.sevenDayPerformance | currency }}</td>
+      <td>{{ portfolio.thirtyDayPerformance | currency }}</td>
 
 
     </tr>
