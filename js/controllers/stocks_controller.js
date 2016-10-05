@@ -16,8 +16,31 @@ StockPortfolioSimulator.controller('StocksController',
 			$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
 		});
 
+	// ---------------------------
+	// Functions
+	// ---------------------------
+
+	$scope.chooseAllSymbols = function(){
+		$scope.clearChosenSymbols();
+
+		_.each($scope.namesAndSymbols, function(stock){
+			$scope.chosenSymbols.push(stock.Symbol);
+		});
+	};
+
+	$scope.clearChosenSymbols = function(){
+		$scope.chosenSymbols = [];
+	};
+
+	// ---------------------------
+	// Variables
+	// ---------------------------
+
 	$scope.rangeValue = 0;
 
 	$scope.notAvailableString = "N/A";
+
+	$scope.chosenSymbols = [];
+
 
 }]);
