@@ -55,11 +55,14 @@ StockApp.factory("transactionService", [function(){
   service.transactionsBeforeDate = function(date){
     var originalDate = new Date(date);
     var transactionsBeforeDate = {};
-
+    o = originalDate;
+    t = _transactions;
+    //console.log(JSON.stringify(_transactions,null,''));
     for(ticker in _transactions){
       _transactions[ticker].forEach(function(transaction){
         var tDate = new Date(transaction.date);
         if(tDate <= originalDate){
+
           if(transactionsBeforeDate[ticker]){
             transactionsBeforeDate[ticker].push(transaction);
           } else {
@@ -69,6 +72,7 @@ StockApp.factory("transactionService", [function(){
         }
       });
     };
+    return transactionsBeforeDate;
   };
 
 

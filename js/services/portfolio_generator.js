@@ -15,6 +15,7 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
       return transactions[0].symbol;
     };
 
+
     var sharesSold = 0;
     var sharesBought = 0;
 
@@ -40,7 +41,8 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
       return valueBuys - valueSells;
     };
     stock.currentPrice = function(date){
-      stockService.findSpecificDay(stock.symbol(), date).Close;
+      console.log("getting current price");
+      return stockService.findSpecificDay(stock.symbol(), date).Close;
     };
 
     stock.currentValue = function(date){
@@ -50,15 +52,26 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
     stock.profitLoss = function(date){
       return stock.currentValue(date) - stock.costBasis();
     };
+
+    return stock;
   }
 
   service.generatePortfolio = function(transactions){
     //turn transactions into a beautiful portfolio
-
+    //reset portfolio
+    _portfolio.stocks = [];
     for(ticker in transactions){
       //get data for each transactions[ticker]
       var stock = _makeStock(transactions[ticker]);
-      _portfolio.stocks.push(stock);
+
+      var loadedStocks = stockService.stocksGetter();
+      var sym = stock.symbol();
+
+      //only add the stock to the portfolio if stockService has loaded it
+      if(loadedStocks[sym]){
+        _portfolio.stocks.push(stock);
+      }
+      
     }
     //add portfolio wide data
 

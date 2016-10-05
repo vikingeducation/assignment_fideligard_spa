@@ -8,13 +8,15 @@ StockApp.factory("portfolioService", ['portfolioGenerator', 'transactionService'
   var _portfolio;
 
   var _buildPortfolio = function(date){
+
     var transactions = transactionService.transactionsBeforeDate(date);
+    
     _portfolio = portfolioGenerator.generatePortfolio(transactions);
     return _portfolio;
   }
 
   service.buildPortfolio = function(date){
-    _buildPortfolio(date);
+    return _buildPortfolio(date);
   };
    
 
