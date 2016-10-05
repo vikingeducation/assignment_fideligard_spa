@@ -72,14 +72,18 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
       workingDate.setDate(workingDate.getDate() - 1);
       var dateString = workingDate.toISOString().slice(0, 10);
       var pastPortfolio = service.generateComparablePortfolio(dateString);
-      fooey = pastPortfolio;
+      
       var pastVal;
       pastPortfolio.stocks.forEach(function(unit){
         if(stock.symbol() === unit.symbol()){
           pastVal = unit.currentValue();
         }
       })
+
+     
       return stock.currentValue() - pastVal;
+     
+      
     };
 
     stock.sevenDayPerformance = function(){

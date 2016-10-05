@@ -23,9 +23,9 @@
       <td>{{ portfolio.costBasis | currency }}</td>
       <td>{{ portfolio.currentValue | currency}}</td>
       <td>{{ portfolio.profitLoss | currency }}</td>
-      <td>{{ portfolio.oneDayPerformance | currency }}</td>
-      <td>{{ portfolio.sevenDayPerformance | currency }}</td>
-      <td>{{ portfolio.thirtyDayPerformance | currency }}</td>
+      <td>{{ portfolio.oneDayPerformance | currency }}<span ng-show="!portfolio.oneDayPerformance">N/A</span></td>
+      <td>{{ portfolio.sevenDayPerformance | currency }}<span ng-show="!portfolio.sevenDayPerformance">N/A</span></td>
+      <td>{{ portfolio.thirtyDayPerformance | currency }}<span ng-show="!portfolio.thirtyDayPerformance">N/A</span></td>
 
 
     </tr>
@@ -69,9 +69,9 @@
       <td>{{ stock.currentValue() | currency }}</td>
       <td>{{ stock.profitLoss() | currency }}</td>
       <td>{{ stock.currentPrice | currency }}</td>
-      <td>{{ stock.oneDayPerformance() | currency }}</td>
-      <td>{{ stock.sevenDayPerformance() | currency }}</td>
-      <td>{{ stock.thirtyDayPerformance() | currency }}</td>
+      <td>{{ stock.oneDayPerformance() | currency }}<span ng-show="!stock.oneDayPerformance()">N/A</span></td>
+      <td>{{ stock.sevenDayPerformance() | currency }}<span ng-show="!stock.sevenDayPerformance()">N/A</span></td>
+      <td>{{ stock.thirtyDayPerformance() | currency }}<span ng-show="!stock.thirtyDayPerformance()">N/A</span></td>
       <td><a ui-sref="main.trade({symbol: stock.symbol(), price: stock.currentPrice})">Trade</a></td>
 
     </tr>
