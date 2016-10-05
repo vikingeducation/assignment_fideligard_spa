@@ -52,6 +52,25 @@ StockApp.factory("transactionService", [function(){
 
   _seedTransactions();
 
+  service.transactionsBeforeDate = function(date){
+    var originalDate = new Date(date);
+    var transactionsBeforeDate = {};
+
+    for(ticker in _transactions){
+      _transactions[ticker].forEach(function(transaction){
+        var tDate = new Date(transaction.date);
+        if(tDate <= originalDate){
+          if(transactionsBeforeDate[ticker]){
+            transactionsBeforeDate[ticker].push(transaction);
+          } else {
+            transactionsBeforeDate[ticker] = [];
+            transactionsBeforeDate[ticker].push(transaction);
+          }
+        }
+      });
+    };
+  };
+
 
 
 
