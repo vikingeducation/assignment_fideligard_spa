@@ -10,6 +10,8 @@ StockPortfolioSimulator.factory('StocksService',
 
 		var _stockDetailsByDate = {};
 
+		var _namesAndSymbols;
+
 		var _returnDateDaysAgo = function(currentDate, daysAgo){
 			return moment(currentDate).subtract(daysAgo, "days").format("YYYY-MM-DD")
 		};
@@ -46,7 +48,18 @@ StockPortfolioSimulator.factory('StocksService',
 		// http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange=nasdaq&render=download
 		// 2. Convery the CSV file at: 
 		// http://www.convertcsv.com/csv-to-json.htm
+		StocksService.getAllNamesAndSymbols = function(){
+			// Get JSON response object
+			return $http({
+				url: '../../data/company_list.json',
+				method: "GET"
+			})
+				.then(function(response) {
+					_namesAndSymbols = _namesAndSymbols ||response.data;
 
+					return _namesAndSymbols;
+				});
+		};
 
 		// Currently this just gets stocks from the json file
 		// I want to make this dynamic

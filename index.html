@@ -41,16 +41,52 @@
 
     <main class="container">
       <div class="col-xs-6">
+
+        <div class="view-container" id="get-stocks-container">
+          <div id="get-stocks-header-container">
+            <div class="sub-header">
+              Retrieve Stock History
+            </div>
+          </div>
+
+          <button class="btn btn-success">All Stock</button>
+          <button class="btn">Selected Stock</button>
+          <div id="table-container">
+            <table class="table table-striped">
+              <tr>
+                <th>
+                  Symbol
+                </th>
+                <th>
+                  Name
+                </th>
+              </tr>
+              <tr ng-repeat="stock in namesAndSymbols">
+                <td>
+                  {{ stock.Symbol }}
+                </td>
+                <td>
+                  {{ stock.Name }}
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
         <div class="view-container" id="stocks-container">
           <div id="stocks-header-container">
-            <div id="stocks-header">Stocks</div>
+            <div class="sub-header">
+              Stocks
+            </div>
             <div id="filter-container">
               Filter: <input type="text">
             </div>
           </div>
 
           <div id="table-explanation">
-            <p>1d: Price on selected day minus the price 1 day ago...</p>
+            <p>
+              1d: Price on selected day minus the price 1 day ago...
+            </p>
           </div>
 
           <table class='table table-striped'>

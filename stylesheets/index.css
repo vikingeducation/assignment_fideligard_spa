@@ -1,3 +1,12 @@
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 7px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
+
 main-nav .navbar {
   margin-bottom: 50px; }
   main-nav .navbar #navbar-logo-link {
@@ -18,13 +27,20 @@ main-nav .navbar {
   .container .view-container {
     border: 1px solid black;
     padding: 15px; }
+  .container .sub-header {
+    display: inline-block;
+    font-size: 25px; }
+  .container #get-stocks-container {
+    margin-bottom: 15px; }
+    .container #get-stocks-container #get-stocks-header-container {
+      margin-bottom: 15px; }
+    .container #get-stocks-container #table-container {
+      height: 300px;
+      overflow: auto; }
   .container #stocks-container {
     position: relative; }
     .container #stocks-container #stocks-header-container {
       margin-bottom: 15px; }
-      .container #stocks-container #stocks-header-container #stocks-header {
-        display: inline-block;
-        font-size: 25px; }
       .container #stocks-container #stocks-header-container #filter-container {
         position: absolute;
         top: 20px;
@@ -51,6 +67,6 @@ main-nav .navbar {
       left: 5px;
       top: 5px; }
   .container #main-view {
-    height: 300px; }
+    min-height: 300px; }
 
 /*# sourceMappingURL=index.css.map */

@@ -1,3 +1,13 @@
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
 main-nav{
 
   .navbar {
@@ -31,16 +41,29 @@ main-nav{
     padding: 15px;
   }
 
+  .sub-header {
+    display: inline-block;
+    font-size: 25px;
+  }
+
+  #get-stocks-container {
+    margin-bottom: 15px;
+
+    #get-stocks-header-container {
+      margin-bottom: 15px;
+    }
+
+    #table-container {
+      height: 300px;
+      overflow: auto;
+    }
+  }
+
   #stocks-container {
     position: relative;
 
     #stocks-header-container {
       margin-bottom: 15px;
-
-      #stocks-header {
-        display: inline-block;
-        font-size: 25px;
-      };
 
       #filter-container {
         position: absolute;
@@ -86,6 +109,6 @@ main-nav{
   }
 
   #main-view {
-    height: 300px;
+    min-height: 300px;
   }
 }
