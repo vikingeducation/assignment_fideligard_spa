@@ -100,20 +100,6 @@ StockApp.config(function($stateProvider, $urlRouterProvider){
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 StockApp.factory('_', ['$window', function($window) {
   return $window._; 
 }]);

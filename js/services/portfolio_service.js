@@ -1,5 +1,5 @@
 StockApp.factory("portfolioService", ['portfolioGenerator', function(portfolioGenerator){
-  //ADDING THE portfolioGenerator dependency throws nasty error
+  
   var service = {};
 
   //Symbol is key and array of transactions is value
