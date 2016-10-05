@@ -1,3 +1,78 @@
-<div class="col-xs-12">
-  <h1 class="text-center">PORTFOLIO</h1>
-</div>
+<div class="col-xs-12" id="portfolio-wrapper">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Portfolio</h2>
+    </div>
+
+    
+  </div>
+
+  <table class="table table-bordered table-striped" id="stats">
+    <tr>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+
+    </tr>
+
+    
+    <tr>
+      <td></td>
+      <td></td>
+
+
+    </tr>
+    
+
+  </table>
+
+  <table class="table table-bordered table-striped" id="portfolio">
+    <tr>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>Current Price</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th>Trade</th>
+
+    </tr>
+
+    <tr id="cash">
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+
+    </tr>
+
+    <tr ng-repeat="stock in portfolio.stocks">
+    <td>{{ stock.symbol() }}</td>
+      <td>{{ stock.quantity() }}</td>
+      <td>{{ stock.costBasis() }}</td>
+      <td>{{ stock.currentValue(selectedDate) }}</td>
+      <td>{{ stock.profitLoss(selectedDate) }}</td>
+      <td>{{ stock.currentPrice(selectedDate) }}</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td>$$$</td>
+      <td><a>Trade</a></td>
+
+    </tr>
+
+  </table>
+
+  
+
