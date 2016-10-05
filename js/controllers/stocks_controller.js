@@ -21,15 +21,15 @@ StockPortfolioSimulator.controller('StocksController',
 	// ---------------------------
 
 	$scope.chooseAllSymbols = function(){
-		$scope.clearChosenSymbols();
-
 		_.each($scope.namesAndSymbols, function(stock){
-			$scope.chosenSymbols.push(stock.Symbol);
+			stock.Checked = true;
 		});
 	};
 
 	$scope.clearChosenSymbols = function(){
-		$scope.chosenSymbols = [];
+		_.each($scope.namesAndSymbols, function(stock){
+			stock.Checked = false;
+		});
 	};
 
 	// ---------------------------
@@ -39,8 +39,5 @@ StockPortfolioSimulator.controller('StocksController',
 	$scope.rangeValue = 0;
 
 	$scope.notAvailableString = "N/A";
-
-	$scope.chosenSymbols = [];
-
 
 }]);
