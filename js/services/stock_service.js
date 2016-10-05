@@ -85,7 +85,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
     stock.oneDayPerformance = function(){
       var sym = stock.Symbol;
       //_stocks[sym] is correct
-      var endIndex = _.indexOf(_stocks[sym], this.stock);
+      var endIndex = _.indexOf(_stocks[sym], stock);
 
       if(endIndex > 0){
         
