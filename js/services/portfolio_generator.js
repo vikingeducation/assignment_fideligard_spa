@@ -42,7 +42,17 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
     };
     stock.currentPrice = function(date){
       console.log("getting current price");
-      return stockService.findSpecificDay(stock.symbol(), date).Close;
+      var currentDay = new Date(date);
+
+      var current = stockService.findSpecificDay(stock.symbol(), date);
+      //keep going back days till one isn't a holiday
+      while(!current){
+        var prevDay = currentDay.setDate(currentDay.getDate() - 1);
+        var prevDate = prevDay.toISOString().slice(0, 10);
+        current = stockService.findSpecificDay(stock.symbol(), prevDate);
+      };
+      booboo = current;
+      return current.Close;
     };
 
     stock.currentValue = function(date){

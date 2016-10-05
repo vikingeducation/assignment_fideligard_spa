@@ -61,10 +61,10 @@
     <tr ng-repeat="stock in portfolio.stocks">
     <td>{{ stock.symbol() }}</td>
       <td>{{ stock.quantity() }}</td>
-      <td>{{ stock.costBasis() }}</td>
-      <td>{{ stock.currentValue(selectedDate) }}</td>
-      <td>{{ stock.profitLoss(selectedDate) }}</td>
-      <td>{{ stock.currentPrice(selectedDate) }}</td>
+      <td>{{ stock.costBasis() | currency }}</td>
+      <td>{{ stock.currentValue(selectedDate) | currency }}</td>
+      <td>{{ stock.profitLoss(selectedDate) | currency }}</td>
+      <td>{{ stock.currentPrice(selectedDate) | currency }}</td>
       <td>$$$</td>
       <td>$$$</td>
       <td>$$$</td>
