@@ -7,15 +7,6 @@ StockPortfolioSimulator.controller('StocksController',
 			$scope.namesAndSymbols = request;
 		})
 
-	StocksService.request()
-		.then(function(request){
-			$scope.results = request;
-
-			$scope.rangeMax = $scope.results.length - 1;
-
-			$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
-		});
-
 	// ---------------------------
 	// Functions
 	// ---------------------------
@@ -26,6 +17,17 @@ StockPortfolioSimulator.controller('StocksController',
 
 	$scope.clearChosenSymbols = function(){
 		StocksService.clearChosenSymbols();
+	};
+
+	$scope.request = function(){
+		StocksService.request()
+			.then(function(request){
+				$scope.results = request;
+
+				$scope.rangeMax = $scope.results.length - 1;
+
+				$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
+			});
 	};
 
 	// ---------------------------
