@@ -1,4 +1,4 @@
-StockApp.factory("portfolioService", ['portfolioGenerator', 'transactionService', function(portfolioGenerator, transactionService){
+StockApp.factory("portfolioService", ['portfolioGenerator', function(portfolioGenerator){
   //ADDING THE portfolioGenerator dependency throws nasty error
   var service = {};
 
@@ -8,10 +8,8 @@ StockApp.factory("portfolioService", ['portfolioGenerator', 'transactionService'
   var _portfolio;
 
   var _buildPortfolio = function(date){
-
-    var transactions = transactionService.transactionsBeforeDate(date);
     
-    _portfolio = portfolioGenerator.generatePortfolio(transactions, date);
+    _portfolio = portfolioGenerator.generatePortfolio(date);
     return _portfolio;
   }
 
