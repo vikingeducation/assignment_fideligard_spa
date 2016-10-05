@@ -1,0 +1,6 @@
+<div class="col-md-12">
+  <p ng-click="editing = !editing" ng-hide="editing">Chosen Date: {{ dates[selectedDate.index] | date}}</p>
+  <input type="date" ng-show="editing" ng-model="chosenDate" min={{currentDate()}} max="2015-12-31">
+  <input type="submit" ng-show="editing" ng-click="changeDate(chosenDate)" value="Jump to Date">
+  <button class="btn btn-default" ng-click="nextDay()">Next Day<span class="glyphicon glyphicon-menu-right"></span></button>
+</div>

@@ -1,0 +1,59 @@
+_stocks:
+{
+	AAPL: {
+			2015-01-02: {
+				Close: 
+			},
+			2015-01-05: {
+				Close:
+			}
+			...
+	},
+
+	AREX: {
+
+	}
+	...
+}
+
+
+_dates:
+{
+	2015-01-02: [AAPL, AREX, ...],
+	2015-01-05: [],
+	...
+}
+
+_dateCollection: 
+["2015-01-02", "2015-01-05", ...]
+
+_stockDates: 
+{
+	AAPL: {
+		0: "2015-01-02", 
+		1: "2015-01-05",
+		...
+	},
+	AREX:{}
+	...
+}
+
+portfolio:
+{
+	AAPL: {
+		quantity: 1400,
+		moneySpent:,
+		moneyEarned: 
+
+	}
+}
+
+transactions:
+[{ 
+	date: ,
+	symbol: ,
+	type: ,
+	quantity: ,
+	price: 
+
+}]

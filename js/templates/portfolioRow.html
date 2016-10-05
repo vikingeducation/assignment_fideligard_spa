@@ -1,0 +1,12 @@
+<tr>
+	<td>{{symbol}}</td>
+	<td>{{stock.quantity}}</td>
+	<td>{{costBasis | currency}}</td>
+	<td>{{currentValue | currency}}</td>
+	<td>{{profitLoss | currency}}</td>
+	<td>{{currentPrice | currency}}</td>
+	<td>{{oneDay | myCurrency}}</td>
+	<td>{{sevenDay | myCurrency}}</td>
+	<td>{{thirtyDay | myCurrency}}</td>
+	<td><a ui-sref="main.trade({symbol: symbol })">trade</a></td>
+</tr>
