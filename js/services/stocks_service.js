@@ -43,6 +43,18 @@ StockPortfolioSimulator.factory('StocksService',
 
 		var StocksService = {};
 
+		StocksService.chooseAllSymbols = function(){
+			_.each(_namesAndSymbols, function(stock){
+				stock.Checked = true;
+			});
+		};
+
+		StocksService.clearChosenSymbols = function(){
+			_.each(_namesAndSymbols, function(stock){
+				stock.Checked = false;
+			});
+		};
+
 		// To get the JSON list for all stock names and their symbols
 		// 1. Get the CSV file from: 
 		// http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange=nasdaq&render=download

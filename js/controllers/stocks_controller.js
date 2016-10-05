@@ -21,15 +21,11 @@ StockPortfolioSimulator.controller('StocksController',
 	// ---------------------------
 
 	$scope.chooseAllSymbols = function(){
-		_.each($scope.namesAndSymbols, function(stock){
-			stock.Checked = true;
-		});
+		StocksService.chooseAllSymbols();
 	};
 
 	$scope.clearChosenSymbols = function(){
-		_.each($scope.namesAndSymbols, function(stock){
-			stock.Checked = false;
-		});
+		StocksService.clearChosenSymbols();
 	};
 
 	// ---------------------------
