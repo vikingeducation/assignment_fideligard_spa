@@ -42,7 +42,6 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
       return valueBuys - valueSells;
     };
     stock.currentPrice = function(){
-      console.log("getting current price");
       var currentDay = new Date(date);
 
       var current = stockService.findSpecificDay(stock.symbol(), date);
@@ -52,7 +51,7 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
         var prevDate = prevDay.toISOString().slice(0, 10);
         current = stockService.findSpecificDay(stock.symbol(), prevDate);
       };
-      booboo = current;
+      
       return current.Close;
     };
 
@@ -77,21 +76,17 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
     _portfolio.stocks = [];
     for(ticker in transactions){
       if(loadedStocks[ticker]){
-        console.log("in the g portfolio transaction loop");
         //get data for each transactions[ticker]
-        var stock = _makeStock(transactions[ticker], date);
-
-        console.log("made the stock");
-        
+        var stock = _makeStock(transactions[ticker], date);        
         var sym = stock.symbol();
 
         _portfolio.stocks.push(stock);
       }
       
     }
-    //add portfolio wide data
     console.log("done generating portfolio");
-    //console.log("here is the portfolio" + _portfolio);
+    //add portfolio wide data
+    
     return _portfolio;
   };// end generate portfolio
 

@@ -177,13 +177,6 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
 
   service.findSpecificDay = function(symbol, date){
     var stocks = service.stocksGetter();
-
-    console.log("finding day");
-    console.log(symbol);
-    
-    //console.log(JSON.stringify(stocks, null, ''));
-    stockys = stocks;
-    console.log('pre loop');
     
     var daysData = stocks[symbol];
 
@@ -191,9 +184,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
     //don't bother if no data for that stock(async load error)
     if(daysData){
       for(var i = 0; i < daysData.length; i++){
-        console.log('in the loop');
         if(daysData[i].Date === date){
-          console.log("its a match");
           targetDay = daysData[i];
           return targetDay;
         };

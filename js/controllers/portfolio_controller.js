@@ -13,7 +13,7 @@ StockApp.controller("PortfolioCtrl", ['$scope', 'portfolioService', 'transaction
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
-      $timeout(function(){ initializing = false; }, 4000);
+      $timeout(function(){ initializing = false; }, 5000);
     } else {
       return dateService.selectedDate;
     }
@@ -21,6 +21,9 @@ StockApp.controller("PortfolioCtrl", ['$scope', 'portfolioService', 'transaction
     $scope.portfolio = portfolioService.buildPortfolio($scope.selectedDate);
   });
 
+
+  //seperate from the watcher above because this one doesn't need stocks to 
+  //load
   $scope.$watch(function(){
     return dateService.selectedDate;
   }, function(newDate){
