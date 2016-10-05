@@ -67,7 +67,46 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     };
 
     stock.oneDayPerformance = function(){
+      var workingDate = new Date(date);
+      workingDate.setDate(workingDate.getDate() - 1);
+      var dateString = workingDate.toISOString().slice(0, 10);
+      var pastPortfolio = service.generateComparablePortfolio(dateString);
+      fooey = pastPortfolio;
+      var pastVal;
+      pastPortfolio.stocks.forEach(function(unit){
+        if(stock.symbol() === unit.symbol()){
+          pastVal = unit.currentValue();
+        }
+      })
+      return stock.currentValue() - pastVal;
+    };
 
+    stock.sevenDayPerformance = function(){
+      var workingDate = new Date(date);
+      workingDate.setDate(workingDate.getDate() - 7);
+      var dateString = workingDate.toISOString().slice(0, 10);
+      var pastPortfolio = service.generateComparablePortfolio(dateString);
+      var pastVal;
+      pastPortfolio.stocks.forEach(function(unit){
+        if(stock.symbol() === unit.symbol()){
+          pastVal = unit.currentValue();
+        }
+      })
+      return stock.currentValue() - pastVal;
+    };
+
+    stock.thirtyDayPerformance = function(){
+      var workingDate = new Date(date);
+      workingDate.setDate(workingDate.getDate() - 30);
+      var dateString = workingDate.toISOString().slice(0, 10);
+      var pastPortfolio = service.generateComparablePortfolio(dateString);
+      var pastVal;
+      pastPortfolio.stocks.forEach(function(unit){
+        if(stock.symbol() === unit.symbol()){
+          pastVal = unit.currentValue();
+        }
+      })
+      return stock.currentValue() - pastVal;
     };
 
     return stock;
@@ -77,12 +116,12 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     //turn transactions into a beautiful portfolio
     var transactions = transactionService.transactionsBeforeDate(date);
     var loadedStocks = stockService.stocksGetter();
-    console.log("generating portfolio");
-
+    
     //reset portfolio
     _portfolio.stocks = [];
     for(ticker in transactions){
       if(loadedStocks[ticker]){
+        
         //get data for each transactions[ticker]
         var stock = _makeStock(transactions[ticker], date);        
         var sym = stock.symbol();
@@ -96,6 +135,25 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
     
     return _portfolio;
   };// end generate portfolio
+
+  service.generateComparablePortfolio = function(date){
+    //turn transactions into a beautiful portfolio
+    var transactions = transactionService.transactionsBeforeDate(date);
+    var loadedStocks = stockService.stocksGetter();
+    var comparable = {};
+    comparable.stocks = [];
+
+    for(ticker in transactions){
+      if(loadedStocks[ticker]){
+        
+        //get data for each transactions[ticker]
+        var stock = _makeStock(transactions[ticker], date);        
+        comparable.stocks.push(stock);
+      }
+      
+    };
+    return comparable;
+  };// end generate comparable portfolio
 
   return service;
 }]);

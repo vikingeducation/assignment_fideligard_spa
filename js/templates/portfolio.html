@@ -65,9 +65,9 @@
       <td>{{ stock.currentValue() | currency }}</td>
       <td>{{ stock.profitLoss() | currency }}</td>
       <td>{{ stock.currentPrice | currency }}</td>
-      <td>$$$</td>
-      <td>$$$</td>
-      <td>$$$</td>
+      <td>{{ stock.oneDayPerformance() | currency }}</td>
+      <td>{{ stock.sevenDayPerformance() | currency }}</td>
+      <td>{{ stock.thirtyDayPerformance() | currency }}</td>
       <td><a ui-sref="main.trade({symbol: stock.symbol(), price: stock.currentPrice})">Trade</a></td>
 
     </tr>
