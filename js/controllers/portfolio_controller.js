@@ -1,15 +1,19 @@
 StockApp.controller("PortfolioCtrl", ['$scope', 'portfolioService', 'transactionService', 'dateService', '$timeout', function($scope, portfolioService, transactionService, dateService, $timeout){
   
-  
+  $scope.cash = portfolioService.availableCash();
   
   //sync date
-  console.log("loading");
   $scope.selectedDate = dateService.selectedDate;
+  $scope.$watch(function(){
+    return dateService.selectedDate;
+  }, function(newDate){
+    $scope.selectedDate = newDate;
+
+  });
+
 
 
   //wait to do this stocks have to load for current price
-  
-
   var initializing = true;
   $scope.$watch(function(){
     if(initializing){
@@ -22,16 +26,7 @@ StockApp.controller("PortfolioCtrl", ['$scope', 'portfolioService', 'transaction
   });
 
 
-  //seperate from the watcher above because this one doesn't need stocks to 
-  //load
-  $scope.$watch(function(){
-    return dateService.selectedDate;
-  }, function(newDate){
-    $scope.selectedDate = newDate;
-
-    $scope.portfolio = portfolioService.buildPortfolio(newDate);
-  });
-
+  
 
   //get portfolio before date
 
