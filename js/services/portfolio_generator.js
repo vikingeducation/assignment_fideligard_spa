@@ -10,7 +10,6 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
 
   var _makeStock = function(transactions, date){
     //make individual p data for a stock and return it
-    console.log("making stock");
     var stock = {};
     stock.symbol = function(){
       return transactions[0].symbol;
@@ -47,9 +46,11 @@ StockApp.factory('portfolioGenerator', ['stockService', function(stockService){
       var current = stockService.findSpecificDay(stock.symbol(), date);
       //keep going back days till one isn't a holiday
       while(!current){
-        var prevDay = currentDay.setDate(currentDay.getDate() - 1);
-        var prevDate = prevDay.toISOString().slice(0, 10);
-        current = stockService.findSpecificDay(stock.symbol(), prevDate);
+        //sets currentDay one day back
+        currentDay.setDate(currentDay.getDate() - 1);
+        
+        var prevDateString = currentDay.toISOString().slice(0, 10);
+        current = stockService.findSpecificDay(stock.symbol(), prevDateString);
       };
       
       return current.Close;

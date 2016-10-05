@@ -41,11 +41,12 @@ StockApp.factory("transactionService", [function(){
 
   var _seedTransactions = function(){
     //var dates = ['2015-01-03','2015-01-04','2015-01-05','2015-01-06',];
-    var tickers = ['AAPL', 'NFLIX', 'CSCO', 'INTU'];
+    var tickers = ['AAL', 'NFLIX', 'CSCO', 'INTU'];
+    var prices = [53.91, 11.81, 27.61, 91.21];
 
     //price is just a random number for some basic seed date
     for(var i = 0; i < 4; i++){
-      service.createTransaction('2015-01-02', tickers[i], "BUY", 50, 137)
+      service.createTransaction('2015-01-02', tickers[i], "BUY", 50, prices[i]);
     }
   };
 
