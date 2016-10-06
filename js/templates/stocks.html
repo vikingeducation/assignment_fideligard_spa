@@ -14,25 +14,25 @@
       <table class="table table-bordered table-hover">
         <thead>
           <tr class="thead-inverse">
-            <th>Symbol<span></span></th>
-            <th>Price</th>
-            <th>1d</th>
-            <th>7d</th>
-            <th>30d</th>
+            <th ng-click="setOrderFilter('Symbol')">Symbol<span></span></th>
+            <th ng-click="setOrderFilter('Close')">Price</th>
+            <th ng-click="setOrderFilter('oneDayPerformance()')">1d</th>
+            <th ng-click="setOrderFilter('sevenDayPerformance()')">7d</th>
+            <th ng-click="setOrderFilter('thirtyDayPerformance()')">30d</th>
             <th>Trade</th>
           </tr>
         </thead>
         
         
         <tbody>
-          <tr ng-repeat="stock in stocks | filter:{Date: selectedDate} | orderBy:'Symbol' | filter:{Symbol: tickerFilter}">
+          <tr ng-repeat="stock in stocks | filter:{Date: selectedDate} | filter:{Symbol: tickerFilter} | orderBy:orderFilter" >
             
             <td>{{ stock.Symbol }}</td>  
             <td>{{ stock.Close | currency }}</td>
             <td>{{ stock.oneDayPerformance() | currency }}</td>
             <td>{{ stock.sevenDayPerformance() | currency }}</td>
-            <!-- not hiding very well.. -->
-            <td><span ng-hide="stock.thirtyDayPerformace() < 0"></span>{{ stock.thirtyDayPerformance() | currency }}</td>
+            <!-- not showing very well.. -->
+            <td><span ng-show="stock.thirtyDayPerformace() > 0"></span>{{ stock.thirtyDayPerformance() | currency }}</td>
             <td ui-sref="main.trade({symbol: stock.Symbol, price: stock.Close, stock: stock.Date})"><a>Trade</a></td>
           </tr>
         </tbody>

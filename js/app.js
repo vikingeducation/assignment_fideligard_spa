@@ -18,9 +18,15 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
 
   // });
   $scope.tickerFilter = "";
-  
+  $scope.orderFilter = "Symbol";
   $scope.selectedDate = dateService.selectedDate;
-
+  $scope.setOrderFilter = function(filter){
+    if($scope.orderFilter === filter){
+      $scope.orderFilter = "-" + filter;
+    } else {
+      $scope.orderFilter = filter;
+    }
+  }
 
 
   $scope.$watch(function(){
