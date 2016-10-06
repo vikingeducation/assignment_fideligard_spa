@@ -11,6 +11,12 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
     
   };
 
+  //update the fields when the symbol changes
+  $scope.updateTrade = function(){
+    $scope.price = parseInt(stockService.findSpecificDay($scope.symbol, $scope.selectedDate).Close);
+    $scope.cost = $scope.price * $scope.quantity; 
+  };
+
   
 
   $scope.validDate = function(){
