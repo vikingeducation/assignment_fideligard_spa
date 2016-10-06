@@ -16,6 +16,16 @@ StockApp.factory("portfolioService", ['portfolioGenerator', function(portfolioGe
   service.buildPortfolio = function(date){
     return _buildPortfolio(date);
   };
+
+  service.makeTrade = function(type, quantity, price){
+    var value = quantity * price;
+
+    if(type === "BUY"){
+      _cash -= value;
+    } else if(type === "SELL"){
+      _cash += value;
+    }
+  };
    
 
 

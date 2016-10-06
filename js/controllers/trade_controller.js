@@ -5,6 +5,8 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
   $scope.makeTransaction = function(date, symbol, type, quantity, price){
     if($scope.validFields()){
       transactionService.createTransaction(date, symbol, type, quantity, price);
+
+      portfolioService.makeTrade(type, quantity, price);
     }
     
   };
