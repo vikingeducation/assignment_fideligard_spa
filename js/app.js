@@ -30,11 +30,18 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
 
     $scope.stocks = stockService.stocksByDate($scope.selectedDate);
   });
+
+  $scope.updateStocks = function(){
+    console.log("updating stocks from callback");
+    $scope.stocks = stockService.stocksByDate($scope.selectedDate);
+  };
   
+  //pass it a m ethod to execut after each promise
+  stockService.getStocks($scope.updateStocks);
   
   //$scope.currentStocks = stockService.allStocksByDay($scope.selectedDate);
- stockService.getStocks();
- $scope.stocks = stockService.stocksByDate($scope.selectedDate);
+ 
+ 
   
   
 

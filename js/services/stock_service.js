@@ -148,7 +148,7 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
     })
   }
 
-  service.getStocks = function(){
+  service.getStocks = function(controllerCallback){
     var promises = _makeStockPromises();
     for(var i = 0; i < promises.length; i++){
       promises[i].then(function success(response){
@@ -162,6 +162,8 @@ StockApp.factory("stockService", ["$http", '_', function($http, _){
           _extendStocks(_stocks[ticker]);
           _stocks[ticker] = _stocks[ticker].reverse();
         }
+
+        controllerCallback();
 
 
         console.log("handled promise");
