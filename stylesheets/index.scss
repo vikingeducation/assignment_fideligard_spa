@@ -36,9 +36,23 @@ main-nav{
 .container {
   width: 940px;
 
+  .hide-show-glyphicon {
+    font-size: 25px;
+    position: absolute;
+      
+    top: 22px;
+    right: 15px;
+  }
+
   .view-container {
     border: 1px solid black;
     padding: 15px;
+    position: relative;
+  }
+
+  .sub-body-container {
+    margin-top: 5px;
+    overflow: hidden;
   }
 
   .sub-header {
@@ -49,12 +63,8 @@ main-nav{
   #get-stocks-container {
     margin-bottom: 15px;
 
-    #get-stocks-header-container {
-      margin-bottom: 5px;
-    }
-
     #buttons-container {
-      margin-bottom: 15px;
+      margin-bottom: 5px;
 
       #all-button {
         width: 25%;
@@ -69,25 +79,25 @@ main-nav{
       }
     }
 
+    #search-container {
+      margin-bottom: 10px;
+
+      input {
+        margin-left: 15px;
+        display: inline-block;
+        width: 323px;
+      }
+    }
+
     #table-container {
-      height: 300px;
+      max-height: 300px;
       overflow: auto;
     }
   }
 
   #stocks-container {
-    position: relative;
-
-    #stocks-header-container {
-      margin-bottom: 15px;
-
-      #filter-container {
-        position: absolute;
-        top: 20px;
-        right: 15px;
-
-        font-size: 13px;
-      }
+    #stocks-body-container {
+      display: none;
     }
   }
 
@@ -107,7 +117,7 @@ main-nav{
 
     #current-date {
       color: black;
-      left: 205px;
+      left: 170px;
     }
 
     #latest-date {

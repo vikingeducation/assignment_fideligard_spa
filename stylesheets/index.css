@@ -24,36 +24,42 @@ main-nav .navbar {
 
 .container {
   width: 940px; }
+  .container .hide-show-glyphicon {
+    font-size: 25px;
+    position: absolute;
+    top: 22px;
+    right: 15px; }
   .container .view-container {
     border: 1px solid black;
-    padding: 15px; }
+    padding: 15px;
+    position: relative; }
+  .container .sub-body-container {
+    margin-top: 5px;
+    overflow: hidden; }
   .container .sub-header {
     display: inline-block;
     font-size: 25px; }
   .container #get-stocks-container {
     margin-bottom: 15px; }
-    .container #get-stocks-container #get-stocks-header-container {
-      margin-bottom: 5px; }
     .container #get-stocks-container #buttons-container {
-      margin-bottom: 15px; }
+      margin-bottom: 5px; }
       .container #get-stocks-container #buttons-container #all-button {
         width: 25%; }
       .container #get-stocks-container #buttons-container #clear-button {
         width: 25%; }
       .container #get-stocks-container #buttons-container #submit-button {
         width: 48%; }
+    .container #get-stocks-container #search-container {
+      margin-bottom: 10px; }
+      .container #get-stocks-container #search-container input {
+        margin-left: 15px;
+        display: inline-block;
+        width: 323px; }
     .container #get-stocks-container #table-container {
-      height: 300px;
+      max-height: 300px;
       overflow: auto; }
-  .container #stocks-container {
-    position: relative; }
-    .container #stocks-container #stocks-header-container {
-      margin-bottom: 15px; }
-      .container #stocks-container #stocks-header-container #filter-container {
-        position: absolute;
-        top: 20px;
-        right: 15px;
-        font-size: 13px; }
+  .container #stocks-container #stocks-body-container {
+    display: none; }
   .container #date-picker-container {
     margin-bottom: 15px;
     position: relative; }
@@ -65,7 +71,7 @@ main-nav .navbar {
       left: 5px; }
     .container #date-picker-container #current-date {
       color: black;
-      left: 205px; }
+      left: 170px; }
     .container #date-picker-container #latest-date {
       right: 5px; }
     .container #date-picker-container #date-line-placer {

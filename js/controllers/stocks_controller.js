@@ -24,12 +24,34 @@ StockPortfolioSimulator.controller('StocksController',
 			.then(function(request){
 				$scope.results = request;
 
+				// currently this isn't running when there's no results!
+				// So I can set it so that the retrieve stock box slides up accordingly
+				$scope.slideBodyContainer('#hide-show-get-stocks-body-container', '#get-stocks-body-container');
+
+				if($('#stocks-body-container').is(":hidden")){
+					$scope.slideBodyContainer('#hide-show-stocks-body-container', '#stocks-body-container');
+				};
+
 				$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
 
 				$scope.dates = Object.keys($scope.stockDetailsByDate);
 
 				$scope.rangeMax = $scope.dates.length -1;
 			});
+	};
+
+	$scope.slideBodyContainer = function(clickedElement, id){
+		if ( $( id ).is( ":hidden" ) ) {
+			$(clickedElement).addClass("glyphicon-triangle-top");
+			$(clickedElement).removeClass("glyphicon-triangle-bottom");
+
+			$(id).slideDown( 1500 );
+		} else {
+			$(clickedElement).addClass("glyphicon-triangle-bottom");
+			$(clickedElement).removeClass("glyphicon-triangle-top");
+
+			$(id).slideUp(1500);
+		};
 	};
 
 	// ---------------------------
