@@ -22,7 +22,13 @@ p.invalid {
   }
 }
 
+thead tr {
+  background-color: lightblue;
+}
 
+tbody tr {
+  background-color: lightgray;
+}
 
 @media(min-width: 1000px){
   #stocks-wrapper {
