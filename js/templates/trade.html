@@ -1,0 +1,119 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card-header">
+      <h3>Trade</h3>
+      <route-dropdown current-view='Trade'></route-dropdown>
+    </div>
+  </div>
+</div>
+
+<!-- Don't give a form the same name as the value used in a validator -->
+<div class="row">
+  <div class="card-block" style="color:white">
+    <form
+    name='tradeForm'
+    novalidate
+    ng-submit='tradeForm.$valid && placeOrder()'>
+      <div class="col-md-6">
+        <div
+        class='form-group'
+        ng-class="{ 'has-danger': tradeForm.symbol.$invalid, 'has-success' : tradeForm.symbol.$valid}">
+          <label>
+            Symbol
+            <input class='form-control'
+            type='text'
+            ng-model='trade.formData.symbol'
+            name='symbol'
+            valid-symbol>
+          </label><br>
+        </div>
+
+        <div
+        class='form-group'
+        ng-class="{ 'has-danger': tradeForm.type.$invalid, 'has-success' : tradeForm.type.$valid}">
+          <label>
+            Buy/Sell
+            <select class='form-control'
+            ng-model='trade.formData.type'
+            name='type'
+            ng-required>
+              <option value='buy'>Buy</option>
+              <option value='sell'>Sell</option>
+            </select>
+          </label><br>
+        </div>
+
+        <div
+        class='form-group'
+        ng-class="{ 'has-danger': tradeForm.quantity.$invalid, 'has-success' : tradeForm.quantity.$valid}">
+          <label>
+            Quantity
+            <input class='form-control'
+            type='number'
+            ng-model='trade.formData.quantity'
+            name='quantity'
+            min='1'
+            max='{{maxQuant()}}'
+            ng-required>
+          </label><br>
+        </div>
+
+        <div
+        class='form-group'
+        ng-class="{ 'has-danger': tradeForm.date.$invalid, 'has-success' : tradeForm.date.$valid}">
+          <label>
+            Date
+            <input class='form-control'
+            type='date'
+            ng-model='trade.formData.date'
+            name='date'
+            value="{{trade.formData.date}}"
+            valid-date>
+          </label><br>
+        </div>
+      </div>
+
+      <div class="col-md-6" style="padding-left:20;padding-right:20">
+        <div
+        class='form-group'>
+          <label>
+            Price
+            <p ng-model='trade.formData.price'>
+              {{trade.stock.Close}}
+            </p>
+          </label><br>
+        </div>
+
+        <div class='form-group'>
+          <label>
+            Cash available
+            <p ng-model='trade.formData.cashAvailable'>
+              {{trade.user.cashAvailable}}
+            </p>
+          </label><br>
+        </div>
+
+        <div class='form-group'>
+          <label>
+            Cost
+            <p>
+              {{ showCost() }}
+            </p>
+          </label><br>
+        </div>
+
+        <div class='form-group'>
+          <label id="order-status">
+            Order status<br>
+            <div class="card">
+              <p ng-show="tradeForm.$valid" class='valid-order'>VALID</p>
+              <p ng-hide="tradeForm.$valid" class='invalid-order'>INVALID</p>
+            </div>
+          </label><br>
+        </div>
+
+        <button type='submit' class='btn btn-success'>PLACE ORDER</button>
+      </div>
+    </form>
+  </div>
+</div>

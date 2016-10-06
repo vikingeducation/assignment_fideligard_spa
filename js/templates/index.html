@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="table-responsive">
+      <table class="table">
+        <theader>
+          <tr>
+            <th style="width:50">Symbol</th>
+            <th style="width:50">Price</th>
+            <th style="width:50">1d</th>
+            <th style="width:50">7d</th>
+            <th style="width:50">30d</th>
+            <th style="width:50">Trade</th>
+          </tr>
+        </theader>
+
+        <tbody
+        ng-repeat="(day, stocks) in stockData | filterDays:dateInfo.currentDate"
+        stocks="stocks"
+        >
+          <tr
+          ng-repeat="stock in stocks"
+          stock-index-row
+          stock='stock'
+          >
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
