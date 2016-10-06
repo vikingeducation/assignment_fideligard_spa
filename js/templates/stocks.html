@@ -11,14 +11,14 @@
         </div>
       </div>
 
-      <table class="table table-bordered table-hover">
+      <table class="table table-bordered table-hover table-condensed">
         <thead>
           <tr class="thead-inverse">
-            <th ng-click="setOrderFilter('Symbol')">Symbol<span></span></th>
-            <th ng-click="setOrderFilter('Close')">Price</th>
-            <th ng-click="setOrderFilter('oneDayPerformance()')">1d</th>
-            <th ng-click="setOrderFilter('sevenDayPerformance()')">7d</th>
-            <th ng-click="setOrderFilter('thirtyDayPerformance()')">30d</th>
+            <th ng-click="setOrderFilter('Symbol')">Symbol<span ng-show="orderFilter === '-Symbol'"> &#x25BC</span><span ng-show="orderFilter === 'Symbol'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('Close')">Price<span ng-show="orderFilter === '-Close'"> &#x25BC</span><span ng-show="orderFilter === 'Close'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('oneDayPerformance()')">1d<span ng-show="orderFilter === '-oneDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'oneDayPerformance()'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('sevenDayPerformance()')">7d<span ng-show="orderFilter === '-sevenDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'sevenDayPerformance()'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('thirtyDayPerformance()')">30d<span ng-show="orderFilter === '-thirtyDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'thirtyDayPerformance()'"> &#x25B2</span></th>
             <th>Trade</th>
           </tr>
         </thead>
