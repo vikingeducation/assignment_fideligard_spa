@@ -55,8 +55,8 @@
       <p>{{ availableCash | currency }}</p>
 
       <h3>Order Status</h3><br>
-      <p>Valid</p>
-
+      <h4 class="text-success" ng-show="validFields() === true">Valid</h4>
+      <h4 class="text-danger" ng-show="validFields() === false">Invalid</h4>
     </div>
 
 
