@@ -8,6 +8,8 @@ StockApp.factory('portfolioGenerator', ['stockService', 'transactionService', fu
   _portfolio = {};
   _portfolio.stocks = [];
 
+  
+
   var _makeStock = function(transactions, date){
     //make individual p data for a stock and return it
     var stock = {};

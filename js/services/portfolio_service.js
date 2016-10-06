@@ -26,6 +26,18 @@ StockApp.factory("portfolioService", ['portfolioGenerator', function(portfolioGe
       _cash += value;
     }
   };
+
+  service.sharesOf = function(ticker){
+    ppp = _portfolio.stocks;
+    for(var i = 0; i < _portfolio.stocks.length; i++){
+      var stock = _portfolio.stocks[i];
+      if(stock.symbol() === ticker){
+        return stock.quantity();
+      } 
+    };
+
+    return 0;
+  };
    
 
 

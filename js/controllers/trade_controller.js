@@ -55,17 +55,12 @@ StockApp.controller("TradeCtrl", ['$scope', 'dateService', 'stockService', '$sta
 
   $scope.validFields = function(){
     if($scope.type === "BUY"){
-        if($scope.availableCash > $scope.cost && $scope.validDate()){
-        return true;
-      } else {
-        return false;
-      }
+        return $scope.availableCash > $scope.cost && $scope.validDate();
+        
     } else if($scope.type === "SELL"){
-      //if owned shares cost is < scope.cost return false
-      //else return true
+      
+      return portfolioService.sharesOf($scope.symbol) > $scope.quantity;
 
-      //return true for placeholder
-      return true;
     } else {
       return false;
     }
