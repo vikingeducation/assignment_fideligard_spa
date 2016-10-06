@@ -112,7 +112,7 @@ StockApp.factory("dateService", [function(){
 
   console.log('my date');
   var myDate = new Date('2015-12-25').getTime();
-  myDate = new Date(myDate - 14400000);
+  myDate = new Date(myDate);
   dDay = startDate;
   theDate = myDate;
   console.log(_checkHoliday(myDate));
@@ -124,7 +124,7 @@ StockApp.factory("dateService", [function(){
       _range.push(angular.copy(startDate));
     }
     
-    startDate = new Date(startDate.setDate(startDate.getDate() + 1));
+    startDate = new Date(startDate.getTime() + 86400000);
   }
   _range.push(endDate);
 
