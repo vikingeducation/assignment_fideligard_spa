@@ -20,6 +20,14 @@ p.invalid {
   h4 {
     display: inline-block;
   }
+
+  thead tr {
+    background-color: lightblue;
+  }
+
+  tbody tr {
+    background-color: lightgray;
+  }
 }
 
 thead tr {
