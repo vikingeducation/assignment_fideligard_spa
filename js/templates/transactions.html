@@ -14,11 +14,11 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Date</th>
-        <th ng-click="sort = 'symbol'">Symbol</th>
-        <th ng-click="sort = 'type'">Type</th>
-        <th ng-click="sort = 'quantity'">Quantity</th>
-        <th ng-click="sort = 'price'">Price</th>
+        <th ng-click="setSort('dateObject')">Date<span ng-show="sort === '-dateObject'"> &#x25BC</span><span ng-show="sort === 'dateObject'"> &#x25B2</span></th>
+        <th ng-click="setSort('symbol')">Symbol<span ng-show="sort === '-symbol'"> &#x25BC</span><span ng-show="sort === 'symbol'"> &#x25B2</span></th>
+        <th ng-click="setSort('type')">Type<span ng-show="sort === '-type'"> &#x25BC</span><span ng-show="sort === 'type'"> &#x25B2</span></th>
+        <th ng-click="setSort('quantity')">Quantity<span ng-show="sort === '-quantity'"> &#x25BC</span><span ng-show="sort === 'quantity'"> &#x25B2</span></th>
+        <th ng-click="setSort('price')">Price<span ng-show="sort === '-price'"> &#x25BC</span><span ng-show="sort === 'price'"> &#x25B2</span></th>
 
       </tr>
     </thead>

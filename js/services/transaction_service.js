@@ -16,6 +16,9 @@ StockApp.factory("transactionService", [function(){
 
   service.createTransaction = function(date, symbol, type, quantity, price){
     var transaction = new service.transaction(date, symbol, type, quantity, price);
+
+    transaction.dateObject = new Date(date);
+    
     if(_transactions[symbol]){
       _transactions[symbol].push(transaction);
     } else {
@@ -29,6 +32,8 @@ StockApp.factory("transactionService", [function(){
     return _transactions;
   };
 
+
+
   service.allTransactions = function(){
     var result = [];
     for(ticker in _transactions){
@@ -36,6 +41,8 @@ StockApp.factory("transactionService", [function(){
         result.push(transaction);
       });
     };
+
+    
     return result;
   };
 
