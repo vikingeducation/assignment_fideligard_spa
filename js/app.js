@@ -31,8 +31,9 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
     $scope.stocks = stockService.stocksByDate($scope.selectedDate);
   });
 
+  //run this after each async stock request
   $scope.updateStocks = function(){
-    console.log("updating stocks from callback");
+    
     $scope.stocks = stockService.stocksByDate($scope.selectedDate);
   };
   
