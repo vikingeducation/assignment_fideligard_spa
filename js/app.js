@@ -55,10 +55,11 @@ angular.module("StockApp").controller("StocksCtrl", ['$scope', 'stockService', '
 }])
 
 
-StockApp.config(function($stateProvider, $urlRouterProvider){
+StockApp.config(function($stateProvider, $urlRouterProvider, $locationProvider){
 
   $urlRouterProvider.otherwise("/");
 
+  $locationProvider.html5Mode(true);
 
   $stateProvider
     .state('main', {
