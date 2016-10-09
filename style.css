@@ -1,0 +1,7 @@
+table { table-layout: fixed; font-size: 12px; text-align: center;} 
+
+table th, table td { overflow: hidden; }
+
+#naver { border-radius: 0px; }
+
+#main-widget { padding: 0px; }

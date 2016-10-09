@@ -1,0 +1,92 @@
+<div class="table-responsive">
+  <table class="table table-bordered table-hover text-xs-center" style="margin: 0px;">
+    <thead class="text-xs-center">
+      <tr>
+        <th>
+          Cost Basis
+        </th>
+        <th>
+          Current Val
+        </th>
+        <th>
+          Net Gain
+        </th>
+        <th>
+          1d
+        </th>
+        <th>
+          7d
+        </th>
+        <th>
+          30d
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          {{portCostBasis}}
+        </td>
+        <td>
+          {{}}
+        </td>
+        <td>
+          {{portNetGain}}
+        </td>
+        <td>
+          tbd
+        </td>
+        <td>
+          tbd
+        </td>
+        <td>
+          tbd
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<br>
+
+<div class="table-responsive">
+  <table class="table table-inverse table-bordered table-hover text-xs-center" style="margin: 0px;">
+    <thead class="text-xs-center">
+      <tr>
+        <th>
+          Symbol
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th>
+          Cost Basis
+        </th>
+        <th>
+          Curr Val
+        </th>
+        <th>
+          Net
+        </th>
+        <th>
+          Curr Price
+        </th>
+        <th>
+          1d
+        </th>
+        <th>
+          7d
+        </th>
+        <th>
+          30d
+        </th>
+        <th>
+          Trade?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr portfolio-row ng-repeat="stock in portfolio[date]" stock="stock"></tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,48 @@
+<div class="card card-outline-primary">
+  <div class="card-header bg-primary">
+    Stocks Widget
+  </div>
+
+  <div class="card-block" style="width: 100%; padding: 0px; margin: 0px">
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-8">
+      <div class="col-sm-5">
+        Filter 
+      </div>
+      <div class="col-sm-7">
+        <input type="text" style="text-transform:uppercase" ng-model="nameFilter" class="form-control" ng-value="">
+      </div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="table table-inverse table-bordered table-hover text-xs-center" style="margin: 0px;">
+        <thead class="text-xs-center">
+          <tr>
+            <th>
+              Symbol
+            </th>
+            <th>
+              Price
+            </th>
+            <th>
+              1d
+            </th>
+            <th>
+              7d
+            </th>
+            <th>
+              30d
+            </th>
+            <th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr stock-row ng-repeat="stock in allStocks | filterBySymbol:(nameFilter|uppercase)" stock="stock"></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
