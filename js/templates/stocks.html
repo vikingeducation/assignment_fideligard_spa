@@ -1,0 +1,48 @@
+<div class="row">
+  <div id="stocks-wrapper">
+    <div class="col-xs-12">
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <h1>Stocks</h1>
+        </div>
+
+        <div class="col-xs-6 col-md-6">
+          <h2 style="display: inline-block;">Filter:</h2><input ng-model="tickerFilter" type="text">
+        </div>
+      </div>
+
+      <table class="table table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th ng-click="setOrderFilter('Symbol')">Symbol<span ng-show="orderFilter === '-Symbol'"> &#x25BC</span><span ng-show="orderFilter === 'Symbol'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('Close')">Price<span ng-show="orderFilter === '-Close'"> &#x25BC</span><span ng-show="orderFilter === 'Close'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('oneDayPerformance()')">1d<span ng-show="orderFilter === '-oneDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'oneDayPerformance()'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('sevenDayPerformance()')">7d<span ng-show="orderFilter === '-sevenDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'sevenDayPerformance()'"> &#x25B2</span></th>
+            <th ng-click="setOrderFilter('thirtyDayPerformance()')">30d<span ng-show="orderFilter === '-thirtyDayPerformance()'"> &#x25BC</span><span ng-show="orderFilter === 'thirtyDayPerformance()'"> &#x25B2</span></th>
+            <th>Trade</th>
+          </tr>
+        </thead>
+        
+        
+        <tbody>
+          <tr ng-repeat="stock in stocks | filter:{Date: selectedDate} | filter:{Symbol: tickerFilter} | orderBy:orderFilter" >
+            
+            <td>{{ stock.Symbol }}</td>  
+            <td>{{ stock.Close | currency }}</td>
+            <td>{{ stock.oneDayPerformance() | currency }}</td>
+            <td>{{ stock.sevenDayPerformance() | currency }}</td>
+            <!-- not showing very well.. -->
+            <td><span ng-show="stock.thirtyDayPerformace() > 0"></span>{{ stock.thirtyDayPerformance() | currency }}</td>
+            <td ui-sref="main.trade({symbol: stock.Symbol, price: stock.Close, stock: stock.Date})"><a>Trade</a></td>
+          </tr>
+        </tbody>
+        
+
+
+
+      </table>
+
+    </div>
+
+  </div>
+</div>

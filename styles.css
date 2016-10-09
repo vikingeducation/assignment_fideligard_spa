@@ -1,0 +1,45 @@
+a.navbar-brand {
+  color: purple;
+}
+
+.trade-container {
+  border: solid 1px black;
+  margin-top: 20px;
+}
+
+#trade-form p {
+  display: inline-block;
+}
+
+p.invalid {
+  color: red;
+}
+
+
+.transactions-wrapper {
+  h4 {
+    display: inline-block;
+  }
+
+  thead tr {
+    background-color: lightblue;
+  }
+
+  tbody tr {
+    background-color: lightgray;
+  }
+}
+
+thead tr {
+  background-color: lightblue;
+}
+
+tbody tr {
+  background-color: lightgray;
+}
+
+@media(min-width: 1000px){
+  #stocks-wrapper {
+    margin-top: -40px;
+  }
+}

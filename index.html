@@ -1,0 +1,82 @@
+<!doctype html>
+<html ng-app="StockApp">
+  <head>
+    <title>Angular Trading</title>
+
+    <!-- <base href="/angular-trading/" /> -->
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+    <script src="js/angular-ui-router.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js"></script>
+
+    
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+
+
+  <body>
+    <nav-bar></nav-bar>
+    
+    <main class="container">
+      <div class="row">
+
+        <div ui-view="datepicker"></div>
+
+      </div>
+      <div class="row">
+        <div class="col-md-4 col-xs" id="stocks-wrapper">
+          <div ui-view="stocks"></div>
+        </div>
+
+        <div class="col-md-8 col-xs-12">
+          
+
+          <div class="row" id="main-content">
+            <div ui-view="statepicker"></div>
+
+            <div ui-view></div>
+
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/directives/navbar.js"></script>
+    <script src="js/services/stock_service.js"></script>
+    
+    
+
+    <script src="js/services/transaction_service.js"></script>
+    
+    <script src="js/services/portfolio_generator.js"></script>
+    <script src="js/services/date_service.js"></script>
+    
+
+    <script src="js/services/portfolio_service.js"></script>
+    <script src="js/controllers/portfolio_controller.js"></script>
+    <script src="js/controllers/state_controller.js"></script>
+    <script src="js/controllers/date_picker_controller.js"></script>
+    <script src="js/controllers/transactions_controller.js"></script>
+    <script src="js/controllers/trade_controller.js"></script>
+    
+    <script src="js/controllers/stocks_controller.js"></script>
+    
+  </body>
+
+
+
+
+
+
+
+</html>
+
+
+
+

@@ -1,0 +1,48 @@
+<div class="col-xs-12" id="transactions-wrapper">
+  <div class="row">
+    <div class="col-xs-4">
+      <h2>Transactions</h2>
+    </div>
+
+    <div class="col-xs-8">
+      <h4>Filter:</h4>
+      <input ng-model="symbolFilter" type="text">
+    </div>
+
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th ng-click="setSort('dateObject')">Date<span ng-show="sort === '-dateObject'"> &#x25BC</span><span ng-show="sort === 'dateObject'"> &#x25B2</span></th>
+        <th ng-click="setSort('symbol')">Symbol<span ng-show="sort === '-symbol'"> &#x25BC</span><span ng-show="sort === 'symbol'"> &#x25B2</span></th>
+        <th ng-click="setSort('type')">Type<span ng-show="sort === '-type'"> &#x25BC</span><span ng-show="sort === 'type'"> &#x25B2</span></th>
+        <th ng-click="setSort('quantity')">Quantity<span ng-show="sort === '-quantity'"> &#x25BC</span><span ng-show="sort === 'quantity'"> &#x25B2</span></th>
+        <th ng-click="setSort('price')">Price<span ng-show="sort === '-price'"> &#x25BC</span><span ng-show="sort === 'price'"> &#x25B2</span></th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="transaction in transactions | filter:{symbol: symbolFilter} | orderBy:sort">
+
+        <td>{{ transaction.date }}</td>
+        <td>{{ transaction.symbol }}</td>
+        <td>{{ transaction.type }}</td>
+        <td>{{ transaction.quantity }}</td>
+        <td>{{ transaction.price | currency }}</td>
+      </tr>
+    </tbody>
+
+
+
+
+  </table>
+
+  
+
+
+
+
+
+</div>

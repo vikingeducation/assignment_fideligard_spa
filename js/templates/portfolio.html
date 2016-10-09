@@ -1,0 +1,90 @@
+<div class="col-xs-12" id="portfolio-wrapper">
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Portfolio</h2>
+    </div>
+
+    
+  </div>
+
+  <table class="table table-bordered" id="stats">
+    <thead>
+      <tr>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
+
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td>{{ portfolio.costBasis | currency }}</td>
+        <td>{{ portfolio.currentValue | currency}}</td>
+        <td>{{ portfolio.profitLoss | currency }}</td>
+        <td>{{ portfolio.oneDayPerformance | currency }}<span ng-show="!portfolio.oneDayPerformance">N/A</span></td>
+        <td>{{ portfolio.sevenDayPerformance | currency }}<span ng-show="!portfolio.sevenDayPerformance">N/A</span></td>
+        <td>{{ portfolio.thirtyDayPerformance | currency }}<span ng-show="!portfolio.thirtyDayPerformance">N/A</span></td>
+
+
+      </tr>
+    </tbody>
+    
+
+  </table>
+
+  <table class="table table-bordered" id="portfolio">
+    <thead>
+      <tr>
+        <th>Symbol</th>
+        <th>Quantity</th>
+        <th>Cost Basis</th>
+        <th>Current Value</th>
+        <th>Profit/Loss</th>
+        <th>Current Price</th>
+        <th>1d</th>
+        <th>7d</th>
+        <th>30d</th>
+        <th>Trade</th>
+
+      </tr>
+    <thead>
+
+    <tbody>
+      <tr id="cash" class="success">
+        <td>$$$CASH</td>
+        <td>{{ cash | currency }}</td>
+        <td>{{ cash | currency }}</td>
+        <td>{{ cash | currency }}</td>
+        <td>{{ 0 | currency }}</td>
+        <td>{{ 1 | currency }}</td>
+        <td>+ {{ 0 | currency }}</td>
+        <td>+ {{ 0 | currency }}</td>
+        <td>+ {{ 0 | currency }}</td>
+        <td></td>
+
+      </tr>
+
+
+      <tr ng-repeat="stock in portfolio.stocks">
+      <td>{{ stock.symbol() }}</td>
+        <td>{{ stock.quantity() }}</td>
+        <td>{{ stock.costBasis() | currency }}</td>
+        <td>{{ stock.currentValue() | currency }}</td>
+        <td>{{ stock.profitLoss() | currency }}</td>
+        <td>{{ stock.currentPrice | currency }}</td>
+        <td>{{ stock.oneDayPerformance() | currency }}<span ng-show="!stock.oneDayPerformance()">N/A</span></td>
+        <td>{{ stock.sevenDayPerformance() | currency }}<span ng-show="!stock.sevenDayPerformance()">N/A</span></td>
+        <td>{{ stock.thirtyDayPerformance() | currency }}<span ng-show="!stock.thirtyDayPerformance()">N/A</span></td>
+        <td><a ui-sref="main.trade({symbol: stock.symbol(), price: stock.currentPrice})">Trade</a></td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+  
+
