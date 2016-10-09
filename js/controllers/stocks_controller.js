@@ -32,9 +32,9 @@ StockPortfolioSimulator.controller('StocksController',
 					$scope.slideBodyContainer('#hide-show-stocks-body-container', '#stocks-body-container');
 				};
 
-				$scope.stockDetailsByDate = StocksService.stockDetailsByDate();
+				$scope.stockDetailsByDate = StocksService.stockDetailsByDate( $scope.startDate, $scope.endDate );
 
-				$scope.dates = Object.keys($scope.stockDetailsByDate);
+				$scope.dates = Object.keys($scope.stockDetailsByDate).sort();
 
 				$scope.rangeMax = $scope.dates.length -1;
 			});

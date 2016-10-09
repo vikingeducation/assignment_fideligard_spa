@@ -170,13 +170,13 @@
                   {{ stock.priceOnDate | currency }}
                 </td>
                 <td>
-                  {{ stock.priceADayAgo ? (stock.priceADayAgo | currency) : notAvailableString }}
+                  {{ (stock.priceADayAgo || stock.priceADayAgo === 0 ) ? (stock.priceADayAgo | currency) : notAvailableString }}
                 </td>
                 <td>
-                  {{ stock.priceSevenDaysAgo ? (stock.priceSevenDaysAgo | currency) : notAvailableString }}
+                  {{ (stock.priceSevenDaysAgo || stock.priceSevenDaysAgo === 0) ? (stock.priceSevenDaysAgo | currency) : notAvailableString }}
                 </td>
                 <td>
-                  {{ stock.priceThirtyDaysAgo ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
+                  {{ (stock.priceThirtyDaysAgo || stock.priceThirtyDaysAgo === 0) ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
                 </td>
                 <td>
                   <a href="">
