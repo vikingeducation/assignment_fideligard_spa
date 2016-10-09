@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="StockPortfolioSimulator">
+<html ng-app="StockPortfolioSimulator" ng-controller="StocksController">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +8,10 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- jQuery-Ui -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Angular -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
@@ -34,8 +38,29 @@
     <!-- Moment -->
     <script src="/bower_components/moment/moment.js"></script>
 
+    <!-- Needed for Datepicker -->
+    <script>
+      $( function() {
+        $( "#from-date-input" ).datepicker({
+          dateFormat: "yy-mm-dd"
+        });
+
+        // Unfortunately we have to set the date here and in the controllers scope for now.
+        // Will look into when I have more time.
+        $( "#from-date-input" ).datepicker("setDate", "2014-01-01" );
+
+
+        $( "#to-date-input" ).datepicker({
+          dateFormat: "yy-mm-dd"
+        });
+
+        $( "#to-date-input" ).datepicker("setDate", "2014-12-31" );
+
+      } );
+    </script>
+
   </head>
-  <body ng-controller="StocksController">
+  <body>
     <!-- Nav -->
     <main-nav></main-nav>
 
@@ -53,6 +78,16 @@
           </div>
 
           <div class="sub-body-container" id="get-stocks-body-container">
+
+            <div id="date-pickers">
+              <label>
+                From: <input type="text" id="from-date-input" class='form-control' ng-model="startDate">
+              </label>
+              <label>
+                To: <input type="text" id="to-date-input" class='form-control' ng-model="endDate">
+              </label>
+            </div>
+
             <div id="buttons-container">
               <button class="btn btn-primary" id="all-button" ng-click="chooseAllSymbols()">
                 All

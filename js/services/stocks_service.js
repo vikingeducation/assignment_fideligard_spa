@@ -53,6 +53,25 @@ StockPortfolioSimulator.factory('StocksService',
 			};
 		};
 
+		var _setDifferencesInStockPricesForAll = function(){
+			// I guess you could do it again but this time comparing away...
+			// So the brute force way
+			// Gonna go through each stock and first off see if stock for a day ago exists
+			_.each(_stocksQuery, function(stock){
+				var oneDayAgo = _returnDateDaysAgo(stock.Date, 1);
+				var sevenDaysAgo = _returnDateDaysAgo(stock.Date, 7);
+				var thirtyDaysAgo = _returnDateDaysAgo(stock.Date, 30);
+				var currentStockIndex = _returnCurrentStockIndexByDate(stock.Date, stock.Symbol);
+
+				_setDifferenceInStockPrices( oneDayAgo, stock.Symbol, stock.Date, currentStockIndex, "priceADayAgo" );
+
+				_setDifferenceInStockPrices( sevenDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceSevenDaysAgo" );
+
+				_setDifferenceInStockPrices( thirtyDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceThirtyDaysAgo" );
+
+			});
+		};
+
 		// --------------
 		// Public
 		// --------------
@@ -72,9 +91,9 @@ StockPortfolioSimulator.factory('StocksService',
 		};
 
 		// To get the JSON list for all stock names and their symbols
-		// 1. Get the CSV file from: 
+		// 1. Get the CSV file from:
 		// http://www.nasdaq.com/screening/companies-by-name.aspx?letter=0&exchange=nasdaq&render=download
-		// 2. Convery the CSV file at: 
+		// 2. Convery the CSV file at:
 		// http://www.convertcsv.com/csv-to-json.htm
 		StocksService.getAllNamesAndSymbols = function(){
 			// Get JSON response object
@@ -89,13 +108,14 @@ StockPortfolioSimulator.factory('StocksService',
 				});
 		};
 
-		StocksService.request = function(){
+		StocksService.request = function( startDate, endDate ){
 			// Get JSON response object
 			var symbolsString = _returnSymbolsString();
 
 			if(symbolsString.length){
+				console.log();
 				return $http({
-					url: 'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20(' + symbolsString + ')%20and%20startDate%20=%20%222013-09-11%22%20and%20endDate%20=%20%222014-02-11%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=',
+					url: 'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20in%20(' + symbolsString + ')%20and%20startDate%20=%20%22' + startDate + '%22%20and%20endDate%20=%20%22' + endDate + '%22%20&format=json%20&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=',
 					method: "GET"
 				})
 					.then(function(response) {
@@ -109,33 +129,29 @@ StockPortfolioSimulator.factory('StocksService',
 		StocksService.stockDetailsByDate = function(){
 			_stockDetailsByDate = {};
 
+			// Go through all the returned data from Yahoo
 			_.each(_stocksQuery, function(stock){
+				// If the date key doesn't work
+				// make that key value equal an empty array.
 				if ( !_stockDetailsByDate[stock.Date] ){
 					_stockDetailsByDate[stock.Date] = [];
 				};
 
+				// push the current stock into the empty array associated with the address.
 				_stockDetailsByDate[stock.Date].push({
 					symbol: stock.Symbol,
 					priceOnDate: stock.Close
 				});
 			});
 
-			// I guess you could do it again but this time comparing away...
-			// So the brute force way
-			// Gonna go through each stock and first off see if stock for a day ago exists
-			_.each(_stocksQuery, function(stock){
-				var oneDayAgo = _returnDateDaysAgo(stock.Date, 1);
-				var sevenDaysAgo = _returnDateDaysAgo(stock.Date, 7);
-				var thirtyDaysAgo = _returnDateDaysAgo(stock.Date, 30);
-				var currentStockIndex = _returnCurrentStockIndexByDate(stock.Date, stock.Symbol);
+			// Okay, so at this point we have an object with the key as the dates and the value as an array with holds objects which are stocks...
+			// So in all actuality this is where the magic needs to happen... 
+			// But for the magic to happen, we need the dates
+			// Cos I'm thinking as we go throuch each date from day 1 onwards, any dates that are missing, we just copy the information from the day before...
+			// Brilliant... 
+			// So the first thing I need to implement is the ability to search by dates
 
-				_setDifferenceInStockPrices( oneDayAgo, stock.Symbol, stock.Date, currentStockIndex, "priceADayAgo" );
-
-				_setDifferenceInStockPrices( sevenDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceSevenDaysAgo" );
-
-				_setDifferenceInStockPrices( thirtyDaysAgo, stock.Symbol, stock.Date, currentStockIndex, "priceThirtyDaysAgo" );
-
-			});
+			_setDifferencesInStockPricesForAll();
 
 			return _stockDetailsByDate;
 		};

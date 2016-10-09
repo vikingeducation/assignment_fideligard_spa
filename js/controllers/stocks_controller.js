@@ -20,7 +20,7 @@ StockPortfolioSimulator.controller('StocksController',
 	};
 
 	$scope.request = function(){
-		StocksService.request()
+		StocksService.request( $scope.startDate, $scope.endDate )
 			.then(function(request){
 				$scope.results = request;
 
@@ -63,5 +63,10 @@ StockPortfolioSimulator.controller('StocksController',
 	$scope.searchText = "";
 
 	$scope.notAvailableString = "N/A";
+
+	// Unfortunately we have to set the date here and in the script to set date for datepicker for now.
+  // Will look into when I have more time.
+	$scope.startDate = "2014-01-01";
+	$scope.endDate = "2014-12-31";
 
 }]);
