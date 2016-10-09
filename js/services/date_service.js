@@ -110,13 +110,6 @@ StockApp.factory("dateService", [function(){
 
   var _range = [];
 
-  console.log('my date');
-  var myDate = new Date('2015-12-25').getTime();
-  myDate = new Date(myDate);
-  dDay = startDate;
-  theDate = myDate;
-  console.log(_checkHoliday(myDate));
-
 
 
   while(startDate <= endDate){
