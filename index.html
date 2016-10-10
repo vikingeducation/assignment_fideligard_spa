@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="StockPortfolioSimulator" ng-controller="StocksController">
+<html ng-app="StockPortfolioSimulator">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,7 +61,7 @@
     <main-nav></main-nav>
 
     <main class="container">
-      <div class="col-xs-6">
+      <div class="col-xs-6" ng-controller="StocksController">
 
         <div class="view-container" id="get-stocks-container">
           <div id="get-stocks-header-container">
@@ -133,6 +133,19 @@
           </div>
         </div>
 
+        <div class="view-container" id="date-picker-container">
+          <div id="earliest-date" class='date-picker-date'>
+            {{ dates[0] }}
+          </div>
+          <div id="current-date" class='date-picker-date'>
+            {{ dates[rangeValue] }}
+          </div>
+          <div id="latest-date" class='date-picker-date'>
+            {{ dates[rangeMax] }}
+          </div>
+          <input type="range" min="0" max="{{ rangeMax }}" step="1"  data-orientation="horizontal" ng-model="rangeValue">
+        </div>
+
         <div class="view-container" id="stocks-container">
           <div id="stocks-header-container">
             <div class="sub-header">
@@ -192,20 +205,6 @@
         </div>
       </div>
       <div class="col-xs-6">
-        <div class="view-container" id="date-picker-container">
-          <div id="earliest-date" class='date-picker-date'>
-            {{ dates[0] }}
-          </div>
-          <div id="current-date" class='date-picker-date'>
-            {{ dates[rangeValue] }}
-          </div>
-          <div id="latest-date" class='date-picker-date'>
-            {{ dates[rangeMax] }}
-          </div>
-          <input type="range" min="0" max="{{ rangeMax }}" step="1"  data-orientation="horizontal" ng-model="rangeValue">
-
-        </div>
-
         <div class='view-container' id="main-view">
           <div ui-view></div>
         </div>
