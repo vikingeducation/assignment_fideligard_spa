@@ -50,6 +50,16 @@ main-nav{
     position: relative;
   }
 
+  .search-container {
+    margin-bottom: 10px;
+
+    input {
+      margin-left: 15px;
+      display: inline-block;
+      width: 323px;
+    }
+  }
+
   .sub-body-container {
     margin-top: 5px;
     overflow: hidden;
@@ -80,16 +90,6 @@ main-nav{
     }
 
     #date-pickers {
-      input {
-        margin-left: 15px;
-        display: inline-block;
-        width: 323px;
-      }
-    }
-
-    #search-container {
-      margin-bottom: 10px;
-
       input {
         margin-left: 15px;
         display: inline-block;

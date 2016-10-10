@@ -60,6 +60,8 @@ StockPortfolioSimulator.controller('StocksController',
 	// Variables
 	// ---------------------------
 
+	$scope.filterText = "";
+
 	$scope.rangeValue = 0;
 
 	$scope.searchText = "";

@@ -96,7 +96,7 @@
               </button>
             </div>
 
-            <div id="search-container">
+            <div class="search-container">
               <label>
                 Search: <input type="text" ng-model="searchText" class='form-control'>
               </label>
@@ -142,6 +142,12 @@
             </div>
           </div>
 
+          <div class="search-container">
+            <label>
+              Filter: <input type="text" ng-model="filterText" class='form-control'>
+            </label>
+          </div>
+
           <div class="sub-body-container" id="stocks-body-container">
             <div id="table-explanation">
               <p>
@@ -158,7 +164,7 @@
                 <th>30d</th>
                 <th>Trade?</th>
               </tr>
-              <tr ng-repeat="stock in stockDetailsByDate[dates[rangeValue]]">
+              <tr ng-repeat="stock in stockDetailsByDate[dates[rangeValue]] | filter:filterText">
                 <td>
                   {{ stock.symbol }}
                 </td>

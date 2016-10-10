@@ -33,6 +33,12 @@ main-nav .navbar {
     border: 1px solid black;
     padding: 15px;
     position: relative; }
+  .container .search-container {
+    margin-bottom: 10px; }
+    .container .search-container input {
+      margin-left: 15px;
+      display: inline-block;
+      width: 323px; }
   .container .sub-body-container {
     margin-top: 5px;
     overflow: hidden; }
@@ -49,12 +55,10 @@ main-nav .navbar {
         width: 25%; }
       .container #get-stocks-container #buttons-container #submit-button {
         width: 48%; }
-    .container #get-stocks-container #search-container {
-      margin-bottom: 10px; }
-      .container #get-stocks-container #search-container input {
-        margin-left: 15px;
-        display: inline-block;
-        width: 323px; }
+    .container #get-stocks-container #date-pickers input {
+      margin-left: 15px;
+      display: inline-block;
+      width: 323px; }
     .container #get-stocks-container #table-container {
       max-height: 300px;
       overflow: auto; }
