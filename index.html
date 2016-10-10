@@ -105,7 +105,7 @@
             <table class="table table-striped" style="margin-bottom: 0px">
               <tr>
                 <th style="width: 75px">
-                  Symbol
+                  Symbol 
                 </th>
                 <th style="width: 260px">
                   Name
@@ -157,14 +157,14 @@
 
             <table class='table table-striped'>
               <tr>
-                <th>Symbol</th>
+                <th ng-click="reverseSearchResults('#search-results-symbol-span')">Symbol <span id='search-results-symbol-span' class="glyphicon glyphicon-triangle-bottom"></span></th>
                 <th>Price</th>
                 <th>1d</th>
                 <th>7d</th>
                 <th>30d</th>
                 <th>Trade?</th>
               </tr>
-              <tr ng-repeat="stock in stockDetailsByDate[dates[rangeValue]] | filter:filterText">
+              <tr ng-repeat="stock in stockDetailsByDate[dates[rangeValue]] | filter:filterText | orderBy:'symbol':reverse">
                 <td>
                   {{ stock.symbol }}
                 </td>
