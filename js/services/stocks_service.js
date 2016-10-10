@@ -47,14 +47,10 @@ StockPortfolioSimulator.factory('StocksService',
 
 		// StocksService._setDifferenceInStockPrices
 		var _setDifferenceInStockPrices = function( previousDate, symbol, currentDate, currentStockIndex, nameOfProperty ){
-			console.log("current date = " + currentDate);
-			console.log("previousDate = " + previousDate);
-			console.log("previous date exists" + _stockDetailsByDate[previousDate])
 			if ( _stockDetailsByDate[previousDate] ){
 				_.each(_stockDetailsByDate[previousDate], function(oldStock){
 					if(oldStock.symbol === symbol){
 						_stockDetailsByDate[currentDate][currentStockIndex][nameOfProperty] = _stockDetailsByDate[currentDate][currentStockIndex].priceOnDate - oldStock.priceOnDate;
-						console.log(_stockDetailsByDate[currentDate][currentStockIndex][nameOfProperty]);
 						return false;
 					};
 				});

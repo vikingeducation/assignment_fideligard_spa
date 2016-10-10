@@ -37,6 +37,8 @@ StockPortfolioSimulator.controller('StocksController',
 				$scope.dates = Object.keys($scope.stockDetailsByDate).sort();
 
 				$scope.rangeMax = $scope.dates.length -1;
+
+				$scope.rangeValue = 0;
 			});
 	};
 
