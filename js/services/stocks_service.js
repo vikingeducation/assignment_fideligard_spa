@@ -1,6 +1,6 @@
 StockPortfolioSimulator.factory('StocksService', 
-	['$http',
-	function($http){
+	['$http', 'DatesService'
+	function($http, DatesService){
 
 		// --------------
 		// Private
@@ -11,11 +11,6 @@ StockPortfolioSimulator.factory('StocksService',
 		var _stockDetailsByDate = {};
 
 		var _namesAndSymbols;
-
-		// StocksService._returnDateDaysAgo
-		var _returnDateDaysAgo = function(currentDate, daysAgo){
-			return moment(currentDate).subtract(daysAgo, "days").format("YYYY-MM-DD")
-		};
 
 		// StocksService._returnCurrentStockIndexByDate
 		var _returnCurrentStockIndexByDate = function( date, symbol ){
@@ -137,9 +132,9 @@ StockPortfolioSimulator.factory('StocksService',
 			var numberOfDaysBetween = moment( endDate ).diff(moment( startDate ), 'days' );
 			for(var i = 1; i <= numberOfDaysBetween; i++){
 				var dayToCheck = moment( startDate ).add(i, 'days').format("YYYY-MM-DD");
-				var previousDay = _returnDateDaysAgo( dayToCheck, 1 );
-				var sevenDaysAgo = _returnDateDaysAgo( dayToCheck, 7 );
-				var thirtyDaysAgo = _returnDateDaysAgo( dayToCheck, 30 );
+				var previousDay = DatesService.returnDateDaysAgo( dayToCheck, 1 );
+				var sevenDaysAgo = DatesService.returnDateDaysAgo( dayToCheck, 7 );
+				var thirtyDaysAgo = DatesService.returnDateDaysAgo( dayToCheck, 30 );
 
 				if(!_stockDetailsByDate[dayToCheck] && _stockDetailsByDate[previousDay]){
 					_stockDetailsByDate[dayToCheck] = _stockDetailsByDate[previousDay];

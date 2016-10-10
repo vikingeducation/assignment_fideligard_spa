@@ -1,6 +1,6 @@
 StockPortfolioSimulator.controller('StocksController', 
-	['$scope', 'StocksService', '_',
-	function($scope, StocksService, _){
+	['$scope', 'DomManipulatorService', 'StocksService', '_',
+	function($scope, DomManipulatorService, StocksService, _){
 
 	// ---------------------------
 	// On Load
@@ -19,30 +19,10 @@ StockPortfolioSimulator.controller('StocksController',
 	// Private
 	// ---------------------------
 
-	var _changeGlyphiconFromTopToBottom = function( clickedElement ){
-		$(clickedElement).addClass("glyphicon-triangle-bottom");
-		$(clickedElement).removeClass("glyphicon-triangle-top");
-	};
-
-	var _changeGlyphiconFromBottomToTop = function( clickedElement ){
-		$(clickedElement).addClass("glyphicon-triangle-top");
-		$(clickedElement).removeClass("glyphicon-triangle-bottom");
-	};
-
-	// currently this isn't running when there's no results!
-	// So I can set it so that the retrieve stock box slides up accordingly
-	var _slideContainersOnceRequestIsSuccessful = function(){
-		$scope.slideBodyContainer('#hide-show-get-stocks-body-container', '#get-stocks-body-container');
-
-		if($('#stocks-body-container').is(":hidden")){
-			$scope.slideBodyContainer('#hide-show-stocks-body-container', '#stocks-body-container');
-		};
-	};
-
 	// ---------------------------
 	// Public
 	// ---------------------------
-
+	
 	$scope.chooseAllSymbols = function(){
 		StocksService.chooseAllSymbols();
 	};
@@ -51,11 +31,11 @@ StockPortfolioSimulator.controller('StocksController',
 		StocksService.clearChosenSymbols();
 	};
 
-	$scope.request = function(){
+	$scope.request = function( getStocksGlyphiconId, getStocksBodyId, stocksGlyphiconId, stocksBodyId ){
 		StocksService.request( $scope.startDate, $scope.endDate )
 			.then(function(request){
 
-				_slideContainersOnceRequestIsSuccessful();
+				DomManipulatorService.slideContainersOnceRequestIsSuccessful( getStocksGlyphiconId, getStocksBodyId, stocksGlyphiconId, stocksBodyId );
 
 				$scope.stockDetailsByDate = StocksService.stockDetailsByDate( $scope.startDate, $scope.endDate );
 
@@ -68,26 +48,20 @@ StockPortfolioSimulator.controller('StocksController',
 			});
 	};
 
-	$scope.reverseSearchResults = function( element ){
+	$scope.reverseSearchResults = function( id ){
 		if ($scope.reverse){
-			_changeGlyphiconFromTopToBottom( element );
+			DomManipulatorService.changeGlyphiconFromTopToBottom( id );
 
 			$scope.reverse = false;
 		} else {
-			_changeGlyphiconFromBottomToTop( element );
+			DomManipulatorService.changeGlyphiconFromBottomToTop( id );
 
 			$scope.reverse = true;
 		};
 	};
 
-	$scope.slideBodyContainer = function(clickedElement, id){
-		if ( $( id ).is( ":hidden" ) ) {
-			_changeGlyphiconFromBottomToTop( clickedElement );
-			$(id).slideDown( 1500 );
-		} else {
-			_changeGlyphiconFromTopToBottom( clickedElement );
-			$(id).slideUp(1500);
-		};
+	$scope.slideBodyContainer = function( glyphiconId, containerId ){
+		DomManipulatorService.slideBodyContainer( glyphiconId, containerId );
 	};
 
 	// ---------------------------

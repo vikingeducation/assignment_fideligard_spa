@@ -69,7 +69,7 @@
               Search Stock History
             </div>
 
-            <div id="hide-show-get-stocks-body-container" class="glyphicon glyphicon-triangle-top hide-show-glyphicon" ng-click="slideBodyContainer('#hide-show-get-stocks-body-container', '#get-stocks-body-container')">
+            <div id="get-stocks-glyphicon" class="glyphicon glyphicon-triangle-top hide-show-glyphicon" ng-click="slideBodyContainer('#get-stocks-glyphicon', '#get-stocks-body-container')">
             </div>
           </div>
 
@@ -91,7 +91,7 @@
               <button class="btn" id="clear-button" ng-click="clearChosenSymbols()">
                 Clear
               </button>
-              <button class='btn btn-success' id="submit-button" ng-click="request()">
+              <button class='btn btn-success' id="submit-button" ng-click="request('#get-stocks-glyphicon', '#get-stocks-body-container', '#stocks-glyphicon', '#stocks-body-container')">
                 Submit
               </button>
             </div>
@@ -138,7 +138,7 @@
             <div class="sub-header">
               Search Results
             </div>
-            <div id="hide-show-stocks-body-container" class="glyphicon glyphicon-triangle-bottom hide-show-glyphicon" ng-click="slideBodyContainer('#hide-show-stocks-body-container', '#stocks-body-container')">
+            <div id="stocks-glyphicon" class="glyphicon glyphicon-triangle-bottom hide-show-glyphicon" ng-click="slideBodyContainer('#stocks-glyphicon', '#stocks-body-container')">
             </div>
           </div>
 
@@ -220,6 +220,8 @@
     <script src="/js/directives/main_nav.js"></script>
 
     <!-- Services -->
+    <script src="/js/services/dates_service.js"></script>
+    <script src="/js/services/dom_manipulator_service.js"></script>
     <script src="/js/services/stocks_service.js"></script>
 
     <!-- Controllers -->
