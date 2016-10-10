@@ -22,7 +22,7 @@ StockPortfolioSimulator.controller('StocksController',
 	// ---------------------------
 	// Public
 	// ---------------------------
-	
+
 	$scope.chooseAllSymbols = function(){
 		StocksService.chooseAllSymbols();
 	};

@@ -1,4 +1,5 @@
-StockPortfolioSimulator.factory('DomManipulatorService', [function(){
+StockPortfolioSimulator.factory('DomManipulatorService', 
+	[function(){
 
 	// -------------------
 	// Private

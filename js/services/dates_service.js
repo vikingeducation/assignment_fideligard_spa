@@ -1,4 +1,5 @@
-StockPortfolioSimulator.factory('DatesService', [function(){
+StockPortfolioSimulator.factory('DatesService', 
+	[function(){
 
 	// -----------------
 	// Private
@@ -8,10 +9,14 @@ StockPortfolioSimulator.factory('DatesService', [function(){
 	// Public
 	// -----------------
 
-	var DatesServices = {};
+	var DatesService = {};
 
 	DatesService.returnDateDaysAgo = function( currentDate, daysAgo ){
 		return moment(currentDate).subtract(daysAgo, "days").format("YYYY-MM-DD")
+	};
+
+	DatesService.returnNumberOfDaysBetween = function( endDate, startDate ){
+		return moment( endDate ).diff(moment( startDate ), 'days' );
 	};
 
 	return DatesService;
