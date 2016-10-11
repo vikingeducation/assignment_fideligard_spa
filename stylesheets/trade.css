@@ -19,6 +19,8 @@
     width: 100%; }
 #trade-container #trade-right #cash-available-container {
   margin-bottom: 15px; }
+#trade-container #trade-right #quantity-user-owns-container {
+  margin-bottom: 15px; }
 #trade-container #trade-right .trade-form-label {
   font-weight: bold; }
 

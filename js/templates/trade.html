@@ -25,9 +25,9 @@
               <label for="buy-sell-select">Buy/Sell:</label>
             </div>
             <div class="trade-form-value">
-              <select name="buy-sell-select" id="buy-sell-select">
-                <option value="">Buy</option>
-                <option value="">Sell</option>
+              <select name="buy-sell-select" id="buy-sell-select" ng-model='buyOrSell'>
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
               </select>
             </div>
           </div>
@@ -87,7 +87,7 @@
           </div>
         </div>
 
-        <div id="order-status-container">
+        <div id="quantity-user-owns-container">
           <div class="trade-form-label">
             Quantity You Own:
           </div>

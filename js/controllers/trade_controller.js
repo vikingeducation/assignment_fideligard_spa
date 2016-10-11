@@ -6,6 +6,8 @@ StockPortfolioSimulator.controller('TradeController',
   // Public
   // ---------------------------
 
+  $scope.buyOrSell = 'buy';
+
   $scope.cashAvailable = UserService.returnCashAvailable();
 
   $scope.stock = StocksService.getChosenStock();
