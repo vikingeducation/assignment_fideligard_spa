@@ -33,6 +33,10 @@ StockPortfolioSimulator.factory('StocksService',
 
 		};
 
+		StocksService.returnStockById = function( id ){
+			return SearchAndResultsService.returnStockById( id );
+		};
+
 		StocksService.stockDetailsByDate = function( startDate, endDate ){
 			return SearchAndResultsService.stockDetailsByDate( startDate, endDate );
 		};

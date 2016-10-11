@@ -1,6 +1,6 @@
 StockPortfolioSimulator.factory('SearchAndResultsService', 
-  ['$http', 'DatesService', 
-  function( $http, DatesService ){
+  ['$http', '_', 'DatesService', 'moment',
+  function( $http, _, DatesService, moment ){
 
     // ----------------------
     // Private
@@ -9,6 +9,8 @@ StockPortfolioSimulator.factory('SearchAndResultsService',
     var _stocksQuery;
 
     var _stockDetailsByDate = {};
+
+    var _stockDetailsById = { "1": { symbol: "Bananas & Blow" } };
 
     var _addToStockDetailsByDateFromQuery = function(){
       // Go through all the returned data from Yahoo
@@ -87,6 +89,10 @@ StockPortfolioSimulator.factory('SearchAndResultsService',
             return _stocksQuery;
           });
       };
+    };
+
+    SearchAndResultsService.returnStockById = function( id ){
+      return _stockDetailsById[id];
     };
 
     SearchAndResultsService.stockDetailsByDate = function( startDate, endDate ){

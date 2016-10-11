@@ -1,6 +1,6 @@
 StockPortfolioSimulator.factory('NamesAndSymbolsService', 
-	['$http', 
-	function( $http ){
+	['$http', '_',
+	function( $http, _ ){
 
 		// ----------------------
 		// Private

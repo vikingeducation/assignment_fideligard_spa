@@ -9,17 +9,17 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.rou
 			templateUrl: "js/templates/trade.html"
 		})
 
-	})
+	});
 
-StockPortfolioSimulator.constant('_', 
-	window._
-);
+StockPortfolioSimulator.factory('_', ['$window', function($window){
+	return $window._;
+}]);
 
-StockPortfolioSimulator.constant('moment', 
-	window.moment
-);
+StockPortfolioSimulator.factory('moment', ['$window', function($window){
+	return $window.moment;
+}])
 
 // ADDING ERROR HANDLING
-StockPortfolioSimulator.run(function($rootScope){
+StockPortfolioSimulator.run(['$rootScope', function($rootScope){
   $rootScope.$on("$stateChangeError", console.log.bind(console));
-});
+}]);

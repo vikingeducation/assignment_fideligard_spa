@@ -1,5 +1,5 @@
 StockPortfolioSimulator.factory('DatesService', 
-	[function(){
+	['moment', function( moment ){
 
 	// -----------------
 	// Private
