@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-xs-6">
       <div id="trade-left">
-        <form action="">
+        <form>
 
           <div class="trade-form-group">
             <div class="trade-form-label">
@@ -79,20 +79,20 @@
     <div class="col-xs-6">
       <div id="trade-right">
         <div id="cash-available-container">
-          <div class="form-label">
+          <div class="trade-form-label">
             Cash Available:
           </div>
-          <div class="value">
-            $123,456.78
+          <div class="trade-form-value">
+            {{ cashAvailable | currency }}
           </div>
         </div>
 
         <div id="order-status-container">
-          <div class="form-label">
+          <div class="trade-form-label">
             Order Status:
           </div>
-          <div class="value">
-            VALID
+          <div class="trade-form-value">
+            {{ valid() }}
           </div>
         </div>
       </div>

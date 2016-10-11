@@ -3,33 +3,47 @@
   #trade-header-container {
     margin-bottom: 15px;
   }
+  
 
-  .trade-form-group {
-    margin-bottom: 5px;
-    .trade-form-label {
-      display: inline-block;
-      font-weight: bold;
-      width: 75px;
-    }
+  #trade-left {
+    .trade-form-group {
+      margin-bottom: 5px;
 
-    .trade-form-value {
-      display: inline-block;
-      width: 102px;
-
-      input {
-        width: 100%;
+      .trade-form-label {
+        display: inline-block;
+        font-weight: bold;
+        width: 75px;
       }
 
-      select {
+      .trade-form-value {
+        display: inline-block;
+        width: 102px;
+
+        input {
+          width: 100%;
+        }
+
+        select {
+          width: 100%;
+        }
+      }
+    }
+
+    #place-order-button-container {
+      margin-top: 15px;
+      button {
         width: 100%;
       }
     }
   }
-  
-  #place-order-button-container {
-    margin-top: 15px;
-    button {
-      width: 100%;
+
+  #trade-right {
+    #cash-available-container {
+      margin-bottom: 15px;
+    }
+
+    .trade-form-label {
+      font-weight: bold;
     }
   }
 }
