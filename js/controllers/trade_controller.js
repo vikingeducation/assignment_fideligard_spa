@@ -3,6 +3,26 @@ StockPortfolioSimulator.controller('TradeController',
   function($scope, $stateParams, StocksService, UserService){
 
   // ---------------------------
+  // Private
+  // ---------------------------
+
+  var _validToBuy = function(){
+    if ( ($scope.quantity * $scope.stock.priceOnDate) <= $scope.cashAvailable && ($scope.quantity * $scope.stock.priceOnDate) > 0 ) {
+      return 'Valid';
+    } else {
+      return 'Invalid';
+    };
+  };
+
+  var _validToSell = function(){
+    if( $scope.quantity > 0 && $scope.quantityUserOwns() >= $scope.quantity ){
+      return 'Valid';
+    } else {
+      return 'Invalid';
+    };
+  };
+
+  // ---------------------------
   // Public
   // ---------------------------
 
@@ -19,7 +39,11 @@ StockPortfolioSimulator.controller('TradeController',
   };
 
   $scope.valid = function(){
-    return (($scope.quantity * $scope.stock.priceOnDate) <= $scope.cashAvailable && ($scope.quantity * $scope.stock.priceOnDate) > 0) ? 'Valid' : 'Invalid'
+    if($scope.buyOrSell === 'buy'){
+      return _validToBuy();
+    } else {
+      return _validToSell();
+    };
   };
 
 }]);
