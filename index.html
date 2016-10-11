@@ -27,6 +27,7 @@
 
     <!-- CSS --> 
     <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/trade.css">
 
     <!-- Lodash -->
     <script src="/bower_components/lodash/lodash.js"></script>
@@ -155,13 +156,14 @@
             </div>
           </div>
 
-          <div class="search-container">
-            <label>
-              Filter: <input type="text" ng-model="filterText" class='form-control'>
-            </label>
-          </div>
-
           <div class="sub-body-container" id="stocks-body-container">
+
+            <div class="search-container">
+              <label>
+                Filter: <input type="text" ng-model="filterText" class='form-control'>
+              </label>
+            </div>
+
             <div id="table-explanation">
               <p>
                 1d: Price on selected day minus the price 1 day ago...

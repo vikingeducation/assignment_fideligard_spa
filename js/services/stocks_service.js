@@ -44,8 +44,9 @@ StockPortfolioSimulator.factory('StocksService',
 		};
 
 		StocksService.setChosenStock = function(date, stock){
-			stock.date = date;
-			angular.copy(stock, _chosenStock)
+			_chosenStock.date = date;
+			_chosenStock.symbol = stock.symbol;
+			_chosenStock.priceOnDate = stock.priceOnDate;
 		};
 
 		StocksService.stockDetailsByDate = function( startDate, endDate ){

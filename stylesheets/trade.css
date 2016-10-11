@@ -1,0 +1,17 @@
+#trade-container #trade-header-container {
+  margin-bottom: 15px; }
+#trade-container .trade-form-group {
+  margin-bottom: 5px; }
+  #trade-container .trade-form-group .trade-form-label {
+    display: inline-block;
+    font-weight: bold;
+    width: 75px; }
+  #trade-container .trade-form-group .trade-form-value {
+    display: inline-block;
+    width: 102px; }
+    #trade-container .trade-form-group .trade-form-value input {
+      width: 100%; }
+    #trade-container .trade-form-group .trade-form-value select {
+      width: 100%; }
+
+/*# sourceMappingURL=trade.css.map */

@@ -1,14 +1,8 @@
-{{ stock }}
-
 <div id="trade-container">
 
-  <div class="header">
-    <div class="title">
+  <div id="trade-header-container">
+    <div class="sub-header">
       Trade
-    </div>
-
-    <div class="select-view-container">
-      A dropdown will exist here one day
     </div>
   </div>
 
@@ -17,32 +11,63 @@
       <div id="trade-left">
         <form action="">
 
-          <label>
-            Symbol: <input type="text">
-          </label> <br>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Symbol:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.symbol }}
+            </div>
+          </div>
 
-          <label>
-            Buy/Sell: <select name="" id="">
-              <option value="">Buy</option>
-              <option value="">Sell</option>
-            </select>
-          </label> <br>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              <label for="buy-sell-select">Buy/Sell:</label>
+            </div>
+            <div class="trade-form-value">
+              <select name="buy-sell-select" id="buy-sell-select">
+                <option value="">Buy</option>
+                <option value="">Sell</option>
+              </select>
+            </div>
+          </div>
 
-          <label>
-            Quantity: <input type="text">
-          </label>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              <label for="buy-sell-quantity">Quantity:</label>
+            </div>
+            <div class="trade-form-value">
+              <input type="text" id='buy-sell-quantity'>
+            </div>
+          </div>
 
-          <label>
-            Date: <input type="text">
-          </label> <br>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Date:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.date }}
+            </div>
+          </div>
 
-          <label>
-            Price:
-          </label> <br>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Price:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.priceOnDate | currency }}
+            </div>
+          </div>
 
-          <label>
-            Cost:
-          </label>
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Cost:
+            </div>
+            <div class="trade-form-value">
+              
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

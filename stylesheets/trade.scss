@@ -1,0 +1,28 @@
+#trade-container {
+  
+  #trade-header-container {
+    margin-bottom: 15px;
+  }
+
+  .trade-form-group {
+    margin-bottom: 5px;
+    .trade-form-label {
+      display: inline-block;
+      font-weight: bold;
+      width: 75px;
+    }
+
+    .trade-form-value {
+      display: inline-block;
+      width: 102px;
+
+      input {
+        width: 100%;
+      }
+
+      select {
+        width: 100%;
+      }
+    }
+  }
+}
