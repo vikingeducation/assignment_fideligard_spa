@@ -18,3 +18,8 @@ StockPortfolioSimulator.constant('_',
 StockPortfolioSimulator.constant('moment', 
 	window.moment
 );
+
+// ADDING ERROR HANDLING
+StockPortfolioSimulator.run(function($rootScope){
+  $rootScope.$on("$stateChangeError", console.log.bind(console));
+});
