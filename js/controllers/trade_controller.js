@@ -1,5 +1,5 @@
 StockPortfolioSimulator.controller('TradeController', 
-  ['$scope', '$stateParams', 'StocksService'
+  ['$scope', '$stateParams', 'StocksService',
   function($scope, $stateParams, StocksService){
 
   // ---------------------------
@@ -14,8 +14,6 @@ StockPortfolioSimulator.controller('TradeController',
   // Public
   // ---------------------------
 
-  // So what do I need here
-  // I need the stock in question
-  $scope.stock = StocksService.returnStockById( $stateParams.id );
+  $scope.stock = StocksService.getChosenStock();
 
 }]);

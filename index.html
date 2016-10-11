@@ -105,7 +105,7 @@
             <table class="table table-striped" style="margin-bottom: 0px">
               <tr>
                 <th style="width: 75px">
-                  Symbol 
+                  Symbol
                 </th>
                 <th style="width: 260px">
                   Name
@@ -194,7 +194,7 @@
                   {{ (stock.priceThirtyDaysAgo || stock.priceThirtyDaysAgo === 0) ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
                 </td>
                 <td>
-                  <a href="">
+                  <a ui-sref="trade" ng-click="setChosenStock( dates[rangeValue], stock )">
                     trade
                   </a>
                 </td>
@@ -227,5 +227,6 @@
 
     <!-- Controllers -->
     <script src="/js/controllers/stocks_controller.js"></script>
+    <script src="/js/controllers/trade_controller.js"></script>
   </body>
 </html>

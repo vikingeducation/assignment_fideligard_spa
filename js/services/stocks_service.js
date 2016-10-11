@@ -6,11 +6,17 @@ StockPortfolioSimulator.factory('StocksService',
 		// Private
 		// --------------
 
+		var _chosenStock = {};
+
 		// --------------
 		// Public
 		// --------------
 
 		var StocksService = {};
+
+		StocksService.chosenStock = function(){
+
+		};
 
 		StocksService.chooseAllSymbols = function(){
 			NamesAndSymbolsService.chooseAllSymbols();
@@ -25,6 +31,10 @@ StockPortfolioSimulator.factory('StocksService',
 			return NamesAndSymbolsService.getAllNamesAndSymbols();
 		};
 
+		StocksService.getChosenStock = function(){
+			return _chosenStock;
+		};
+
 		StocksService.request = function( startDate, endDate ){
 
 			var symbolsString = NamesAndSymbolsService.returnSymbolsString();
@@ -33,8 +43,9 @@ StockPortfolioSimulator.factory('StocksService',
 
 		};
 
-		StocksService.returnStockById = function( id ){
-			return SearchAndResultsService.returnStockById( id );
+		StocksService.setChosenStock = function(date, stock){
+			stock.date = date;
+			angular.copy(stock, _chosenStock)
 		};
 
 		StocksService.stockDetailsByDate = function( startDate, endDate ){

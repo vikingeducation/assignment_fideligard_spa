@@ -60,6 +60,10 @@ StockPortfolioSimulator.controller('StocksController',
 		};
 	};
 
+	$scope.setChosenStock = function( date, stock ){
+		StocksService.setChosenStock( date, stock );
+	};
+
 	$scope.slideBodyContainer = function( glyphiconId, containerId ){
 		DomManipulatorService.slideBodyContainer( glyphiconId, containerId );
 	};
