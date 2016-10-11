@@ -16,4 +16,6 @@ StockPortfolioSimulator.controller('TradeController',
 
   $scope.stock = StocksService.getChosenStock();
 
+  $scope.quantity = 0;
+
 }]);

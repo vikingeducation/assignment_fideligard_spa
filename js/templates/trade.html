@@ -37,7 +37,7 @@
               <label for="buy-sell-quantity">Quantity:</label>
             </div>
             <div class="trade-form-value">
-              <input type="text" id='buy-sell-quantity'>
+              <input type="text" id='buy-sell-quantity' ng-model='quantity'>
             </div>
           </div>
 
@@ -64,7 +64,7 @@
               Cost:
             </div>
             <div class="trade-form-value">
-              
+              {{ quantity * stock.priceOnDate | currency }}
             </div>
           </div>
 
