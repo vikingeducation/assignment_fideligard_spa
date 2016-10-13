@@ -28,7 +28,18 @@ StockPortfolioSimulator.controller('TradeController',
 
   $scope.buyOrSell = 'buy';
 
-  $scope.cashAvailable = UserService.returnCashAvailable();
+  $scope.cashAvailable = UserService.returnCashAvailable( StocksService.getChosenStock() );
+
+
+  $scope.placeOrder = function(){
+    if ($scope.buyOrSell === 'buy'){
+      // we want to
+      // reduce the amount of cash we have now
+      // change the quantity of stock we have at that date and then proceed to alter the quantity for all days afterwards...
+    } else {
+
+    };
+  };
 
   $scope.stock = StocksService.getChosenStock();
 
