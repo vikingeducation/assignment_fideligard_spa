@@ -6,6 +6,10 @@ StockPortfolioSimulator.controller('TradeController',
   // Private
   // ---------------------------
 
+  var _setCashAvailable = function(){
+    $scope.cashAvailable = UserService.returnCashAvailable( StocksService.getChosenStock().date );
+  };
+
   var _validToBuy = function(){
     if ( ($scope.quantity * $scope.stock.priceOnDate) <= $scope.cashAvailable && ($scope.quantity * $scope.stock.priceOnDate) > 0 ) {
       return 'Valid';
@@ -28,16 +32,21 @@ StockPortfolioSimulator.controller('TradeController',
 
   $scope.buyOrSell = 'buy';
 
-  $scope.cashAvailable = UserService.returnCashAvailable( StocksService.getChosenStock() );
+  _setCashAvailable();
 
-
+  // I think it's time to make a purchase
   $scope.placeOrder = function(){
-    if ($scope.buyOrSell === 'buy'){
-      // we want to
-      // reduce the amount of cash we have now
-      // change the quantity of stock we have at that date and then proceed to alter the quantity for all days afterwards...
-    } else {
-
+    if ($scope.quantity > 0) {
+      if ($scope.buyOrSell === 'buy'){
+        UserService.buyStock( $scope.stock.date, 
+                              $scope.stock.priceOnDate, 
+                              $scope.quantity, 
+                              $scope.stock.symbol );
+        _setCashAvailable();
+      } else {
+        UserService.sellStock( $scope.stock.priceOnDate, $scope.quantity, $scope.stock.symbol );
+        _setCashAvailable();
+      };
     };
   };
 

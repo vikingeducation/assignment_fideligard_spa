@@ -34,6 +34,23 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		var _enoughMoneyToBuy = function( price, quantity, cashAvailable ){
+			if( cashAvailable ){
+				console.log(5);
+			} else {
+				console.log(_initialCash);
+				console.log( price );
+				console.log( quantity );
+				return _initialCash >= ( price * quantity );
+			};
+		};
+
+		var _initialSetup = function( date ){
+			_portfolioByDateEarliestDate = date;
+			_portfolioByDateLatestDate = date;
+			_portfolioByDate[date] = { cashAvailable: _initialCash };
+		};
+
 		var _returnDateToCreateUpTo = function( date, daysToEarliestDate ){
 			// if this is a negative number
 			// it means that our given date is earlier than the earliest date and
@@ -50,6 +67,29 @@ StockPortfolioSimulator.factory('UserService',
 		// ----------------------
 
 		var UserService = {};
+
+		UserService.buyStock = function( date, price, quantity, symbol ){
+			if(_portfolioByDate[date]){
+				console.log(1);
+			} else {
+				console.log(2);
+				if( _portfolioByDateEarliestDate ){
+
+				} else {
+					console.log(3);
+					// So at this point it's just an empty object we're dealing with here
+					// So gotta set up the earliest date
+					// Latest date
+					_initialSetup( date );
+					// Now it's an object with the date in there as an empty object
+					if( _enoughMoneyToBuy( price, quantity ) ){
+						_portfolioByDate[date][symbol] = { quantity: quantity };
+						_portfolioByDate[date].cashAvailable -= (price * quantity);
+						console.log( _portfolioByDate );
+					};
+				};
+			};
+		};
 
 		UserService.returnCashAvailable = function( date ){
 			if( Object.keys(_portfolioByDate).length ){
