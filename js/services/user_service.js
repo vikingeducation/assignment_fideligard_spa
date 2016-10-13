@@ -29,7 +29,8 @@ StockPortfolioSimulator.factory('UserService',
 				daysToEarliestDate *= -1;
 				for (var i = 1; i <= daysToEarliestDate; i++){
 					var newDate = DatesService.returnDateDaysAgo( _portfolioByDateEarliestDate, i );
-					_portfolioByDate[newDate] = _portfolioByDate[_portfolioByDateEarliestDate];
+					_portfolioByDate[newDate] = {};
+					_portfolioByDate[newDate][cashAvailable] = 					_portfolioByDate[_portfolioByDateEarliestDate].cashAvailable;
 				};
 			};
 		};
@@ -90,6 +91,8 @@ StockPortfolioSimulator.factory('UserService',
 				};
 			};
 		};
+
+		// oh shit just realised, you can't just copy things backwards beceauseeeeeeee ownership of stock can't go in to the pasttttttttt
 
 		UserService.returnCashAvailable = function( date ){
 			if( Object.keys(_portfolioByDate).length ){
