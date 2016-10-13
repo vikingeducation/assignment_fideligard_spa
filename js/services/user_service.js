@@ -37,11 +37,8 @@ StockPortfolioSimulator.factory('UserService',
 
 		var _enoughMoneyToBuy = function( price, quantity, cashAvailable ){
 			if( cashAvailable ){
-				console.log(5);
+
 			} else {
-				console.log(_initialCash);
-				console.log( price );
-				console.log( quantity );
 				return _initialCash >= ( price * quantity );
 			};
 		};
@@ -50,6 +47,15 @@ StockPortfolioSimulator.factory('UserService',
 			_portfolioByDateEarliestDate = date;
 			_portfolioByDateLatestDate = date;
 			_portfolioByDate[date] = { cashAvailable: _initialCash };
+		};
+
+		var _processPurchase = function(date, price, quantiy, symbol){
+			if( _portfolioByDate[date][symbol] ){
+				_portfolioByDate[date][symbol].quantity += quantity;
+			} else {
+				_portfolioByDate[date][symbol] = { quantity: quantity };
+			};
+			_portfolioByDate[date].cashAvailable -= (price * quantity);
 		};
 
 		var _returnDateToCreateUpTo = function( date, daysToEarliestDate ){
@@ -71,7 +77,9 @@ StockPortfolioSimulator.factory('UserService',
 
 		UserService.buyStock = function( date, price, quantity, symbol ){
 			if(_portfolioByDate[date]){
-				console.log(1);
+				if( _enoughMoneyToBuy( price, quantiy, _portfolioByDate[date].cashAvailable ) ){
+
+				};
 			} else {
 				console.log(2);
 				if( _portfolioByDateEarliestDate ){
@@ -84,9 +92,7 @@ StockPortfolioSimulator.factory('UserService',
 					_initialSetup( date );
 					// Now it's an object with the date in there as an empty object
 					if( _enoughMoneyToBuy( price, quantity ) ){
-						_portfolioByDate[date][symbol] = { quantity: quantity };
-						_portfolioByDate[date].cashAvailable -= (price * quantity);
-						console.log( _portfolioByDate );
+						_processPurchase( date, price, quantity, symbol);
 					};
 				};
 			};
