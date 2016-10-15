@@ -25,7 +25,7 @@
               <label for="buy-sell-select">Buy/Sell:</label>
             </div>
             <div class="trade-form-value">
-              <select name="buy-sell-select" id="buy-sell-select" ng-model='buyOrSell'>
+              <select name="buy-sell-select" id="buy-sell-select" ng-model='transactionProperties.buyOrSell'>
                 <option value="buy">Buy</option>
                 <option value="sell">Sell</option>
               </select>
@@ -37,7 +37,7 @@
               <label for="buy-sell-quantity">Quantity:</label>
             </div>
             <div class="trade-form-value">
-              <input type="text" id='buy-sell-quantity' ng-model='quantity'>
+              <input type="text" id='buy-sell-quantity' ng-model='transactionProperties.transactionQuantity'>
             </div>
           </div>
 
@@ -64,7 +64,7 @@
               Cost:
             </div>
             <div class="trade-form-value">
-              {{ quantity * stock.priceOnDate | currency }}
+              {{ transactionProperties.transactionQuantity * stock.priceOnDate | currency }}
             </div>
           </div>
           
@@ -92,7 +92,7 @@
             Quantity You Own:
           </div>
           <div class="trade-form-value">
-            {{ quantityUserOwns() }}
+            {{ transactionProperties.quantityUserOwns }}
           </div>
         </div>
 

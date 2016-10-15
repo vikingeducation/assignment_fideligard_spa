@@ -14,10 +14,6 @@ StockPortfolioSimulator.factory('StocksService',
 
 		var StocksService = {};
 
-		StocksService.chosenStock = function(){
-
-		};
-
 		StocksService.chooseAllSymbols = function(){
 			NamesAndSymbolsService.chooseAllSymbols();
 		};

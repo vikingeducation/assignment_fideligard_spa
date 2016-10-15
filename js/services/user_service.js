@@ -10,49 +10,39 @@ StockPortfolioSimulator.factory('UserService',
 		// ----------------------
 
 		var _initialCash = 1000;
+		var _transactionProperties = { transactionQuantity: 0,
+		buyOrSell: 'buy',
+		quantityUserOwns: 0 };
 
 		// There's a bit of a logic based on
 		// earliestDate and latestDate being truthy
 		var _portfolioByDate = { earliestDate: undefined,
 														 latestDate: undefined };
 
-		// This will get some use when a user picks a stock, on a 
-		// date, to do a transaction on. 
-		var _createDatesUpToDate = function( date ){
-			// What's closer to our chosen date?
-			var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.earliestDate );
-			var daysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
+		var _buildDatesWhenChosenDateIsAfterTheLatestDate = function( date, daysToLatestDate ){
+			// looping backwards from the chosen date
+			// up to, but not including the latestDate.
+			// First we get the newDate,
+			// then we set the value of newDate in portfolio
+			// as the value for the latestDate in our portfolio.
+			for (var i = 0; i < daysToLatestDate; i++){
+				var newDate = DatesService.returnDateDaysAgo( date, i );
+				_portfolioByDate[newDate] = _.cloneDeep( _portfolioByDate[_portfolioByDate.latestDate] );
+			};
+		};
 
-			// Is it the earliest or latest day in our portfolio?
-			var dateToCreateUpTo = _returnDateToCreateUpTo( date, daysToEarliestDate, daysToLatestDate );
-
-			// If it's the earliest, we'll be building dates in our portfolio
-			// from the chosen date, up to the earliest date.
-			// If it's the latest, we'll build from the latest date, to the chosen date. 
-			if (dateToCreateUpTo === date){
-				// looping backwards from the chosen date
-				// up to, but not including the latestDate.
-				// First we get the newDate,
-				// then we set the value of newDate in portfolio
-				// as the value for the latestDate in our portfolio.
-				for (var i = 0; i < daysToLatestDate; i++){
-					var newDate = DatesService.returnDateDaysAgo( date, i );
-					_portfolioByDate[newDate] = _portfolioByDate[_portfolioByDate.latestDate];
-				};
-			// So the daysToCreateUpTo will be the earliestDate.
-			} else {
-				// daysToEarliestDate has to be changed into a positive number
-				daysToEarliestDate *= -1;
-				// looping back from the day before earliestDate
-				// up to and including the chosen date.
-				for (var i = 1; i <= daysToEarliestDate; i++){
-					// getting the new date to set as a key in the porfolio folder
-					var newDate = DatesService.returnDateDaysAgo( _portfolioByDate.earliestDate, i );
-					// Can't just cop from the earliestDate because you can't transfer stock back in time.
-					_portfolioByDate[newDate] = {};
-					// However the cashAvailable is transferrable backwards
-					_portfolioByDate[newDate][cashAvailable] =  _portfolioByDate[_portfolioByDate.earliestDate].cashAvailable;
-				};
+		var _buildDatesWhenChosenDateIsBeforeTheEarliestDate = function( daysToEarliestDate ){
+			// daysToEarliestDate has to be changed into a positive number
+			daysToEarliestDate *= -1;
+			// looping back from the day before earliestDate
+			// up to and including the chosen date.
+			for (var i = 1; i <= daysToEarliestDate; i++){
+				// getting the new date to set as a key in the porfolio folder
+				var newDate = DatesService.returnDateDaysAgo( _portfolioByDate.earliestDate, i );
+				// Can't just cop from the earliestDate because you can't transfer stock back in time.
+				_portfolioByDate[newDate] = {};
+				// However the cashAvailable is transferrable backwards
+				_portfolioByDate[newDate][cashAvailable] =  _portfolioByDate[_portfolioByDate.earliestDate].cashAvailable;
 			};
 		};
 
@@ -66,8 +56,16 @@ StockPortfolioSimulator.factory('UserService',
 
 		var _initialSetup = function( date ){
 			_portfolioByDate.earliestDate = date;
-			_portfolioByDateLatestDate = date;
+			_portfolioByDate.latestDate = date;
 			_portfolioByDate[date] = { cashAvailable: _initialCash };
+		};
+
+		var _portfolioDateHasStockSymbol = function( date, symbol ){
+			return _portfolioHasContent() && !!_portfolioByDate[date][symbol];
+		};
+
+		var _portfolioHasContent = function(){
+			return !!_portfolioByDate.earliestDate;
 		};
 
 		// This gets called once all the initial setup has been done
@@ -82,6 +80,7 @@ StockPortfolioSimulator.factory('UserService',
 			} else {
 				_portfolioByDate[date][symbol] = { quantity: quantity };
 			};
+			_transactionProperties.quantityUserOwns = _portfolioByDate[date][symbol].quantity;
 			_portfolioByDate[date].cashAvailable -= (price * quantity);
 		};
 
@@ -94,6 +93,14 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		var _returnQuantityUserOwns = function( date, symbol ){
+			if ( _portfolioDateHasStockSymbol( date, symbol ) ){
+				return _portfolioByDate[date][symbol].quantity;
+			} else {
+				return 0;
+			};
+		};
+
 		// ----------------------
 		// Public
 		// ----------------------
@@ -101,52 +108,73 @@ StockPortfolioSimulator.factory('UserService',
 		var UserService = {};
 
 		// This the mother method for buying stock.
-		UserService.buyStock = function( date, price, quantity, symbol ){
-			// First it figures out whether the chosen date is already in our portfolio.
-			// If it is, it figures out whether we have enough money to buy the stock,
-			// and if so, it processes the purchase.
-			if(_portfolioByDate[date]){
-				if( _enoughMoneyToBuy( price, quantity, _portfolioByDate[date].cashAvailable ) ){
-					_processPurchase( date, price, quantity, symbol);
-				};
-			// The chose date isn't in the portfolio... yet
-			} else {
-				// earliestDate exists?
-				// There's stuff inside the portfolio.
-				// Let's build out days up to our chosenDate and connect it all up.
-				if( _portfolioByDate.earliestDate ){
-					_createDatesUpToDate( date );
-					// !!!!!!!!!!!!!!!!!!!!!!!!!!//
-				// earliestDate doesn't exist
-				// First entry!
+    UserService.buyStock = function( date, price, quantity, symbol ){
+      var cashAvailable;
+
+      // If there's nothing in the portfolio
+      // the cashAvailable will be the initialCash
+      // otherwise the cashAvailable will be in the portfolio's date key value
+      if ( !_portfolioHasContent() ){
+        cashAvailable = _initialCash;
+      } else {
+        cashAvailable = _portfolioByDate[date].cashAvailable;
+      };
+
+      // Now that we know what the cashAvailable is,
+      // we can see if we have enough money to buy the stock.
+      // If we can afford it,
+      // first we do an initial set up if this is our first transaction,
+      // then we process the purchase either way.
+      if( _enoughMoneyToBuy( price, quantity, cashAvailable ) ){
+        if( !_portfolioHasContent() ){
+          _initialSetup( date );
+        };
+        _processPurchase( date, price, quantity, symbol);
+      };
+    };
+
+    // This will get some use when a user picks a stock, on a 
+		// date, to do a transaction on. 
+		UserService.createDatesUpToDate = function( date ){
+			// We're only going to run this
+			// if there's previous transaction history
+			if( _portfolioHasContent() ){
+
+				// What's closer to our chosen date?
+				var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.earliestDate );
+				var daysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
+
+				// Is it the earliest or latest day in our portfolio?
+				var dateToCreateUpTo = _returnDateToCreateUpTo( date, daysToEarliestDate, daysToLatestDate );
+
+				// If it's the earliest, we'll be building dates in our portfolio
+				// from the chosen date, up to the earliest date.
+				// If it's the latest, we'll build from the latest date, to the chosen date. 
+				if (dateToCreateUpTo === date){
+					_buildDatesWhenChosenDateIsAfterTheLatestDate( date, daysToLatestDate );
+				// So the daysToCreateUpTo will be the earliestDate.
 				} else {
-					// If we can afford it,
-					// we'll do an initial setup (set earliestDate)
-					// and then we'll process the purchase. 
-					if( _enoughMoneyToBuy( price, quantity ) ){
-						_initialSetup( date );
-						_processPurchase( date, price, quantity, symbol);
-					};
+					_buildDatesWhenChosenDateIsBeforeTheEarliestDate( daysToEarliestDate );
 				};
 			};
+		};
+
+		UserService.getTransactionProperties = function(){
+			return _transactionProperties;
+		};
+
+		UserService.resetTransactionProperties = function( date, symbol ){
+			console.log( _portfolioByDate );
+			_transactionProperties.buyOrSell = 'buy';
+			_transactionProperties.transactionQuantity = 0;
+			_transactionProperties.quantityUserOwns = _returnQuantityUserOwns( date, symbol );
 		};
 
 		UserService.returnCashAvailable = function( date ){
-			if( Object.keys(_portfolioByDate).length > 2 ){
-				if ( !_portfolioByDate[date] ){
-					_createDatesUpToDate(date);
-				};
+			if( _portfolioHasContent() ){
 				return _portfolioByDate[date].cashAvailable;
 			} else {
 				return _initialCash;
-			};
-		};
-
-		UserService.returnQuantityUserOwns = function( date, symbol ){
-			if (_portfolioByDate[date] && _portfolioByDate[date][symbol]){
-				return _portfolioByDate[date][symbol].quantity;
-			} else {
-				return 0;
 			};
 		};
 

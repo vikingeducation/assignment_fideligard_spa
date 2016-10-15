@@ -1,6 +1,6 @@
 StockPortfolioSimulator.controller('StocksController', 
-	['$scope', 'DomManipulatorService', 'StocksService', '_',
-	function($scope, DomManipulatorService, StocksService, _){
+	['$scope', 'DomManipulatorService', 'StocksService', 'UserService', '_',
+	function($scope, DomManipulatorService, StocksService, UserService, _){
 
 	// ---------------------------
 	// On Load
@@ -62,6 +62,8 @@ StockPortfolioSimulator.controller('StocksController',
 
 	$scope.setChosenStock = function( date, stock ){
 		StocksService.setChosenStock( date, stock );
+		UserService.createDatesUpToDate( date );
+		UserService.resetTransactionProperties( date, stock.symbol );
 	};
 
 	$scope.slideBodyContainer = function( glyphiconId, containerId ){
