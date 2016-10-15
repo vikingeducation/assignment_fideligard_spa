@@ -54,10 +54,30 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		var _adjustQuantitiesAfterPurchases = function( date, quantity, symbol ){
+			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
+			if (numberOfDaysToLatestDate < 0){
+				numberOfDaysToLatestDate *= -1;
+			};
+
+			for(var i = 0; i <= numberOfDaysToLatestDate; i++ ){
+				var dateToAdjust = DatesService.returnDateDaysAfter( date, i );
+				if( _portfolioByDate[dateToAdjust][symbol] ){
+					_portfolioByDate[dateToAdjust][symbol].quantity += quantity;
+				} else {
+					_portfolioByDate[dateToAdjust][symbol] = { quantity: quantity };
+				};
+			};
+		};
+
 		var _initialSetup = function( date ){
 			_portfolioByDate.earliestDate = date;
 			_portfolioByDate.latestDate = date;
 			_portfolioByDate[date] = { cashAvailable: _initialCash };
+		};
+
+		var _portfolioDateExists = function( date ){
+			return !!_portfolioByDate[date];
 		};
 
 		var _portfolioDateHasStockSymbol = function( date, symbol ){
@@ -75,12 +95,10 @@ StockPortfolioSimulator.factory('UserService',
 		// It'll reduce the cashAvailable for that day either way.
 		var _processPurchase = function(date, price, quantity, symbol){
 			quantity = Number(quantity);
-			if( _portfolioByDate[date][symbol] ){
-				_portfolioByDate[date][symbol].quantity += quantity;
-			} else {
-				_portfolioByDate[date][symbol] = { quantity: quantity };
-			};
+			_adjustQuantitiesAfterPurchases( date, quantity, symbol );
+
 			_transactionProperties.quantityUserOwns = _portfolioByDate[date][symbol].quantity;
+
 			_portfolioByDate[date].cashAvailable -= (price * quantity);
 		};
 
@@ -138,7 +156,8 @@ StockPortfolioSimulator.factory('UserService',
 		UserService.createDatesUpToDate = function( date ){
 			// We're only going to run this
 			// if there's previous transaction history
-			if( _portfolioHasContent() ){
+			// and the date doesn't exist
+			if( _portfolioHasContent() && !_portfolioDateExists( date ) ){
 
 				// What's closer to our chosen date?
 				var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.earliestDate );
@@ -152,9 +171,11 @@ StockPortfolioSimulator.factory('UserService',
 				// If it's the latest, we'll build from the latest date, to the chosen date. 
 				if (dateToCreateUpTo === date){
 					_buildDatesWhenChosenDateIsAfterTheLatestDate( date, daysToLatestDate );
+					_portfolioByDate.latestDate = date;
 				// So the daysToCreateUpTo will be the earliestDate.
 				} else {
 					_buildDatesWhenChosenDateIsBeforeTheEarliestDate( daysToEarliestDate );
+					_portfolioByDate.earliestDate = date;
 				};
 			};
 		};
