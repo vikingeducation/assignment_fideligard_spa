@@ -18,20 +18,12 @@ StockPortfolioSimulator.controller('TradeController',
     $scope.cashAvailable = UserService.returnCashAvailable( $scope.stock.date );
   };
 
-  var _validToBuy = function(){
-    if ( ($scope.transactionProperties.transactionQuantity * $scope.stock.priceOnDate) <= $scope.cashAvailable && ($scope.transactionProperties.transactionQuantity * $scope.stock.priceOnDate) > 0 ) {
-      return 'Valid';
-    } else {
-      return 'Invalid';
-    };
+  var _validToBuy = function( cashAvailable, price, transactionQuantity ){
+    return transactionQuantity > 0 && UserService.enoughMoneyToBuy( price, transactionQuantity, cashAvailable );
   };
 
-  var _validToSell = function(){
-    if( $scope.transactionProperties.transactionQuantity > 0 && $scope.transactionProperties.quantityUserOwns >= $scope.transactionProperties.transactionQuantity ){
-      return 'Valid';
-    } else {
-      return 'Invalid';
-    };
+  var _validToSell = function( availableQuantity, transactionQuantity ){
+    return transactionQuantity > 0 && UserService.enoughStockToSell( availableQuantity, transactionQuantity );
   };
 
   // ---------------------------
@@ -46,14 +38,21 @@ StockPortfolioSimulator.controller('TradeController',
   // make the transaction happen
   // then set the updated cashAvailable()
   $scope.placeOrder = function(){
-    if ($scope.transactionProperties.transactionQuantity > 0) {
-      if ($scope.transactionProperties.buyOrSell === 'buy'){
-        UserService.buyStock( $scope.stock.date, 
-                              $scope.stock.priceOnDate, 
-                              $scope.transactionProperties.transactionQuantity, 
-                              $scope.stock.symbol );
+    var tP = $scope.transactionProperties;
+    var buyOrSell = tP.buyOrSell;
+    var quantity = tP.transactionQuantity;
+    var stock = $scope.stock;
+    if (quantity > 0) {
+      if ( buyOrSell === 'buy'){
+        UserService.buyStock( stock.date, 
+                              stock.priceOnDate, 
+                              quantity, 
+                              stock.symbol );
       } else {
-        UserService.sellStock( $scope.stock.priceOnDate, $scope.transactionProperties.transactionQuantity, $scope.stock.symbol );
+        UserService.sellStock( stock.date, 
+                               stock.priceOnDate, 
+                               quantity, 
+                               stock.symbol );
       };
       _setCashAvailable();
     };
@@ -61,12 +60,17 @@ StockPortfolioSimulator.controller('TradeController',
 
   // This method is being used solely to return 'valid'
   // or 'invalid' right now.
-  // Okay so I thought that this function was run only once at start up, but now I see that it is continuously looping.
   $scope.valid = function(){
-    if($scope.transactionProperties.buyOrSell === 'buy'){
-      return _validToBuy();
+    var stock = $scope.stock;
+    var transactionProperties = $scope.transactionProperties;
+    var transactionQuantity = transactionProperties.transactionQuantity;
+    var quantityUserOwns = transactionProperties.quantityUserOwns;
+    var valid;
+
+    if( transactionProperties.buyOrSell === 'buy' ){
+      return _validToBuy( $scope.cashAvailable, stock.priceOnDate, transactionQuantity );
     } else {
-      return _validToSell();
+      return _validToSell( quantityUserOwns, transactionQuantity );
     };
   };
 

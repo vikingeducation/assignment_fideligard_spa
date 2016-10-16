@@ -46,14 +46,6 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
-		var _enoughMoneyToBuy = function( price, quantity, cashAvailable ){
-			if( cashAvailable ){
-				return cashAvailable >= ( price * quantity );
-			} else {
-				return _initialCash >= ( price * quantity );
-			};
-		};
-
 		var _adjustQuantitiesAfterPurchases = function( date, quantity, symbol ){
 			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
 			if (numberOfDaysToLatestDate < 0){
@@ -143,7 +135,7 @@ StockPortfolioSimulator.factory('UserService',
       // If we can afford it,
       // first we do an initial set up if this is our first transaction,
       // then we process the purchase either way.
-      if( _enoughMoneyToBuy( price, quantity, cashAvailable ) ){
+      if( UserService.enoughMoneyToBuy( price, quantity, cashAvailable ) ){
         if( !_portfolioHasContent() ){
           _initialSetup( date );
         };
@@ -180,6 +172,14 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		UserService.enoughMoneyToBuy = function( price, quantity, cashAvailable ){
+			return cashAvailable >= ( price * quantity );
+		};
+
+		UserService.enoughStockToSell = function( quantityUserOwns, transactionQuantity ){
+			return quantityUserOwns >= transactionQuantity;
+		};
+
 		UserService.getTransactionProperties = function(){
 			return _transactionProperties;
 		};
@@ -190,11 +190,30 @@ StockPortfolioSimulator.factory('UserService',
 			_transactionProperties.quantityUserOwns = _returnQuantityUserOwns( date, symbol );
 		};
 
+		// It'll return the cashAvailable on the date chosen
+		// Or if it doesn't exist, because the portfolio is empty
+		// it'll return the initial amount.
 		UserService.returnCashAvailable = function( date ){
-			if( _portfolioHasContent() ){
+			if( _portfolioDateExists( date ) ){
 				return _portfolioByDate[date].cashAvailable;
 			} else {
 				return _initialCash;
+			};
+		};
+
+		// # Reduce the number of stock on the date of sale and all future dates.
+		// # Think about reducing the number of stock on previous days.
+		// When this function is called we know the quantity will be greater than zero
+		UserService.sellStock = function( quantityUserOwns, transactionQuantity ){
+			// Figure out if have enough of that stock to sell
+			// If we do
+			// First we need to reduce the amount of stock we have on that day and all subsequent days... 
+			// I'm also thinking we should have a amount of stock on day, and amount of stock available to sell...
+			// But you know, it's not a crucial requirement right now so let's just work with what we have and move on from there...
+
+			if ( UserService.enoughtStockToSell( quantityUserOwns,
+																					 transactionQuantity ) ){
+
 			};
 		};
 
