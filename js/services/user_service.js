@@ -47,6 +47,8 @@ StockPortfolioSimulator.factory('UserService',
 		};
 
 		var _adjustQuantitiesAfterPurchases = function( date, quantity, symbol ){
+			_setUnaccountedStockValue( date, quantity, symbol );
+
 			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
 			if (numberOfDaysToLatestDate < 0){
 				numberOfDaysToLatestDate *= -1;
@@ -59,6 +61,15 @@ StockPortfolioSimulator.factory('UserService',
 				} else {
 					_portfolioByDate[dateToAdjust][symbol] = { quantity: quantity };
 				};
+			};
+		};
+
+		// unaccountedStockValue is needed to calculate available stock to sell numbers after making a sale
+		var _setUnaccountedStockValue = function( date, quantity, symbol ){
+			if ( _portfolioByDate[date][symbol].unaccountedStock ){
+				_portfolioByDate[date][symbol].unaccountedStock += quantity;
+			} else {
+				_portfolioByDate[date][symbol].unaccountedStock = quantity;
 			};
 		};
 
