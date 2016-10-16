@@ -27,7 +27,7 @@ StockPortfolioSimulator.controller('TradeController',
   };
 
   var _validToSell = function(){
-    if( $scope.transactionProperties.transactionQuantity > 0 && $scope.quantityUserOwns() >= $scope.transactionProperties.transactionQuantity ){
+    if( $scope.transactionProperties.transactionQuantity > 0 && $scope.transactionProperties.quantityUserOwns >= $scope.transactionProperties.transactionQuantity ){
       return 'Valid';
     } else {
       return 'Invalid';
@@ -41,7 +41,10 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.transactionProperties;
   $scope.stock;
 
-  // I think it's time to make a purchase
+  // If the user has entered a number above 0
+  // depending on whether user has selected 'buy' or 'sell'
+  // make the transaction happen
+  // then set the updated cashAvailable()
   $scope.placeOrder = function(){
     if ($scope.transactionProperties.transactionQuantity > 0) {
       if ($scope.transactionProperties.buyOrSell === 'buy'){
@@ -56,6 +59,9 @@ StockPortfolioSimulator.controller('TradeController',
     };
   };
 
+  // This method is being used solely to return 'valid'
+  // or 'invalid' right now.
+  // Okay so I thought that this function was run only once at start up, but now I see that it is continuously looping.
   $scope.valid = function(){
     if($scope.transactionProperties.buyOrSell === 'buy'){
       return _validToBuy();

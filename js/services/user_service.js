@@ -185,7 +185,6 @@ StockPortfolioSimulator.factory('UserService',
 		};
 
 		UserService.resetTransactionProperties = function( date, symbol ){
-			console.log( _portfolioByDate );
 			_transactionProperties.buyOrSell = 'buy';
 			_transactionProperties.transactionQuantity = 0;
 			_transactionProperties.quantityUserOwns = _returnQuantityUserOwns( date, symbol );
