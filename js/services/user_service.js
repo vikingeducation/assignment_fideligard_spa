@@ -12,7 +12,7 @@ StockPortfolioSimulator.factory('UserService',
 		var _initialCash = 1000;
 		var _transactionProperties = { transactionQuantity: 0,
 		buyOrSell: 'buy',
-		quantityUserOwns: 0 };
+		quantityAvailableToSell: 0 };
 
 		// There's a bit of a logic based on
 		// earliestDate and latestDate being truthy
@@ -62,6 +62,12 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		// You'd have to reduce the quanties on the date and for all subsequent dates.
+		// In the past 
+		var _adjustQuantitiesAfterSale = function( date, quantity, symbol ){
+
+		};
+
 		var _initialSetup = function( date ){
 			_portfolioByDate.earliestDate = date;
 			_portfolioByDate.latestDate = date;
@@ -89,11 +95,10 @@ StockPortfolioSimulator.factory('UserService',
 			quantity = Number(quantity);
 			_adjustQuantitiesAfterPurchases( date, quantity, symbol );
 
-			_transactionProperties.quantityUserOwns = _portfolioByDate[date][symbol].quantity;
+			_transactionProperties.quantityAvailableToSell = _portfolioByDate[date][symbol].quantity;
 
 			_portfolioByDate[date].cashAvailable -= (price * quantity);
 		};
-
 
 		var _returnDateToCreateUpTo = function( date, daysToEarliestDate ){
 			if (daysToEarliestDate < 0){
@@ -103,7 +108,7 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
-		var _returnQuantityUserOwns = function( date, symbol ){
+		var _returnQuantityAvailableToSell = function( date, symbol ){
 			if ( _portfolioDateHasStockSymbol( date, symbol ) ){
 				return _portfolioByDate[date][symbol].quantity;
 			} else {
@@ -176,18 +181,20 @@ StockPortfolioSimulator.factory('UserService',
 			return cashAvailable >= ( price * quantity );
 		};
 
-		UserService.enoughStockToSell = function( quantityUserOwns, transactionQuantity ){
-			return quantityUserOwns >= transactionQuantity;
+		UserService.enoughStockToSell = function( quantityAvailableToSell, transactionQuantity ){
+			return quantityAvailableToSell >= transactionQuantity;
 		};
 
 		UserService.getTransactionProperties = function(){
 			return _transactionProperties;
 		};
 
+		// This isn't getting used anywhere right now but I'm sure it'd
+		// come in handy somehwere
 		UserService.resetTransactionProperties = function( date, symbol ){
 			_transactionProperties.buyOrSell = 'buy';
 			_transactionProperties.transactionQuantity = 0;
-			_transactionProperties.quantityUserOwns = _returnQuantityUserOwns( date, symbol );
+			_transactionProperties.quantityAvailableToSell = _returnQuantityAvailableToSell( date, symbol );
 		};
 
 		// It'll return the cashAvailable on the date chosen
@@ -204,16 +211,17 @@ StockPortfolioSimulator.factory('UserService',
 		// # Reduce the number of stock on the date of sale and all future dates.
 		// # Think about reducing the number of stock on previous days.
 		// When this function is called we know the quantity will be greater than zero
-		UserService.sellStock = function( quantityUserOwns, transactionQuantity ){
-			// Figure out if have enough of that stock to sell
+		UserService.sellStock = function( quantityAvailableToSell, transactionQuantity ){
 			// If we do
 			// First we need to reduce the amount of stock we have on that day and all subsequent days... 
 			// I'm also thinking we should have a amount of stock on day, and amount of stock available to sell...
 			// But you know, it's not a crucial requirement right now so let's just work with what we have and move on from there...
 
-			if ( UserService.enoughtStockToSell( quantityUserOwns,
-																					 transactionQuantity ) ){
-
+			if ( UserService.enoughStockToSell( quantityAvailableToSell,
+																					transactionQuantity ) ){
+				// These methods haven't been written up yet.
+				_adjustCashAvailableAfterSale();
+				_adjustQuantitiesAfterSale();
 			};
 		};
 

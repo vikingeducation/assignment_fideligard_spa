@@ -40,19 +40,17 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.placeOrder = function(){
     var tP = $scope.transactionProperties;
     var buyOrSell = tP.buyOrSell;
-    var quantity = tP.transactionQuantity;
+    var transactionQuantity = tP.transactionQuantity;
+    var quantityAvailableToSell = tP.quantityAvailableToSell;
     var stock = $scope.stock;
-    if (quantity > 0) {
+    if (transactionQuantity > 0) {
       if ( buyOrSell === 'buy'){
         UserService.buyStock( stock.date, 
                               stock.priceOnDate, 
-                              quantity, 
+                              transactionQuantity, 
                               stock.symbol );
       } else {
-        UserService.sellStock( stock.date, 
-                               stock.priceOnDate, 
-                               quantity, 
-                               stock.symbol );
+        UserService.sellStock( quantityAvailableToSell, transactionQuantity );
       };
       _setCashAvailable();
     };
@@ -64,13 +62,13 @@ StockPortfolioSimulator.controller('TradeController',
     var stock = $scope.stock;
     var transactionProperties = $scope.transactionProperties;
     var transactionQuantity = transactionProperties.transactionQuantity;
-    var quantityUserOwns = transactionProperties.quantityUserOwns;
+    var quantityAvailableToSell = transactionProperties.quantityAvailableToSell;
     var valid;
 
     if( transactionProperties.buyOrSell === 'buy' ){
       return _validToBuy( $scope.cashAvailable, stock.priceOnDate, transactionQuantity );
     } else {
-      return _validToSell( quantityUserOwns, transactionQuantity );
+      return _validToSell( quantityAvailableToSell, transactionQuantity );
     };
   };
 
