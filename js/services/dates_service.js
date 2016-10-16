@@ -19,8 +19,13 @@ StockPortfolioSimulator.factory('DatesService',
 		return moment(currentDate).subtract(daysAgo, "days").format("YYYY-MM-DD")
 	};
 
+	// Going to covert this to a positive number here too.
 	DatesService.returnNumberOfDaysBetween = function( endDate, startDate ){
-		return moment( endDate ).diff(moment( startDate ), 'days' );
+		var days = moment( endDate ).diff(moment( startDate ), 'days' );
+		if ( days < 0 ){
+			days *= -1;
+		};
+		return days;
 	};
 
 	return DatesService;

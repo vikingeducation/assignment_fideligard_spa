@@ -50,7 +50,10 @@ StockPortfolioSimulator.controller('TradeController',
                               transactionQuantity, 
                               stock.symbol );
       } else {
-        UserService.sellStock( quantityAvailableToSell, transactionQuantity );
+        UserService.sellStock( stock.date, 
+                               quantityAvailableToSell, 
+                               stock.symbol,
+                               transactionQuantity );
       };
       _setCashAvailable();
     };

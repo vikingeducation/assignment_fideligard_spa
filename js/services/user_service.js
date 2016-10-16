@@ -28,12 +28,18 @@ StockPortfolioSimulator.factory('UserService',
 			for (var i = 0; i < daysToLatestDate; i++){
 				var newDate = DatesService.returnDateDaysAgo( date, i );
 				_portfolioByDate[newDate] = _.cloneDeep( _portfolioByDate[_portfolioByDate.latestDate] );
+				_resetUnaccountedStockValueForAllSymbolsOnADate( newDate );
 			};
 		};
 
+		var _resetUnaccountedStockValueForAllSymbolsOnADate = function( date ){
+			var symbols = Object.keys( _portfolioByDate[date] );
+			_.each( symbols, function( symbol ){
+				_portfolioByDate[date][symbol].unaccountedStock = 0;
+			} );
+		};
+
 		var _buildDatesWhenChosenDateIsBeforeTheEarliestDate = function( daysToEarliestDate ){
-			// daysToEarliestDate has to be changed into a positive number
-			daysToEarliestDate *= -1;
 			// looping back from the day before earliestDate
 			// up to and including the chosen date.
 			for (var i = 1; i <= daysToEarliestDate; i++){
@@ -47,12 +53,8 @@ StockPortfolioSimulator.factory('UserService',
 		};
 
 		var _adjustQuantitiesAfterPurchases = function( date, quantity, symbol ){
-			_setUnaccountedStockValue( date, quantity, symbol );
 
 			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.latestDate );
-			if (numberOfDaysToLatestDate < 0){
-				numberOfDaysToLatestDate *= -1;
-			};
 
 			for(var i = 0; i <= numberOfDaysToLatestDate; i++ ){
 				var dateToAdjust = DatesService.returnDateDaysAfter( date, i );
@@ -62,10 +64,13 @@ StockPortfolioSimulator.factory('UserService',
 					_portfolioByDate[dateToAdjust][symbol] = { quantity: quantity };
 				};
 			};
+
+			_setUnaccountedStockValue( date, quantity, symbol );
 		};
 
 		// unaccountedStockValue is needed to calculate available stock to sell numbers after making a sale
 		var _setUnaccountedStockValue = function( date, quantity, symbol ){
+			console.log( _portfolioByDate );
 			if ( _portfolioByDate[date][symbol].unaccountedStock ){
 				_portfolioByDate[date][symbol].unaccountedStock += quantity;
 			} else {
@@ -73,10 +78,48 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
-		// You'd have to reduce the quanties on the date and for all subsequent dates.
-		// In the past 
 		var _adjustQuantitiesAfterSale = function( date, quantity, symbol ){
+			var daysToLatestDate = DatesService.returnNumberOfDaysBetween( _portfolioByDate.latestDate, date );
 
+			var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioByDate.earliestDate );
+			// reduce the quantity available for sale from the date given onwards
+			_reduceQuantitiesForDatesAfterSale( date, daysToLatestDate, quantity, symbol );
+			_reduceQuantitiesForDatesOnOrBeforeSale( date, daysToEarliestDate, quantity, symbol );
+		};
+
+		// then reduce the unnaccountedStock value by the quantity
+		// and if it goes to a negative number
+		// set the unaccountedStock value to zero
+		// and then start going backwards and reducing the cash available for that date
+		// and if they have an unaccounted stock value for that day, reduce from that and repeat on until quantity is zero. 
+
+		var _reduceQuantitiesForDatesOnOrBeforeSale = function( date, daysToEarliestDate, quantity, symbol ){
+			var q = quantity;
+			for (var i = 0; i <= daysToEarliestDate; i++){
+				var d = DatesService.returnDateDaysAgo( date, i );
+				if ( _portfolioByDate[d][symbol] ){
+					_portfolioByDate[d][symbol].quantity -= q;
+					if ( _portfolioByDate[d][symbol].unaccountedStock ){
+						_portfolioByDate[d][symbol].unaccountedStock -= q;
+
+						if (_portfolioByDate[d][symbol].unaccountedStock < 0 ){
+							_portfolioByDate[d][symbol].unaccountedStock = 0;
+							q = _portfolioByDate[d][symbol].unaccountedStock * -1;
+						} else {
+							q = 0;
+							return false;
+						};
+					};
+				};
+			};
+		};
+
+		var _reduceQuantitiesForDatesAfterSale = function( date, daysToLatestDate, quantity, symbol ){
+			console.log( daysToLatestDate );
+			for (var i = 1; i <= daysToLatestDate; i++){
+				var d = DatesService.returnDateDaysAfter( date, i );
+				_portfolioByDate[d][symbol].quantity -= quantity;
+			};
 		};
 
 		var _initialSetup = function( date ){
@@ -222,7 +265,7 @@ StockPortfolioSimulator.factory('UserService',
 		// # Reduce the number of stock on the date of sale and all future dates.
 		// # Think about reducing the number of stock on previous days.
 		// When this function is called we know the quantity will be greater than zero
-		UserService.sellStock = function( quantityAvailableToSell, transactionQuantity ){
+		UserService.sellStock = function( date, quantityAvailableToSell, symbol, transactionQuantity ){
 			// If we do
 			// First we need to reduce the amount of stock we have on that day and all subsequent days... 
 			// I'm also thinking we should have a amount of stock on day, and amount of stock available to sell...
@@ -231,8 +274,8 @@ StockPortfolioSimulator.factory('UserService',
 			if ( UserService.enoughStockToSell( quantityAvailableToSell,
 																					transactionQuantity ) ){
 				// These methods haven't been written up yet.
-				_adjustCashAvailableAfterSale();
-				_adjustQuantitiesAfterSale();
+				// _adjustCashAvailableAfterSale();
+				_adjustQuantitiesAfterSale( date, transactionQuantity, symbol );
 			};
 		};
 
