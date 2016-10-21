@@ -138,14 +138,16 @@ StockPortfolioSimulator.factory('UserService',
 				var d = DatesService.returnDateDaysAgo( date, i );
 				if ( _portfolioByDate[d][symbol] ){
 					_portfolioByDate[d][symbol].quantity -= q;
+					// If there's an unaccounted stock value for this date and symbol
 					if ( _portfolioByDate[d][symbol].unaccountedStock ){
+						// Reduce the unaccountedStock value for thie date.
 						_portfolioByDate[d][symbol].unaccountedStock -= q;
 
-						if (_portfolioByDate[d][symbol].unaccountedStock < 0 ){
-							_portfolioByDate[d][symbol].unaccountedStock = 0;
+						// If the unaccountedStock value becomes a negative we keep going.
+						if ( _portfolioByDate[d][symbol].unaccountedStock < 0 ){
 							q = _portfolioByDate[d][symbol].unaccountedStock * -1;
+							_portfolioByDate[d][symbol].unaccountedStock = 0;
 						} else {
-							q = 0;
 							return false;
 						};
 					};
