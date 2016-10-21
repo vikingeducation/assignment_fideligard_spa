@@ -51,6 +51,7 @@ StockPortfolioSimulator.controller('TradeController',
                               stock.symbol );
       } else {
         UserService.sellStock( stock.date, 
+                               stock.priceOnDate,
                                quantityAvailableToSell, 
                                stock.symbol,
                                transactionQuantity );

@@ -48,7 +48,6 @@ StockPortfolioSimulator.factory('UserService',
 			_reduceQuantitiesForDatesAfterSale( date, daysToLatestDate, quantity, symbol );
 			_reduceQuantitiesForDatesOnOrBeforeSale( date, daysToEarliestDate, quantity, symbol );
 
-			console.log( _portfolioByDate[date][symbol].quantity );
 		};
 
 		var _buildDatesWhenChosenDateIsAfterTheLatestDate = function( date, daysToLatestDate ){
@@ -109,7 +108,7 @@ StockPortfolioSimulator.factory('UserService',
 			_portfolioByDate[date].cashAvailable -= (price * quantity);
 		};
 
-		var _processSale = function(date, quantity, symbol){
+		var _processSale = function(date, price, quantity, symbol){
 			quantiy = Number(quantity);
 
 			// These methods haven't been written up yet.
@@ -118,6 +117,7 @@ StockPortfolioSimulator.factory('UserService',
 
 			_transactionProperties.quantityAvailableToSell = _portfolioByDate[date][symbol].quantity;
 
+			_portfolioByDate[date].cashAvailable += ( price * quantity );
 		};
 
 		var _reduceQuantitiesForDatesAfterSale = function( date, daysToLatestDate, quantity, symbol ){
@@ -178,7 +178,6 @@ StockPortfolioSimulator.factory('UserService',
 
 		// unaccountedStockValue is needed to calculate available stock to sell numbers after making a sale
 		var _setUnaccountedStockValue = function( date, quantity, symbol ){
-			console.log( _portfolioByDate );
 			if ( _portfolioByDate[date][symbol].unaccountedStock ){
 				_portfolioByDate[date][symbol].unaccountedStock += quantity;
 			} else {
@@ -281,7 +280,7 @@ StockPortfolioSimulator.factory('UserService',
 		// # Reduce the number of stock on the date of sale and all future dates.
 		// # Think about reducing the number of stock on previous days.
 		// When this function is called we know the quantity will be greater than zero
-		UserService.sellStock = function( date, quantityAvailableToSell, symbol, transactionQuantity ){
+		UserService.sellStock = function( date, price, quantityAvailableToSell, symbol, transactionQuantity ){
 			// If we do
 			// First we need to reduce the amount of stock we have on that day and all subsequent days... 
 			// I'm also thinking we should have a amount of stock on day, and amount of stock available to sell...
@@ -289,7 +288,7 @@ StockPortfolioSimulator.factory('UserService',
 
 			if ( UserService.enoughStockToSell( quantityAvailableToSell,
 																					transactionQuantity ) ){
-				_processSale( date, transactionQuantity, symbol );
+				_processSale( date, price, transactionQuantity, symbol );
 			};
 		};
 
