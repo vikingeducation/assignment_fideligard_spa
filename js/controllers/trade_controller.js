@@ -1,6 +1,6 @@
 StockPortfolioSimulator.controller('TradeController', 
-  ['$scope', '$stateParams', 'StocksService', 'UserService', 
-  function($scope, $stateParams, StocksService, UserService){
+  ['$scope', '$stateParams', 'StocksService', 'TransactionsService', 'UserService', 
+  function($scope, $stateParams, StocksService, TransactionsService, UserService){
 
   // ---------------------------
   // Private
@@ -9,7 +9,7 @@ StockPortfolioSimulator.controller('TradeController',
   var _init = function(){
     $scope.stock = StocksService.getChosenStock();
 
-    $scope.transactionProperties = UserService.getTransactionProperties();
+    $scope.transactionProperties = TransactionsService.getTransactionProperties();
 
     _setCashAvailable();
   };
