@@ -1,0 +1,9 @@
+<div class="col-md-12">
+
+  <span>{{ 1438401600000 | date}}</span>
+  <input type="range" min="1438401600000" max="1451538000000" step="86400000" ng-model="currentDate" ng-change="setDate()">
+  <span>{{ 1451538000000 | date}}</span>
+  <div>
+    currentdate: {{currentDate | date}}
+  </div>
+</div>

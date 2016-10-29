@@ -1,0 +1,18 @@
+<h2>Stocks</h2>
+<!-- <input type="text" ng-model="stockFilter"> -->
+<table class='tabel table-striped'>
+
+  <tr>
+    <th>Symbol</th>
+    <th>Price</th>
+    <th>1d</th>
+    <th>7d</th>
+    <th>30d</th>
+    <th>Trade?</th>
+  </tr>
+
+  <tr stock-ticker ng-repeat="stock in stocks" stock='stock'> </tr>
+  <div class="">
+    date{{date}}
+  </div>
+</table>
