@@ -4,10 +4,9 @@ StockPortfolioSimulator.factory('TransactionsService', [function(){
 	// Private
 	// -------------------------------
 
-	var _transactionProperties = { 
-		transactionQuantity: 0,
+	var _transactionProperties = {
 		buyOrSell: 'buy',
-		quantityAvailableToSell: 0 
+		transactionQuantity: 0
 	};
 
 	// -------------------------------
@@ -20,16 +19,12 @@ StockPortfolioSimulator.factory('TransactionsService', [function(){
 		return _transactionProperties;
 	};
 
-	// This isn't getting used anywhere right now but I'm sure it'd
-	// come in handy somehwere
+	// This is used in the stocks_controller
+	// to reset transaction inputs everytime user clicks
+	// on the trade button
 	TransactionsService.resetTransactionProperties = function( date, symbol ){
 		_transactionProperties.buyOrSell = 'buy';
 		_transactionProperties.transactionQuantity = 0;
-		_transactionProperties.quantityAvailableToSell = _returnQuantityAvailableToSell( date, symbol );
-	};
-
-	TransactionsService.setQuantityAvailableToSell = function( value ){
-		_transactionProperties.quantityAvailableToSell = value;
 	};
 
 	return TransactionsService;

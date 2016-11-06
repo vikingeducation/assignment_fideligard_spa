@@ -36,6 +36,10 @@ main-nav{
 .container {
   width: 940px;
 
+  h4 {
+    color: #777;
+  }
+
   .hide-show-glyphicon {
     font-size: 25px;
     position: absolute;
@@ -74,26 +78,32 @@ main-nav{
     margin-bottom: 30px;
 
     #buttons-container {
+      float: right;
       margin-bottom: 5px;
 
-      #all-button {
-        width: 25%;
-      }
-
       #clear-button {
-        width: 25%;
+        width: 70px;
       }
 
       #submit-button {
-        width: 48%;
+        margin-left: 10px;
+        width: 100px;
       }
     }
 
     #date-pickers {
-      input {
-        margin-left: 15px;
-        display: inline-block;
-        width: 323px;
+      margin-bottom: 20px;
+
+      .date-picker-label-input {
+        margin-bottom: 20px;
+        position: relative;
+
+        input {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 323px;
+        }
       }
     }
 

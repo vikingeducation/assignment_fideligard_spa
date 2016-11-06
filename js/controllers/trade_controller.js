@@ -2,6 +2,11 @@ StockPortfolioSimulator.controller('TradeController',
   ['$scope', '$stateParams', 'StocksService', 'TransactionsService', 'UserService', 
   function($scope, $stateParams, StocksService, TransactionsService, UserService){
 
+  $scope.cashAvailable;
+  $scope.quantityAvailableToSell;
+  $scope.stock;
+  $scope.transactionProperties;
+
   // ---------------------------
   // Private
   // ---------------------------
@@ -9,13 +14,19 @@ StockPortfolioSimulator.controller('TradeController',
   var _init = function(){
     $scope.stock = StocksService.getChosenStock();
 
-    $scope.transactionProperties = TransactionsService.getTransactionProperties();
+    _setCashAvailable( $scope.stock.date );
 
-    _setCashAvailable();
+    _setQuantityAvailableToSell( $scope.stock.date, $scope.stock.symbol );
+
+    $scope.transactionProperties = TransactionsService.getTransactionProperties();
   };
 
-  var _setCashAvailable = function(){
-    $scope.cashAvailable = UserService.returnCashAvailable( $scope.stock.date );
+  var _setCashAvailable = function( date ){
+    $scope.cashAvailable = UserService.returnCashAvailable( date );
+  };
+
+  var _setQuantityAvailableToSell = function( date, symbol ){
+    $scope.quantityAvailableToSell = UserService.returnQuantityAvailableToSell( date, symbol );
   };
 
   var _validToBuy = function( cashAvailable, price, transactionQuantity ){
@@ -30,50 +41,48 @@ StockPortfolioSimulator.controller('TradeController',
   // Public
   // ---------------------------
 
-  $scope.transactionProperties;
-  $scope.stock;
-
   // If the user has entered a number above 0
   // depending on whether user has selected 'buy' or 'sell'
   // make the transaction happen
-  // then set the updated cashAvailable()
   $scope.placeOrder = function(){
     var tP = $scope.transactionProperties;
     var buyOrSell = tP.buyOrSell;
     var transactionQuantity = tP.transactionQuantity;
-    var quantityAvailableToSell = tP.quantityAvailableToSell;
+    var quantityAvailableToSell = $scope.quantityAvailableToSell;
     var stock = $scope.stock;
-    if (transactionQuantity > 0) {
-      if ( buyOrSell === 'buy'){
-        UserService.buyStock( stock.date, 
-                              stock.priceOnDate, 
-                              transactionQuantity, 
-                              stock.symbol );
-      } else {
-        UserService.sellStock( stock.date, 
-                               stock.priceOnDate,
-                               quantityAvailableToSell, 
-                               stock.symbol,
-                               transactionQuantity );
-      };
-      _setCashAvailable();
+    if ( buyOrSell === 'buy' ){
+      UserService.buyStock( stock.date, 
+                            stock.priceOnDate, 
+                            transactionQuantity, 
+                            stock.symbol );
+    } else {
+      UserService.sellStock( stock.date, 
+                             stock.priceOnDate,
+                             quantityAvailableToSell, 
+                             stock.symbol,
+                             transactionQuantity );
     };
+    _setCashAvailable( stock.date );
+    _setQuantityAvailableToSell( stock.date, stock.symbol );
   };
 
   // This method is being used solely to return 'valid'
   // or 'invalid' right now.
-  $scope.valid = function(){
+  $scope.validOrInvalid = function(){
     var stock = $scope.stock;
     var transactionProperties = $scope.transactionProperties;
+    var cashAvailable = $scope.cashAvailable;
     var transactionQuantity = transactionProperties.transactionQuantity;
-    var quantityAvailableToSell = transactionProperties.quantityAvailableToSell;
+    var quantityAvailableToSell = $scope.quantityAvailableToSell;
     var valid;
 
     if( transactionProperties.buyOrSell === 'buy' ){
-      return _validToBuy( $scope.cashAvailable, stock.priceOnDate, transactionQuantity );
+      valid = _validToBuy( cashAvailable, stock.priceOnDate, transactionQuantity );
     } else {
-      return _validToSell( quantityAvailableToSell, transactionQuantity );
+      valid = _validToSell( quantityAvailableToSell, transactionQuantity );
     };
+
+    return valid ? "Valid" : "Invalid";
   };
 
   _init();

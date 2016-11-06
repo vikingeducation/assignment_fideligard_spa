@@ -24,6 +24,8 @@ main-nav .navbar {
 
 .container {
   width: 940px; }
+  .container h4 {
+    color: #777; }
   .container .hide-show-glyphicon {
     font-size: 25px;
     position: absolute;
@@ -48,17 +50,23 @@ main-nav .navbar {
   .container #get-stocks-container {
     margin-bottom: 30px; }
     .container #get-stocks-container #buttons-container {
+      float: right;
       margin-bottom: 5px; }
-      .container #get-stocks-container #buttons-container #all-button {
-        width: 25%; }
       .container #get-stocks-container #buttons-container #clear-button {
-        width: 25%; }
+        width: 70px; }
       .container #get-stocks-container #buttons-container #submit-button {
-        width: 48%; }
-    .container #get-stocks-container #date-pickers input {
-      margin-left: 15px;
-      display: inline-block;
-      width: 323px; }
+        margin-left: 10px;
+        width: 100px; }
+    .container #get-stocks-container #date-pickers {
+      margin-bottom: 20px; }
+      .container #get-stocks-container #date-pickers .date-picker-label-input {
+        margin-bottom: 20px;
+        position: relative; }
+        .container #get-stocks-container #date-pickers .date-picker-label-input input {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 323px; }
     .container #get-stocks-container #table-container {
       max-height: 300px;
       overflow: auto; }

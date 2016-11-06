@@ -92,7 +92,7 @@
             Quantity You Own:
           </div>
           <div class="trade-form-value">
-            {{ transactionProperties.quantityAvailableToSell }}
+            {{ quantityAvailableToSell }}
           </div>
         </div>
 
@@ -101,7 +101,7 @@
             Order Status:
           </div>
           <div class="trade-form-value">
-            {{ valid() ? 'valid' : 'invalid' }}
+            {{ validOrInvalid() }}
           </div>
         </div>
       </div>

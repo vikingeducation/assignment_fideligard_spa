@@ -113,8 +113,6 @@ StockPortfolioSimulator.factory('UserService',
 			quantity = Number(quantity);
 			_adjustQuantitiesAfterPurchases( date, quantity, symbol );
 
-			TransactionsService.setQuantityAvailableToSell( _portfolioAndCashByDate[date][symbol].quantity );
-
 			_portfolioAndCashByDate[date].cashAvailable -= (price * quantity);
 		};
 
@@ -124,8 +122,6 @@ StockPortfolioSimulator.factory('UserService',
 			// These methods haven't been written up yet.
 			// _adjustCashAvailableAfterSale();
 			_adjustQuantitiesAfterSale( date, quantity, symbol );
-
-			TransactionsService.setQuantityAvailableToSell( _portfolioAndCashByDate[date][symbol].quantity );
 
 			_portfolioAndCashByDate[date].cashAvailable += ( price * quantity );
 		};
@@ -177,14 +173,6 @@ StockPortfolioSimulator.factory('UserService',
 				return _portfolioAndCashByDate.earliestDate;
 			} else {
 				return date;
-			};
-		};
-
-		var _returnQuantityAvailableToSell = function( date, symbol ){
-			if ( _portfolioDateHasStockSymbol( date, symbol ) ){
-				return _portfolioAndCashByDate[date][symbol].quantity;
-			} else {
-				return 0;
 			};
 		};
 
@@ -274,6 +262,14 @@ StockPortfolioSimulator.factory('UserService',
 				return _portfolioAndCashByDate[date].cashAvailable;
 			} else {
 				return _initialCash;
+			};
+		};
+
+		UserService.returnQuantityAvailableToSell = function( date, symbol ){
+			if ( _portfolioDateHasStockSymbol( date, symbol ) ){
+				return _portfolioAndCashByDate[date][symbol].quantity;
+			} else {
+				return 0;
 			};
 		};
 

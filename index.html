@@ -76,35 +76,14 @@
 
           <div class="sub-body-container" id="get-stocks-body-container">
 
-            <div id="date-pickers">
-              <label>
-                From: <input type="text" id="from-date-input" class='form-control' ng-model="startDate">
-              </label>
-              <label>
-                To: <input type="text" id="to-date-input" class='form-control' ng-model="endDate">
-              </label>
-            </div>
-
-            <div id="buttons-container">
-              <button class="btn btn-primary" id="all-button" ng-click="chooseAllSymbols()">
-                All
-              </button>
-              <button class="btn" id="clear-button" ng-click="clearChosenSymbols()">
-                Clear
-              </button>
-              <button class='btn btn-success' id="submit-button" ng-click="request('#get-stocks-glyphicon', '#get-stocks-body-container', '#stocks-glyphicon', '#stocks-body-container')">
-                Submit
-              </button>
-            </div>
-
-            <hr>
-
             <div class="search-container">
+              <h4>
+                Select Stock
+              </h4>
               <label>
                 Search: <input type="text" ng-model="searchText" class='form-control'>
               </label>
             </div>
-          
             <table class="table table-striped" style="margin-bottom: 0px">
               <tr>
                 <th style="width: 75px">
@@ -132,6 +111,29 @@
                   </td>
                 </tr>
               </table>
+            </div>
+            <br>
+            <h4>
+              Select Date Range
+            </h4>
+            <div id="date-pickers">
+              <div class="date-picker-label-input">
+                <label for="from-date-input">From:</label>
+                <input type="text" id="from-date-input" class='form-control' ng-model="startDate">
+              </div>
+              <div class="date-picker-label-input">
+                <label for="to-date-input">To:</label>
+                <input type="text" id="to-date-input" class='form-control' ng-model="endDate">
+              </div>
+            </div>
+
+            <div id="buttons-container">
+              <button class="btn" id="clear-button" ng-click="clearChosenSymbols()">
+                Clear
+              </button>
+              <button class='btn btn-success' id="submit-button" ng-click="request('#get-stocks-glyphicon', '#get-stocks-body-container', '#stocks-glyphicon', '#stocks-body-container')">
+                Submit
+              </button>
             </div>
           </div>
         </div>
