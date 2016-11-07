@@ -69,7 +69,7 @@
           </div>
           
           <div id="place-order-button-container">
-            <button class='btn btn-primary' ng-click='placeOrder()'>Place Order!</button>
+            <button class='btn btn-primary' ng-click='placeOrder()'>Place Order!!</button>
           </div>
 
         </form>
@@ -78,25 +78,43 @@
 
     <div class="col-xs-6">
       <div id="trade-right">
-        <div id="cash-available-container">
+        <div class="label-and-value">
           <div class="trade-form-label">
-            Cash Available:
+            Cash at Date:
+          </div>
+          <div class="trade-form-value">
+            n/a
+          </div>
+        </div>
+
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Cash Available for Purachases:
           </div>
           <div class="trade-form-value">
             {{ cashAvailable | currency }}
           </div>
         </div>
 
-        <div id="quantity-user-owns-container">
+        <div class="label-and-value">
           <div class="trade-form-label">
-            Quantity You Own:
+            Quantity at Date:
           </div>
           <div class="trade-form-value">
-            {{ quantityAvailableToSell }}
+            {{ portfolio[stock.date][stock.symbol].quantityAtDate }}
           </div>
         </div>
 
-        <div id="order-status-container">
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Quantity Available to Sell:
+          </div>
+          <div class="trade-form-value">
+            {{ portfolio[stock.date][stock.symbol].quantityAvailableToSell }}
+          </div>
+        </div>
+
+        <div class="label-and-value">
           <div class="trade-form-label">
             Order Status:
           </div>

@@ -41,9 +41,11 @@ StockPortfolioSimulator.factory('UserService',
 			for(var i = 0; i <= numberOfDaysToLatestDate; i++ ){
 				var dateToAdjust = DatesService.returnDateDaysAfter( date, i );
 				if( _portfolioAndCashByDate[dateToAdjust][symbol] ){
-					_portfolioAndCashByDate[dateToAdjust][symbol].quantity += quantity;
+					_portfolioAndCashByDate[dateToAdjust][symbol].quantityAtDate += quantity;
+					_portfolioAndCashByDate[dateToAdjust][symbol].quantityAvailableToSell += quantity;
 				} else {
-					_portfolioAndCashByDate[dateToAdjust][symbol] = { quantity: quantity };
+					_portfolioAndCashByDate[dateToAdjust][symbol] = { quantityAtDate: quantity, 
+																														quantityAvailableToSell: quantity };
 				};
 			};
 
@@ -129,7 +131,8 @@ StockPortfolioSimulator.factory('UserService',
 		var _reduceQuantitiesForDatesAfterSale = function( date, daysToLatestDate, quantity, symbol ){
 			for (var i = 1; i <= daysToLatestDate; i++){
 				var d = DatesService.returnDateDaysAfter( date, i );
-				_portfolioAndCashByDate[d][symbol].quantity -= quantity;
+				_portfolioAndCashByDate[d][symbol].quantityAvailableToSell -= quantity;
+				_portfolioAndCashByDate[d][symbol].quantityAtDate -= quantity;
 			};
 		};
 
@@ -143,7 +146,10 @@ StockPortfolioSimulator.factory('UserService',
 			for (var i = 0; i <= daysToEarliestDate; i++){
 				var d = DatesService.returnDateDaysAgo( date, i );
 				if ( _portfolioAndCashByDate[d][symbol] ){
-					_portfolioAndCashByDate[d][symbol].quantity -= q;
+					_portfolioAndCashByDate[d][symbol].quantityAvailableToSell -= q;
+					if ( i === 0 ){
+						_portfolioAndCashByDate[d][symbol].quantityAtDate -= q;
+					};
 					// If there's an unaccounted stock value for this date and symbol
 					if ( _portfolioAndCashByDate[d][symbol].unaccountedStock ){
 						// Reduce the unaccountedStock value for thie date.
@@ -193,56 +199,48 @@ StockPortfolioSimulator.factory('UserService',
 
 		// This the mother method for buying stock.
     UserService.buyStock = function( date, price, quantity, symbol ){
-      var cashAvailable;
+      var cashAvailable = _portfolioAndCashByDate[date].cashAvailable;
 
-      // If there's nothing in the portfolio
-      // the cashAvailable will be the initialCash
-      // otherwise the cashAvailable will be in the portfolio's date key value
-      if ( !_portfolioHasContent() ){
-        cashAvailable = _initialCash;
-      } else {
-        cashAvailable = _portfolioAndCashByDate[date].cashAvailable;
-      };
-
-      // Now that we know what the cashAvailable is,
-      // we can see if we have enough money to buy the stock.
-      // If we can afford it,
-      // first we do an initial set up if this is our first transaction,
-      // then we process the purchase either way.
       if( UserService.enoughMoneyToBuy( price, quantity, cashAvailable ) ){
-        if( !_portfolioHasContent() ){
-          _initialSetup( date );
-        };
         _processPurchase( date, price, quantity, symbol);
+        console.log(_portfolioAndCashByDate[date][symbol].quantityAtDate);
       };
     };
 
     // This will get some use when a user picks a stock, on a 
 		// date, to do a transaction on. 
-		UserService.createDatesUpToDate = function( date ){
+		UserService.createDatesUpToDate = function( date, symbol ){
 			// We're only going to run this
 			// if there's previous transaction history
 			// and the date doesn't exist
-			if( _portfolioHasContent() && !_portfolioDateExists( date ) ){
+			if( _portfolioHasContent() ){
+				if ( !_portfolioDateExists( date ) ){
+					// What's closer to our chosen date?
+					var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.earliestDate );
+					var daysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.latestDate );
 
-				// What's closer to our chosen date?
-				var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.earliestDate );
-				var daysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.latestDate );
+					// Is it the earliest or latest day in our portfolio?
+					var dateToCreateUpTo = _returnDateToCreateUpTo( date, daysToEarliestDate, daysToLatestDate );
 
-				// Is it the earliest or latest day in our portfolio?
-				var dateToCreateUpTo = _returnDateToCreateUpTo( date, daysToEarliestDate, daysToLatestDate );
-
-				// If it's the earliest, we'll be building dates in our portfolio
-				// from the chosen date, up to the earliest date.
-				// If it's the latest, we'll build from the latest date, to the chosen date. 
-				if (dateToCreateUpTo === date){
-					_buildDatesWhenChosenDateIsAfterTheLatestDate( date, daysToLatestDate );
-					_portfolioAndCashByDate.latestDate = date;
-				// So the daysToCreateUpTo will be the earliestDate.
-				} else {
-					_buildDatesWhenChosenDateIsBeforeTheEarliestDate( daysToEarliestDate );
-					_portfolioAndCashByDate.earliestDate = date;
+					// If it's the earliest, we'll be building dates in our portfolio
+					// from the chosen date, up to the earliest date.
+					// If it's the latest, we'll build from the latest date, to the chosen date. 
+					if (dateToCreateUpTo === date){
+						_buildDatesWhenChosenDateIsAfterTheLatestDate( date, daysToLatestDate );
+						_portfolioAndCashByDate.latestDate = date;
+					// So the daysToCreateUpTo will be the earliestDate.
+					} else {
+						_buildDatesWhenChosenDateIsBeforeTheEarliestDate( daysToEarliestDate );
+						_portfolioAndCashByDate.earliestDate = date;
+					};
 				};
+			} else {
+				_initialSetup( date );
+			};
+
+			if( !_portfolioAndCashByDate[date][symbol] ){
+				_portfolioAndCashByDate[date][symbol] = { quantityAtDate: 0,
+																									quantityAvailableToSell: 0 };
 			};
 		};
 
@@ -265,12 +263,8 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
-		UserService.returnQuantityAvailableToSell = function( date, symbol ){
-			if ( _portfolioDateHasStockSymbol( date, symbol ) ){
-				return _portfolioAndCashByDate[date][symbol].quantity;
-			} else {
-				return 0;
-			};
+		UserService.returnPortfolio = function(){
+			return _portfolioAndCashByDate;
 		};
 
 		// # Reduce the number of stock on the date of sale and all future dates.

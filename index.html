@@ -200,8 +200,8 @@
                   {{ (stock.priceThirtyDaysAgo || stock.priceThirtyDaysAgo === 0) ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
                 </td>
                 <td>
-                  <a ui-sref="trade" ng-click="setChosenStock( dates[rangeValue], stock )">
-                    trade
+                  <a ng-click="setChosenStock( dates[rangeValue], stock )" ui-sref="trade">
+                    trade!
                   </a>
                 </td>
               </tr>

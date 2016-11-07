@@ -62,7 +62,7 @@ StockPortfolioSimulator.controller('StocksController',
 
 	$scope.setChosenStock = function( date, stock ){
 		StocksService.setChosenStock( date, stock );
-		UserService.createDatesUpToDate( date );
+		UserService.createDatesUpToDate( date, stock.symbol );
 		TransactionsService.resetTransactionProperties( date, stock.symbol );
 	};
 
