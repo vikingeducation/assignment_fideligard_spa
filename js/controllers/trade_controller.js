@@ -5,7 +5,6 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.stock = StocksService.getChosenStock();
   $scope.portfolio = UserService.returnPortfolio();
   $scope.transactionProperties = TransactionsService.getTransactionProperties();
-  $scope.cashAvailable = $scope.portfolio[$scope.stock.date][$scope.stock.symbol].cashAvailable;
 
   // ---------------------------
   // Private
@@ -50,7 +49,7 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.validOrInvalid = function(){
     var stock = $scope.stock;
     var transactionProperties = $scope.transactionProperties;
-    var cashAvailable = $scope.cashAvailable;
+    var cashAvailable = $scope.portfolio[stock.date].cashAvailable;
     var transactionQuantity = transactionProperties.transactionQuantity;
     var quantityAvailableToSell = $scope.portfolio[$scope.stock.date][$scope.stock.symbol].quantityAvailableToSell;
     var valid;

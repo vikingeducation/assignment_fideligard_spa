@@ -83,7 +83,7 @@
             Cash at Date:
           </div>
           <div class="trade-form-value">
-            n/a
+            {{ portfolio[stock.date].cashAtDate | currency }}
           </div>
         </div>
 
@@ -92,7 +92,7 @@
             Cash Available for Purachases:
           </div>
           <div class="trade-form-value">
-            {{ cashAvailable | currency }}
+            {{ portfolio[stock.date].cashAvailable | currency }}
           </div>
         </div>
 

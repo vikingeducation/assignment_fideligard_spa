@@ -34,6 +34,57 @@ StockPortfolioSimulator.factory('UserService',
 			latestDate: undefined 
 		};
 
+		var _adjustCashAfterPurchases = function(date, price, quantity){
+			var daysToLatestDate = DatesService.returnNumberOfDaysBetween( _portfolioAndCashByDate.latestDate, date );
+
+			var daysToEarliestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.earliestDate );
+
+			_reduceCashForDatesAfterPurchase( date, daysToLatestDate, price, quantity);
+			_reduceCashForDatesOnOrBeforePurchase( date, daysToEarliestDate, price, quantity);
+		};
+
+		var _reduceCashForDatesAfterPurchase = function( date, daysToLatestDate, price, quantity ){
+			for (var i = 1; i <= daysToLatestDate; i++){
+				var d = DatesService.returnDateDaysAfter( date, i );
+				_portfolioAndCashByDate[d].cashAvailable -= (quantity * price);
+				_portfolioAndCashByDate[d].cashAtDate -= (quantity * price);
+			};
+		};
+
+		var _reduceCashForDatesOnOrBeforePurchase = function( date, daysToEarliestDate, price, quantity ){
+			var reduceAmount = price * quantity;
+			for (var i = 0; i <= daysToEarliestDate; i++){
+				var d = DatesService.returnDateDaysAgo( date, i );
+				_portfolioAndCashByDate[d].cashAvailable -= reduceAmount;
+				if ( i === 0 ){
+					_portfolioAndCashByDate[d].cashAtDate -= reduceAmount;
+				};
+				// If there's an unaccounted cash value for this date
+				if ( _portfolioAndCashByDate[d].unaccountedCash ){
+					// Reduce the unaccountedCash value for this date.
+					_portfolioAndCashByDate[d].unaccountedCash -= reduceAmount;
+
+					// If the unaccountedStock value becomes a negative we keep going.
+					if ( _portfolioAndCashByDate[d].unaccountedCash < 0 ){
+						reduceAmount = _portfolioAndCashByDate[d].unaccountedCash * -1;
+						_portfolioAndCashByDate[d].unaccountedCash = 0;
+					} else {
+						return false;
+					};
+				};
+			};
+		};
+
+		var _adjustCashAfterSale = function( date, price, quantity ){
+			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.latestDate );
+
+			for(var i = 0; i <= numberOfDaysToLatestDate; i++ ){
+				var dateToAdjust = DatesService.returnDateDaysAfter( date, i );
+				_portfolioAndCashByDate[dateToAdjust].cashAvailable += ( price * quantity );
+				_portfolioAndCashByDate[dateToAdjust].cashAtDate += ( price * quantity );
+			};
+		};
+
 		var _adjustQuantitiesAfterPurchases = function( date, quantity, symbol ){
 
 			var numberOfDaysToLatestDate = DatesService.returnNumberOfDaysBetween( date, _portfolioAndCashByDate.latestDate );
@@ -48,8 +99,6 @@ StockPortfolioSimulator.factory('UserService',
 																														quantityAvailableToSell: quantity };
 				};
 			};
-
-			_setUnaccountedStockValue( date, quantity, symbol );
 		};
 
 		var _adjustQuantitiesAfterSale = function( date, quantity, symbol ){
@@ -84,14 +133,17 @@ StockPortfolioSimulator.factory('UserService',
 				// Can't just cop from the earliestDate because you can't transfer stock back in time.
 				_portfolioAndCashByDate[newDate] = {};
 				// However the cashAvailable is transferrable backwards
-				_portfolioAndCashByDate[newDate][cashAvailable] =  _portfolioAndCashByDate[_portfolioAndCashByDate.earliestDate].cashAvailable;
+				_portfolioAndCashByDate[newDate].cashAvailable = _portfolioAndCashByDate[_portfolioAndCashByDate.earliestDate].cashAvailable;
+				// Going back the cashAtDate will always be the _initialCash right?
+				_portfolioAndCashByDate[newDate].cashAtDate = _initialCash;
 			};
 		};
 
 		var _initialSetup = function( date ){
 			_portfolioAndCashByDate.earliestDate = date;
 			_portfolioAndCashByDate.latestDate = date;
-			_portfolioAndCashByDate[date] = { cashAvailable: _initialCash };
+			_portfolioAndCashByDate[date] = { cashAvailable: _initialCash,
+																				cashAtDate: _initialCash };
 		};
 
 		var _portfolioDateExists = function( date ){
@@ -112,20 +164,22 @@ StockPortfolioSimulator.factory('UserService',
 		// If not it'll set up a new object for that stock which holds the quantity.
 		// It'll reduce the cashAvailable for that day either way.
 		var _processPurchase = function(date, price, quantity, symbol){
-			quantity = Number(quantity);
+			var quantity = Number(quantity);
 			_adjustQuantitiesAfterPurchases( date, quantity, symbol );
+			_setUnaccountedStockValue( date, quantity, symbol );
 
-			_portfolioAndCashByDate[date].cashAvailable -= (price * quantity);
+			_adjustCashAfterPurchases(date, price, quantity);
 		};
 
 		var _processSale = function(date, price, quantity, symbol){
-			quantiy = Number(quantity);
+			var quantity = Number(quantity);
 
 			// These methods haven't been written up yet.
 			// _adjustCashAvailableAfterSale();
 			_adjustQuantitiesAfterSale( date, quantity, symbol );
+			_adjustCashAfterSale( date, price, quantity );
 
-			_portfolioAndCashByDate[date].cashAvailable += ( price * quantity );
+			_setUnaccountedCashValue( date, price, quantity );
 		};
 
 		var _reduceQuantitiesForDatesAfterSale = function( date, daysToLatestDate, quantity, symbol ){
@@ -182,6 +236,14 @@ StockPortfolioSimulator.factory('UserService',
 			};
 		};
 
+		var _setUnaccountedCashValue = function( date, price, quantity ){
+			if ( _portfolioAndCashByDate[date].unaccountedCash ){
+				_portfolioAndCashByDate[date].unaccountedCash += (quantity * price);
+			} else {
+				_portfolioAndCashByDate[date].unaccountedCash = (quantity * price);
+			};
+		};
+
 		// unaccountedStockValue is needed to calculate available stock to sell numbers after making a sale
 		var _setUnaccountedStockValue = function( date, quantity, symbol ){
 			if ( _portfolioAndCashByDate[date][symbol].unaccountedStock ){
@@ -203,7 +265,6 @@ StockPortfolioSimulator.factory('UserService',
 
       if( UserService.enoughMoneyToBuy( price, quantity, cashAvailable ) ){
         _processPurchase( date, price, quantity, symbol);
-        console.log(_portfolioAndCashByDate[date][symbol].quantityAtDate);
       };
     };
 
