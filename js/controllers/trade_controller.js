@@ -1,21 +1,21 @@
 StockPortfolioSimulator.controller('TradeController', 
-  ['$scope', '$stateParams', 'StocksService', 'TransactionsService', 'UserService', 
-  function($scope, $stateParams, StocksService, TransactionsService, UserService){
+  ['$scope', '$stateParams', 'PortfolioService', 'StocksService', 'TransactionsService', 
+  function($scope, $stateParams, PortfolioService, StocksService, TransactionsService){
 
   $scope.stock = StocksService.getChosenStock();
-  $scope.portfolio = UserService.returnPortfolio();
+  $scope.portfolio = PortfolioService.returnPortfolio();
   $scope.transactionProperties = TransactionsService.getTransactionProperties();
 
   // ---------------------------
   // Private
   // ---------------------------
 
-  var _validToBuy = function( cashAvailable, price, transactionQuantity ){
-    return transactionQuantity > 0 && UserService.enoughMoneyToBuy( price, transactionQuantity, cashAvailable );
+  var _validToBuy = function( date, price, transactionQuantity ){
+    return transactionQuantity > 0 && PortfolioService.enoughMoneyToBuy( date, price, transactionQuantity );
   };
 
-  var _validToSell = function( availableQuantity, transactionQuantity ){
-    return transactionQuantity > 0 && UserService.enoughStockToSell( availableQuantity, transactionQuantity );
+  var _validToSell = function( date, symbol, transactionQuantity ){
+    return transactionQuantity > 0 && PortfolioService.enoughStockToSell( date, symbol, transactionQuantity );
   };
 
   // ---------------------------
@@ -29,16 +29,16 @@ StockPortfolioSimulator.controller('TradeController',
     var tP = $scope.transactionProperties;
     var buyOrSell = tP.buyOrSell;
     var transactionQuantity = tP.transactionQuantity;
-    var quantityAvailableToSell = $scope.portfolio[$scope.stock.date][$scope.stock.symbol].quantityAvailableToSell;
+
+
     if ( buyOrSell === 'buy' ){
-      UserService.buyStock( $scope.stock.date, 
+      PortfolioService.buyStock( $scope.stock.date, 
                             $scope.stock.priceOnDate, 
                             transactionQuantity, 
                             $scope.stock.symbol );
     } else {
-      UserService.sellStock( $scope.stock.date, 
+      PortfolioService.sellStock( $scope.stock.date, 
                              $scope.stock.priceOnDate,
-                             quantityAvailableToSell, 
                              $scope.stock.symbol,
                              transactionQuantity );
     };
@@ -49,15 +49,13 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.validOrInvalid = function(){
     var stock = $scope.stock;
     var transactionProperties = $scope.transactionProperties;
-    var cashAvailable = $scope.portfolio[stock.date].cashAvailable;
     var transactionQuantity = transactionProperties.transactionQuantity;
-    var quantityAvailableToSell = $scope.portfolio[$scope.stock.date][$scope.stock.symbol].quantityAvailableToSell;
     var valid;
 
     if( transactionProperties.buyOrSell === 'buy' ){
-      valid = _validToBuy( cashAvailable, stock.priceOnDate, transactionQuantity );
+      valid = _validToBuy( stock.date, stock.priceOnDate, transactionQuantity );
     } else {
-      valid = _validToSell( quantityAvailableToSell, transactionQuantity );
+      valid = _validToSell( stock.date, stock.symbol, transactionQuantity );
     };
 
     return valid ? "Valid" : "Invalid";
