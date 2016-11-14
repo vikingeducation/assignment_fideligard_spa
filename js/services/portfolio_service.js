@@ -171,9 +171,6 @@ StockPortfolioSimulator.factory('PortfolioService',
 
 		var _processSale = function(date, price, quantity, symbol){
 			var quantity = Number(quantity);
-
-			// These methods haven't been written up yet.
-			// _adjustCashAvailableAfterSale();
 			_adjustQuantitiesAfterSale( date, quantity, symbol );
 			_adjustCashAfterSale( date, price, quantity );
 

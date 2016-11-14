@@ -18,27 +18,12 @@ StockPortfolioSimulator.factory('TransactionsService', [function(){
 	var TransactionsService = {};
 
 	TransactionsService.addTransaction = function(date, price, quantity, symbol, transactionType){
-		if ( transactionType === "buy"){
-			if ( PortfolioService.enoughMoneyToBuy( date, price, quantity ) ) {
-				_transactions.push( { "date": date,
+		_transactions.push( { "date": date,
 											"price": price,
 											"quantity": quantity,
 											"symbol": symbol,
 											"transactionType": transactionType
 										} );
-			};
-		} else {
-			if ( PortfolioService.enoughStockToSell( date, symbol, transactionQuantity ) ){
-				if ( PortfolioService.enoughMoneyToBuy( date, price, quantity ) ) {
-					_transactions.push( { "date": date,
-											"price": price,
-											"quantity": quantity,
-											"symbol": symbol,
-											"transactionType": transactionType
-										} );
-				};
-			};
-		};
 	};
 
 	TransactionsService.getTransactionProperties = function(){

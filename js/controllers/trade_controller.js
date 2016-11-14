@@ -28,19 +28,34 @@ StockPortfolioSimulator.controller('TradeController',
   $scope.placeOrder = function(){
     var tP = $scope.transactionProperties;
     var buyOrSell = tP.buyOrSell;
+    var s = $scope.stock;
     var transactionQuantity = tP.transactionQuantity;
 
-
     if ( buyOrSell === 'buy' ){
-      PortfolioService.buyStock( $scope.stock.date, 
-                            $scope.stock.priceOnDate, 
-                            transactionQuantity, 
-                            $scope.stock.symbol );
+      if ( _validToBuy( s.date, s.priceOnDate, transactionQuantity ) ){
+        TransactionsService.addTransaction( s.date, 
+                                   s.priceOnDate, 
+                                   transactionQuantity, 
+                                   s.symbol,
+                                   buyOrSell );
+        PortfolioService.buyStock( s.date, 
+                                   s.priceOnDate, 
+                                   transactionQuantity, 
+                                   s.symbol );
+      };
     } else {
-      PortfolioService.sellStock( $scope.stock.date, 
-                             $scope.stock.priceOnDate,
-                             $scope.stock.symbol,
-                             transactionQuantity );
+      if ( _validToSell( s.date, s.symbol, transactionQuantity ) ){
+        TransactionsService.addTransaction( s.date, 
+                           s.priceOnDate, 
+                           transactionQuantity, 
+                           s.symbol,
+                           buyOrSell );
+        
+        PortfolioService.sellStock( s.date,
+                       s.priceOnDate,
+                       s.symbol,
+                       transactionQuantity );
+      };
     };
   };
 
