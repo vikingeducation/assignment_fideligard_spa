@@ -35,6 +35,9 @@
     <!-- Moment -->
     <script src="/bower_components/moment/moment.js"></script>
 
+    <!-- OcLazyLoad -->
+    <script src="/bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+
     <!-- Needed for Datepicker -->
     <script>
       $( function() {
@@ -234,8 +237,7 @@
     <script src="/js/services/user_service.js"></script>
 
     <!-- Controllers -->
+    <!-- Some controllers are lazy loaded in routes -->
     <script src="/js/controllers/stocks_controller.js"></script>
-    <script src="/js/controllers/trade_controller.js"></script>
-    <script src="/js/controllers/transactions_controller.js"></script>
   </body>
 </html>

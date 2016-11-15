@@ -1,4 +1,4 @@
-StockPortfolioSimulator.controller('TradeController', 
+angular.module('StockPortfolioSimulator').controller('TradeController', 
   ['$scope', '$stateParams', 'PortfolioService', 'StocksService', 'TransactionsService', 
   function($scope, $stateParams, PortfolioService, StocksService, TransactionsService){
 

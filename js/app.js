@@ -1,4 +1,4 @@
-var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.router'])
+var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ["oc.lazyLoad", 'ui.router'])
 
 	.config(function($stateProvider, $urlRouterProvider){
 
@@ -8,12 +8,24 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.rou
 		.state('trade', {
 			url: '/trade',
 			templateUrl: "js/templates/trade.html",
-			controller: "TradeController"
+			resolve: {
+				deps: ["$ocLazyLoad", 
+					function($ocLazyLoad){
+						return $ocLazyLoad.load('js/controllers/trade_controller.js');
+					}
+				]
+			}
 		})
 		.state('transactions', {
 			url: '/transactions',
 			templateUrl: "js/templates/transactions.html",
-			controller: "TransactionsController"
+			resolve: {
+				deps: ["$ocLazyLoad",
+					function($ocLazyLoad){
+						return $ocLazyLoad.load('js/controllers/transactions_controller.js');
+					}
+				]
+			}
 		})
 
 	});
