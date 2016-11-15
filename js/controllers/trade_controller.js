@@ -24,7 +24,9 @@ StockPortfolioSimulator.controller('TradeController',
 
   // If the user has entered a number above 0
   // depending on whether user has selected 'buy' or 'sell'
-  // make the transaction happen
+  // make the transaction happen.
+  // Not terribly happy I had to put _validToBuy / _validToSell here but I had no choice
+  // TransactionsService can't call upon portfolio service because of
   $scope.placeOrder = function(){
     var tP = $scope.transactionProperties;
     var buyOrSell = tP.buyOrSell;
@@ -50,7 +52,7 @@ StockPortfolioSimulator.controller('TradeController',
                            transactionQuantity, 
                            s.symbol,
                            buyOrSell );
-        
+
         PortfolioService.sellStock( s.date,
                        s.priceOnDate,
                        s.symbol,

@@ -19,7 +19,7 @@
 // Pretty much the user's portfolio and functions to make it work.
 
 StockPortfolioSimulator.factory('PortfolioService', 
-	['DatesService', 'TransactionsService', 'UserService', function(DatesService, TransactionsService, UserService){
+	['DatesService', 'UserService', function(DatesService, UserService){
 
 		// ----------------------
 		// Private

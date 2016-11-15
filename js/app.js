@@ -4,10 +4,16 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ['ui.rou
 
 		$urlRouterProvider.otherwise("/");
 
-		$stateProvider.state('trade', {
+		$stateProvider
+		.state('trade', {
 			url: '/trade',
 			templateUrl: "js/templates/trade.html",
 			controller: "TradeController"
+		})
+		.state('transactions', {
+			url: '/transactions',
+			templateUrl: "js/templates/transactions.html",
+			controller: "TransactionsController"
 		})
 
 	});

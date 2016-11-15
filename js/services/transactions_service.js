@@ -1,4 +1,4 @@
-StockPortfolioSimulator.factory('TransactionsService', [function(){
+StockPortfolioSimulator.factory('TransactionsService', ['PortfolioService', function( PortfolioService ){
 
 	// -------------------------------
 	// Private
