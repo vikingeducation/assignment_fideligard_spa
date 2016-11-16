@@ -1,0 +1,9 @@
+#main-view {
+  min-height: 300px; }
+  #main-view .main-view-header-container {
+    margin-bottom: 15px; }
+    #main-view .main-view-header-container .view-dropdown-container {
+      float: right;
+      padding-top: 10px; }
+
+/*# sourceMappingURL=main_view_header.css.map */

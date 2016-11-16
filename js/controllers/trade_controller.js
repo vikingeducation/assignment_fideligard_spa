@@ -1,10 +1,6 @@
 angular.module('StockPortfolioSimulator').controller('TradeController', 
-  ['$scope', '$stateParams', 'PortfolioService', 'StocksService', 'TransactionsService', 
-  function($scope, $stateParams, PortfolioService, StocksService, TransactionsService){
-
-  $scope.stock = StocksService.getChosenStock();
-  $scope.portfolio = PortfolioService.returnPortfolio();
-  $scope.transactionProperties = TransactionsService.getTransactionProperties();
+  ['$scope', '$state', '$stateParams', 'PortfolioService', 'StocksService', 'TransactionsService', 
+  function($scope, $state, $stateParams, PortfolioService, StocksService, TransactionsService){
 
   // ---------------------------
   // Private
@@ -21,6 +17,20 @@ angular.module('StockPortfolioSimulator').controller('TradeController',
   // ---------------------------
   // Public
   // ---------------------------
+
+  $scope.stock = StocksService.getChosenStock();
+  $scope.portfolio = PortfolioService.returnPortfolio();
+  $scope.transactionProperties = TransactionsService.getTransactionProperties();
+  $scope.viewName = "trade";
+
+  // Need this setTimeout here
+  // as the ng-change whichi calls this function
+  // runs beore the ng-model change seems to happen
+  $scope.changeView = function(){
+    setTimeout(function(){
+      $state.go( $scope.viewName );
+    })
+  };
 
   // If the user has entered a number above 0
   // depending on whether user has selected 'buy' or 'sell'

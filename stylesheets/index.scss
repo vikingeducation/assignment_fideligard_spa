@@ -95,18 +95,6 @@ main-nav{
     font-size: 25px;
   }
 
-  .filter-view-dropdown-container {
-    float: right;
-
-    .filter-container {
-      display: inline-block;
-    }
-
-    .view-dropdown-container {
-      display: inline-block;
-    }
-  }
-
   #get-stocks-container {
     margin-bottom: 30px;
 
@@ -182,26 +170,6 @@ main-nav{
       position: absolute;
       left: 5px;
       top: 5px;
-    }
-  }
-
-  #main-view {
-    min-height: 300px;
-
-    .main-view-header-container {
-      margin-bottom: 15px;
-
-      .filter-view-dropdown-container {
-        float: right;
-
-        .filter-container {
-          display: inline-block;
-        }
-
-        .view-dropdown-container {
-          display: inline-block;
-        }
-      }
     }
   }
 }

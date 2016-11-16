@@ -2,12 +2,10 @@
   <div class="sub-header">
     {{ header }}
   </div>
-  <div class="filter-view-dropdown-container">
-    <div class="filter-container">
-      Filter: 
-    </div>
-    <div class="view-dropdown-container">
-      Trade
-    </div>
+  <div class="view-dropdown-container">
+    <select name="view-selector" ng-model="viewName" ng-change="changeView()">
+      <option value="transactions">Transactions</option>
+      <option value="trade">Trade</option>
+    </select>
   </div>
 </div>
