@@ -1,3 +1,22 @@
+// Index
+// 1. Scrollbar
+// 2. Main Navbar
+// 3. .container
+//  h4
+//  .hide-show-glyphicon
+//  .view-container
+//  .search-container
+//  .sub-body-container
+//  .sub-header
+//  .filter-view-dropdown-container
+//  #get-stocks-container
+//  #stock-container
+//  #date-picker-container
+//  #main-view
+
+
+
+// 1. Scrollbar
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 7px;
@@ -8,6 +27,7 @@
     -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
+// 2. Main Navbar
 main-nav{
 
   .navbar {
@@ -33,6 +53,7 @@ main-nav{
   }
 }
 
+// 3. .container
 .container {
   width: 940px;
 
@@ -72,6 +93,18 @@ main-nav{
   .sub-header {
     display: inline-block;
     font-size: 25px;
+  }
+
+  .filter-view-dropdown-container {
+    float: right;
+
+    .filter-container {
+      display: inline-block;
+    }
+
+    .view-dropdown-container {
+      display: inline-block;
+    }
   }
 
   #get-stocks-container {
@@ -154,5 +187,21 @@ main-nav{
 
   #main-view {
     min-height: 300px;
+
+    .main-view-header-container {
+      margin-bottom: 15px;
+
+      .filter-view-dropdown-container {
+        float: right;
+
+        .filter-container {
+          display: inline-block;
+        }
+
+        .view-dropdown-container {
+          display: inline-block;
+        }
+      }
+    }
   }
 }

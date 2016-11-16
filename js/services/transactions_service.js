@@ -26,6 +26,10 @@ StockPortfolioSimulator.factory('TransactionsService', ['PortfolioService', func
 										} );
 	};
 
+	TransactionsService.getTransactions = function(){
+		return _transactions;
+	};
+
 	TransactionsService.getTransactionProperties = function(){
 		return _transactionProperties;
 	};

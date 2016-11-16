@@ -47,6 +47,12 @@ main-nav .navbar {
   .container .sub-header {
     display: inline-block;
     font-size: 25px; }
+  .container .filter-view-dropdown-container {
+    float: right; }
+    .container .filter-view-dropdown-container .filter-container {
+      display: inline-block; }
+    .container .filter-view-dropdown-container .view-dropdown-container {
+      display: inline-block; }
   .container #get-stocks-container {
     margin-bottom: 30px; }
     .container #get-stocks-container #buttons-container {
@@ -94,5 +100,13 @@ main-nav .navbar {
       top: 5px; }
   .container #main-view {
     min-height: 300px; }
+    .container #main-view .main-view-header-container {
+      margin-bottom: 15px; }
+      .container #main-view .main-view-header-container .filter-view-dropdown-container {
+        float: right; }
+        .container #main-view .main-view-header-container .filter-view-dropdown-container .filter-container {
+          display: inline-block; }
+        .container #main-view .main-view-header-container .filter-view-dropdown-container .view-dropdown-container {
+          display: inline-block; }
 
 /*# sourceMappingURL=index.css.map */
