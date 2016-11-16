@@ -4,5 +4,21 @@
                     change-view = "changeView()"
                     view-name = "viewName">
   </main-view-header>
-
+  
+  <table class='table table-condensed'>
+    <tr>
+      <th>Date</th>
+      <th>Symbol</th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <tr ng-repeat="transaction in transactions">
+      <td>{{ transaction.date }}</td>
+      <td>{{ transaction.symbol }}</td>
+      <td>{{ transaction.transactionType }}</td>
+      <td>{{ transaction.quantity }}</td>
+      <td>{{ transaction.price }}</td>
+    </tr>
+  </table>
 </div>
