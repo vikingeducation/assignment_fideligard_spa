@@ -4,6 +4,8 @@
                     change-view = "changeView()"
                     view-name = "viewName">
   </main-view-header>
+
+  <input type="text" ng-model = "filterText">
   
   <table class='table table-condensed'>
     <tr>
@@ -13,7 +15,7 @@
       <th>Quantity</th>
       <th>Price</th>
     </tr>
-    <tr ng-repeat="transaction in transactions">
+    <tr ng-repeat="transaction in transactions | filter: filterText">
       <td>{{ transaction.date }}</td>
       <td>{{ transaction.symbol }}</td>
       <td>{{ transaction.transactionType }}</td>
