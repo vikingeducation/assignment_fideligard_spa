@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,mBAAM;EACJ,OAAO,EAAE,YAAY;EACrB,WAAW,EAAE,IAAI;EACjB,KAAK,EAAE,GAAG;AAGZ,mBAAM;EACJ,OAAO,EAAE,YAAY;AAGvB,+BAAkB;EAChB,aAAa,EAAE,IAAI",
+"sources": ["transactions.scss"],
+"names": [],
+"file": "transactions.css"
+}
