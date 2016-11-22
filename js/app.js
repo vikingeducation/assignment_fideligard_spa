@@ -27,6 +27,17 @@ var StockPortfolioSimulator = angular.module('StockPortfolioSimulator', ["oc.laz
 				]
 			}
 		})
+		.state('portfolio', {
+			url: '/portfolio',
+			templateUrl: "js/templates/portfolio.html",
+			resolve: {
+				deps: ["$ocLazyLoad",
+					function($ocLazyLoad){
+						return $ocLazyLoad.load('js/controllers/portfolio_controller.js');
+					}
+				]
+			}
+		})
 
 	});
 
