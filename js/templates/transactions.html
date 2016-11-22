@@ -9,18 +9,25 @@
   
   <table class='table table-condensed'>
     <tr>
-      <th>Date</th>
-      <th>Symbol</th>
+      <th ng-click="ordeExpression = 'date'; reverse = !reverse">
+      Date
+      <span class="glyphicon glyphicon-triangle-bottom" ng-show="!reverse"></span>
+      <span class="glyphicon glyphicon-triangle-top" ng-show="reverse"></span></th>
+
+      <th ng-click="orderExpression = 'symbol'; reverse = !reverse">
+      Symbol
+      <span class="glyphicon glyphicon-triangle-bottom" ng-show="!reverse"></span>
+      <span class="glyphicon glyphicon-triangle-top" ng-show="reverse"></span></th>
       <th>Type</th>
       <th>Quantity</th>
       <th>Price</th>
     </tr>
-    <tr ng-repeat="transaction in transactions | filter: filterText">
+    <tr ng-repeat="transaction in transactions | filter: filterText | orderBy: orderExpression : reverse">
       <td>{{ transaction.date }}</td>
       <td>{{ transaction.symbol }}</td>
       <td>{{ transaction.transactionType }}</td>
       <td>{{ transaction.quantity }}</td>
-      <td>{{ transaction.price }}</td>
+      <td>{{ transaction.price | currency }}</td>
     </tr>
   </table>
 </div>

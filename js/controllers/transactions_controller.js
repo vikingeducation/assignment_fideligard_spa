@@ -9,6 +9,8 @@ angular.module('StockPortfolioSimulator').controller('TransactionsController', [
 	// ---------------------
 
 	$scope.filterText = "";
+	$scope.orderExpression = 'date';
+	$scope.reverse = false;
 	$scope.transactions = TransactionsService.getTransactions();
 
 	$scope.viewName = "transactions";
