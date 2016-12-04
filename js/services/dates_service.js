@@ -20,14 +20,6 @@ StockPortfolioSimulator.factory('DatesService',
 		return moment( otherDate ).diff(moment( date ), 'days' ) > 0 ;
 	};
 
-	DatesService.returnChosenDate = function(){
-		return _dates.chosenDate;
-	};
-
-	DatesService.returnDates = function(){
-		return _dates.dates;
-	};
-
 	DatesService.returnDateDaysAfter = function( currentDate, daysAfter ){
 		return moment(currentDate).add(daysAfter, "days").format("YYYY-MM-DD");
 	};
@@ -40,10 +32,6 @@ StockPortfolioSimulator.factory('DatesService',
 		return _dates;
 	};
 
-	DatesService.returnEndDate = function(){
-		return _dates.endDate;
-	};
-
 	// Going to covert this to a positive number here too.
 	DatesService.returnNumberOfDaysBetween = function( endDate, startDate ){
 		var days = moment( endDate ).diff(moment( startDate ), 'days' );
@@ -53,17 +41,12 @@ StockPortfolioSimulator.factory('DatesService',
 		return days;
 	};
 
-	DatesService.returnStartDate = function(){
-		return _dates.startDate;
-	};
-
 	DatesService.setChosenDate = function( date ){
 		_dates.chosenDate = date;
 	};
 
 	DatesService.setDates = function( dates ){
 		_dates.dates = dates;
-
 	};
 
 	DatesService.setEndDate = function( date ){

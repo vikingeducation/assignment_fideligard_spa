@@ -317,11 +317,11 @@ StockPortfolioSimulator.factory('PortfolioService',
 			// Return the cashAtDate of the final day on record
 		PortfolioService.returnCashAtDate = function( date ){
 			if( _portfolioDateExists( date ) ){
-				return _portfolioAndCashByDate[date].cashAvailable;
+				return _portfolioAndCashByDate[date].cashAtDate;
 			} else if ( DatesService.dateIsBeforeOtherDate( date, _portfolioAndCashByDate.earliestDate ) ){
 				return UserService.returnStartingAmount();
 			} else {
-				return _portfolioAndCashByDate[_portfolioAndCashByDate.latestDate].cashAvailable;
+				return _portfolioAndCashByDate[_portfolioAndCashByDate.latestDate].cashAtDate;
 			};
 		};
 

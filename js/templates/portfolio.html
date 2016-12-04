@@ -23,7 +23,7 @@
       <td>CASH</td>
       <td></td>
       <td></td>
-      <td>{{ portfolio[datesObject.chosenDate].cashAtDate }}</td>
+      <td>{{ portfolio[datesObject.chosenDate].cashAtDate | currency }}</td>
       <td>{{ returnProfitLossFromDaysAgo() | currency }}</td>
       <td>{{ returnProfitLossFromDaysAgo(1) | currency }}</td>
       <td>{{ returnProfitLossFromDaysAgo(7) | currency }}</td>

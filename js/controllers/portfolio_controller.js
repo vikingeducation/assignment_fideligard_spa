@@ -21,8 +21,8 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
     })
   };
 
+  // Cash at chosen date - initial amount
   $scope.returnProfitLossFromDaysAgo = function( daysAgo ){
-    console.log( portfolio[$scope.datesObject.chosenDate].cashAtDate );
   	var cashAtChosenDate = PortfolioService.returnCashAtDate( $scope.datesObject.chosenDate );
   	var cashDaysAgo;
   	var dateDaysAgo;
