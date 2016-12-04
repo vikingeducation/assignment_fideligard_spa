@@ -30,7 +30,7 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
     for( var i=0; i < $scope.transactions.length; i++){
       // Only bother if symbols match
       // Only bother if date matches or is before hand
-      if( $scope.transactions[i].symbol === symbol ){
+      if( $scope.transactions[i].symbol === symbol && ( date === $scope.transactions[i].date || DatesService.dateIsBeforeOtherDate( $scope.transactions[i].date, date ) )){
         if( $scope.transactions[i].transactionType === "buy" ){
           totalSpentOnPurchases += ($scope.transactions[i].price * $scope.transactions[i].quantity);
         } else {
