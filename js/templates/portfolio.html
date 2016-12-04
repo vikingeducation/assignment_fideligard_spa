@@ -19,6 +19,7 @@
       <th>30d</th>
       <th>Trade?</th>
     </tr>
+    <!-- Only to calculate cash -->
     <tr>
       <td>CASH</td>
       <td></td>
@@ -31,6 +32,22 @@
       <td>{{ returnProfitLossFromDaysAgo(30) | currency }}</td>
       <td></td>
     </tr>
+    <tr ng-repeat="(symbol, properties) in portfolio[datesObject.chosenDate]" ng-hide="symbol == 'cashAvailable' || symbol == 'cashAtDate' || symbol == 'unaccountedCash'">
+      <td>{{ symbol }}</td>
+      <td>{{ properties.quantityAtDate }}</td>
+      <td>{{ returnCostBasis( symbol, datesObject.chosenDate ) }}</td>
+      <td>{{ properties }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
   </table>
+
+  <ul>
+    <li ng-repeat="t in transactions">{{ t }}</li>
+  </ul>
 
 </div>

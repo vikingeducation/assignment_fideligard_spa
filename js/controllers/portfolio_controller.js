@@ -1,4 +1,4 @@
-angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$scope', '$state', 'DatesService', 'PortfolioService', 'UserService', function($scope, $state, DatesService, PortfolioService, UserService){
+angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$scope', '$state', 'DatesService', 'PortfolioService', 'TransactionsService', 'UserService', function($scope, $state, DatesService, PortfolioService, TransactionsService, UserService){
 
 	// ---------------------
 	// Private
@@ -10,6 +10,7 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
 
   $scope.datesObject = DatesService.returnDatesObject();
 	$scope.portfolio = PortfolioService.returnPortfolio();
+  $scope.transactions = TransactionsService.getTransactions();
 	$scope.viewName = "portfolio";
 
   // Need this setTimeout here
@@ -19,6 +20,26 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
     setTimeout(function(){
       $state.go( $scope.viewName );
     })
+  };
+
+  // "Cost Basis" basically represents all the money you've spent to buy a particular stock so far. It is typically calculated in a much more complicated way, but assume here that it represents the total money spent to purchase a stock minus the total money earned by selling it up until that point.
+  $scope.returnCostBasis = function( symbol, date ){
+    var totalSpentOnPurchases = 0;
+    var totalMadeFromSales = 0;
+
+    for( var i=0; i < $scope.transactions.length; i++){
+      // Only bother if symbols match
+      // Only bother if date matches or is before hand
+      if( $scope.transactions[i].symbol === symbol ){
+        if( $scope.transactions[i].transactionType === "buy" ){
+          totalSpentOnPurchases += ($scope.transactions[i].price * $scope.transactions[i].quantity);
+        } else {
+          totalMadeFromSales += ($scope.transactions[i].price * $scope.transactions[i].quantity);
+        };
+      };
+    };
+
+    return totalSpentOnPurchases - totalMadeFromSales;
   };
 
   // Cash at chosen date - initial amount
@@ -34,7 +55,7 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
   	// else
   		// set the cashDaysAgo as the starting amount
   	if( daysAgo ){
-  		dateDaysAgo = DatesService.returnDateDaysAgo( daysAgo );
+  		dateDaysAgo = DatesService.returnDateDaysAgo( $scope.datesObject.chosenDate, daysAgo );
   		if ($scope.portfolio[dateDaysAgo]){
   			cashDaysAgo = $scope.portfolio[dateDaysAgo].cashAtDate;
   		} else {
