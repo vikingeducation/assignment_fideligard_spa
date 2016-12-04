@@ -292,7 +292,9 @@ StockPortfolioSimulator.factory('PortfolioService',
 				_initialSetup( date );
 			};
 
-			if( !_portfolioAndCashByDate[date][symbol] ){
+			// Sometimes there's going to be no symbol passed in
+			// If a symbol is provided and there's no smybol on the date, then we run this initial set up...
+			if( symbol && !_portfolioAndCashByDate[date][symbol] ){
 				_portfolioAndCashByDate[date][symbol] = { quantityAtDate: 0,
 																									quantityAvailableToSell: 0 };
 			};
@@ -306,6 +308,21 @@ StockPortfolioSimulator.factory('PortfolioService',
 		PortfolioService.enoughStockToSell = function( date, symbol, transactionQuantity ){
 			var quantityAvailableToSell = PortfolioService.returnQuantityAvailableToSellAtDate( date, symbol );
 			return quantityAvailableToSell >= transactionQuantity;
+		};
+
+		// 1. User selects a date that's in the portfolio...
+		// 2. User selects a date before the earliest date in the portfolio
+			// Return the starting amount
+		// 3. User selects a date after the latest date in the portfolio
+			// Return the cashAtDate of the final day on record
+		PortfolioService.returnCashAtDate = function( date ){
+			if( _portfolioDateExists( date ) ){
+				return _portfolioAndCashByDate[date].cashAvailable;
+			} else if ( DatesService.dateIsBeforeOtherDate( date, _portfolioAndCashByDate.earliestDate ) ){
+				return UserService.returnStartingAmount();
+			} else {
+				return _portfolioAndCashByDate[_portfolioAndCashByDate.latestDate].cashAvailable;
+			};
 		};
 
 		// It'll return the cashAvailable on the date chosen

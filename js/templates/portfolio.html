@@ -5,4 +5,31 @@
                     view-name = "viewName">
   </main-view-header>
 
+  <!-- Portfolio positions table -->
+  <table class='table table-condensed' id='portfolio-positions-table'>
+    <tr>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>Current Price</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th>Trade?</th>
+    </tr>
+    <tr>
+      <td>CASH</td>
+      <td></td>
+      <td></td>
+      <td>{{ portfolio[datesObject.chosenDate].cashAtDate }}</td>
+      <td>{{ returnProfitLossFromDaysAgo() | currency }}</td>
+      <td>{{ returnProfitLossFromDaysAgo(1) | currency }}</td>
+      <td>{{ returnProfitLossFromDaysAgo(7) | currency }}</td>
+      <td>{{ returnProfitLossFromDaysAgo(30) | currency }}</td>
+      <td></td>
+    </tr>
+  </table>
+
 </div>

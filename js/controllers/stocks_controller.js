@@ -1,6 +1,6 @@
 StockPortfolioSimulator.controller('StocksController', 
-	['$scope', 'DomManipulatorService', 'PortfolioService', 'StocksService', 'TransactionsService', '_',
-	function($scope, DomManipulatorService, PortfolioService, StocksService, TransactionsService, _){
+	['$scope', 'DatesService', 'DomManipulatorService', 'PortfolioService', 'StocksService', 'TransactionsService', '_',
+	function($scope, DatesService, DomManipulatorService, PortfolioService, StocksService, TransactionsService, _){
 
 	// ---------------------------
 	// On Load
@@ -23,6 +23,14 @@ StockPortfolioSimulator.controller('StocksController',
 	// Public
 	// ---------------------------
 
+	$scope.datesObject = DatesService.returnDatesObject();
+	$scope.datePickerEndDate = "2014-12-31";
+	$scope.datePickerStartDate = "2014-01-01";
+	$scope.filterText;
+	$scope.searchText;
+	$scope.reverse = false;
+	$scope.notAvailableString = "N/A";
+
 	$scope.chooseAllSymbols = function(){
 		StocksService.chooseAllSymbols();
 	};
@@ -32,18 +40,21 @@ StockPortfolioSimulator.controller('StocksController',
 	};
 
 	$scope.request = function( getStocksGlyphiconId, getStocksBodyId, stocksGlyphiconId, stocksBodyId ){
-		StocksService.request( $scope.startDate, $scope.endDate )
+		StocksService.request( $scope.datePickerStartDate, $scope.datePickerEndDate )
 			.then(function(request){
 
 				DomManipulatorService.slideContainersOnceRequestIsSuccessful( getStocksGlyphiconId, getStocksBodyId, stocksGlyphiconId, stocksBodyId );
 
-				$scope.stockDetailsByDate = StocksService.stockDetailsByDate( $scope.startDate, $scope.endDate );
+				$scope.stockDetailsByDate = StocksService.stockDetailsByDate( $scope.datePickerStartDate, $scope.datePickerEndDate );
 
-				$scope.dates = Object.keys($scope.stockDetailsByDate).sort();
+				DatesService.setDates( Object.keys($scope.stockDetailsByDate).sort() );
 
-				$scope.rangeMax = $scope.dates.length - 1;
+				$scope.rangeMax = $scope.datesObject.dates.length - 1;
 
 				$scope.rangeValue = 0;
+
+				$scope.setChosenDate();
+				$scope.createDatesUpToDate();
 
 			});
 	};
@@ -60,31 +71,33 @@ StockPortfolioSimulator.controller('StocksController',
 		};
 	};
 
-	$scope.setChosenStock = function( date, stock ){
-		StocksService.setChosenStock( date, stock );
-		PortfolioService.createDatesUpToDate( date, stock.symbol );
-		TransactionsService.resetTransactionProperties( date, stock.symbol );
+	$scope.setChosenDate = function(){
+		DatesService.setChosenDate( $scope.datesObject.dates[$scope.rangeValue] );
+	};
+
+	$scope.createDatesUpToDate = function( stock ){
+		if (stock){
+			PortfolioService.createDatesUpToDate( $scope.datesObject.chosenDate, stock.symbol );
+		} else {
+			PortfolioService.createDatesUpToDate( $scope.datesObject.chosenDate );
+		};
+	};
+
+	$scope.setChosenStock = function( stock ){
+		StocksService.setChosenStock( $scope.datesObject.chosenDate, stock );
+		TransactionsService.resetTransactionProperties( $scope.datesObject.chosenDate, stock.symbol );
+	};
+
+	$scope.setEndDate = function(){
+		DatesService.setEndDate( $scope.datesObject.endDate );
+	};
+
+	$scope.setStartDate = function(){
+		DatesService.setStartDate( $scope.datesObject.startDate );
 	};
 
 	$scope.slideBodyContainer = function( glyphiconId, containerId ){
 		DomManipulatorService.slideBodyContainer( glyphiconId, containerId );
 	};
-
-	// ---------------------------
-	// Variables
-	// ---------------------------
-
-	$scope.filterText;
-
-	$scope.searchText;
-
-	$scope.reverse = false;
-
-	$scope.notAvailableString = "N/A";
-
-	// Unfortunately we have to set the date here and in the script to set date for datepicker for now.
-  // Will look into when I have more time.
-	$scope.startDate = "2014-01-01";
-	$scope.endDate = "2014-12-31";
 
 }]);
