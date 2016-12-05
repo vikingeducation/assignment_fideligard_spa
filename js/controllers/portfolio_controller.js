@@ -42,6 +42,11 @@ angular.module('StockPortfolioSimulator').controller('PortfolioController', ['$s
     return totalSpentOnPurchases - totalMadeFromSales;
   };
 
+  $scope.returnCurrentValue = function( symbol, date ){
+    // First we need to figure out how much of a stock we have at a certain date ( easily done by looking at the portfolio )
+    // The price at a date is hard because even though we have the price at transactions, we can't access the price at every date
+  };
+
   // Cash at chosen date - initial amount
   $scope.returnProfitLossFromDaysAgo = function( daysAgo ){
   	var cashAtChosenDate = PortfolioService.returnCashAtDate( $scope.datesObject.chosenDate );
