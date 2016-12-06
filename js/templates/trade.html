@@ -1,0 +1,128 @@
+<div id="trade-container" ng-controller="TradeController">
+
+  <main-view-header header = "Trade" 
+                    change-view = "changeView()"
+                    view-name = "viewName">
+  </main-view-header>
+
+  <div class="row">
+    <div class="col-xs-6">
+      <div id="trade-left">
+        <form>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Symbol:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.symbol }}
+            </div>
+          </div>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              <label for="buy-sell-select">Buy/Sell:</label>
+            </div>
+            <div class="trade-form-value">
+              <select name="buy-sell-select" id="buy-sell-select" ng-model='transactionProperties.buyOrSell'>
+                <option value="buy">Buy</option>
+                <option value="sell">Sell</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              <label for="buy-sell-quantity">Quantity:</label>
+            </div>
+            <div class="trade-form-value">
+              <input type="text" id='buy-sell-quantity' ng-model='transactionProperties.transactionQuantity'>
+            </div>
+          </div>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Date:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.date }}
+            </div>
+          </div>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Price:
+            </div>
+            <div class="trade-form-value">
+              {{ stock.priceOnDate | currency }}
+            </div>
+          </div>
+
+          <div class="trade-form-group">
+            <div class="trade-form-label">
+              Transaction:
+            </div>
+            <div class="trade-form-value">
+              {{ transactionProperties.transactionQuantity * stock.priceOnDate | currency }}
+            </div>
+          </div>
+          
+          <div id="place-order-button-container">
+            <button class='btn btn-primary' ng-click='placeOrder()'>Place Order!!</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div id="trade-right">
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Cash at Date:
+          </div>
+          <div class="trade-form-value">
+            {{ portfolio[stock.date].cashAtDate | currency }}
+          </div>
+        </div>
+
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Cash Available for Purachases:
+          </div>
+          <div class="trade-form-value">
+            {{ portfolio[stock.date].cashAvailable | currency }}
+          </div>
+        </div>
+
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Quantity at Date:
+          </div>
+          <div class="trade-form-value">
+            {{ portfolio[stock.date][stock.symbol].quantityAtDate }}
+          </div>
+        </div>
+
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Quantity Available to Sell:
+          </div>
+          <div class="trade-form-value">
+            {{ portfolio[stock.date][stock.symbol].quantityAvailableToSell }}
+          </div>
+        </div>
+
+        <div class="label-and-value">
+          <div class="trade-form-label">
+            Order Status:
+          </div>
+          <div class="trade-form-value">
+            {{ validOrInvalid() }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

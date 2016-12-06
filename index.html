@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html ng-app="StockPortfolioSimulator">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fideligard Stock Portfolio Simulator</title>
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <!-- jQuery-Ui -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+
+    <!-- UI-router -->
+    <script src="/plugins/angular-ui-router.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+    <!-- CSS --> 
+    <link rel="stylesheet" href="/stylesheets/index.css">
+    <link rel="stylesheet" href="/stylesheets/trade.css">
+    <link rel="stylesheet" href="/stylesheets/transactions.css">
+    <link rel="stylesheet" href="/stylesheets/main_view_header.css">
+
+    <!-- Lodash -->
+    <script src="/bower_components/lodash/lodash.js"></script>
+
+    <!-- Moment -->
+    <script src="/bower_components/moment/moment.js"></script>
+
+    <!-- OcLazyLoad -->
+    <script src="/bower_components/oclazyload/dist/ocLazyLoad.js"></script>
+
+    <!-- Needed for Datepicker -->
+    <script>
+      $( function() {
+        $( "#from-date-input" ).datepicker({
+          dateFormat: "yy-mm-dd"
+        });
+
+        // Unfortunately we have to set the date here and in the controllers scope for now.
+        // Will look into when I have more time.
+        $( "#from-date-input" ).datepicker("setDate", "2014-01-01" );
+
+
+        $( "#to-date-input" ).datepicker({
+          dateFormat: "yy-mm-dd"
+        });
+
+        $( "#to-date-input" ).datepicker("setDate", "2014-12-31" );
+
+      } );
+    </script>
+
+  </head>
+  <body>
+    <!-- Nav -->
+    <main-nav></main-nav>
+
+    <main class="container">
+      <div class="col-xs-6" ng-controller="StocksController">
+
+        <div class="view-container" id="get-stocks-container">
+          <div id="get-stocks-header-container">
+            <div class="sub-header">
+              Search Stock History
+            </div>
+
+            <div id="get-stocks-glyphicon" class="glyphicon glyphicon-triangle-top hide-show-glyphicon" ng-click="slideBodyContainer('#get-stocks-glyphicon', '#get-stocks-body-container')">
+            </div>
+          </div>
+
+          <div class="sub-body-container" id="get-stocks-body-container">
+
+            <div class="search-container">
+              <h4>
+                Select Stock
+              </h4>
+              <label>
+                Search: <input type="text" ng-model="searchText" class='form-control'>
+              </label>
+            </div>
+            <table class="table table-striped" style="margin-bottom: 0px">
+              <tr>
+                <th style="width: 75px">
+                  Symbol
+                </th>
+                <th style="width: 260px">
+                  Name
+                </th>
+                <th>
+                  Select
+                </th>
+              </tr>
+            </table>
+            <div id="table-container">
+              <table class="table table-striped">
+                <tr ng-repeat="stock in namesAndSymbols | filter:searchText">
+                  <td>
+                    {{ stock.Symbol }}
+                  </td>
+                  <td>
+                    {{ stock.Name }}
+                  </td>
+                  <td class='text-center'>
+                    <input type="checkbox" ng-model="stock.Checked">
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <br>
+            <h4>
+              Select Date Range
+            </h4>
+            <div id="date-pickers">
+              <div class="date-picker-label-input">
+                <label for="from-date-input">From:</label>
+                <input type="text" id="from-date-input" class='form-control' ng-model="datePickerStartDate">
+              </div>
+              <div class="date-picker-label-input">
+                <label for="to-date-input">To:</label>
+                <input type="text" id="to-date-input" class='form-control' ng-model="datePickerEndDate">
+              </div>
+            </div>
+
+            <div id="buttons-container">
+              <button class="btn" id="clear-button" ng-click="clearChosenSymbols()">
+                Clear
+              </button>
+              <button class='btn btn-success' id="submit-button" ng-click="request('#get-stocks-glyphicon', '#get-stocks-body-container', '#stocks-glyphicon', '#stocks-body-container')">
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="view-container" id="date-picker-container">
+          <div id="earliest-date" class='date-picker-date'>
+            {{ datesObject.dates[0] }}
+          </div>
+          <div id="current-date" class='date-picker-date'>
+            {{ datesObject.dates[rangeValue] }}
+          </div>
+          <div id="latest-date" class='date-picker-date'>
+            {{ datesObject.dates[rangeMax] }}
+          </div>
+          <input type="range" min="0" max="{{ rangeMax }}" step="1"  data-orientation="horizontal" ng-change="setChosenDate(); createDatesUpToDate()" ng-model="rangeValue">
+        </div>
+
+        <div class="view-container" id="stocks-container">
+          <div id="stocks-header-container">
+            <div class="sub-header">
+              Search Results
+            </div>
+            <div id="stocks-glyphicon" class="glyphicon glyphicon-triangle-bottom hide-show-glyphicon" ng-click="slideBodyContainer('#stocks-glyphicon', '#stocks-body-container')">
+            </div>
+          </div>
+
+          <div class="sub-body-container" id="stocks-body-container">
+
+            <div class="search-container">
+              <label>
+                Filter: <input type="text" ng-model="filterText" class='form-control'>
+              </label>
+            </div>
+
+            <div id="table-explanation">
+              <p>
+                1d: Price on selected day minus the price 1 day ago...
+              </p>
+            </div>
+
+            <table class='table table-striped'>
+              <tr>
+                <th ng-click="reverseSearchResults('#search-results-symbol-span')">Symbol <span id='search-results-symbol-span' class="glyphicon glyphicon-triangle-bottom"></span></th>
+                <th>Price</th>
+                <th>1d</th>
+                <th>7d</th>
+                <th>30d</th>
+                <th>Trade?</th>
+              </tr>
+              <tr ng-repeat="stock in stockDetailsByDate[datesObject.dates[rangeValue]] | filter:filterText | orderBy:'symbol':reverse">
+                <td>
+                  {{ stock.symbol }}
+                </td>
+                <td>
+                  {{ stock.priceOnDate | currency }}
+                </td>
+                <td>
+                  {{ (stock.priceADayAgo || stock.priceADayAgo === 0 ) ? (stock.priceADayAgo | currency) : notAvailableString }}
+                </td>
+                <td>
+                  {{ (stock.priceSevenDaysAgo || stock.priceSevenDaysAgo === 0) ? (stock.priceSevenDaysAgo | currency) : notAvailableString }}
+                </td>
+                <td>
+                  {{ (stock.priceThirtyDaysAgo || stock.priceThirtyDaysAgo === 0) ? ( stock.priceThirtyDaysAgo | currency) : notAvailableString }}
+                </td>
+                <td>
+                  <a ng-click="setChosenStock( stock )" ui-sref="trade">
+                    trade!
+                  </a>
+                </td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-xs-6">
+        <div class='view-container' id="main-view">
+          <div ui-view></div>
+        </div>
+      </div>
+    </main>
+
+    <!-- App -->
+    <script src="/js/app.js"></script>
+
+    <!-- Directives -->
+    <script src="/js/directives/main_nav.js"></script>
+    <script src="/js/directives/main_view_header.js"></script>
+
+    <!-- Services -->
+    <script src="/js/services/dom_manipulator_service.js"></script>
+    <script src="/js/services/dates_service.js"></script>
+    <script src="/js/services/names_and_symbols_service.js"></script>
+    <script src="/js/services/portfolio_service.js"></script>
+    <script src="/js/services/transactions_service.js"></script>
+    <script src="/js/services/search_and_results_service.js"></script>
+    <script src="/js/services/stocks_service.js"></script>
+    <script src="/js/services/user_service.js"></script>
+
+    <!-- Controllers -->
+    <!-- Some controllers are lazy loaded in routes -->
+    <script src="/js/controllers/stocks_controller.js"></script>
+  </body>
+</html>

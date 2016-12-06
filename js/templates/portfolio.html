@@ -1,0 +1,30 @@
+<div id="portfolio" ng-controller = "PortfolioController">
+  
+  <main-view-header header = "Portfolio"
+                    change-view = "changeView()"
+                    view-name = "viewName">
+  </main-view-header>
+
+  <!-- Portfolio positions table -->
+  <table class='table table-condensed' id='portfolio-positions-table'>
+    <tr>
+      <th>Symbol</th>
+      <th>Quantity</th>
+      <th>Cost Basis ( Total Spent - Total Made )</th>
+    </tr>
+    <!-- Only to calculate cash -->
+    <tr>
+      <td>CASH</td>
+      <!-- quantity = cash at date -->
+      <td>{{ portfolio[datesObject.chosenDate].cashAtDate | currency }}</td>
+      <!-- Leave empty -->
+      <td>{{ returnProfitLossFromDaysAgo() | currency }}</td>
+    </tr>
+    <tr ng-repeat="(symbol, properties) in portfolio[datesObject.chosenDate]" ng-hide="symbol == 'cashAvailable' || symbol == 'cashAtDate' || symbol == 'unaccountedCash'">
+      <td>{{ symbol }}</td>
+      <td>{{ properties.quantityAtDate }}</td>
+      <td>{{ returnCostBasis( symbol, datesObject.chosenDate ) | currency }}</td>
+    </tr>
+  </table>
+
+</div>

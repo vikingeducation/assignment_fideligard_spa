@@ -1,0 +1,175 @@
+// Index
+// 1. Scrollbar
+// 2. Main Navbar
+// 3. .container
+//  h4
+//  .hide-show-glyphicon
+//  .view-container
+//  .search-container
+//  .sub-body-container
+//  .sub-header
+//  .filter-view-dropdown-container
+//  #get-stocks-container
+//  #stock-container
+//  #date-picker-container
+//  #main-view
+
+
+
+// 1. Scrollbar
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
+}
+
+// 2. Main Navbar
+main-nav{
+
+  .navbar {
+    margin-bottom: 50px;
+
+    #navbar-logo-link {
+      font-size: 24px;
+      padding: 15px;
+    }
+
+    #navbar-name-link {
+      color: #777;
+      display: inline-block;
+      font-size: 21px;
+      line-height: 25px;
+      padding: 15px 0; 
+      text-decoration: none;
+    }
+
+    #navbar-name-link:hover {
+      color: #5e5e5e;
+    }
+  }
+}
+
+// 3. .container
+.container {
+  width: 960px;
+
+  h4 {
+    color: #777;
+  }
+
+  .hide-show-glyphicon {
+    font-size: 25px;
+    position: absolute;
+      
+    top: 22px;
+    right: 15px;
+  }
+
+  .view-container {
+    border: 1px solid black;
+    padding: 15px;
+    position: relative;
+  }
+
+  .search-container {
+    margin-bottom: 10px;
+
+    input {
+      margin-left: 15px;
+      display: inline-block;
+      width: 323px;
+    }
+  }
+
+  .sub-body-container {
+    margin-top: 5px;
+    overflow: hidden;
+  }
+
+  .sub-header {
+    display: inline-block;
+    font-size: 25px;
+  }
+
+  #get-stocks-container {
+    margin-bottom: 30px;
+
+    #buttons-container {
+      float: right;
+      margin-bottom: 5px;
+
+      #clear-button {
+        width: 70px;
+      }
+
+      #submit-button {
+        margin-left: 10px;
+        width: 100px;
+      }
+    }
+
+    #date-pickers {
+      margin-bottom: 20px;
+
+      .date-picker-label-input {
+        margin-bottom: 20px;
+        position: relative;
+
+        input {
+          position: absolute;
+          right: 0;
+          top: 0;
+          width: 323px;
+        }
+      }
+    }
+
+    #table-container {
+      max-height: 300px;
+      overflow: auto;
+    }
+  }
+
+  #stocks-container {
+    #stocks-body-container {
+      display: none;
+    }
+  }
+
+  #date-picker-container {
+    margin-bottom: 15px;
+    position: relative;
+
+    .date-picker-date {
+      color: gray;
+      position: absolute;
+      top: -25px;
+    }
+
+    #earliest-date {
+      left: 5px;
+    }
+
+    #current-date {
+      color: black;
+      left: 170px;
+    }
+
+    #latest-date {
+      right: 5px;
+    }
+
+    #date-line-placer {
+      color: #D4AF37;
+      font-size: 20px;
+
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+  }
+}

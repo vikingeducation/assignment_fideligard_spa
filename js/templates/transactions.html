@@ -1,0 +1,36 @@
+<div id="transactions" ng-controller="TransactionsController">
+
+  <main-view-header header = "Transactions"
+                    change-view = "changeView()"
+                    view-name = "viewName">
+  </main-view-header>
+  
+  <div id="filter-container">
+    <label for="filter-input">Filter: </label>
+    <input id = "filter-input" type = "text" ng-model = "filterText" class="form-control">
+  </div>
+  
+  <table class='table table-condensed'>
+    <tr>
+      <th ng-click="ordeExpression = 'date'; reverse = !reverse">
+      Date
+      <span class="glyphicon glyphicon-triangle-bottom" ng-show="!reverse"></span>
+      <span class="glyphicon glyphicon-triangle-top" ng-show="reverse"></span></th>
+
+      <th ng-click="orderExpression = 'symbol'; reverse = !reverse">
+      Symbol
+      <span class="glyphicon glyphicon-triangle-bottom" ng-show="!reverse"></span>
+      <span class="glyphicon glyphicon-triangle-top" ng-show="reverse"></span></th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+    <tr ng-repeat="transaction in transactions | filter: filterText | orderBy: orderExpression : reverse">
+      <td>{{ transaction.date }}</td>
+      <td>{{ transaction.symbol }}</td>
+      <td>{{ transaction.transactionType }}</td>
+      <td>{{ transaction.quantity }}</td>
+      <td>{{ transaction.price | currency }}</td>
+    </tr>
+  </table>
+</div>

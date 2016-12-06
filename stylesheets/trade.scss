@@ -1,0 +1,43 @@
+#trade-container {
+  #trade-left {
+    .trade-form-group {
+      margin-bottom: 5px;
+
+      .trade-form-label {
+        display: inline-block;
+        font-weight: bold;
+        width: 75px;
+      }
+
+      .trade-form-value {
+        display: inline-block;
+        width: 102px;
+
+        input {
+          width: 100%;
+        }
+
+        select {
+          width: 100%;
+        }
+      }
+    }
+
+    #place-order-button-container {
+      margin-top: 15px;
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+  #trade-right {
+    .label-and-value {
+      margin-bottom: 15px;
+    }
+
+    .trade-form-label {
+      font-weight: bold;
+    }
+  }
+}
