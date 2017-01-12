@@ -1,5 +1,5 @@
-Fideligard.controller('DateCtrl', ['$scope', 'dateService',
-  function($scope, dateService) {
+Fideligard.controller('DateCtrl', ['$scope', 'dateService', '$rootScope',
+  function($scope, dateService, $rootScope) {
     $scope.date = {
       value: 150,
       options: {
@@ -16,8 +16,11 @@ Fideligard.controller('DateCtrl', ['$scope', 'dateService',
 
     $scope.updateDate = function () {
       dateService.updateCurrent($scope.date.value);
-      // $rootScope.$broadcast('date.updated');
+      $rootScope.$broadcast('date.updated');
     };
+
+    $scope.updateDate();
   }
 ]);
+
 
