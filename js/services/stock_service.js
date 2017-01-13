@@ -7,7 +7,7 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
 
   var stockService = {};
 
-  var _stocks = {};  //_stocks = { 'NOK': {date1: {stock}, date2: {stock}}, 'GOOG'.. }}
+  var _stocks = [];  //_stocks = { {'NOK': {date1: {stock}, date2: {stock}}}, 'GOOG'.. }}
   var _symbols = ['NOK', 'GOOG', 'AAPL', 'C', 'DIS', 'DTEGY', 'NVS', 'UL', 'TMUS', 'CVS']
 
   stockService.getAllStocks = function() {
@@ -23,26 +23,31 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
         response.forEach(function(data) {
           _buildStock(data.data.query.results.quote);
         })
-        console.log(_stocks);
         return _stocks;
       })
     }
   }
 
+  var findStock = function(stock, q) {
+    return Object.keys(stock)[0] === q;
+  }
   var _buildStock = function(stocks) {
-    stocks.forEach(function(stock){
-      if (_stocks[stock.Symbol]) {
-        _stocks[stock.Symbol][stock.Date] = stock
+    var cur_stock_symbol = "";
+    stocks.forEach(function(stock) {
+      if (cur_stock_symbol === stock.Symbol)  {
+        obj = _.last(_stocks);
+        obj[stock.Date] = stock;
       } else {
-        _stocks[stock.Symbol] = {}
-        _stocks[stock.Symbol][stock.Date] = stock
+        obj = { key: stock.Symbol }
+        obj[stock.Date] = stock;
+        _stocks.push(obj);
+        cur_stock_symbol = stock.Symbol;
       }
     })
   }
 
   var _stockQueryUrl = function(stockSym) {
     var url = 'http://query.yahooapis.com/v1/public/yql?q=%20select%20*%20from%20yahoo.finance.historicaldata%20where%20symbol%20=%20%22' + stockSym + '%20%22and%20startDate%20=%20' + '"2014-01-01"' + '%20and%20endDate%20=%20' + '"2014-12-31"' + '%20&format=json&diagnostics=true%20&env=store://datatables.org/alltableswithkeys%20&callback=';
-    console.log('getting url')
     return url
   }
 
@@ -50,14 +55,14 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
     return $http({url: _stockQueryUrl(sym), method: 'GET'})
   }
 
-  stockService.stockChange = function(rawSym, formattedTime, daysBefore) {
-    var cur_stock = _stocks[rawSym][formattedTime];
+  stockService.stockChange = function(obj, formattedTime, daysBefore) {
+    var cur_stock = obj[formattedTime];
 
     var new_date = new Date(formattedTime).add(-daysBefore).days().toISO();
-    while (_stocks[rawSym][new_date] === undefined) {
+    while (obj[new_date] === undefined) {
       new_date = new Date(formattedTime).add(1).days().toISO();
     }
-    var past_stock = _stocks[rawSym][new_date];
+    var past_stock = obj[new_date];
     return  ((cur_stock.Close - past_stock.Close)/past_stock.Close) * 100;
   }
 

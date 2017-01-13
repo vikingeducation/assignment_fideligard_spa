@@ -1,8 +1,14 @@
 <h1>Stock Panel</h1>
+<label class="pull-right">Filter:
+  <input ng-model="filterstock.key">
+</label>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Symbol</th>
+      <th>
+        <button ng-click="sortBy('key')">Symbol</button>
+        <span class="sortorder" ng-show="propertyName === 'key'" ng-class="{reverse: reverse}"></span>
+      </th>
       <th>Price</th>
       <th>1d</th>
       <th>7d</th>
@@ -11,6 +17,6 @@
     </tr>
   </thead>
   <tbody>
-    <tr stock-row ng-repeat="stock in stocks" stock='stock' date='date'></tr>
+    <tr stock-row ng-repeat="stock in stocks | filter:filterstock:strict | orderBy:propertyName:reverse" stock='stock' date='date'></tr>
   </tbody>
 </table>

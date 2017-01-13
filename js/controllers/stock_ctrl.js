@@ -5,4 +5,11 @@ Fideligard.controller('StockCtrl', ['$scope', 'stockService', 'dateService', 'st
     $scope.$on('date.updated', function () {
       $scope.date = dateService.getCurrent();
     });
+    $scope.propertyName = 'key';
+    $scope.reverse = true;
+
+    $scope.sortBy = function(propertyName) {
+      $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+      $scope.propertyName = propertyName;
+    };
 }]);
