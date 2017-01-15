@@ -10,7 +10,7 @@ Fideligard.directive('stockRow', ["stockService", "dateService", function(stockS
       scope.currentDate =  dateService.getCurrent();
 
       scope.updateStock = function() {
-        var formattedDate = dateService.getValidFormattedDate(scope.date);
+        var formattedDate = scope.date.toISO();
         scope.currentStock = scope.stock[formattedDate];
         if (scope.currentStock) {
         var rawSym = scope.currentStock.Symbol;

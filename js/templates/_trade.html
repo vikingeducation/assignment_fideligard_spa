@@ -1,0 +1,46 @@
+<h1>Trade</h1>
+<div class="row">
+  <div class="col-md-6">
+    <form name="tradeForm">
+    <div class="row">
+      <label class="col-md-4">Symbol:</label>
+      <input class="col-md-8" type="text" ng-model="params.symbol">
+    </div>
+    <div class="row">
+      <label class="col-md-4">Buy/Sell:</label>
+      <select class="col-md-8" name="buysell" ng-model="params.buysell">
+        <option value="buy">BUY</option>
+        <option value="sell">SELL</option>
+      </select><br>
+    </div>
+
+    <div class="row">
+      <label class="col-md-4">Quantity:</label>
+      <input class="col-md-8" type="text" ng-model="params.quantity">
+    </div>
+
+    <div class="row">
+      <label class="col-md-4">Date:</label>
+      <input class="col-md-8" type="date" id="dateInput" name="date" ng-model="params.date"
+         placeholder="yyyy-MM-dd" min="2014-01-01" max="2015-01-01" required
+         ng-change="onDateChange(params.date)"/><br>
+    </div>
+
+    <div class="row">
+      <label class="col-md-4">Price:</label>
+      <p class="col-md-8">{{ params.price | currency }}</p><br>
+    </div>
+
+    <div class="row">
+      <label class="col-md-4">Cost:</label>
+      <p class="col-md-8">{{ params.price * params.quantity | currency }}</p>
+    </div>
+
+    <label class="btn btn-primary" ng-disabled="tradeForm.$invalid" ng-click="trade(tradeForm.$valid, tradeForm)">Place Order!</label>
+    </form>
+</div>
+  </div>
+  <div class="col-md-6">
+
+  </div>
+</div>

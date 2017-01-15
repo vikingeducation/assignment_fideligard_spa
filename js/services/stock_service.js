@@ -37,9 +37,17 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
       if (cur_stock_symbol === stock.Symbol)  {
         obj = _.last(_stocks);
         obj[stock.Date] = stock;
+        if (Date.parse(stock.Date).is().friday()) {
+          obj[Date.parse(stock.Date).add(1).day().toISO()] = stock;
+          obj[Date.parse(stock.Date).add(2).day().toISO()] = stock;
+        }
       } else {
         obj = { key: stock.Symbol }
         obj[stock.Date] = stock;
+        if (Date.parse(stock.Date).is().friday()) {
+          obj[Date.parse(stock.Date).add(1).day().toISO()] = stock;
+          obj[Date.parse(stock.Date).add(2).day().toISO()] = stock;
+        }
         _stocks.push(obj);
         cur_stock_symbol = stock.Symbol;
       }

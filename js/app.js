@@ -34,6 +34,15 @@ Fideligard.config(
           }]
         }
       })
+      .state('root.trade', {
+        url: 'trade/:symbol',
+        views: {
+          'portfolioPanel@' : {
+            templateUrl: 'js/templates/_trade.html',
+            controller: 'TradeCtrl',
+          }
+        },
+      });
     }
   ]);
 

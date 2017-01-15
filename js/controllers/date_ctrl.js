@@ -15,9 +15,12 @@ Fideligard.controller('DateCtrl', ['$scope', 'dateService', '$rootScope',
     };
 
     $scope.updateDate = function () {
-      dateService.updateCurrent($scope.date.value);
-      $rootScope.$broadcast('date.updated');
+      dateService.setDateFromNumDays($scope.date.value);
     };
+
+    $scope.$on('date.updated', function () {
+      $scope.date.value = dateService.getCurrentNum();
+    });
 
     $scope.updateDate();
   }
