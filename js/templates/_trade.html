@@ -16,7 +16,7 @@
 
     <div class="row">
       <label class="col-md-4">Quantity:</label>
-      <input class="col-md-8" type="text" ng-model="params.quantity">
+      <input class="col-md-8" type="number" name="quantity" ng-max="maxQuantity()" ng-min="1" ng-model="params.quantity">
     </div>
 
     <div class="row">
@@ -38,9 +38,17 @@
 
     <label class="btn btn-primary" ng-disabled="tradeForm.$invalid" ng-click="trade(tradeForm.$valid, tradeForm)">Place Order!</label>
     </form>
-</div>
   </div>
   <div class="col-md-6">
-
+    <h4>Cash Available: </h4>{{ cashAvailable | currency }}
+    <h4>
+      <strong>Order Status:</strong>
+    </h4>
+    <div class="alert alert-success text-center" ng-if="tradeForm.$valid">
+      <strong>Valid</strong>
+    </div>
+    <div class="alert alert-danger text-center" ng-if="tradeForm.$invalid">
+      <strong>Invalid</strong>
+    </div>
   </div>
 </div>
