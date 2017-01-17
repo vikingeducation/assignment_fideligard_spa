@@ -1,0 +1,32 @@
+<h1>Transaction</h1>
+<label class="pull-right">Filter:
+  <input ng-model="filterTransaction">
+</label>
+<a class="pull-right" ui-sref="root.portfolio">portfolio</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th ng-click="sortBy('date')">
+        Date
+        <span class="sortorder" ng-show="propertyName === 'date'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th ng-click="sortBy('symbol')">
+        Symbol
+        <span class="sortorder" ng-show="propertyName === 'symbol'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tx in transactions | filter:filterTransaction | orderBy:propertyName:reverse">
+      <td>{{ tx.date | date }}</td>
+      <td>{{ tx.symbol }}</td>
+      <td>{{ tx.type }}</td>
+      <td>{{ tx.quantity }}</td>
+      <td>{{ tx.price | currency }}</td>
+    </tr>
+  </tbody>
+</table>

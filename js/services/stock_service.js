@@ -1,4 +1,4 @@
-Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
+Fideligard.factory('stockService', ['$http', '$q', 'transactionService', function ($http, $q, transactionService) {
 
   // private
   Date.prototype.toISO = function () {
@@ -7,7 +7,7 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
 
   var stockService = {};
 
-  var _stocks = [];  //_stocks = { {'NOK': {date1: {stock}, date2: {stock}}}, 'GOOG'.. }}
+  var _stocks = [];  //_stocks = { key: 'NOK' date1: {stock}, date2: {stock}}
   var _symbols = ['NOK', 'GOOG', 'AAPL', 'C', 'DIS', 'DTEGY', 'NVS', 'UL', 'TMUS', 'CVS']
 
   stockService.getAllStocks = function() {
@@ -20,8 +20,8 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
         requests.push(stockService.getStock(sym));
       });
       return $q.all(requests).then(function(response) {
-        response.forEach(function(data) {
-          _buildStock(data.data.query.results.quote);
+        response.forEach(function(data, index) {
+          _buildStock(data.data.query.results.quote, index);
         })
         return _stocks;
       })
@@ -31,27 +31,20 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
   var findStock = function(stock, q) {
     return Object.keys(stock)[0] === q;
   }
-  var _buildStock = function(stocks) {
+  var _buildStock = function(stocks, index) {
     var cur_stock_symbol = "";
     stocks.forEach(function(stock) {
       if (cur_stock_symbol === stock.Symbol)  {
         obj = _.last(_stocks);
         obj[stock.Date] = stock;
-        if (Date.parse(stock.Date).is().friday()) {
-          obj[Date.parse(stock.Date).add(1).day().toISO()] = stock;
-          obj[Date.parse(stock.Date).add(2).day().toISO()] = stock;
-        }
       } else {
         obj = { key: stock.Symbol }
         obj[stock.Date] = stock;
-        if (Date.parse(stock.Date).is().friday()) {
-          obj[Date.parse(stock.Date).add(1).day().toISO()] = stock;
-          obj[Date.parse(stock.Date).add(2).day().toISO()] = stock;
-        }
         _stocks.push(obj);
         cur_stock_symbol = stock.Symbol;
       }
     })
+    fillHolidayStocks(index);
   }
 
   var _stockQueryUrl = function(stockSym) {
@@ -72,6 +65,38 @@ Fideligard.factory('stockService', ['$http', '$q', function ($http, $q) {
     }
     var past_stock = obj[new_date];
     return  ((cur_stock.Close - past_stock.Close)/past_stock.Close) * 100;
+  }
+
+  var fillHolidayStocks = function(index) {
+    date = Date.parse('1/2/2014')
+    var prev = {};
+    while (date < Date.parse('12/31/2014')) {
+      if (_stocks[index][date.toISO()] === undefined) {
+        _stocks[index][date.toISO()] = prev;
+      }
+      prev = _stocks[index][date.toISO()];
+      date.add(1).day();
+    }
+  }
+
+  stockService.seedTx = function() {
+    var len = _stocks.length;
+    for (i=0;i<len;i++) {
+      var obj = {};
+      obj.date = Date.parse('1/1/2014').add(_.random(1, 360)).days().toISO();
+      if (_stocks[i][obj.date] === undefined) {
+        console.log(_stocks[i]);
+        console.log(' date ' + obj.date);
+      }
+      obj.symbol = _stocks[i][obj.date].Symbol.substring(0, _stocks[i][obj.date].Symbol.length-3);
+      obj.type = 'buy';
+      obj.quantity = 5;
+      obj.price = _stocks[i][obj.date].Close;
+      transactionService.trade(obj);
+      obj.quantity = 2;
+      obj.type = 'sell';
+      transactionService.trade(obj);
+    }
   }
 
   return stockService;

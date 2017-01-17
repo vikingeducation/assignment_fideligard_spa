@@ -27,8 +27,7 @@ Fideligard.config(
         resolve: {
           stocks: ['stockService', function(stockService) {
              return stockService.getAllStocks();
-           }
-          ],
+           }],
           date: ['dateService', function(dateService) {
             return dateService.getCurrent();
           }]
@@ -42,6 +41,29 @@ Fideligard.config(
             controller: 'TradeCtrl',
           }
         },
+      })
+      .state('root.transaction', {
+        url: 'transaction',
+        views: {
+          'portfolioPanel@' : {
+            templateUrl: 'js/templates/_transaction.html',
+            controller: 'TransactionCtrl',
+          }
+        }
+      })
+      .state('root.portfolio', {
+        url: 'portfolio',
+        views: {
+          'portfolioPanel@' : {
+            templateUrl: 'js/templates/_portfolio.html',
+            controller: 'PortfolioCtrl',
+          }
+        },
+        resolve: {
+          userStocks: ['transactionService', function(transactionService) {
+             return transactionService.getUserStocks();
+          }],
+        }
       });
     }
   ]);

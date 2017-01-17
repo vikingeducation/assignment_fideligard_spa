@@ -1,0 +1,36 @@
+<h4>Portfolio</h4>
+<a class="pull-right" ui-sref="root.transaction">transactions</a>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th ng-click="sortBy('key')">
+        Symbol
+        <span class="sortorder" ng-show="propertyName === 'key'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th>Quantity</th>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>Current Price</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th>trade?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="stock in userStocks | toArray | orderBy:propertyName:reverse">
+      <td>{{ stock.key }}</td>
+      <td>{{ stock.quantity }}</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

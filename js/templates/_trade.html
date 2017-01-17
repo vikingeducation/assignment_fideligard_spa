@@ -1,4 +1,8 @@
 <h1>Trade</h1>
+<a href="#" ng-click="seedTradeData()">Seed trade data</a>
+<a class="pull-right" ui-sref="root.transaction">transactions</a>
+<a class="pull-right" ui-sref="root.portfolio">portfolio</a>
+
 <div class="row">
   <div class="col-md-6">
     <form name="tradeForm">
@@ -8,7 +12,7 @@
     </div>
     <div class="row">
       <label class="col-md-4">Buy/Sell:</label>
-      <select class="col-md-8" name="buysell" ng-model="params.buysell">
+      <select class="col-md-8" name="type" ng-model="params.type">
         <option value="buy">BUY</option>
         <option value="sell">SELL</option>
       </select><br>
