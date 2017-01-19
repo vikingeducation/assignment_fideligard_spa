@@ -6,7 +6,7 @@ Fideligard.controller('TradeCtrl', ['$scope', 'stockService', 'dateService', 'tr
       symbol   : $stateParams.symbol,
       date     : new Date($scope.date),
       quantity : 2,
-      type     : 'buy'
+      type     : 'buy',
     }
     var stock = _.find($scope.stocks, function(item){ return item.key === $stateParams.symbol + '%20'});
     $scope.params.price = stock[$scope.date].Close;

@@ -4,6 +4,29 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> {{ aggData.costBasis | currency }}</td>
+      <td> {{ aggData.currentValue | currency }}</td>
+      <td> {{ aggData.profitLoss | currency }}</td>
+      <td> {{ aggData.agg1dayChange | currency }}</td>
+      <td> {{ aggData.agg7dayChange | currency }}</td>
+      <td> {{ aggData.agg30dayChange | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
       <th ng-click="sortBy('key')">
         Symbol
         <span class="sortorder" ng-show="propertyName === 'key'" ng-class="{reverse: reverse}"></span>
@@ -20,17 +43,29 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td>CASH</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ 0 | currency }}</td>
+      <td>{{ 1 | currency }}</td>
+      <td>+{{ 0 | currency }}</td>
+      <td>+{{ 0 | currency }}</td>
+      <td>+{{ 0 | currency }}</td>
+      <td></td>
+    </tr>
     <tr ng-repeat="stock in userStocks | toArray | orderBy:propertyName:reverse">
       <td>{{ stock.key }}</td>
       <td>{{ stock.quantity }}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td>{{ stock.costBasis | currency }}</td>
+      <td>{{ currentPrice(stock) * stock.quantity | currency }}</td>
+      <td>{{ stock.profitLoss | currency }}</td>
+      <td>{{ currentPrice(stock) | currency }}</td>
+      <td>{{ oneDayChange(stock) | currency }}</td>
+      <td>{{ sevenDayChange(stock) | currency }}</td>
+      <td>{{ thirtyDayChange(stock) | currency }}</td>
+      <td><a ui-sref="root.trade({ symbol: stock.key })">trade</a></td>
     </tr>
   </tbody>
 </table>

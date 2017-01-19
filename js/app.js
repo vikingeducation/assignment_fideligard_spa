@@ -1,4 +1,4 @@
-var Fideligard = angular.module('Fideligard', ['ui.router', 'rzModule']);
+var Fideligard = angular.module('Fideligard', ['ui.router', 'rzModule', 'angular-loading-bar', 'ngAnimate']);
 
 
 // inject the services provided by ui-router

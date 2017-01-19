@@ -32,8 +32,10 @@ Fideligard.factory('transactionService', function () {
     var cash = type === 'buy' ? -(tradeParams.quantity * tradeParams.price)  : tradeParams.quantity * tradeParams.price;
     if (_userStocks[symbol] != undefined) {
       _userStocks[symbol].quantity += qty;
+      _userStocks[symbol].costBasis += cash;
+      _userStocks[symbol].profitLoss = (_userStocks[symbol].quantity * tradeParams.price) - _userStocks[symbol].costBasis;
     } else {
-      _userStocks[symbol] = { key: symbol, quantity: qty };
+      _userStocks[symbol] = { key: symbol, quantity: qty, costBasis: 0, profitLoss: 0 };
     }
     _userCash += cash;
   }

@@ -56,15 +56,12 @@ Fideligard.factory('stockService', ['$http', '$q', 'transactionService', functio
     return $http({url: _stockQueryUrl(sym), method: 'GET'})
   }
 
-  stockService.stockChange = function(obj, formattedTime, daysBefore) {
-    var cur_stock = obj[formattedTime];
-
+  stockService.stockChange = function(sym, formattedTime, daysBefore) {
+    var stock = _.find(_stocks, function(stock){ return stock.key === sym+'%20' });
+    var cur_stock = stock[formattedTime];
     var new_date = new Date(formattedTime).add(-daysBefore).days().toISO();
-    while (obj[new_date] === undefined) {
-      new_date = new Date(formattedTime).add(1).days().toISO();
-    }
-    var past_stock = obj[new_date];
-    return  ((cur_stock.Close - past_stock.Close)/past_stock.Close) * 100;
+    var past_stock = stock[new_date] || stock['2014-01-02'];
+    return  (cur_stock.Close - past_stock.Close);
   }
 
   var fillHolidayStocks = function(index) {
@@ -77,6 +74,11 @@ Fideligard.factory('stockService', ['$http', '$q', 'transactionService', functio
       prev = _stocks[index][date.toISO()];
       date.add(1).day();
     }
+  }
+
+  stockService.getCurrentPrice = function(symbol, dateIso) {
+    var stock = _.find(_stocks, function(stock){ return stock.key === symbol+"%20" })
+    return (stock != undefined) ? stock[dateIso].Close : 0;
   }
 
   stockService.seedTx = function() {
