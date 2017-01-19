@@ -59,6 +59,7 @@ Fideligard.controller('PortfolioCtrl', ['$scope', 'stockService', 'dateService',
              };
     }
     $scope.aggData = $scope.aggregate();
-
-    $scope.aggProfitLoss = 0;
+    $scope.$on('date.updated', function () {
+      $scope.aggData = $scope.aggregate();
+    });
 }]);
