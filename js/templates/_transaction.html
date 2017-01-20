@@ -1,0 +1,40 @@
+<h4 class="panel-heading">Transaction</h1>
+<input class="filter-input" ng-model="filterTransaction" placeholder="Filter">
+<div class="dropdown pull-right">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Transaction/Portfolio
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a ui-sref="root.transaction">Transactions</a></li>
+    <li><a ui-sref="root.portfolio">Portfolio</a></li>
+  </ul>
+</div>
+
+<table ng-show="{{ transactions.length > 0 }}" class="table table-striped">
+  <thead>
+    <tr>
+      <th ng-click="sortBy('date')">
+        Date
+        <span class="sortorder" ng-show="propertyName === 'date'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th ng-click="sortBy('symbol')">
+        Symbol
+        <span class="sortorder" ng-show="propertyName === 'symbol'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th>Type</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="tx in transactions | filter:filterTransaction | orderBy:propertyName:reverse">
+      <td>{{ tx.date | date }}</td>
+      <td>{{ tx.symbol }}</td>
+      <td>{{ tx.type }}</td>
+      <td>{{ tx.quantity }}</td>
+      <td>{{ tx.price | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+<p ng-show="{{ transactions.length === 0 }}">There are no transactions</p>

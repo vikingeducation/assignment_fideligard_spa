@@ -1,0 +1,74 @@
+<h4 class="panel-heading">Portfolio</h4>
+<div class="dropdown pull-right">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Transaction/Portfolio
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a ui-sref="root.transaction">Transactions</a></li>
+    <li><a ui-sref="root.portfolio">Portfolio</a></li>
+  </ul>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td> {{ aggData.costBasis | currency }}</td>
+      <td> {{ aggData.currentValue | currency }}</td>
+      <td> {{ aggData.profitLoss | currency }}</td>
+      <td> {{ aggData.agg1dayChange | currency }}</td>
+      <td> {{ aggData.agg7dayChange | currency }}</td>
+      <td> {{ aggData.agg30dayChange | currency }}</td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th ng-click="sortBy('key')">
+        Symbol
+        <span class="sortorder" ng-show="propertyName === 'key'" ng-class="{reverse: reverse}"></span>
+      </th>
+      <th>Quantity</th>
+      <th>Cost Basis</th>
+      <th>Current Value</th>
+      <th>Profit/Loss</th>
+      <th>Current Price</th>
+      <th>7d</th>
+      <th>trade?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CASH</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ currentCash | currency }}</td>
+      <td>{{ 0 | currency }}</td>
+      <td>{{ 1 | currency }}</td>
+      <td>+{{ 0 | currency }}</td>
+      <td></td>
+    </tr>
+    <tr ng-repeat="stock in userStocks | toArray | orderBy:propertyName:reverse">
+      <td>{{ stock.key }}</td>
+      <td>{{ stock.quantity }}</td>
+      <td>{{ stock.costBasis | currency }}</td>
+      <td>{{ currentPrice(stock) * stock.quantity | currency }}</td>
+      <td>{{ stock.profitLoss | currency }}</td>
+      <td>{{ currentPrice(stock) | currency }}</td>
+      <td>{{ sevenDayChange(stock) | currency }}</td>
+      <td><a ui-sref="root.trade({ symbol: stock.key })">trade</a></td>
+    </tr>
+  </tbody>
+</table>

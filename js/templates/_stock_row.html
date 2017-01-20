@@ -1,0 +1,6 @@
+<td> {{ symbol }} </td>
+<td> {{ price | currency }} </td>
+<td> {{oneDay | currency }}</td>
+<td> {{sevenDay | currency }}</td>
+<td> {{thirtyDay | currency }}</td>
+<td><a ui-sref="root.trade({ symbol: symbol })">trade</a></td>

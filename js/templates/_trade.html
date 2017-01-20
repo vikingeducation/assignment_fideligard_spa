@@ -1,0 +1,79 @@
+<h4 class="panel-heading">Trade</h4>
+
+<div class="dropdown pull-right">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Transaction/Portfolio
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a ui-sref="root.transaction">Transactions</a></li>
+    <li><a ui-sref="root.portfolio">Portfolio</a></li>
+  </ul>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <form name="tradeForm">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label form-label">Symbol</label>
+        <div class="col-sm-10">
+          <input type="text" ng-model="params.symbol" class="form-control form-control-success">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label form-label">Buy/Sell</label>
+        <div class="col-sm-10">
+          <select name="type" ng-model="params.type" class="form-control form-control-success">
+            <option value="buy">BUY</option>
+            <option value="sell">SELL</option>
+          </select>
+        </div>
+      </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label form-label">Quantity</label>
+      <div class="col-sm-10">
+        <input type="number" name="quantity" ng-max="maxQuantity()" ng-min="1" ng-model="params.quantity" class="form-control form-control-success">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label form-label">Date</label>
+      <div class="col-sm-10">
+        <input type="date" id="dateInput" name="date" ng-model="params.date" placeholder="yyyy-MM-dd" min="2014-01-01" max="2015-01-01" required ng-change="onDateChange(params.date)" class="form-control form-control-success">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label form-label">Price</label>
+      <div class="col-sm-10">
+        <p class="form-static-data">{{ params.price | currency }}</p>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label form-label">Cost</label>
+      <div class="col-sm-10">
+        <p class="form-static-data">{{ params.price * params.quantity | currency }}</p>
+      </div>
+    </div>
+
+    <label class="btn btn-primary col-sm-12" ng-disabled="tradeForm.$invalid" ng-click="trade(tradeForm.$valid, tradeForm)">Place Order!</label>
+    </form>
+  </div>
+  <div class="col-md-6">
+    <h4>Cash Available: </h4>{{ cashAvailable | currency }}
+    <h4>
+      <strong>Order Status:</strong>
+    </h4>
+    <div class="alert alert-success text-center" ng-if="tradeForm.$valid">
+      <strong>Valid</strong>
+    </div>
+    <div class="alert alert-danger text-center" ng-if="tradeForm.$invalid">
+      <strong>Invalid</strong>
+    </div>
+    <hr>
+    <a href="#" class="btn btn-danger simulate-trade pull-right" ng-click="seedTradeData()">Simulate Trading</a>
+  </div>
+</div>
