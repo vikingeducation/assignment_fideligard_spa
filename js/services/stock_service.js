@@ -10,6 +10,7 @@ Fideligard.factory('stockService', ['$http', '$q', 'transactionService', functio
   var _stocks = [];  //_stocks = { key: 'NOK' date1: {stock}, date2: {stock}}
   var _symbols = ['NOK', 'GOOG', 'AAPL', 'C', 'DIS', 'DTEGY', 'NVS', 'UL', 'TMUS', 'CVS']
 
+  var response =
   stockService.getAllStocks = function() {
     console.log("getting all stocks");
     if (!_.isEmpty(_stocks)) {
@@ -20,6 +21,8 @@ Fideligard.factory('stockService', ['$http', '$q', 'transactionService', functio
         requests.push(stockService.getStock(sym));
       });
       return $q.all(requests).then(function(response) {
+        console.log("response===")
+        console.log(response);
         response.forEach(function(data, index) {
           _buildStock(data.data.query.results.quote, index);
         })

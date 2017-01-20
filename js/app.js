@@ -6,7 +6,7 @@ Fideligard.config(
   ['$stateProvider', '$urlRouterProvider',
   function($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/transaction');
 
     $stateProvider
       .state('root', {
@@ -21,8 +21,9 @@ Fideligard.config(
             controller: 'StockCtrl'
           },
           portfolioPanel: {
-            templateUrl: 'js/templates/_portfolio_panel.html',
-          },
+            templateUrl: 'js/templates/_transaction.html',
+            controller: 'TransactionCtrl'
+          }
         },
         resolve: {
           stocks: ['stockService', function(stockService) {

@@ -8,6 +8,8 @@
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="css/app.css">
   <link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.9.0/loading-bar.min.css' type='text/css' media='all' />
   <!-- Latest compiled and minified JavaScript -->
@@ -24,7 +26,7 @@
 <nav class="navbar navbar-default">
   <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Fideligard</a>
+      <a class="navbar-brand" href="#">Fideligard Stock Portfolio Simulator</a>
     </div>
   </div>
 </nav>
@@ -32,11 +34,11 @@
 <main ng-app="Fideligard" >
   <div class="row">
     <div class="col-md-5">
-      <div ui-view="stockPanel" class="panel"></div>
+      <div ui-view="stockPanel" class="well"></div>
     </div>
     <div class="col-md-7">
-      <div ui-view="dateSlider" class="panel"></div>
-      <div ui-view="portfolioPanel" class="panel"></div>
+      <div ui-view="dateSlider" class="date-selector-container"></div>
+      <div ui-view="portfolioPanel" class="well"></div>
     </div>
 </main>
 

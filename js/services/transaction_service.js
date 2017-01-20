@@ -1,7 +1,7 @@
 Fideligard.factory('transactionService', function () {
 
   var _transactions = [];
-  var _userCash = 123000000.00;
+  var _userCash = 20000.00;
   var _userStocks = {};
 
   var transactionService = {};

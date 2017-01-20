@@ -22,6 +22,15 @@ Fideligard.controller('DateCtrl', ['$scope', 'dateService', '$rootScope',
       $scope.date.value = dateService.getCurrentNum();
     });
 
+    $scope.onDateChange = function(new_date) {
+      if (new_date === undefined) return;
+      dateService.updateCurrent(new_date);
+    }
+
+    $scope.dateFromValue = function(value) {
+      return new Date('2014/01/01').add(value).days();
+    }
+
     $scope.updateDate();
   }
 ]);

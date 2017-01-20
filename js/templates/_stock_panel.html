@@ -1,12 +1,10 @@
-<h1>Stock Panel</h1>
-<label class="pull-right">Filter:
-  <input ng-model="filterstock.key">
-</label>
+<h4 class="panel-heading">Stocks</h4>
+  <input class="pull-right filter-input" ng-model="filterstock.key" placeholder="Filter">
 <table class="table table-striped">
   <thead>
     <tr>
       <th>
-        <button ng-click="sortBy('key')">Symbol</button>
+        <div ng-click="sortBy('key')" class="table-header-sortable">Symbol</div>
         <span class="sortorder" ng-show="propertyName === 'key'" ng-class="{reverse: reverse}"></span>
       </th>
       <th>Price</th>

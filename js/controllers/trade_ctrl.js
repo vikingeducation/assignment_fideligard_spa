@@ -37,5 +37,6 @@ Fideligard.controller('TradeCtrl', ['$scope', 'stockService', 'dateService', 'tr
 
     $scope.seedTradeData = function() {
       stockService.seedTx();
+      $state.go('root.transaction');
     }
 }]);
