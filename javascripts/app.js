@@ -5,14 +5,14 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
   $urlRouterProvider.otherwise('/');
 
   $stateProvider
-    .state('', {
+    .state('dashboard', {
       url: "/",
       views: {
         'dateSlider': {
           templateUrl: '/javascripts/templates/dateSlider.html',
-          //controller: 
+          controller: 'DashCtrl',
         }
       }
-    })
+    });
 
 });
