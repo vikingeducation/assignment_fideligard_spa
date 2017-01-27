@@ -8,19 +8,27 @@ fideligard.controller('DashCtrl', ['$scope', 'dateService', function dashCtrl($s
 
   $scope.chooseDate = false;
 
+  $scope.$watch('currentScalarDate', function() {
+    dateService.updateScalarDate($scope.currentScalarDate);
+    $scope.currentCalDate = dateService.currentCalDate;
+  });
 
   $scope.dateClickHandler = function dateClickHandler() {
     $scope.chooseDate = true;
   };
 
+  $scope.rangeChangeHandler = function rangeChangeHandler() {
+    dateService.updateScalarDate($scope.currentScalarDate);
+  };
+
   $scope.dateChangeHandler = function dateChangeHandler() {
 
     $scope.chooseDate = false;
-    
+
     dateService.updateCalendarDate($scope.currentCalDate);
 
     console.log('service cal date', dateService.currentCalDate);
     console.log('service scalar date', dateService.currentScalarDate);
   };
-  
+
 }]);
