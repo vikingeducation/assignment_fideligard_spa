@@ -1,1 +1,10 @@
-<date-slider scalar-date="scalarDate" start-date="dateService.START_DATE" end-date="dateService.END_DATE" scalar-to-calendar-date="dateService.scalarToCalendarDate(scalarDate)"></date-slider>
+<div class="dateLabels">
+  <div>{{ startDate | date }}</div>
+
+  <div ng-show="!chooseDate" ng-click="dateClickHandler()">{{ scalarToCalendarDate(currentScalarDate) | date }}</div>
+
+  <input ng-change="dateChangeHandler()" ng-show="chooseDate" type="date" ng-model="currentCalDate">
+
+  <div>{{ endDate | date }}</div>
+</div>
+<input type="range" min="0" max="365" ng-model="currentScalarDate">

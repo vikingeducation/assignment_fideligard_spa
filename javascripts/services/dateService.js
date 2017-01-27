@@ -1,4 +1,5 @@
 fideligard.factory('dateService', function() {
+
   var exports = {};
 
   exports.START_DATE = new Date("Jan 1, 2016");
@@ -7,7 +8,7 @@ fideligard.factory('dateService', function() {
   exports.scalarToCalendarDate = function(scalar) {
     var date = new Date(exports.START_DATE);
     date.setDate(date.getDate() + scalar);
-    return Math.floor(date);
+    return date;
   };
 
   exports.calendarToScalarDate = function(date) {
@@ -18,6 +19,24 @@ fideligard.factory('dateService', function() {
     var days = hours / 24;
     return Math.floor(days);
   };
+
+  exports.updateCalendarDate = function(date) {
+    if (date === exports.currentCalDate) { return false }
+    exports.currentCalDate = date;
+    var scalar = exports.calendarToScalarDate(date);
+    exports.updateScalarDate(scalar);
+  }
+
+  exports.updateScalarDate = function(scalar) {
+    if (scalar === exports.currentScalarDate) { return false }
+    exports.currentScalarDate = scalar;
+    var date = exports.scalarToCalendarDate(scalar);
+    exports.updateCalendarDate(date);
+  }
+
+  exports.currentScalarDate = 182;
+
+  exports.currentCalDate = exports.scalarToCalendarDate(exports.currentScalarDate);
 
   return exports;
 });
