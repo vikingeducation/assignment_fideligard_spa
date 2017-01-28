@@ -20,23 +20,23 @@ fideligard.factory('dateService', function() {
     return Math.floor(days);
   };
 
-  exports.updateCalendarDate = function(date) {
-    if (date === exports.currentCalDate) { return false; }
-    exports.currentCalDate = date;
-    var scalar = exports.calendarToScalarDate(date);
-    exports.updateScalarDate(scalar);
-  };
-
-  exports.updateScalarDate = function(scalar) {
-    if (scalar === exports.currentScalarDate) { return false; }
-    exports.currentScalarDate = scalar;
-    var date = exports.scalarToCalendarDate(scalar);
-    exports.updateCalendarDate(date);
-  };
-
-  // exports.currentScalarDate = 182;
-  exports.updateScalarDate(5);
-
+  // exports.updateCalendarDate = function(date) {
+  //   if (date === exports.currentCalDate) { return false; }
+  //   exports.currentCalDate = date;
+  //   var scalar = exports.calendarToScalarDate(date);
+  //   exports.updateScalarDate(scalar);
+  // };
+  //
+  // exports.updateScalarDate = function(scalar) {
+  //   if (scalar === exports.currentScalarDate) { return false; }
+  //   exports.currentScalarDate = scalar;
+  //   var date = exports.scalarToCalendarDate(scalar);
+  //   exports.updateCalendarDate(date);
+  // };
+  //
+  // // exports.currentScalarDate = 182;
+  // exports.updateScalarDate(5);
+  //
 
 
   // exports.currentCalDate = exports.scalarToCalendarDate(exports.currentScalarDate);
