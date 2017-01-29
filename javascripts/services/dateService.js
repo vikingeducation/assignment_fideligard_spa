@@ -4,6 +4,7 @@ fideligard.factory('dateService', function() {
 
   exports.START_DATE = new Date("Jan 1, 2016");
   exports.END_DATE = new Date("Dec 31, 2016");
+  exports.MS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
   exports.scalarToCalendarDate = function(scalar) {
     var date = new Date(exports.START_DATE);
@@ -20,26 +21,7 @@ fideligard.factory('dateService', function() {
     return Math.floor(days);
   };
 
-  // exports.updateCalendarDate = function(date) {
-  //   if (date === exports.currentCalDate) { return false; }
-  //   exports.currentCalDate = date;
-  //   var scalar = exports.calendarToScalarDate(date);
-  //   exports.updateScalarDate(scalar);
-  // };
-  //
-  // exports.updateScalarDate = function(scalar) {
-  //   if (scalar === exports.currentScalarDate) { return false; }
-  //   exports.currentScalarDate = scalar;
-  //   var date = exports.scalarToCalendarDate(scalar);
-  //   exports.updateCalendarDate(date);
-  // };
-  //
-  // // exports.currentScalarDate = 182;
-  // exports.updateScalarDate(5);
-  //
 
-
-  // exports.currentCalDate = exports.scalarToCalendarDate(exports.currentScalarDate);
 
   return exports;
 });
