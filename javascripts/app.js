@@ -11,6 +11,9 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
         'dateSlider': {
           templateUrl: '/javascripts/templates/dateSlider.html',
           controller: 'DashCtrl',
+        }, 'dailyStockListing': {
+          templateUrl: '/javascripts/templates/dailyStockListing.html',
+          controller: 'DashCtrl'
         }
       }
     });

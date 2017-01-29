@@ -1,0 +1,23 @@
+<h2>Stocks</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Symbol</th>
+      <th>Price</th>
+      <th>1d</th>
+      <th>7d</th>
+      <th>30d</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="stock in stocks">
+      <td>{{ stock.symbol }}</td>
+      <td>{{ stock.price | currency }}</td>
+      <td>{{ stock.days.one | currency }}</td>
+      <td>{{ stock.days.seven | currency }}</td>
+      <td>{{ stock.days.thirty | currency }}</td>
+    </tr>
+  </tbody>
+</table>
