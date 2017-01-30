@@ -3,8 +3,9 @@
 
   <div ng-show="!chooseDate" ng-click="dateClickHandler()">{{ currentDate | date }}</div>
 
-  <!-- <input ng-change="dateChangeHandler()" ng-show="chooseDate" type="date" ng-model=""> -->
+  <input ng-show="chooseDate" type="date" ng-model="currentDate" ng-change="dateChangeHandler()">
 
   <div>{{ endDate | date }}</div>
 </div>
-<input type="range" min="{{startDate.valueOf()}}" max="{{endDate.valueOf()}}" step="{{msInADay}}" ng-model="currentDate">
+
+<input type="range" min="{{calendarToScalarDate(startDate)}}" max="{{calendarToScalarDate(endDate)}}" step="" ng-model="currentScalarDate" ng-change="sliderChangeHandler()">

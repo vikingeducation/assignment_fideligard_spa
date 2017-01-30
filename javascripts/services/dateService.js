@@ -21,7 +21,7 @@ fideligard.factory('dateService', function() {
     return Math.floor(days);
   };
 
-
+  exports.currentDate = new Date('Jul 1, 2016');
 
   return exports;
 });

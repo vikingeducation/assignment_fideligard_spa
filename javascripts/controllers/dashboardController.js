@@ -3,10 +3,19 @@ fideligard.controller('DashCtrl', ['$scope', 'dateService', function dashCtrl($s
   // time slider
   $scope.startDate = dateService.START_DATE;
   $scope.endDate = dateService.END_DATE;
-  $scope.msInADay = dateService.MS_IN_A_DAY;
   $scope.chooseDate = false;
-  $scope.dateClickHandler = function dateClickHandler() { };
+  $scope.calendarToScalarDate = dateService.calendarToScalarDate;
+  $scope.currentDate = dateService.currentDate;
+  $scope.currentScalarDate = dateService.calendarToScalarDate($scope.currentDate);
+
+  $scope.sliderChangeHandler = function() {
+    $scope.currentDate = dateService.scalarToCalendarDate($scope.currentScalarDate);
+  };
+  $scope.dateClickHandler = function dateClickHandler() {
+    $scope.chooseDate = true;
+  };
   $scope.dateChangeHandler = function dateChangeHandler() {
+    $scope.currentScalarDate = dateService.calendarToScalarDate($scope.currentDate);
     $scope.chooseDate = false;
   };
 
