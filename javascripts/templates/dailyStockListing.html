@@ -1,10 +1,10 @@
-<h2>Stocks</h2>
+<h2>Stocks for {{currentDate | date}}</h2>
 
 <table class="table">
   <thead>
     <tr>
       <th>Symbol</th>
-      <th>Price</th>
+      <th>Closing Price</th>
       <th>1d</th>
       <th>7d</th>
       <th>30d</th>
@@ -12,9 +12,9 @@
     </tr>
   </thead>
   <tbody>
-    <tr ng-repeat="stock in stocks">
+    <tr ng-repeat="stock in dates[currentDate.toDateString()]">
       <td>{{ stock.symbol }}</td>
-      <td>{{ stock.price | positive}}{{ stock.price | currency}}</td>
+      <td>{{ stock.closing | positive}}{{ stock.closing | currency}}</td>
       <td>{{ stock.price | positive}}{{ stock.days.one | currency }}</td>
       <td>{{ stock.days.seven | positive }}{{ stock.days.seven | currency }}</td>
       <td>{{ stock.days.thirty | positive }}{{ stock.days.thirty | currency }}</td>

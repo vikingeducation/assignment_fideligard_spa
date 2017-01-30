@@ -10,10 +10,10 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'dateSlider': {
           templateUrl: '/javascripts/templates/dateSlider.html',
-          controller: 'DashCtrl',
+          controller: 'TimeCtrl',
         }, 'dailyStockListing': {
           templateUrl: '/javascripts/templates/dailyStockListing.html',
-          controller: 'DashCtrl'
+          controller: 'StockCtrl'
         }
       }
     });

@@ -4,7 +4,6 @@ fideligard.factory('dateService', function() {
 
   exports.START_DATE = new Date("Jan 1, 2016");
   exports.END_DATE = new Date("Dec 31, 2016");
-  exports.MS_IN_A_DAY = 1000 * 60 * 60 * 24;
 
   exports.scalarToCalendarDate = function(scalar) {
     var date = new Date(exports.START_DATE);

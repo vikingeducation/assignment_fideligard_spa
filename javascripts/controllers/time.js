@@ -1,6 +1,5 @@
-fideligard.controller('DashCtrl', ['$scope', 'dateService', function dashCtrl($scope, dateService) {
+fideligard.controller('TimeCtrl', ['$scope', '$q', 'dateService', function dashCtrl($scope, $q, dateService) {
 
-  // time slider
   $scope.startDate = dateService.START_DATE;
   $scope.endDate = dateService.END_DATE;
   $scope.chooseDate = false;
@@ -17,18 +16,6 @@ fideligard.controller('DashCtrl', ['$scope', 'dateService', function dashCtrl($s
   $scope.dateChangeHandler = function dateChangeHandler() {
     $scope.currentScalarDate = dateService.calendarToScalarDate($scope.currentDate);
     $scope.chooseDate = false;
-  };
-
-  // daily stock listing
-  $scope.stocks = {};
-  $scope.stocks.AAPL = {
-    symbol: "AAPL",
-    price: 123.45,
-    days: {
-      one: 1.45,
-      seven: -2.12,
-      thirty: -2.56,
-    }
   };
 
 }]);

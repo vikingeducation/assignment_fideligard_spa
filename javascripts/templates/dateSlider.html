@@ -8,4 +8,4 @@
   <div>{{ endDate | date }}</div>
 </div>
 
-<input type="range" min="{{calendarToScalarDate(startDate)}}" max="{{calendarToScalarDate(endDate)}}" step="" ng-model="currentScalarDate" ng-change="sliderChangeHandler()">
+<input type="range" min="{{calendarToScalarDate(startDate)}}" max="{{calendarToScalarDate(endDate)}}" ng-model="currentScalarDate" ng-change="sliderChangeHandler()">
