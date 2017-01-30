@@ -4,6 +4,7 @@ fideligard.controller('StockCtrl',
 
       $scope.currentDate = dateService.currentDate;
       $scope.stocks = stockService.stocks;
+      $scope.dates = stockService.dates;
 
     }
   ]
