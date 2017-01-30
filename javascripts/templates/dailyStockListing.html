@@ -14,10 +14,10 @@
   <tbody>
     <tr ng-repeat="stock in stocks">
       <td>{{ stock.symbol }}</td>
-      <td>{{ stock.price | currency }}</td>
-      <td>{{ stock.days.one | currency }}</td>
-      <td>{{ stock.days.seven | currency }}</td>
-      <td>{{ stock.days.thirty | currency }}</td>
+      <td>{{ stock.price | positive}}{{ stock.price | currency}}</td>
+      <td>{{ stock.price | positive}}{{ stock.days.one | currency }}</td>
+      <td>{{ stock.days.seven | positive }}{{ stock.days.seven | currency }}</td>
+      <td>{{ stock.days.thirty | positive }}{{ stock.days.thirty | currency }}</td>
     </tr>
   </tbody>
 </table>
