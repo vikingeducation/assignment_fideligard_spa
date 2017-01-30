@@ -9,6 +9,7 @@ fideligard.controller('TimeCtrl', ['$scope', '$q', 'dateService', function dashC
 
   $scope.sliderChangeHandler = function() {
     $scope.currentDate = dateService.scalarToCalendarDate($scope.currentScalarDate);
+    dateService.currentDate.setTime($scope.currentDate);
   };
   $scope.dateClickHandler = function dateClickHandler() {
     $scope.chooseDate = true;
