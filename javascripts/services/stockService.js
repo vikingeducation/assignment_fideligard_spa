@@ -2,13 +2,24 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
   'use strict';
   var exports = {};
 
-  var SYMBOLS = ['AAPL', 'GOOGL', 'FB'];
+  var SYMBOLS = exports.symbols = ['AAPL', 'GOOGL', 'FB'];
   var EARLY_START_DATE = '2015-12-01'; // ensures we can get "Last 30 days" on the first day in January
   var REAL_START_DATE = '2016-01-01';
 
   var promises = [];
   exports.stocks = {};
   exports.dates = {};
+
+  // structure of exports.dates:
+  // stockService.dates[dateObj.toDateString()][symbol] = {
+  //   symbol: "AAPL",
+  //   closing: "99.6",
+  //   days: {
+  //     one: -1.7,
+  //     seven: -5.06,
+  //     thirty: 5.45
+  //   }
+  // }
 
   // var buildQueryString = function(symbol) {
   //   return "http://query.yahooapis.com/v1/public/yql?q="+
@@ -82,7 +93,7 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
             days.thirty = changeOverTimePeriod(exports.dates, date, 30, SYMBOLS[i]);
           }
         }
-      }
+      };
     }
   });
   var changeOverTimePeriod = function(dateData, currentDateString, numDays, symbol) {
