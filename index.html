@@ -16,6 +16,7 @@
   <script src="/javascripts/controllers/time.js"></script>
   <script src="/javascripts/controllers/stocks.js"></script>
   <script src="/javascripts/controllers/tradeCreator.js"></script>
+  <script src="/javascripts/controllers/resources.js"></script>
   <script src="/javascripts/filters/positive.js"></script>
 </head>
 <body>
@@ -31,12 +32,19 @@
   <div class="container">
 
     <div class="row">
+      <div class="col-md-12">
+        <div class="date-slider" ui-view="dateSlider"></div>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-5">
         <div class="daily-stock-listing" ui-view="dailyStockListing"></div>
       </div>
-      <div class="col-md-7">
-        <div class="date-slider" ui-view="dateSlider"></div>
+      <div class="col-md-2">
         <div ui-view="tradeCreator"></div>
+      </div>
+      <div class="col-md-5">
+        <div ui-view="resources"></div>
       </div>
     </div>
 

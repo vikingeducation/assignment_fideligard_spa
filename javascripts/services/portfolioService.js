@@ -29,12 +29,12 @@ fideligard.factory('portfolioService', ['stockService', function(stockService) {
   //   }
   // })();
 
-  var walkDates = function(callback) {
-    var START_DATE = new Date("Jan 01 2016");
-    var END_DATE = new Date("Dec 31 2016");
-    var current = new Date(START_DATE);
+  var walkDates = function(startDateString, endDateString, callback) {
+    var startDate = new Date(startDateString);
+    var endDate = new Date(endDateString);
+    var current = new Date(startDate);
     var dateString;
-    while (current < END_DATE) {
+    while (current < endDate) {
       dateString = current.toDateString();
       callback(dateString);
       current = new Date(current.setDate(current.getDate() + 1));
@@ -42,8 +42,7 @@ fideligard.factory('portfolioService', ['stockService', function(stockService) {
   };
 
   // initialize dates
-  walkDates(function(dateString) {
-    // angular.copy(exports.resources[jan1String], exports.resources[dateString]);
+  walkDates("Jan 01 2016", "Dec 31 2016", function(dateString) {
     exports.resources[dateString] = {
       cash: 10000
     };
@@ -72,20 +71,11 @@ fideligard.factory('portfolioService', ['stockService', function(stockService) {
     exports.trades.byDate[dateString] = exports.trades.byDate[dateString] || [];
     exports.trades.byDate[dateString].push(id);
 
-    // save to resources
-    if (buyOrSell === "buy") {
-      exports.resources[dateString].cash -= cost;
-      if (!exports.resources[dateString][symbol]) {
-        exports.resources[dateString][symbol] = quantity;
-      } else {
-        exports.resources[dateString][symbol] += quantity;
-      }
-    } else if (buyOrSell === "sell") {
-      exports.resources[dateString].cash += cost;
-      exports.resources[dateString][symbol] -= quantity;
-    } else {
-      console.warn("buyOrSell invalid");
-    }
+    walkDates(dateString, "Dec 31 2016", function(dateString) {
+      exports.resources[dateString].cash += trade.cash;
+      exports.resources[dateString][symbol] = exports.resources[dateString][symbol] || 0;
+      exports.resources[dateString][symbol] += trade.quantity;
+    });
 
     console.log(exports.trades);
     console.log(exports.resources);

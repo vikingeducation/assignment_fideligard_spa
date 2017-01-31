@@ -17,6 +17,9 @@ fideligard.config(function($stateProvider, $urlRouterProvider) {
         }, 'tradeCreator': {
           templateUrl: '/javascripts/templates/tradeCreator.html',
           controller: 'TradeCreatorCtrl'
+        }, 'resources': {
+          templateUrl: '/javascripts/templates/resources.html',
+          controller: 'ResourceCtrl'
         }
       }
     });
