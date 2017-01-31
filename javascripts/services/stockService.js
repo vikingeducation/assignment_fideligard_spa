@@ -9,24 +9,24 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
   exports.stocks = {};
   exports.dates = {};
 
-  var buildQueryString = function(symbol) {
-    return "http://query.yahooapis.com/v1/public/yql?q="+
-      "select * from yahoo.finance.historicaldata " +
-      'where symbol    = "' + symbol + '" ' +
-      'and   startDate = "' + EARLY_START_DATE + '"' +
-      'and    endDate   = "2016-12-31"' +
-      '&format=json' +
-      '&diagnostics=true' +
-      '&env=store://datatables.org/alltableswithkeys' +
-      '&callback=';
-  };
+  // var buildQueryString = function(symbol) {
+  //   return "http://query.yahooapis.com/v1/public/yql?q="+
+  //     "select * from yahoo.finance.historicaldata " +
+  //     'where symbol    = "' + symbol + '" ' +
+  //     'and   startDate = "' + EARLY_START_DATE + '"' +
+  //     'and    endDate   = "2016-12-31"' +
+  //     '&format=json' +
+  //     '&diagnostics=true' +
+  //     '&env=store://datatables.org/alltableswithkeys' +
+  //     '&callback=';
+  // };
   var buildFakeQueryString = function(symbol) {
     return '/json/' + symbol + '.json';
   };
   (function initializeDates() {
     var current = new Date(EARLY_START_DATE);
     while (current < dateService.END_DATE) {
-      exports.dates[current.toDateString()] = null;
+      exports.dates[current.toDateString()] = {};
       current = new Date(current.setDate(current.getDate() + 1));
     }
   })();
@@ -38,7 +38,7 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
     );
   }
 
-  var stock, quotes, date, dateName;
+  var stock, quotes, dateName;
   $q.all(promises).then(function(response) {
     for (var i = 0; i < response.length; i++) {
       if (response[i].statusText === "OK") {
@@ -58,42 +58,25 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
         for (var k = 0; k < quotes.length; k++) {
           dateName = new Date(quotes[k].Date).toDateString();
           date = exports.dates[dateName];
-          exports.dates[dateName] = {};
+          exports.dates[dateName] = exports.dates[dateName] || {};
           exports.dates[dateName][SYMBOLS[i]] = {
             symbol: SYMBOLS[i],
             closing: quotes[k].Close
-          }
+          };
         }
         // finished populating stocks and dates with data from API
         // next: fill holes where there is no data
-
         var prior = {};
         for (var date in exports.dates) {
-          if (exports.dates[date]) {
-            // copy symbol into prior
-            for (var symbol in exports.dates[date]) {
-              prior[symbol] = exports.dates[date][symbol];
-              // console.log(prior);
-            }
-            // exports.dates[date].AAPL.symbol = "aapl";
+          if (exports.dates[date][SYMBOLS[i]]) {
+            angular.copy(exports.dates[date][SYMBOLS[i]], prior);
           } else {
-            console.log(exports.dates[date])
-            // angular.copy(prior, exports.dates[date]);
-            // exports.dates[date] = prior;
-            exports.dates[date] = {};
-            angular.copy(prior, exports.dates[date]);
-            // prior = {};
-            console.log("prior: ", prior)
-            // exports.dates[date].notes = "Interpolated";
-            console.log("dates:", exports.dates[date]);
+            exports.dates[date][SYMBOLS[i]] = {};
+            angular.copy(prior, exports.dates[date][SYMBOLS[i]]);
           }
         }
-        console.log(exports.dates);
-
       }
     }
-    // console.log("stocks", exports.stocks);
-    // console.log("dates", exports.dates);
   });
 
   return exports;
