@@ -4,6 +4,7 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
 
   var SYMBOLS = ['AAPL', 'GOOGL', 'FB'];
   var EARLY_START_DATE = '2015-12-01'; // ensures we can get "Last 30 days" on the first day in January
+  var REAL_START_DATE = '2016-01-01';
 
   var promises = [];
   exports.stocks = {};
@@ -44,7 +45,6 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
       if (response[i].statusText === "OK") {
 
         quotes = response[i].data.query.results.quote;
-        // console.log(quotes);
 
         stock = {
           symbol: SYMBOLS[i],
@@ -74,10 +74,24 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
             exports.dates[date][SYMBOLS[i]] = {};
             angular.copy(prior, exports.dates[date][SYMBOLS[i]]);
           }
+          if (new Date(date) >= new Date(REAL_START_DATE)) {
+            // calculate 1d, 7d, 30d
+            var days = exports.dates[date][SYMBOLS[i]].days = {};
+            days.one = changeOverTimePeriod(exports.dates, date, 1, SYMBOLS[i]);
+            days.seven = changeOverTimePeriod(exports.dates, date, 7, SYMBOLS[i]);
+            days.thirty = changeOverTimePeriod(exports.dates, date, 30, SYMBOLS[i]);
+          }
         }
       }
     }
   });
+  var changeOverTimePeriod = function(dateData, currentDateString, numDays, symbol) {
+    var todaysPrice = dateData[currentDateString][symbol].closing;
+    var startingDay = new Date(currentDateString);
+    startingDay.setDate(startingDay.getDate() - numDays);
+    var startingDayPrice = dateData[startingDay.toDateString()][symbol].closing;
+    return startingDayPrice - todaysPrice;
+  };
 
   return exports;
 }]);
