@@ -8,16 +8,17 @@
       <th>1d</th>
       <th>7d</th>
       <th>30d</th>
-      <th></th>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="stock in dates[currentDate.toDateString()]">
       <td>{{ stock.symbol }}</td>
       <td>{{ stock.closing | positive}}{{ stock.closing | currency}}</td>
-      <td>{{ stock.price | positive}}{{ stock.days.one | currency }}</td>
+      <td></td>
+      <td></td>
+      <!-- <td>{{ stock.price | positive}}{{ stock.days.one | currency }}</td>
       <td>{{ stock.days.seven | positive }}{{ stock.days.seven | currency }}</td>
-      <td>{{ stock.days.thirty | positive }}{{ stock.days.thirty | currency }}</td>
+      <td>{{ stock.days.thirty | positive }}{{ stock.days.thirty | currency }}</td> -->
     </tr>
   </tbody>
 </table>

@@ -20,17 +20,21 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
       '&env=store://datatables.org/alltableswithkeys' +
       '&callback=';
   };
+  var buildFakeQueryString = function(symbol) {
+    return '/json/' + symbol + '.json';
+  };
   (function initializeDates() {
     var current = new Date(EARLY_START_DATE);
     while (current < dateService.END_DATE) {
-      exports.dates[current.toDateString()] = current;
+      exports.dates[current.toDateString()] = null;
       current = new Date(current.setDate(current.getDate() + 1));
     }
   })();
 
   for (var i = 0; i < SYMBOLS.length; i++) {
+    // console.log(buildQueryString(SYMBOLS[i]));
     promises.push(
-      $http.get(buildQueryString(SYMBOLS[i]))
+      $http.get(buildFakeQueryString(SYMBOLS[i]))
     );
   }
 
@@ -40,6 +44,7 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
       if (response[i].statusText === "OK") {
 
         quotes = response[i].data.query.results.quote;
+        // console.log(quotes);
 
         stock = {
           symbol: SYMBOLS[i],
@@ -53,15 +58,42 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
         for (var k = 0; k < quotes.length; k++) {
           dateName = new Date(quotes[k].Date).toDateString();
           date = exports.dates[dateName];
-          date[SYMBOLS[i]] = {
+          exports.dates[dateName] = {};
+          exports.dates[dateName][SYMBOLS[i]] = {
             symbol: SYMBOLS[i],
             closing: quotes[k].Close
-          };
+          }
         }
+        // finished populating stocks and dates with data from API
+        // next: fill holes where there is no data
+
+        var prior = {};
+        for (var date in exports.dates) {
+          if (exports.dates[date]) {
+            // copy symbol into prior
+            for (var symbol in exports.dates[date]) {
+              prior[symbol] = exports.dates[date][symbol];
+              // console.log(prior);
+            }
+            // exports.dates[date].AAPL.symbol = "aapl";
+          } else {
+            console.log(exports.dates[date])
+            // angular.copy(prior, exports.dates[date]);
+            // exports.dates[date] = prior;
+            exports.dates[date] = {};
+            angular.copy(prior, exports.dates[date]);
+            // prior = {};
+            console.log("prior: ", prior)
+            // exports.dates[date].notes = "Interpolated";
+            console.log("dates:", exports.dates[date]);
+          }
+        }
+        console.log(exports.dates);
+
       }
     }
-    console.log("stocks", exports.stocks);
-    console.log("dates", exports.dates);
+    // console.log("stocks", exports.stocks);
+    // console.log("dates", exports.dates);
   });
 
   return exports;

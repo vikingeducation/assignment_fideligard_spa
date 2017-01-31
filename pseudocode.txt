@@ -21,6 +21,7 @@ Wait until data retrieved, then process the data
 dates = {
   '2016-12-28': {
     'AAPL': {
+      'symbol': 'AAPL',
       'closing price': 116.24,
       '1 day ago': 836,
       '7 days ago': 333,
@@ -36,7 +37,7 @@ stocks = {
       (date: price),
       2016-12-28: 116.76,
       2016-12-29: 116.74
-    }    
+    }
   }
 };
 
@@ -101,8 +102,3 @@ portfolio = {
 
 
 - use transactions to turn cash into shares or vice versa
-
-
-
-
-
