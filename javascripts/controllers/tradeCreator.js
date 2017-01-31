@@ -3,6 +3,7 @@ fideligard.controller('TradeCreatorCtrl',
     function($scope, dateService, stockService, portfolioService) {
       $scope.dateService = dateService;
       $scope.currentDate = dateService.currentDate;
+      $scope.buyOrSell = "buy";
 
       $scope.symbolChangeHandler = function() {
         var date = dateService.currentDate.toDateString();

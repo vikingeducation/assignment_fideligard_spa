@@ -93,7 +93,7 @@ fideligard.factory('stockService', ['$http', '$q', 'dateService', function($http
             days.thirty = changeOverTimePeriod(exports.dates, date, 30, SYMBOLS[i]);
           }
         }
-      };
+      }
     }
   });
   var changeOverTimePeriod = function(dateData, currentDateString, numDays, symbol) {

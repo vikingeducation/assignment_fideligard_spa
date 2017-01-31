@@ -1,7 +1,7 @@
 <div class="dateLabels">
   <div>{{ startDate | date }}</div>
 
-  <div ng-show="!chooseDate" ng-click="dateClickHandler()">{{ currentDate | date }}</div>
+  <div ng-show="!chooseDate" ng-click="dateClickHandler()">{{ currentDate | date : 'fullDate' }}</div>
 
   <input ng-show="chooseDate" type="date" ng-model="currentDate" ng-change="dateChangeHandler()">
 
