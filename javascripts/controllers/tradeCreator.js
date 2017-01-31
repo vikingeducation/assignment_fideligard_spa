@@ -1,7 +1,8 @@
 fideligard.controller('TradeCreatorCtrl',
-  ['$scope', 'dateService', 'stockService',
-    function($scope, dateService, stockService) {
+  ['$scope', 'dateService', 'stockService', 'portfolioService',
+    function($scope, dateService, stockService, portfolioService) {
       $scope.dateService = dateService;
+      $scope.currentDate = dateService.currentDate;
 
       $scope.symbolChangeHandler = function() {
         var date = dateService.currentDate.toDateString();
@@ -12,6 +13,11 @@ fideligard.controller('TradeCreatorCtrl',
       };
       $scope.quantityChangeHandler = function() {
         $scope.totalCost = $scope.stockPrice * $scope.quantity;
+      };
+      $scope.formSubmitHandler = function(buyOrSell) {
+        console.log("buy/sell", buyOrSell);
+        var dateString = dateService.currentDate.toDateString();
+        portfolioService.newTrade($scope.symbol, $scope.quantity, dateString, buyOrSell);
       };
 
       $scope.$watch('dateService.currentDate.toDateString()', function() {

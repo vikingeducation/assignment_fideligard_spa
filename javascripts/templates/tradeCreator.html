@@ -2,7 +2,7 @@
 
   <h3>New Trade</h3>
 
-  <form class="form">
+  <form class="form" ng-submit="formSubmitHandler(buyOrSell)">
     <div class="form-group">
       <label for="symbolPicker">Symbol:</label>
       <select id="symbolPicker" class="form-control" ng-model="symbol" ng-change="symbolChangeHandler()">
@@ -13,9 +13,9 @@
     </div>
     <div class="form-group">
       <label for="radioBuy">Buy</label>
-      <input id="radioBuy" type="radio" name="buy-sell" value="buy">
+      <input id="radioBuy" type="radio" ng-model="buyOrSell" value="buy">
       <label for="radioSell">Sell</label>
-      <input id="radioSell" type="radio" name="buy-sell" value="sell">
+      <input id="radioSell" type="radio" ng-model="buyOrSell" value="sell">
     </div>
     <div class="form-group">
       <label for="quantity">Quantity</label>
