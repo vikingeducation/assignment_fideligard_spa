@@ -1,0 +1,25 @@
+portfolioService
+  resources: {
+    1-1-2016: {
+      cash: 10000
+    },
+    1-2-2016: {
+      cash: 9000,
+      AAPL: 50
+    }
+  }
+  transactions: {
+    byId: {
+      1: {
+        id: 1,
+        date: 1-2-2016,
+        symbol: 'AAPL',
+        type: 'buy',
+        quantity: 50,
+        price: 200
+      }
+    },
+    byDate: {
+      1-2-2016: [1]
+    }
+  }

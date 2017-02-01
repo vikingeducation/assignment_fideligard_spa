@@ -1,0 +1,12 @@
+.date-slider .dateLabels {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.trade-creator {
+  padding: 1em;
+}
+.trade-creator form {
+  width: 150px;
+}

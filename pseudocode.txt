@@ -1,0 +1,104 @@
+SERVICES
+========
+
+DATE
+
+Scalar Date (number between 0 and 364)
+   - makes arithmetic simple
+
+Converts scalar date to calendar date (3-26-2016)
+
+
+STOCKS
+
+Queries the API for 12 preset companies
+  - (symbol, date, close)
+
+Wait until data retrieved, then process the data
+  - Fills in weekend/holiday closing prices by finding most recent close price
+
+
+dates = {
+  '2016-12-28': {
+    'AAPL': {
+      'symbol': 'AAPL',
+      'closing price': 116.24,
+      '1 day ago': 836,
+      '7 days ago': 333,
+      '30 days ago': 38
+    }
+  }
+}
+
+stocks = {
+  'AAPL': {
+    symbol: 'AAPL',
+    closing_prices = {
+      (date: price),
+      2016-12-28: 116.76,
+      2016-12-29: 116.74
+    }
+  }
+};
+
+company = {
+  symbol: 'AAPL',
+  closing_prices = {
+    (date: price),
+    2016-12-28: 116.76,
+    2016-12-29: 116.74
+  }
+};
+
+
+TRANSACTION
+
+- needs a way of asking the portfolio how much cash you have on a particular day
+
+- need to be able to CRD transactions (as trades)
+
+transactions = [
+  {
+    'id': 1,
+    'date': '2-27-2016',
+    'symbol': 'AAPL',
+    'type': 'buy/sell',
+    'quantity': 10,
+    'price': 78
+  },
+  {
+    'id': 2,
+    'date': '2-28-2016',
+    'symbol': 'AAPL',
+    'type': 'buy/sell',
+    'quantity': 10,
+    'price': 78
+  }
+];
+
+
+
+PORTFOLIO
+
+portfolio = {
+  1-1-2016: {
+    cash: 1000,
+    'AAPL': 70,
+    'BAC': 30
+  },
+  1-2-2016: {
+    cash: 1000,
+    'AAPL': 70,
+    'BAC': 30
+  }
+};
+
+- cost basis is the total amount spent on that stock - total amount of money earned from selling that stock
+- current value = current price x shares held
+- profit/loss = current value - cost basis
+- depends on transactions
+- has resources
+  - cash
+
+
+- use transactions to turn cash into shares or vice versa

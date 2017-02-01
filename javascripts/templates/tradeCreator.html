@@ -1,0 +1,39 @@
+<div class="trade-creator">
+
+  <h3>New Trade</h3>
+
+  <form class="form" ng-submit="formSubmitHandler(buyOrSell)">
+    <div class="form-group">
+      <label for="symbolPicker">Symbol:</label>
+      <select id="symbolPicker" class="form-control" ng-model="symbol" ng-change="symbolChangeHandler()">
+        <option>AAPL</option>
+        <option>GOOGL</option>
+        <option>FB</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="radioBuy">Buy</label>
+      <input id="radioBuy" type="radio" ng-model="buyOrSell" value="buy">
+      <label for="radioSell">Sell</label>
+      <input id="radioSell" type="radio" ng-model="buyOrSell" value="sell">
+    </div>
+    <div class="form-group">
+      <label for="quantity">Quantity</label>
+      <input id="quantity" type="number" min="0" class="form-control" ng-model="quantity" ng-change="quantityChangeHandler()">
+    </div>
+    <div class="form-group">
+      <label>Date</label>
+      <span>{{ currentDate | date }}</span>
+    </div>
+    <div class="form-group">
+      <label>Price</label>
+      <span>{{ stockPrice | currency }}</span>
+    </div>
+    <div class="form-group">
+      <label>Cost</label>
+      <span>{{ totalCost | currency }}</span>
+    </div>
+    <button class="btn btn-primary">Place Order</button>
+  </form>
+
+</div>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="fideligard">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Fideligard</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
+  <script src="/javascripts/app.js"></script>
+  <script src="/javascripts/services/dateService.js"></script>
+  <script src="/javascripts/services/stockService.js"></script>
+  <script src="/javascripts/services/portfolioService.js"></script>
+  <script src="/javascripts/controllers/time.js"></script>
+  <script src="/javascripts/controllers/stocks.js"></script>
+  <script src="/javascripts/controllers/tradeCreator.js"></script>
+  <script src="/javascripts/controllers/resources.js"></script>
+  <script src="/javascripts/controllers/trades.js"></script>
+  <script src="/javascripts/filters/positive.js"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">
+          <span>Fideligard Historical Portfolio Simulator</span>
+        </a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="date-slider" ui-view="dateSlider"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="daily-stock-listing" ui-view="dailyStockListing"></div>
+      </div>
+      <div class="col-md-2">
+        <div ui-view="tradeCreator"></div>
+      </div>
+      <div class="col-md-5">
+        <div ui-view="resources"></div>
+        <div ui-view="trades"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
