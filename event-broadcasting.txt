@@ -1,0 +1,6 @@
+$rootScope.$broadcast('dateChange', currentDate);
+
+$scope.$on('dateChange', function(event) {
+  $scope.date = dateService.getCurrentDate();
+  $scope.portfolio = portfolioService.portfolioToDate($scope.date);
+});
