@@ -1,0 +1,23 @@
+<h2>Trades on {{ dateString }}</h2>
+<table class="table">
+  <thead>
+    <tr>
+      <!-- <th>ID</th> -->
+      <th>Symbol</th>
+      <th>Buy/Sell</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Cash delta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="trade in trades">
+      <!-- <td>{{ trade.id }}</td> -->
+      <td>{{ trade.symbol }}</td>
+      <td>{{ trade.buyOrSell }}</td>
+      <td>{{ trade.quantity }}</td>
+      <td>{{ trade.price }}</td>
+      <td>{{ trade.cash }}</td>
+    </tr>
+  </tbody>
+</table>
