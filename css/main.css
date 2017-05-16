@@ -1,0 +1,26 @@
+.alert {
+    margin-top: -21px; 
+}
+
+.template {
+  border: 3px solid black;
+  margin-bottom: 20px;
+  padding: 5px 10px 30px 15px;
+}
+
+.bottom {
+  margin-top: 25px;
+}
+
+table td {
+    border-top: none !important;
+}
+
+th {
+    white-space: nowrap;
+}
+
+button a, a:hover, a:focus {
+  color: white;
+  text-decoration: none;
+}
