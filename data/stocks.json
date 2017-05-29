@@ -1,0 +1,70 @@
+{
+  "query": {
+    "count": 0,
+    "created": "2017-05-24T08:24:34Z",
+    "lang": "en-US",
+    "diagnostics": {
+      "url": [{
+        "execution-start-time": "0",
+        "execution-stop-time": "1",
+        "execution-time": "1",
+        "content": "http://www.datatables.org/yahoo/finance/yahoo.finance.historicaldata.xml"
+      }, {
+        "execution-start-time": "4",
+        "execution-stop-time": "40",
+        "execution-time": "36",
+        "http-status-code": "502",
+        "http-status-message": "Connection refused",
+        "content": "http://ichart.finance.yahoo.com/table.csv?a=0&b=1&e=31&g=d&c=2014&d=11&f=2014&s=AAPL"
+      }, {
+        "execution-start-time": "44",
+        "execution-stop-time": "62",
+        "execution-time": "18",
+        "http-status-code": "502",
+        "http-status-message": "Connection refused",
+        "content": "http://ichart.finance.yahoo.com/table.csv?a=0&b=1&e=31&g=d&c=2014&d=11&f=2014&s=AAPL"
+      }],
+      "publiclyCallable": "true",
+      "cache": [{
+        "execution-start-time": "3",
+        "execution-stop-time": "4",
+        "execution-time": "1",
+        "method": "GET",
+        "type": "MEMCACHED",
+        "content": "f756d73c9b6c7b01a1d7f9c2ff5f9809"
+      }, {
+        "execution-start-time": "41",
+        "execution-stop-time": "44",
+        "execution-time": "3",
+        "method": "GET",
+        "type": "MEMCACHED",
+        "content": "c4379b6b627ca025ca4533cf69f3e85f"
+      }],
+      "query": [{
+        "execution-start-time": "4",
+        "execution-stop-time": "41",
+        "execution-time": "37",
+        "params": "{url=[http://ichart.finance.yahoo.com/table.csv?a=0&b=1&e=31&g=d&c=2014&d=11&f=2014&s=AAPL]}",
+        "content": "select * from csv(0,1) where url=@url"
+      }, {
+        "execution-start-time": "44",
+        "execution-stop-time": "62",
+        "execution-time": "18",
+        "params": "{columnsNames=[<!DOCTYPE_html>], url=[http://ichart.finance.yahoo.com/table.csv?a=0&b=1&e=31&g=d&c=2014&d=11&f=2014&s=AAPL]}",
+        "content": "select * from csv(2,0) where url=@url and columns=@columnsNames"
+      }],
+      "csv": "Column mismatch: [<!DOCTYPE_html>] vs     font: 300 18px \"helvetica neue, helvetica, verdana, tahoma, arial, sans-serif;",
+      "javascript": {
+        "execution-start-time": "2",
+        "execution-stop-time": "62",
+        "execution-time": "60",
+        "instructions-used": "27496",
+        "table-name": "yahoo.finance.historicaldata"
+      },
+      "user-time": "63",
+      "service-time": "59",
+      "build-version": "2.0.118"
+    },
+    "results": null
+  }
+}
